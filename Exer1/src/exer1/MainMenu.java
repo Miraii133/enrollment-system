@@ -26,8 +26,10 @@ public class MainMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        invalidID = new javax.swing.JDialog();
+        nonIntID = new javax.swing.JDialog();
         jLabel7 = new javax.swing.JLabel();
+        invalidID = new javax.swing.JDialog();
+        jLabel8 = new javax.swing.JLabel();
         id_textField = new javax.swing.JTextField();
         course_textField = new javax.swing.JTextField();
         name_textField = new javax.swing.JTextField();
@@ -44,31 +46,53 @@ public class MainMenu extends javax.swing.JFrame {
         update_button = new javax.swing.JButton();
         delete_button = new javax.swing.JButton();
 
-        invalidID.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        invalidID.setAlwaysOnTop(true);
-        invalidID.setLocation(new java.awt.Point(200, 200));
-        invalidID.setMinimumSize(new java.awt.Dimension(250, 250));
+        nonIntID.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        nonIntID.setAlwaysOnTop(true);
+        nonIntID.setLocation(new java.awt.Point(200, 200));
+        nonIntID.setMinimumSize(new java.awt.Dimension(250, 250));
 
         jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 22)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(204, 0, 0));
         jLabel7.setText("ID must be a number!");
         jLabel7.setToolTipText("");
 
+        javax.swing.GroupLayout nonIntIDLayout = new javax.swing.GroupLayout(nonIntID.getContentPane());
+        nonIntID.getContentPane().setLayout(nonIntIDLayout);
+        nonIntIDLayout.setHorizontalGroup(
+            nonIntIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nonIntIDLayout.createSequentialGroup()
+                .addContainerGap(92, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(90, 90, 90))
+        );
+        nonIntIDLayout.setVerticalGroup(
+            nonIntIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nonIntIDLayout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(174, Short.MAX_VALUE))
+        );
+
+        jLabel8.setFont(new java.awt.Font("Liberation Sans", 1, 22)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel8.setText("Non-Existing ID!");
+        jLabel8.setToolTipText("");
+
         javax.swing.GroupLayout invalidIDLayout = new javax.swing.GroupLayout(invalidID.getContentPane());
         invalidID.getContentPane().setLayout(invalidIDLayout);
         invalidIDLayout.setHorizontalGroup(
             invalidIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, invalidIDLayout.createSequentialGroup()
-                .addContainerGap(92, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(90, 90, 90))
+                .addContainerGap(126, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(109, 109, 109))
         );
         invalidIDLayout.setVerticalGroup(
             invalidIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(invalidIDLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addGap(86, 86, 86)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(152, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -219,17 +243,62 @@ public class MainMenu extends javax.swing.JFrame {
         try {
            id = Integer.parseInt(values[0]);
         }catch(Exception ex){
-           invalidID.setTitle("Error! ID must be a number!");
-           invalidID.setVisible(true);
+           nonIntID.setTitle("Error! ID must be a number!");
+           nonIntID.setVisible(true);
         }
         String update = "DELETE FROM Students WHERE studid='" + id + "'";
         DB db = new DB();
         db.connectDB();
         db.executeUpdate(update);
     }//GEN-LAST:event_delete_buttonActionPerformed
-
+    private boolean IsExistingID(){
+        
+        String[] values = getTextFieldValues();
+        int id = 0;
+        try {
+           id = Integer.parseInt(values[0]);
+        }catch(Exception ex){
+           nonIntID.setTitle("Error! ID must be a number!");
+           nonIntID.setVisible(true);
+           return false;
+    }
+        DB db = new DB();
+        db.connectDB();
+        
+        try {
+        String update = "SELECT * FROM Students WHERE studid='" + id + "'";
+        db.executeUpdate(update);    
+        }catch(Exception ex){
+            invalidID.setTitle("Error! ID must be existing!");
+            invalidID.setVisible(true);
+            return false;
+        }
+        
+        return true;
+    }
     private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_buttonActionPerformed
-        // TODO add your handling code here:
+        String[] values = getTextFieldValues();
+          int id = 0;
+           if (IsExistingID()){
+       id = Integer.parseInt(values[0]);
+       String studName = values[1];
+       String studAddress = values[2];
+       String studCourse = values[3];
+       String studGender = values[4];
+       String studYrlevel = values[5];
+       
+       DB db = new DB();
+       db.connectDB();
+       
+       //Deletes row and replaces it with a new and updated one.
+       String update = "DELETE FROM Students WHERE studid='" + id + "'";
+       db.executeUpdate(update);
+       update = "INSERT INTO Students VALUES("+ id + ",'" + studName + "','" + studAddress + "','" + studCourse + "','" +
+               studGender + "','" + studYrlevel + "')";
+       db.executeUpdate(update);
+           }
+        
+    
     }//GEN-LAST:event_update_buttonActionPerformed
 
     /**
@@ -281,7 +350,9 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField name_textField;
+    private javax.swing.JDialog nonIntID;
     private javax.swing.JButton save_button;
     private javax.swing.JButton update_button;
     private javax.swing.JTextField yrlevel_textField;
