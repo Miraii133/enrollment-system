@@ -198,14 +198,7 @@ public class MainMenu extends javax.swing.JFrame {
     
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
        String[] values = getTextFieldValues();
-       int id = 0;
-       try {
-            id = Integer.parseInt(values[0]);
-       }catch (Exception error){
-           invalidID.setTitle("Error! ID must be a number!");
-           invalidID.setVisible(true);
-           
-       }
+       int id = Integer.parseInt(values[0]);
        String studName = values[1];
        String studAddress = values[2];
        String studCourse = values[3];
@@ -221,7 +214,18 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_save_buttonActionPerformed
 
     private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
-        // TODO add your handling code here:
+        String[] values = getTextFieldValues();
+        int id = 0;
+        try {
+           id = Integer.parseInt(values[0]);
+        }catch(Exception ex){
+           invalidID.setTitle("Error! ID must be a number!");
+           invalidID.setVisible(true);
+        }
+        String update = "DELETE FROM Students WHERE studid='" + id + "'";
+        DB db = new DB();
+        db.connectDB();
+        db.executeUpdate(update);
     }//GEN-LAST:event_delete_buttonActionPerformed
 
     private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_buttonActionPerformed
