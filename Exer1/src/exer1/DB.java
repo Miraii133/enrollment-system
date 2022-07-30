@@ -42,17 +42,42 @@ public class DB {
     }
     
     void connectDB(){
-        System.out.println("called");
 try {
     // db parameters
     setConn(DriverManager.getConnection(getURL(), getUser(), getPassword()));
-    setStatement(getConn().createStatement());
-    String query = "INSERT INTO Students VALUES ('3', 'Meme', 'davao', 'IT', 'Male', '2nd')";
-    getStatement().executeUpdate(query);
 }
- catch(SQLException e) {
-   System.out.println(e.getMessage());
-   e.printStackTrace();
+ catch(SQLException ex) {
+     System.out.println("Unable to connect to the Database.");
+   System.out.println(ex.getMessage());
+   ex.printStackTrace();
 }
     }
-}
+    
+    void executeUpdate(String update){
+        try {
+            setStatement(getConn().createStatement());
+            // update refers to the statement that is going to modify
+            // the database.
+            getStatement().executeUpdate(update);  
+        }  catch (SQLException ex){
+            System.out.println("Unable to execute update to the database");
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+   
+    }
+        /*void executeQuery(String query){
+            
+        try {
+            setStatement(getConn().createStatement());
+            // update refers to the statement that is going to modify
+            // the database.
+            getStatement().executeQuery(query);  
+        }  catch (SQLException ex){
+            System.out.println("Unable to execute quqery to the database");
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }*/
+   
+    }
+
