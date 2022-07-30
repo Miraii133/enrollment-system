@@ -4,8 +4,9 @@ public class Exer1 {
 
     public static void main(String[] args) {
         DB db = new DB();
-        db.connectDB();
-        db.executeUpdate("INSERT INTO Students VALUES('5', 'Nya', 'davao', 'IT', 'Male', '3rd')");
+        MainMenu mainmenu = new MainMenu();
+        mainmenu.setVisible(true);
+
 
     }
 }

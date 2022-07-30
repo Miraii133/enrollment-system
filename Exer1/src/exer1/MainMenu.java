@@ -26,6 +26,8 @@ public class MainMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        invalidID = new javax.swing.JDialog();
+        jLabel7 = new javax.swing.JLabel();
         id_textField = new javax.swing.JTextField();
         course_textField = new javax.swing.JTextField();
         name_textField = new javax.swing.JTextField();
@@ -42,6 +44,33 @@ public class MainMenu extends javax.swing.JFrame {
         update_button = new javax.swing.JButton();
         delete_button = new javax.swing.JButton();
 
+        invalidID.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        invalidID.setAlwaysOnTop(true);
+        invalidID.setLocation(new java.awt.Point(200, 200));
+        invalidID.setMinimumSize(new java.awt.Dimension(250, 250));
+
+        jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 22)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel7.setText("ID must be a number!");
+        jLabel7.setToolTipText("");
+
+        javax.swing.GroupLayout invalidIDLayout = new javax.swing.GroupLayout(invalidID.getContentPane());
+        invalidID.getContentPane().setLayout(invalidIDLayout);
+        invalidIDLayout.setHorizontalGroup(
+            invalidIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, invalidIDLayout.createSequentialGroup()
+                .addContainerGap(92, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(90, 90, 90))
+        );
+        invalidIDLayout.setVerticalGroup(
+            invalidIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(invalidIDLayout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(174, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("ID");
@@ -56,21 +85,21 @@ public class MainMenu extends javax.swing.JFrame {
 
         jLabel6.setText("Year Level");
 
-        save_button.setText("jButton1");
+        save_button.setText("Save");
         save_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 save_buttonActionPerformed(evt);
             }
         });
 
-        update_button.setText("jButton1");
+        update_button.setText("Update");
         update_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 update_buttonActionPerformed(evt);
             }
         });
 
-        delete_button.setText("jButton1");
+        delete_button.setText("Delete");
         delete_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 delete_buttonActionPerformed(evt);
@@ -94,22 +123,26 @@ public class MainMenu extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(save_button)
+                        .addGap(37, 37, 37)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(update_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addComponent(delete_button)
+                        .addGap(39, 39, 39))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(name_textField, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
                             .addComponent(id_textField)
                             .addComponent(address_textField)
                             .addComponent(course_textField)
                             .addComponent(yrlevel_textField)
-                            .addComponent(gender_textField)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(save_button)
-                        .addGap(38, 38, 38)
-                        .addComponent(update_button)
-                        .addGap(32, 32, 32)
-                        .addComponent(delete_button)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                            .addComponent(gender_textField))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,9 +182,42 @@ public class MainMenu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private String[] getTextFieldValues(){
+        // retrieves values of all text fields and
+        // stores them in an array
+        // to make it much easier to pass to other methods.
+        String[] values = new String[6];
+        values[0] = id_textField.getText();
+        values[1] = name_textField.getText();
+        values[2] = address_textField.getText();
+        values[3] = course_textField.getText();
+        values[4] = gender_textField.getText();
+        values[5] = yrlevel_textField.getText();
+        return values;
+    }
+    
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
+       String[] values = getTextFieldValues();
+       int id = 0;
+       try {
+            id = Integer.parseInt(values[0]);
+       }catch (Exception error){
+           invalidID.setTitle("Error! ID must be a number!");
+           invalidID.setVisible(true);
+           
+       }
+       String studName = values[1];
+       String studAddress = values[2];
+       String studCourse = values[3];
+       String studGender = values[4];
+       String studYrlevel = values[5];
        
+       DB db = new DB();
+       db.connectDB();
+       
+       String update = "INSERT INTO Students VALUES("+ id + ",'" + studName + "','" + studAddress + "','" + studCourse + "','" +
+               studGender + "','" + studYrlevel + "')";
+       db.executeUpdate(update);
     }//GEN-LAST:event_save_buttonActionPerformed
 
     private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
@@ -203,12 +269,14 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton delete_button;
     private javax.swing.JTextField gender_textField;
     private javax.swing.JTextField id_textField;
+    private javax.swing.JDialog invalidID;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField name_textField;
     private javax.swing.JButton save_button;
     private javax.swing.JButton update_button;
