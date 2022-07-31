@@ -83,9 +83,9 @@ public class MainMenu extends javax.swing.JFrame {
         invalidIDLayout.setHorizontalGroup(
             invalidIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, invalidIDLayout.createSequentialGroup()
-                .addContainerGap(126, Short.MAX_VALUE)
+                .addContainerGap(123, Short.MAX_VALUE)
                 .addComponent(jLabel8)
-                .addGap(109, 109, 109))
+                .addGap(112, 112, 112))
         );
         invalidIDLayout.setVerticalGroup(
             invalidIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,9 +220,41 @@ public class MainMenu extends javax.swing.JFrame {
         return values;
     }
     
+        private boolean IsExistingID(){
+        
+        String[] values = getTextFieldValues();
+        int id = 0;
+        try {
+           id = Integer.parseInt(values[0]);
+        }catch(Exception ex){
+          System.out.println("Not a number!");
+           return false;
+    }
+        DB db = new DB();
+        db.connectDB();
+        
+        String query = "SELECT * FROM Students WHERE studid='" + id + "'";
+        if (!db.executeQuery(query)){
+           System.out.println("Not an existing ID!");
+            return false;
+        }    
+            
+        // returns true if the ID is valid.
+        return true;
+        
+    }
+    
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
        String[] values = getTextFieldValues();
-       int id = Integer.parseInt(values[0]);
+       int id = 0;
+       try {
+          id = Integer.parseInt(values[0]);
+       } catch (NumberFormatException ex){
+           System.out.println("Not a valid number!");
+           return;
+       }
+    
+       
        String studName = values[1];
        String studAddress = values[2];
        String studCourse = values[3];
@@ -231,10 +263,16 @@ public class MainMenu extends javax.swing.JFrame {
        
        DB db = new DB();
        db.connectDB();
-       
-       String update = "INSERT INTO Students VALUES("+ id + ",'" + studName + "','" + studAddress + "','" + studCourse + "','" +
+
+       if (!IsExistingID()){
+        String update = "INSERT INTO Students VALUES("+ id + ",'" + studName + "','" + studAddress + "','" + studCourse + "','" +
                studGender + "','" + studYrlevel + "')";
        db.executeUpdate(update);
+       }
+       System.out.println("Number provided for ID already exists!");
+       System.out.println("Please use update instead.");
+       
+       
     }//GEN-LAST:event_save_buttonActionPerformed
 
     private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
@@ -251,31 +289,7 @@ public class MainMenu extends javax.swing.JFrame {
         db.connectDB();
         db.executeUpdate(update);
     }//GEN-LAST:event_delete_buttonActionPerformed
-    private boolean IsExistingID(){
-        
-        String[] values = getTextFieldValues();
-        int id = 0;
-        try {
-           id = Integer.parseInt(values[0]);
-        }catch(Exception ex){
-           nonIntID.setTitle("Error! ID must be a number!");
-           nonIntID.setVisible(true);
-           return false;
-    }
-        DB db = new DB();
-        db.connectDB();
-        
-        String query = "SELECT * FROM Students WHERE studid='" + id + "'";
-        if (!db.executeQuery(query)){
-            invalidID.setTitle("Error! ID must be existing!");
-            invalidID.setVisible(true);
-            return false;
-        }    
-            
-        
-        return true;
-        
-    }
+
     private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_buttonActionPerformed
         String[] values = getTextFieldValues();
           int id = 0;
