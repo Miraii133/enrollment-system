@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -58,7 +59,8 @@ try {
             setStatement(getConn().createStatement());
             // update refers to the statement that is going to modify
             // the database.
-            getStatement().executeUpdate(update);  
+            getStatement().executeUpdate(update);
+            
         }  catch (SQLException ex){
             System.out.println("Unable to execute update to the database");
             System.out.println(ex.getMessage());
@@ -66,18 +68,26 @@ try {
         }
    
     }
-        /*void executeQuery(String query){
-            
+        // returns true or false if the query is
+         // valid or not
+       boolean executeQuery(String query){
         try {
             setStatement(getConn().createStatement());
-            // update refers to the statement that is going to modify
-            // the database.
-            getStatement().executeQuery(query);  
+            // checks if current query has something
+            // returns false if next() is empty.
+            ResultSet rs = getStatement().executeQuery(query);
+             if(!rs.next()){
+                 return false;
+             }
+           
         }  catch (SQLException ex){
-            System.out.println("Unable to execute quqery to the database");
+            System.out.println("Unable to execute query to the database");
             System.out.println(ex.getMessage());
             ex.printStackTrace();
-        }*/
+            return false;
+        }
+        return true;
    
     }
+}
 

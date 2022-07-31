@@ -265,16 +265,16 @@ public class MainMenu extends javax.swing.JFrame {
         DB db = new DB();
         db.connectDB();
         
-        try {
-        String update = "SELECT * FROM Students WHERE studid='" + id + "'";
-        db.executeUpdate(update);    
-        }catch(Exception ex){
+        String query = "SELECT * FROM Students WHERE studid='" + id + "'";
+        if (!db.executeQuery(query)){
             invalidID.setTitle("Error! ID must be existing!");
             invalidID.setVisible(true);
             return false;
-        }
+        }    
+            
         
         return true;
+        
     }
     private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_buttonActionPerformed
         String[] values = getTextFieldValues();
