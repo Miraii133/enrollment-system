@@ -227,15 +227,15 @@ public class MainMenu extends javax.swing.JFrame {
         try {
            id = Integer.parseInt(values[0]);
         }catch(Exception ex){
-          System.out.println("Not a number!");
+          System.out.println("Number provided for ID is not a valid number!");
            return false;
     }
         DB db = new DB();
         db.connectDB();
         
         String query = "SELECT * FROM Students WHERE studid='" + id + "'";
+        // if ID is not am existing ID.
         if (!db.executeQuery(query)){
-           System.out.println("Not an existing ID!");
             return false;
         }    
             
@@ -264,10 +264,13 @@ public class MainMenu extends javax.swing.JFrame {
        DB db = new DB();
        db.connectDB();
 
+       // checks if ID provided already exists
+       // so code can insert it to DB.
        if (!IsExistingID()){
         String update = "INSERT INTO Students VALUES("+ id + ",'" + studName + "','" + studAddress + "','" + studCourse + "','" +
                studGender + "','" + studYrlevel + "')";
        db.executeUpdate(update);
+       return;
        }
        System.out.println("Number provided for ID already exists!");
        System.out.println("Please use update instead.");
@@ -293,7 +296,12 @@ public class MainMenu extends javax.swing.JFrame {
     private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_buttonActionPerformed
         String[] values = getTextFieldValues();
           int id = 0;
-           if (IsExistingID()){
+           if (!IsExistingID()){
+               System.out.println("Number provided for ID does not exist.");
+               System.out.println("Please use Save instead.");
+               return;
+           }
+           
        id = Integer.parseInt(values[0]);
        String studName = values[1];
        String studAddress = values[2];
@@ -310,7 +318,7 @@ public class MainMenu extends javax.swing.JFrame {
        update = "INSERT INTO Students VALUES("+ id + ",'" + studName + "','" + studAddress + "','" + studCourse + "','" +
                studGender + "','" + studYrlevel + "')";
        db.executeUpdate(update);
-           }
+           
         
     
     }//GEN-LAST:event_update_buttonActionPerformed
