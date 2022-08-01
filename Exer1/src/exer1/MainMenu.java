@@ -272,6 +272,7 @@ public class MainMenu extends javax.swing.JFrame {
         String update = "INSERT INTO Students VALUES("+ id + ",'" + studName + "','" + studAddress + "','" + studCourse + "','" +
                studGender + "','" + studYrlevel + "')";
        db.executeUpdate(update);
+       System.out.println("ID data inserted.");
        return;
        }
        System.out.println("ID provided already exists!");
@@ -301,6 +302,7 @@ public class MainMenu extends javax.swing.JFrame {
         DB db = new DB();
         db.connectDB();
         db.executeUpdate(update);
+        System.out.println("ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
 
     private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_buttonActionPerformed
@@ -335,6 +337,7 @@ public class MainMenu extends javax.swing.JFrame {
        update = "INSERT INTO Students VALUES("+ id + ",'" + studName + "','" + studAddress + "','" + studCourse + "','" +
                studGender + "','" + studYrlevel + "')";
        db.executeUpdate(update);
+       System.out.println("ID data updated.");
            
         
     
