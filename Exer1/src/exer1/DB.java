@@ -44,7 +44,7 @@ public class DB {
     
     void connectDB(){
 try {
-    // db parameters
+    // connects code to DB
     setConn(DriverManager.getConnection(getURL(), getUser(), getPassword()));
 }
  catch(SQLException ex) {
@@ -54,6 +54,9 @@ try {
 }
     }
     
+    // executeUpdate is named the same with the built-in
+    // SQL executeUpdate() function, but inherintly
+    // does the same job.
     void executeUpdate(String update){
         try {
             setStatement(getConn().createStatement());
@@ -68,8 +71,9 @@ try {
         }
    
     }
-        // returns true or false if the query is
-         // valid or not
+    
+        // Checks if query is a valid query
+        // returns true or false accordingly.
        boolean executeQuery(String query){
         try {
             setStatement(getConn().createStatement());

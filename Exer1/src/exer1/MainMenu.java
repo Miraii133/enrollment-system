@@ -226,8 +226,9 @@ public class MainMenu extends javax.swing.JFrame {
         int id = 0;
         try {
            id = Integer.parseInt(values[0]);
-        }catch(Exception ex){
+        }catch(NumberFormatException ex){
           System.out.println("Number provided for ID is not a valid number!");
+          System.out.println(ex);
            return false;
     }
         DB db = new DB();
@@ -250,7 +251,8 @@ public class MainMenu extends javax.swing.JFrame {
        try {
           id = Integer.parseInt(values[0]);
        } catch (NumberFormatException ex){
-           System.out.println("Not a valid number!");
+           System.out.println("ID provided is not a valid number!");
+           System.out.println(ex);
            return;
        }
     
@@ -272,7 +274,7 @@ public class MainMenu extends javax.swing.JFrame {
        db.executeUpdate(update);
        return;
        }
-       System.out.println("Number provided for ID already exists!");
+       System.out.println("ID provided already exists!");
        System.out.println("Please use update instead.");
        
        
@@ -283,10 +285,18 @@ public class MainMenu extends javax.swing.JFrame {
         int id = 0;
         try {
            id = Integer.parseInt(values[0]);
-        }catch(Exception ex){
-           nonIntID.setTitle("Error! ID must be a number!");
-           nonIntID.setVisible(true);
+        }catch(NumberFormatException ex){
+           System.out.println("ID provided is not a valid number!");
+           System.out.println(ex);
+           return;
         }
+        
+        if (!IsExistingID()){
+               System.out.println("ID provided does not exist.");
+               System.out.println("Cannot delete data from ID");
+               return; 
+           }
+        
         String update = "DELETE FROM Students WHERE studid='" + id + "'";
         DB db = new DB();
         db.connectDB();
@@ -296,13 +306,20 @@ public class MainMenu extends javax.swing.JFrame {
     private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_buttonActionPerformed
         String[] values = getTextFieldValues();
           int id = 0;
-           if (!IsExistingID()){
-               System.out.println("Number provided for ID does not exist.");
-               System.out.println("Please use Save instead.");
-               return;
-           }
            
-       id = Integer.parseInt(values[0]);
+        try {
+           id = Integer.parseInt(values[0]);
+        }catch(NumberFormatException ex){
+           System.out.println("ID provided is not a valid number!");
+           System.out.println(ex);
+           return;
+        }
+            if (!IsExistingID()){
+               System.out.println("ID provided does not exist.");
+               System.out.println("Please use Save instead.");
+               return; 
+           }
+        
        String studName = values[1];
        String studAddress = values[2];
        String studCourse = values[3];
