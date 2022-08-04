@@ -41,6 +41,7 @@ public class Students extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        back_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,59 +78,65 @@ public class Students extends javax.swing.JFrame {
 
         jLabel3.setText("Address");
 
+        back_button.setText("Back");
+        back_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                back_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addComponent(jLabel1))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(save_button)
-                        .addGap(31, 31, 31)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(108, 108, 108)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel6)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(name_textField)
-                            .addComponent(id_textField)
-                            .addComponent(address_textField)
-                            .addComponent(course_textField)
-                            .addComponent(yrlevel_textField)
-                            .addComponent(gender_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(update_button)
-                        .addGap(31, 31, 31)
-                        .addComponent(delete_button)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(back_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(name_textField)
+                    .addComponent(id_textField)
+                    .addComponent(address_textField)
+                    .addComponent(course_textField)
+                    .addComponent(yrlevel_textField)
+                    .addComponent(gender_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 65, Short.MAX_VALUE)
+                .addComponent(save_button)
+                .addGap(31, 31, 31)
+                .addComponent(update_button)
+                .addGap(31, 31, 31)
+                .addComponent(delete_button)
+                .addGap(57, 57, 57))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(id_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(name_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(address_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(id_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(back_button))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(name_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(address_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -174,7 +181,7 @@ public class Students extends javax.swing.JFrame {
         try {
            id = Integer.parseInt(values[0]);
         }catch(NumberFormatException ex){
-          System.out.println("Number provided for ID is not a valid number!");
+          System.out.println("Number provided for Student ID is not a valid number!");
           System.out.println(ex);
            return false;
     }
@@ -199,7 +206,7 @@ public class Students extends javax.swing.JFrame {
         try {
             id = Integer.parseInt(values[0]);
         } catch (NumberFormatException ex){
-            System.out.println("ID provided is not a valid number!");
+            System.out.println("Student ID provided is not a valid number!");
             System.out.println(ex);
             return;
         }
@@ -219,27 +226,27 @@ public class Students extends javax.swing.JFrame {
             String update = "INSERT INTO Students VALUES("+ id + ",'" + studName + "','" + studAddress + "','" + studCourse + "','" +
             studGender + "','" + studYrlevel + "')";
             db.executeUpdate(update);
-            System.out.println("ID data inserted.");
+            System.out.println("Student ID data inserted.");
             return;
         }
-        System.out.println("ID provided already exists!");
+        System.out.println("Student ID provided already exists!");
         System.out.println("Please use Update instead.");
 
     }//GEN-LAST:event_save_buttonActionPerformed
 
     private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_buttonActionPerformed
         String[] values = getTextFieldValues();
-        int id = 0;
+        int studId = 0;
 
         try {
-            id = Integer.parseInt(values[0]);
+            studId = Integer.parseInt(values[0]);
         }catch(NumberFormatException ex){
-            System.out.println("ID provided is not a valid number!");
+            System.out.println("Student ID provided is not a valid number!");
             System.out.println(ex);
             return;
         }
         if (!IsExistingID()){
-            System.out.println("ID provided does not exist.");
+            System.out.println("Student ID provided does not exist.");
             System.out.println("Please use Save instead.");
             return;
         }
@@ -254,12 +261,15 @@ public class Students extends javax.swing.JFrame {
         db.connectDB();
 
         //Deletes row and replaces it with a new and updated one.
-        String update = "DELETE FROM Students WHERE studid='" + id + "'";
+        // String update = "DELETE FROM Students WHERE studid='" + id + "'";
+        String update = ""
+                + "UPDATE Students SET " + "studid='" + studId + "', studname='" + studName + "', studaddr='" + studAddress + "',"
+                + "studcrs='" + studCourse + "', studgender='" + studGender + "', yrlvl='" + studYrlevel + "'"
+                + "WHERE studId=" + studId ;
         db.executeUpdate(update);
-        update = "INSERT INTO Students VALUES("+ id + ",'" + studName + "','" + studAddress + "','" + studCourse + "','" +
-        studGender + "','" + studYrlevel + "')";
-        db.executeUpdate(update);
-        System.out.println("ID data updated.");
+        /*update = "INSERT INTO Students VALUES("+ studId + ",'" + studName + "','" + studAddress + "','" + studCourse + "','" +
+        studGender + "','" + studYrlevel + "')";*/
+        System.out.println("Student ID data updated.");
 
     }//GEN-LAST:event_update_buttonActionPerformed
 
@@ -269,14 +279,14 @@ public class Students extends javax.swing.JFrame {
         try {
             id = Integer.parseInt(values[0]);
         }catch(NumberFormatException ex){
-            System.out.println("ID provided is not a valid number!");
+            System.out.println("Student ID provided is not a valid number!");
             System.out.println(ex);
             return;
         }
 
         if (!IsExistingID()){
-            System.out.println("ID provided does not exist!");
-            System.out.println("Cannot delete data from ID.");
+            System.out.println("Student ID provided does not exist!");
+            System.out.println("Cannot delete data from Student ID.");
             return;
         }
 
@@ -284,8 +294,14 @@ public class Students extends javax.swing.JFrame {
         DB db = new DB();
         db.connectDB();
         db.executeUpdate(update);
-        System.out.println("ID data deleted.");
+        System.out.println("Student ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
+
+    private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_buttonActionPerformed
+        this.setVisible(false);
+        MainMenu mainMenu = new MainMenu();
+        mainMenu.setVisible(true);       // TODO add your handling code here:
+    }//GEN-LAST:event_back_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -324,6 +340,7 @@ public class Students extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address_textField;
+    private javax.swing.JButton back_button;
     private javax.swing.JTextField course_textField;
     private javax.swing.JButton delete_button;
     private javax.swing.JTextField gender_textField;

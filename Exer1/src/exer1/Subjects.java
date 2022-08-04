@@ -26,23 +26,43 @@ public class Subjects extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        id_textField = new javax.swing.JTextField();
-        course_textField = new javax.swing.JTextField();
+        subjects_panel = new javax.swing.JPanel();
+        delete_button = new javax.swing.JButton();
+        back_button = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        name_textField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        subjode_textField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        address_textField = new javax.swing.JTextField();
-        gender_textField = new javax.swing.JTextField();
+        subjdesc_textField = new javax.swing.JTextField();
+        subjsched_textField = new javax.swing.JTextField();
         save_button = new javax.swing.JButton();
         update_button = new javax.swing.JButton();
+        subjid_textField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        delete_button = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        subjunits_textField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        delete_button.setText("Delete");
+        delete_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_buttonActionPerformed(evt);
+            }
+        });
+
+        back_button.setText("Back");
+        back_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                back_buttonActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Subject Units");
+
+        jLabel2.setText("Subject ode");
+
+        jLabel3.setText("Subject Desc");
 
         jLabel5.setText("Subject Sched");
 
@@ -62,76 +82,90 @@ public class Subjects extends javax.swing.JFrame {
 
         jLabel1.setText("Subject ID");
 
-        delete_button.setText("Delete");
-        delete_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                delete_buttonActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Subject Code");
-
-        jLabel3.setText("Subject Desc");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
+        javax.swing.GroupLayout subjects_panelLayout = new javax.swing.GroupLayout(subjects_panel);
+        subjects_panel.setLayout(subjects_panelLayout);
+        subjects_panelLayout.setHorizontalGroup(
+            subjects_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, subjects_panelLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(subjects_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(subjects_panelLayout.createSequentialGroup()
+                        .addGap(66, 66, 66)
                         .addComponent(save_button)
                         .addGap(31, 31, 31)
                         .addComponent(update_button)
                         .addGap(31, 31, 31)
                         .addComponent(delete_button))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(subjects_panelLayout.createSequentialGroup()
+                        .addComponent(back_button)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(name_textField)
-                            .addComponent(id_textField)
-                            .addComponent(address_textField)
-                            .addComponent(course_textField)
-                            .addComponent(gender_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(70, Short.MAX_VALUE))
+                        .addGroup(subjects_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(subjects_panelLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(subjsched_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(subjects_panelLayout.createSequentialGroup()
+                                .addGroup(subjects_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(subjects_panelLayout.createSequentialGroup()
+                                        .addGap(7, 7, 7)
+                                        .addGroup(subjects_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addGroup(subjects_panelLayout.createSequentialGroup()
+                                        .addGap(25, 25, 25)
+                                        .addComponent(jLabel1)))
+                                .addGap(18, 18, 18)
+                                .addGroup(subjects_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(subjode_textField)
+                                    .addComponent(subjid_textField)
+                                    .addComponent(subjdesc_textField)
+                                    .addComponent(subjunits_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(id_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        subjects_panelLayout.setVerticalGroup(
+            subjects_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(subjects_panelLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(subjects_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(subjid_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(back_button))
+                .addGap(23, 23, 23)
+                .addGroup(subjects_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(name_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(subjode_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(address_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(subjects_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(subjdesc_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(course_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(subjects_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(subjunits_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(gender_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(subjects_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(subjsched_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(44, 44, 44)
+                .addGroup(subjects_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(save_button)
                     .addComponent(update_button)
                     .addComponent(delete_button))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(subjects_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(subjects_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -142,29 +176,29 @@ public class Subjects extends javax.swing.JFrame {
         // stores them in an array
         // to make it much easier to pass to other methods.
         String[] values = new String[5];
-        values[0] = id_textField.getText();
-        values[1] = name_textField.getText();
-        values[2] = address_textField.getText();
-        values[3] = course_textField.getText();
-        values[4] = gender_textField.getText();
+        values[0] = subjid_textField.getText();
+        values[1] = subjode_textField.getText();
+        values[2] = subjdesc_textField.getText();
+        values[3] = subjunits_textField.getText();
+        values[4] = subjsched_textField.getText();
         return values;
     }
     
         private boolean IsExistingID(){
         
         String[] values = getTextFieldValues();
-        int id = 0;
+        int subjid = 0;
         try {
-           id = Integer.parseInt(values[0]);
+           subjid = Integer.parseInt(values[0]);
         }catch(NumberFormatException ex){
-          System.out.println("Number provided for ID is not a valid number!");
+          System.out.println("Number provided for Subject ID is not a valid number!");
           System.out.println(ex);
            return false;
     }
         DB db = new DB();
         db.connectDB();
         
-        String query = "SELECT * FROM Students WHERE studid='" + id + "'";
+        String query = "SELECT * FROM Subjects WHERE subjid='" + subjid + "'";
         // if ID is not am existing ID.
         if (!db.executeQuery(query)){
             return false;
@@ -177,20 +211,27 @@ public class Subjects extends javax.swing.JFrame {
         
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
         String[] values = getTextFieldValues();
-        int id = 0;
+        int subjid = 0;
+        int subjunits = 0;
         try {
-            id = Integer.parseInt(values[0]);
+            subjid = Integer.parseInt(values[0]);
         } catch (NumberFormatException ex){
-            System.out.println("ID provided is not a valid number!");
+            System.out.println("Subject ID provided is not a valid number!");
+            System.out.println(ex);
+            return;
+        }
+        try {
+            subjunits = Integer.parseInt(values[3]);
+        }catch(NumberFormatException ex)    {
+            System.out.println("Units provided is not a valid number!");
             System.out.println(ex);
             return;
         }
 
-        String studName = values[1];
-        String studAddress = values[2];
-        String studCourse = values[3];
-        String studGender = values[4];
-        String studYrlevel = values[5];
+        String subjode = values[1];
+        String subjdesc = values[2];
+        
+        String subjsched = values[4];
 
         DB db = new DB();
         db.connectDB();
@@ -198,74 +239,90 @@ public class Subjects extends javax.swing.JFrame {
         // checks if ID provided already exists
         // so code can insert it to DB.
         if (!IsExistingID()){
-            String update = "INSERT INTO Students VALUES("+ id + ",'" + studName + "','" + studAddress + "','" + studCourse + "','" +
-            studGender + "','" + studYrlevel + "')";
+            String update = "INSERT INTO Subjects VALUES("+ subjid + ",'" + subjode + "','" + subjdesc + "','" + subjunits + "','" +
+            subjsched + "')";
             db.executeUpdate(update);
-            System.out.println("ID data inserted.");
+            System.out.println("Subject ID data inserted.");
             return;
         }
-        System.out.println("ID provided already exists!");
+        System.out.println("Sibject ID provided already exists!");
         System.out.println("Please use Update instead.");
     }//GEN-LAST:event_save_buttonActionPerformed
 
     private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_buttonActionPerformed
         String[] values = getTextFieldValues();
-        int id = 0;
+        int subjid = 0;
+        int subjunits = 0;
 
         try {
-            id = Integer.parseInt(values[0]);
-        }catch(NumberFormatException ex){
-            System.out.println("ID provided is not a valid number!");
+            subjid = Integer.parseInt(values[0]);
+        }catch(NumberFormatException ex)    {
+            System.out.println("Subject ID provided is not a valid number!");
             System.out.println(ex);
             return;
         }
+        
+         try {
+            subjunits = Integer.parseInt(values[3]);
+        }catch(NumberFormatException ex)    {
+            System.out.println("Units provided is not a valid number!");
+            System.out.println(ex);
+            return;
+        }
+         
         if (!IsExistingID()){
-            System.out.println("ID provided does not exist.");
+            System.out.println("Subject ID provided does not exist.");
             System.out.println("Please use Save instead.");
             return;
         }
 
-        String studName = values[1];
-        String studAddress = values[2];
-        String studCourse = values[3];
-        String studGender = values[4];
-        String studYrlevel = values[5];
+        String subjode = values[1];
+        String subjdesc = values[2];
+        
+        String subjsched = values[4];
 
         DB db = new DB();
         db.connectDB();
 
         //Deletes row and replaces it with a new and updated one.
-        String update = "DELETE FROM Students WHERE studid='" + id + "'";
+         String update = ""
+                + "UPDATE Subjects SET " + "subjid='" + subjid + "', subjode='" + subjode + "', subjdesc='" + subjdesc + "',"
+                + "subjunits='" + subjunits + "', subjsched='" + subjsched + "'"
+                + "WHERE subjid=" + subjid;
         db.executeUpdate(update);
-        update = "INSERT INTO Students VALUES("+ id + ",'" + studName + "','" + studAddress + "','" + studCourse + "','" +
-        studGender + "','" + studYrlevel + "')";
-        db.executeUpdate(update);
-        System.out.println("ID data updated.");
+        System.out.println("Subject ID data updated.");
     }//GEN-LAST:event_update_buttonActionPerformed
 
     private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
         String[] values = getTextFieldValues();
-        int id = 0;
+        int subjid = 0;
         try {
-            id = Integer.parseInt(values[0]);
+            subjid = Integer.parseInt(values[0]);
         }catch(NumberFormatException ex){
-            System.out.println("ID provided is not a valid number!");
+            System.out.println("Subject ID provided is not a valid number!");
             System.out.println(ex);
             return;
         }
 
         if (!IsExistingID()){
-            System.out.println("ID provided does not exist!");
-            System.out.println("Cannot delete data from ID.");
+            System.out.println("Subject ID provided does not exist!");
+            System.out.println("Cannot delete data from Subject ID.");
             return;
         }
 
-        String update = "DELETE FROM Students WHERE studid='" + id + "'";
+        String update = "DELETE FROM Subjects WHERE subjid='" + subjid + "'";
         DB db = new DB();
         db.connectDB();
         db.executeUpdate(update);
-        System.out.println("ID data deleted.");
+        System.out.println("Subject ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
+
+    private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_buttonActionPerformed
+        this.setVisible(false);
+        MainMenu mainMenu = new MainMenu();
+        mainMenu.setVisible(true);
+// TODO add your handling code here:
+    }//GEN-LAST:event_back_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -303,18 +360,20 @@ public class Subjects extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField address_textField;
-    private javax.swing.JTextField course_textField;
+    private javax.swing.JButton back_button;
     private javax.swing.JButton delete_button;
-    private javax.swing.JTextField gender_textField;
-    private javax.swing.JTextField id_textField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField name_textField;
     private javax.swing.JButton save_button;
+    private javax.swing.JTextField subjdesc_textField;
+    private javax.swing.JPanel subjects_panel;
+    private javax.swing.JTextField subjid_textField;
+    private javax.swing.JTextField subjode_textField;
+    private javax.swing.JTextField subjsched_textField;
+    private javax.swing.JTextField subjunits_textField;
     private javax.swing.JButton update_button;
     // End of variables declaration//GEN-END:variables
 }
