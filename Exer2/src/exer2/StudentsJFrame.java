@@ -246,7 +246,17 @@ public class StudentsJFrame extends javax.swing.JFrame {
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
         /*DefaultTableModel tableModel = (DefaultTableModel) students_table.getModel();
         tableModel.addRow(new Object[]{"10", "Jiyo", "Davao"});*/
+        Functions functions = new Functions();
+        String values[] =  
+        {"studentsJFrame",
+            id_textField.getText(), name_textField.getText(),
+            address_textField.getText(), course_textField.getText(), 
+            gender_textField.getText(), year_textField.getText()};
         
+        // parameters provided
+        // nameOfFrame, id, name, address, course, gender, yearLevel
+        System.out.println("test");
+        functions.getTextFieldValues(values);
         
     }//GEN-LAST:event_save_buttonActionPerformed
 

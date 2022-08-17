@@ -11,13 +11,19 @@ package exer2;
  public class Functions {
     
      // 1st parameter: which frame
-    private String[] getTextFieldValues(String frameName){
+    public String[] getTextFieldValues(String[] textFieldValues){
         // retrieves values of all text fields and
         // stores them in an array
         // to make it much easier to pass to other methods.
-        String[] values = new String[6];
-        if (frameName == "studentsJFrame"){
-            
+        String[] values = new String[textFieldValues.length];
+        // loops to assign values to values array from textFieldValues array.
+        for (int i = 0; i < textFieldValues.length; i++){
+            values[i] = textFieldValues[i];
+            System.out.println(values[i]);
+        }
+        
+        if (values[0] == "studentsJFrame"){
+            System.out.println("Hello");
 
         }
         
