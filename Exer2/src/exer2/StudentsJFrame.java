@@ -248,14 +248,15 @@ public class StudentsJFrame extends javax.swing.JFrame {
         tableModel.addRow(new Object[]{"10", "Jiyo", "Davao"});*/
         Functions functions = new Functions();
         String values[] =  
-        {this.getName(),
+             // retrieve current frame name for Functions
+             // if condition. 
+            {this.getName(),
             id_textField.getText(), name_textField.getText(),
             address_textField.getText(), course_textField.getText(), 
             gender_textField.getText(), year_textField.getText()};
         
         // parameters provided
         // nameOfFrame, id, name, address, course, gender, yearLevel
-        System.out.println("test");
         functions.getTextFieldValues(values);
         
     }//GEN-LAST:event_save_buttonActionPerformed

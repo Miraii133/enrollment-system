@@ -247,7 +247,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         tableModel.addRow(new Object[]{"10", "Jiyo", "Davao"});*/
         Functions functions = new Functions();
         String values[] =  
-        {"subjectsJFrame",
+        {this.getName(),
             id_textField.getText(), name_textField.getText(),
             address_textField.getText(), course_textField.getText(), 
             gender_textField.getText(), year_textField.getText()};
