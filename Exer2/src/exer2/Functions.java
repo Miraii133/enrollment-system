@@ -10,6 +10,7 @@ package exer2;
  */
  public class Functions {
     
+     StudentsJFrame studentsFrame = new StudentsJFrame();
      // 1st parameter: which frame
     public String[] getTextFieldValues(String[] textFieldValues){
         // retrieves values of all text fields and
@@ -22,7 +23,7 @@ package exer2;
             System.out.println(values[i]);
         }
         
-        if (values[0] == "studentsJFrame"){
+        if (values[0].equalsIgnoreCase(studentsFrame.getName())){
             System.out.println("Hello");
 
         }

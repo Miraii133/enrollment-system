@@ -10,12 +10,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jiyo
  */
-public class StudentsJFrame extends javax.swing.JFrame {
+public class SubjectsJFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form StudentsJFrame
      */
-    public StudentsJFrame() {
+    public SubjectsJFrame() {
         initComponents();
     }
 
@@ -52,9 +52,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
         teachers_item = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Students Menu");
+        setTitle("Subjects Menu");
         setName("studentsJFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1000, 600));
         setResizable(false);
 
         jLabel1.setText("Student ID");
@@ -248,7 +247,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         tableModel.addRow(new Object[]{"10", "Jiyo", "Davao"});*/
         Functions functions = new Functions();
         String values[] =  
-        {this.getName(),
+        {"subjectsJFrame",
             id_textField.getText(), name_textField.getText(),
             address_textField.getText(), course_textField.getText(), 
             gender_textField.getText(), year_textField.getText()};
@@ -281,20 +280,21 @@ public class StudentsJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StudentsJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SubjectsJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StudentsJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SubjectsJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StudentsJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SubjectsJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StudentsJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SubjectsJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StudentsJFrame().setVisible(true);
+                new SubjectsJFrame().setVisible(true);
             }
         });
     }

@@ -90,9 +90,9 @@ public class TeachersJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_students_itemActionPerformed
 
     private void subjects_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjects_itemActionPerformed
-            this.setVisible(false);
+            /*this.setVisible(false);
             SubjectsJFrame subjectsFrame = new SubjectsJFrame();
-            subjectsFrame.setVisible(true);
+            subjectsFrame.setVisible(true);*/
     }//GEN-LAST:event_subjects_itemActionPerformed
 
     private void teachers_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teachers_itemActionPerformed
