@@ -26,10 +26,47 @@ public class SubjectsJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        students_item = new javax.swing.JMenuItem();
+        subjects_item = new javax.swing.JMenuItem();
+        teachers_item = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Subjects Menu");
         setName("subjectsJFrame"); // NOI18N
         setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
+
+        jMenu1.setText("Menu");
+
+        students_item.setText("Students");
+        students_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                students_itemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(students_item);
+
+        subjects_item.setText("Subjects");
+        subjects_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subjects_itemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(subjects_item);
+
+        teachers_item.setText("Teachers");
+        teachers_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                teachers_itemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(teachers_item);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -39,12 +76,30 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGap(0, 576, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void students_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_students_itemActionPerformed
+            this.setVisible(false);
+            StudentsJFrame studentsFrame = new StudentsJFrame();
+            studentsFrame.setVisible(true);
+    }//GEN-LAST:event_students_itemActionPerformed
+
+    private void subjects_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjects_itemActionPerformed
+            this.setVisible(false);
+            SubjectsJFrame subjectsFrame = new SubjectsJFrame();
+            subjectsFrame.setVisible(true);
+    }//GEN-LAST:event_subjects_itemActionPerformed
+
+    private void teachers_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teachers_itemActionPerformed
+            this.setVisible(false);
+            TeachersJFrame teachersFrame = new TeachersJFrame();
+            teachersFrame.setVisible(true);
+    }//GEN-LAST:event_teachers_itemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -82,5 +137,10 @@ public class SubjectsJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem students_item;
+    private javax.swing.JMenuItem subjects_item;
+    private javax.swing.JMenuItem teachers_item;
     // End of variables declaration//GEN-END:variables
 }

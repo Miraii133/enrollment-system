@@ -28,30 +28,41 @@ public class StudentsJFrame extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        students_item = new javax.swing.JMenuItem();
+        subjects_item = new javax.swing.JMenuItem();
+        teachers_item = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Students Menu");
         setName("studentsJFrame"); // NOI18N
         setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         jMenu1.setText("Menu");
 
-        jMenuItem1.setText("Students");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        students_item.setText("Students");
+        students_item.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                students_itemActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(students_item);
 
-        jMenuItem2.setText("Subjects");
-        jMenu1.add(jMenuItem2);
+        subjects_item.setText("Subjects");
+        subjects_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subjects_itemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(subjects_item);
 
-        jMenuItem3.setText("Teachers");
-        jMenu1.add(jMenuItem3);
+        teachers_item.setText("Teachers");
+        teachers_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                teachers_itemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(teachers_item);
 
         jMenuBar1.add(jMenu1);
 
@@ -72,9 +83,23 @@ public class StudentsJFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void students_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_students_itemActionPerformed
+             this.setVisible(false);
+             StudentsJFrame studentsFrame = new StudentsJFrame();
+             studentsFrame.setVisible(true);
+    }//GEN-LAST:event_students_itemActionPerformed
+
+    private void subjects_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjects_itemActionPerformed
+             this.setVisible(false);
+             SubjectsJFrame subjectsFrame = new SubjectsJFrame();
+             subjectsFrame.setVisible(true);
+    }//GEN-LAST:event_subjects_itemActionPerformed
+
+    private void teachers_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teachers_itemActionPerformed
+             this.setVisible(false);
+             TeachersJFrame teachersFrame = new TeachersJFrame();
+             teachersFrame.setVisible(true);
+    }//GEN-LAST:event_teachers_itemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,8 +139,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem students_item;
+    private javax.swing.JMenuItem subjects_item;
+    private javax.swing.JMenuItem teachers_item;
     // End of variables declaration//GEN-END:variables
 }
