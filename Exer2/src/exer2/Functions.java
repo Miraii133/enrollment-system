@@ -17,13 +17,7 @@ package exer2;
         // to make it much easier to pass to other methods.
         String[] values = new String[6];
         if (frameName == "studentsJFrame"){
-            StudentsJFrame studentsFrame = new StudentsJFrame();
-            values[0] = .getText();
-            values[1] = name_textField.getText();
-            values[2] = address_textField.getText();
-            values[3] = course_textField.getText();
-            values[4] = gender_textField.getText();
-            values[5] = yrlevel_textField.getText();
+            
 
         }
         
