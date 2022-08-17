@@ -243,6 +243,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
              teachersFrame.setVisible(true);
     }//GEN-LAST:event_teachers_itemActionPerformed
 
+    
+    
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
         /*DefaultTableModel tableModel = (DefaultTableModel) students_table.getModel();
         tableModel.addRow(new Object[]{"10", "Jiyo", "Davao"});*/
@@ -256,6 +258,13 @@ public class StudentsJFrame extends javax.swing.JFrame {
         
         // parameters provided
         // id, name, address, course, gender, yearLevel
+            Functions functions = new Functions();
+            functions.getTextFieldValues(textFieldValues);
+            String sql = functions.getFrameSQL(this.getName());
+            DB db = new DB();
+            db.connectDB();
+            db.executeUpdate(sql);
+            
             
         
     }//GEN-LAST:event_save_buttonActionPerformed
