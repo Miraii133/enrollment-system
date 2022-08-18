@@ -4,6 +4,9 @@
  */
 package exer2;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author jiyo
@@ -54,8 +57,9 @@ package exer2;
         
     }
     
-    private void displayTableValues(){
-        
+    public void DisplayTableValues(JTable tableName){
+        DefaultTableModel tableModel = (DefaultTableModel) tableName.getModel();
+        tableModel.addRow(new Object[]{"10", "Jiyo", "Davao"});
     }
     
  }
@@ -89,7 +93,9 @@ package exer2;
         String dbName = "";
         Functions functions = new Functions();
         
-        // assigns the dbName so SQL is dynamic
+        // assigns the dbName so SQL is dynamic and
+        // changes accordingly to which frame
+        // is being called for the SQL
         if (frameName.equalsIgnoreCase(functions.studentsFrame.getName())){
             dbName = "Students";
         }
@@ -107,9 +113,6 @@ package exer2;
     }
     
     public String getInsertSQL(String frameName){
-       /*if (frameName.equalsIgnoreCase(studentsFrame.getName())){
-           return studentsInsertSQL;
-       }*/
        return insertSQL;
     }
     
