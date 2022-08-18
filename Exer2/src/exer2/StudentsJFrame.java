@@ -255,29 +255,20 @@ public class StudentsJFrame extends javax.swing.JFrame {
             id_textField.getText(), name_textField.getText(),
             address_textField.getText(), course_textField.getText(), 
             gender_textField.getText(), year_textField.getText()};
-        
-        // parameters provided
-        // id, name, address, course, gender, yearLevel
+       
             Functions functions = new Functions();
             SQL sqlObj = new SQL();
-            // getTextFieldValues here is not going to be used in 
-            // this method
-            // however, it will be used by other functions like
-            // isExistingID.
             DB db = new DB();
             db.connectDB();
-    
-
         // checks if ID provided already exists
         // so code can insert it to DB.
         if (!functions.IsExistingID(functions.getTextFieldValues(textFieldValues))){
-             sqlObj.setInsertSQL(textFieldValues);
+            // includes frame name to verify which frame
+            // is sending the setInsertSQL
+             sqlObj.setInsertSQL(textFieldValues, this.getName());
              String sql = sqlObj.getInsertSQL(this.getName());
              db.executeUpdate(sql);
-            /*String update = "INSERT INTO Students VALUES("+ id + ",'" + studName + "','" + studAddress + "','" + studCourse + "','" +
-            studGender + "','" + studYrlevel + "')";
-            db.executeUpdate(update);
-            System.out.println("Student ID data inserted.");*/
+            System.out.println("Student ID data inserted.");
             return;
         }
         System.out.println("Student ID provided already exists!");

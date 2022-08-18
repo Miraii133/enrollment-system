@@ -67,7 +67,7 @@ package exer2;
         private String fourthFieldValue;
         private String fifthFieldValue;
         private String sixthFieldValue;
-        private String InsertSQL; 
+        private String insertSQL; 
            
     private final String subjectsInsertSQL = "";
     private final String teachersInsertSQL = "";
@@ -78,26 +78,39 @@ package exer2;
     
     
     // changes the value of fieldValue accordingly to the frame.
-    public void setInsertSQL(String[] textFieldValues){
+    public void setInsertSQL(String[] textFieldValues, String frameName){
         firstFieldValue = textFieldValues[0];
         secondFieldValue = textFieldValues[1];
         thirdFieldValue = textFieldValues[2];
         fourthFieldValue = textFieldValues[3];
         fifthFieldValue = textFieldValues[4];
         sixthFieldValue = textFieldValues[5];
-        InsertSQL =  
-                "INSERT INTO Students VALUES(" 
-                + firstFieldValue + ", '" + secondFieldValue + "','" + thirdFieldValue + "','" + fourthFieldValue + "','" + 
-            " + " + fifthFieldValue + "','" + sixthFieldValue + "')";
-        System.out.println(firstFieldValue);
-        System.out.println(InsertSQL);
+        
+        String dbName = "";
+        Functions functions = new Functions();
+        
+        // assigns the dbName so SQL is dynamic
+        if (frameName.equalsIgnoreCase(functions.studentsFrame.getName())){
+            dbName = "Students";
+        }
+        else if (frameName.equalsIgnoreCase(functions.subjectsFrame.getName())){
+            dbName = "Subjects";
+        }
+        else if (frameName.equalsIgnoreCase(functions.teachersFrame.getName())){
+            dbName = "Teachers";
+        }
+        insertSQL =  
+                "INSERT INTO " + dbName + " VALUES(" + firstFieldValue + ", '" + secondFieldValue + 
+                "','" + thirdFieldValue + "','" + fourthFieldValue + "','" + 
+                fifthFieldValue + "','" + sixthFieldValue + "')";
+        System.out.println(insertSQL);
     }
     
     public String getInsertSQL(String frameName){
        /*if (frameName.equalsIgnoreCase(studentsFrame.getName())){
            return studentsInsertSQL;
        }*/
-       return InsertSQL;
+       return insertSQL;
     }
     
     public String getIdQuery(String frameName){
