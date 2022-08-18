@@ -259,6 +259,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         // parameters provided
         // id, name, address, course, gender, yearLevel
             Functions functions = new Functions();
+            SQL sqlObj = new SQL();
             // getTextFieldValues here is not going to be used in 
             // this method
             // however, it will be used by other functions like
@@ -270,7 +271,9 @@ public class StudentsJFrame extends javax.swing.JFrame {
         // checks if ID provided already exists
         // so code can insert it to DB.
         if (!functions.IsExistingID(functions.getTextFieldValues(textFieldValues))){
-             String sql = functions.getInsertSQL(this.getName());
+             sqlObj.setInsertSQL(textFieldValues);
+             String sql = sqlObj.getInsertSQL(this.getName());
+             db.executeUpdate(sql);
             /*String update = "INSERT INTO Students VALUES("+ id + ",'" + studName + "','" + studAddress + "','" + studCourse + "','" +
             studGender + "','" + studYrlevel + "')";
             db.executeUpdate(update);

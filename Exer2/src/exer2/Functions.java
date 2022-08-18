@@ -67,9 +67,8 @@ package exer2;
         private String fourthFieldValue;
         private String fifthFieldValue;
         private String sixthFieldValue;
-        private final String InsertSQL = 
-            "INSERT INTO Students VALUES(" + firstFieldValue + ", '" + secondFieldValue + "','" + thirdFieldValue + "','" + fourthFieldValue + "','" + 
-            " + " + fifthFieldValue + "','" + sixthFieldValue + "')";
+        private String InsertSQL; 
+           
     private final String subjectsInsertSQL = "";
     private final String teachersInsertSQL = "";
     
@@ -86,13 +85,19 @@ package exer2;
         fourthFieldValue = textFieldValues[3];
         fifthFieldValue = textFieldValues[4];
         sixthFieldValue = textFieldValues[5];
+        InsertSQL =  
+                "INSERT INTO Students VALUES(" 
+                + firstFieldValue + ", '" + secondFieldValue + "','" + thirdFieldValue + "','" + fourthFieldValue + "','" + 
+            " + " + fifthFieldValue + "','" + sixthFieldValue + "')";
+        System.out.println(firstFieldValue);
+        System.out.println(InsertSQL);
     }
     
     public String getInsertSQL(String frameName){
-       if (frameName.equalsIgnoreCase(studentsFrame.getName())){
+       /*if (frameName.equalsIgnoreCase(studentsFrame.getName())){
            return studentsInsertSQL;
-       }
-       return "";
+       }*/
+       return InsertSQL;
     }
     
     public String getIdQuery(String frameName){
