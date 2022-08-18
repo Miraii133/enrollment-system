@@ -263,7 +263,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
             // this method
             // however, it will be used by other functions like
             // isExistingID.
-       
             DB db = new DB();
             db.connectDB();
     
@@ -271,6 +270,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         // checks if ID provided already exists
         // so code can insert it to DB.
         if (!functions.IsExistingID(functions.getTextFieldValues(textFieldValues))){
+             String sql = functions.getInsertSQL(this.getName());
             /*String update = "INSERT INTO Students VALUES("+ id + ",'" + studName + "','" + studAddress + "','" + studCourse + "','" +
             studGender + "','" + studYrlevel + "')";
             db.executeUpdate(update);

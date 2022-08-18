@@ -255,7 +255,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         // parameters provided
         // nameOfFrame, id, name, address, course, gender, yearLevel
         System.out.println("test");
-        //functions.getTextFieldValues(values);
+        //tfunctions.getTextFieldValues(values);
         
     }//GEN-LAST:event_save_buttonActionPerformed
 
