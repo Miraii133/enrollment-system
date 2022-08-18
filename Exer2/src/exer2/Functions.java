@@ -29,16 +29,55 @@ package exer2;
         return values;
     }
     
+    public boolean IsANumber(String[] textFieldValues){
+        
+        try {
+           Integer.parseInt(textFieldValues[0]);
+        }catch(NumberFormatException ex){
+          System.out.println("ID is not a valid number!");
+          System.out.println(ex);
+           return false;
+    }
+        return true;
+    }
+    
+    public boolean IsExistingID(String[] textFieldValues){
+        
+        if (!IsANumber(textFieldValues)) return false;
+            DB db = new DB();
+            db.connectDB();
+            int id = Integer.parseInt(textFieldValues[0]);
+            String query = "SELECT * FROM Students WHERE studid='" + id + "'";
+         // if ID is not an existing ID.
+         // returns true if the ID is valid.
+        return db.executeQuery(query);
+        
+    }
+    
     private void displayTableValues(){
         
     }
     
     
-    private final String studentsFrameSQL = "";
-    private final String subjectsFrameSQL = "";
-    private final String teachersFrameSQL = "";
-    public String getFrameSQL(String frameName){
-       return studentsFrameSQL;
+    private final String studentsInsertSQL = "";
+    private final String subjectsInsertSQL = "";
+    private final String teachersInsertSQL = "";
+    
+    private final String studentsIdQuery = "";
+    private final String subjectsIdQuery = "";
+    private final String teachersIdQuery = "";
+    
+    //private final S
+    public String getInsertSQL(String frameName){
+       if (frameName.equalsIgnoreCase(studentsFrame.getName())){
+           
+       }
+       return "";
+    }
+    
+    public String getIdQuery(String frameName){
+        
+        return studentsIdQuery;
     }
     
 }
