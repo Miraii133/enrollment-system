@@ -47,6 +47,7 @@ import javax.swing.table.DefaultTableModel;
     public boolean IsExistingID(String[] textFieldValues){
         
         if (!IsANumber(textFieldValues)) return false;
+        
             DB db = new DB();
             db.connectDB();
             int id = Integer.parseInt(textFieldValues[0]);
@@ -57,15 +58,15 @@ import javax.swing.table.DefaultTableModel;
         
     }
     
-    public void DisplayTableValues(JTable tableName){
-        DefaultTableModel tableModel = (DefaultTableModel) tableName.getModel();
+    public void DisplayTableValues(JTable tableObj){
+        DefaultTableModel tableModel = (DefaultTableModel) tableObj.getModel();
         tableModel.addRow(new Object[]{"10", "Jiyo", "Davao"});
     }
     
  }
     class SQL {
         // changes SQL depending on the frame that will use it.
-        private String firstFieldValue;
+        private String firstFieldValue = "";
         private String secondFieldValue;
         private String thirdFieldValue;
         private String fourthFieldValue;

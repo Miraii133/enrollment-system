@@ -260,21 +260,23 @@ public class StudentsJFrame extends javax.swing.JFrame {
             SQL sqlObj = new SQL();
             DB db = new DB();
             db.connectDB();
+        // checks if ID is a valid id    
         // checks if ID provided already exists
         // so code can insert it to DB.
-        if (!functions.IsExistingID(functions.getTextFieldValues(textFieldValues))){
-            // includes frame name to verify which frame
-            // is sending the setInsertSQL
-             sqlObj.setInsertSQL(textFieldValues, this.getName());
-             String sql = sqlObj.getInsertSQL(this.getName());
-             db.executeUpdate(sql);
-            System.out.println("Student ID data inserted.");
-            functions.DisplayTableValues(students_table);
-            return;
-        }
-        System.out.println("Student ID provided already exists!");
-        System.out.println("Please use Update instead.");
-
+        if (functions.IsANumber(functions.getTextFieldValues(textFieldValues))){
+            if (!functions.IsExistingID(functions.getTextFieldValues(textFieldValues))){
+                // includes frame name to verify which frame
+                // is sending the setInsertSQL
+                 sqlObj.setInsertSQL(textFieldValues, this.getName());
+                 String sql = sqlObj.getInsertSQL(this.getName());
+                 db.executeUpdate(sql);
+                System.out.println("Student ID data inserted.");
+                functions.DisplayTableValues(students_table);
+                return;
+            }
+            System.out.println("Student ID provided already exists!");
+            System.out.println("Please use Update instead.");
+            }
             
         
     }//GEN-LAST:event_save_buttonActionPerformed
