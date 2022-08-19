@@ -7,6 +7,8 @@ package exer2;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -59,9 +61,17 @@ import java.sql.ResultSet;
         
     }
     
-    public void DisplayTableValues(JTable tableObj){
+    public void DisplayTableValues(JTable tableObj, List<String> resultData){
         DefaultTableModel tableModel = (DefaultTableModel) tableObj.getModel();
-        tableModel.addRow(new Object[]{"10", "Jiyo", "Davao"});
+        
+        String[] resultDataArray;
+        // converts resultData List to String array to make
+        // values in resultData iterable in loop.
+        resultDataArray = resultData.toArray(new String[resultData.size()]);
+        for (int i = 0; i < resultDataArray.length; i++){
+            tableModel.addRow(new Object[]{resultDataArray[i]});
+        }
+        
     }
     
  }
@@ -123,26 +133,28 @@ import java.sql.ResultSet;
         return studentsIdQuery;
     }
     
-    public String[] GetResultSetSQL(){
+    public List<String> GetResultSetSQL(){
         
         String query = "SELECT * FROM Students";
         DB db = new DB();
         db.connectDB();
+        List<String> resultData = new ArrayList<String>();
         try {
              db.setStatement(db.getConn().createStatement());
             // update refers to the statement that is going to modify
             // the database.
             ResultSet resultSet = db.getStatement().executeQuery(query);
             while (resultSet.next()){
-                System.out.println(resultSet.getString("studid"));
+                resultData.add(resultSet.getString("studid"));
             }
+            return resultData;
         } catch (Exception ex ){
             System.out.println("Cant get result set");
             ex.printStackTrace();
         }
        
         String[] a = {"a"};
-        return a;
+        return resultData;
     }
     
     

@@ -4,6 +4,7 @@
  */
 package exer2;
 
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -271,8 +272,13 @@ public class StudentsJFrame extends javax.swing.JFrame {
                  String sql = sqlObj.getInsertSQL(this.getName());
                  db.executeUpdate(sql);
                 System.out.println("Student ID data inserted.");
-                sqlObj.GetResultSetSQL();
-                //functions.DisplayTableValues(students_table);
+                
+                // converts return value from GetResultSetSQL to
+                // a local variable
+                
+                // passes it to DisplayTableValues
+                List<String> resultData = sqlObj.GetResultSetSQL();
+                functions.DisplayTableValues(students_table, resultData);
                 return;
             }
             System.out.println("Student ID provided already exists!");
