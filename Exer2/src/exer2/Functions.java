@@ -64,13 +64,8 @@ import java.util.List;
     public void DisplayTableValues(JTable tableObj, List<String> resultData){
         DefaultTableModel tableModel = (DefaultTableModel) tableObj.getModel();
         
-        String[] resultDataArray;
-        // converts resultData List to String array to make
-        // values in resultData iterable in loop.
-        resultDataArray = resultData.toArray(new String[resultData.size()]);
-        for (int i = 0; i < resultDataArray.length; i++){
-            tableModel.addRow(new Object[]{resultDataArray[i]});
-        }
+            tableModel.addRow(resultData.toArray());
+        
         
     }
     
@@ -138,14 +133,24 @@ import java.util.List;
         String query = "SELECT * FROM Students";
         DB db = new DB();
         db.connectDB();
-        List<String> resultData = new ArrayList<String>();
+        List<String> resultData = new ArrayList<>();
         try {
              db.setStatement(db.getConn().createStatement());
             // update refers to the statement that is going to modify
             // the database.
             ResultSet resultSet = db.getStatement().executeQuery(query);
             while (resultSet.next()){
-                resultData.add(resultSet.getString("studid"));
+                String id = resultSet.getString("studid");
+                String name = resultSet.getString("studname");
+                String address = resultSet.getString("studaddr");
+                String course = resultSet.getString("studcrs");
+                String gender = resultSet.getString("studgender");
+                String yearLevel = resultSet.getString("yrlvl");
+                String array[] = {id, name, address, course, gender, yearLevel};
+                for(String data:array){  
+                resultData.add(data);
+                }
+                
             }
             return resultData;
         } catch (Exception ex ){
