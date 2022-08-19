@@ -6,6 +6,7 @@ package exer2;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
 
 /**
  *
@@ -121,6 +122,30 @@ import javax.swing.table.DefaultTableModel;
         
         return studentsIdQuery;
     }
+    
+    public String[] GetResultSetSQL(){
+        
+        String query = "SELECT * FROM Students";
+        DB db = new DB();
+        db.connectDB();
+        try {
+             db.setStatement(db.getConn().createStatement());
+            // update refers to the statement that is going to modify
+            // the database.
+            ResultSet resultSet = db.getStatement().executeQuery(query);
+            while (resultSet.next()){
+                System.out.println(resultSet.getString("studid"));
+            }
+        } catch (Exception ex ){
+            System.out.println("Cant get result set");
+            ex.printStackTrace();
+        }
+       
+        String[] a = {"a"};
+        return a;
+    }
+    
+    
     }
     
    

@@ -271,7 +271,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
                  String sql = sqlObj.getInsertSQL(this.getName());
                  db.executeUpdate(sql);
                 System.out.println("Student ID data inserted.");
-                functions.DisplayTableValues(students_table);
+                sqlObj.GetResultSetSQL();
+                //functions.DisplayTableValues(students_table);
                 return;
             }
             System.out.println("Student ID provided already exists!");
