@@ -61,13 +61,21 @@ import java.util.List;
         
     }
     
-    public void DisplayTableValues(JTable tableObj, List<String> resultData){
+    /*public void DisplayTableValues(JTable tableObj, List<String> resultData){
         DefaultTableModel tableModel = (DefaultTableModel) tableObj.getModel();
+            String[] values = new String[6];
+            String currentValue = "";
+            for (int i = 0; i < resultData.toArray().length; i++) {
+                if (i % 5 != 0 ){
+                    values[i] = resultData.get(i);
+                    
+                } else {
+                    tableModel.addRow(new Object[]{values});
+                }
+                
+            }
         
-            tableModel.addRow(resultData.toArray());
-        
-        
-    }
+    }*/
     
  }
     class SQL {
@@ -128,7 +136,7 @@ import java.util.List;
         return studentsIdQuery;
     }
     
-    public List<String> GetResultSetSQL(){
+    public List<String> GetResultSetSQL(JTable students_table){
         
         String query = "SELECT * FROM Students";
         DB db = new DB();
@@ -147,9 +155,11 @@ import java.util.List;
                 String gender = resultSet.getString("studgender");
                 String yearLevel = resultSet.getString("yrlvl");
                 String array[] = {id, name, address, course, gender, yearLevel};
-                for(String data:array){  
+                 DefaultTableModel tableModel = (DefaultTableModel) students_table.getModel();
+                 tableModel.addRow(array);
+                /*for(String data:array){  
                 resultData.add(data);
-                }
+                }*/
                 
             }
             return resultData;

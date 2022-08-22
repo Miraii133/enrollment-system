@@ -284,7 +284,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
                 // a local variable
                 
                 // passes it to DisplayTableValues
-                List<String> resultData = sqlObj.GetResultSetSQL();
+                List<String> resultData = sqlObj.GetResultSetSQL(students_table);
                 functions.DisplayTableValues(students_table, resultData);
                 return;
             }
