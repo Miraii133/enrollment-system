@@ -18,6 +18,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
      */
     public StudentsJFrame() {
         initComponents();
+        SQL sql = new SQL();
+        sql.GetResultSetSQL(students_table);
     }
 
     /**
@@ -44,7 +46,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         students_table = new javax.swing.JTable();
         save_button = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        update_button = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -69,12 +71,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
         jLabel5.setText("Student Gender");
 
         jLabel6.setText("Student Year");
-
-        name_textField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                name_textFieldActionPerformed(evt);
-            }
-        });
 
         students_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -116,7 +112,12 @@ public class StudentsJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Update");
+        update_button.setText("Update");
+        update_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_buttonActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Delete");
 
@@ -170,7 +171,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(save_button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
+                        .addComponent(update_button)
                         .addGap(12, 12, 12)
                         .addComponent(jButton3))
                     .addGroup(layout.createSequentialGroup()
@@ -221,7 +222,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(save_button)
-                            .addComponent(jButton2)
+                            .addComponent(update_button)
                             .addComponent(jButton3)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
@@ -285,7 +286,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
                 
                 // passes it to DisplayTableValues
                 List<String> resultData = sqlObj.GetResultSetSQL(students_table);
-                functions.DisplayTableValues(students_table, resultData);
+                //functions.DisplayTableValues(students_table, resultData);
                 return;
             }
             System.out.println("Student ID provided already exists!");
@@ -295,9 +296,26 @@ public class StudentsJFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_save_buttonActionPerformed
 
-    private void name_textFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_textFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_name_textFieldActionPerformed
+    private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_buttonActionPerformed
+        String textFieldValues[] =  
+             // retrieve current frame name for Functions
+             // if condition. 
+            {
+            id_textField.getText(), name_textField.getText(),
+            address_textField.getText(), course_textField.getText(), 
+            gender_textField.getText(), year_textField.getText()};
+        DB db = new DB();
+        db.connectDB();
+
+        //Deletes row and replaces it with a new and updated one.
+        // String update = "DELETE FROM Students WHERE studid='" + id + "'";
+        SQL sqlObj = new SQL();
+        sqlObj.setUpdateSQL(textFieldValues, this.getName());
+        String sql = sqlObj.getUpdateSQL(this.getName());
+        db.executeUpdate(sql);
+        sqlObj.GetResultSetSQL(students_table);
+        System.out.println("Student ID data updated.");
+    }//GEN-LAST:event_update_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,7 +357,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField course_textField;
     private javax.swing.JTextField gender_textField;
     private javax.swing.JTextField id_textField;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -356,6 +373,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
     private javax.swing.JTable students_table;
     private javax.swing.JMenuItem subjects_item;
     private javax.swing.JMenuItem teachers_item;
+    private javax.swing.JButton update_button;
     private javax.swing.JTextField year_textField;
     // End of variables declaration//GEN-END:variables
 }

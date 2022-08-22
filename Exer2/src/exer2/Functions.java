@@ -86,9 +86,9 @@ import java.util.List;
         private String fourthFieldValue;
         private String fifthFieldValue;
         private String sixthFieldValue;
+        
         private String insertSQL; 
-           
-    private final String subjectsInsertSQL = "";
+        private String updateSQL;
     private final String teachersInsertSQL = "";
     
     private final String studentsIdQuery = "";
@@ -105,7 +105,7 @@ import java.util.List;
         fifthFieldValue = textFieldValues[4];
         sixthFieldValue = textFieldValues[5];
         
-        String dbName = "";
+        String dbName;
         Functions functions = new Functions();
         
         // assigns the dbName so SQL is dynamic and
@@ -113,6 +113,10 @@ import java.util.List;
         // is being called for the SQL
         if (frameName.equalsIgnoreCase(functions.studentsFrame.getName())){
             dbName = "Students";
+            insertSQL =  
+                "INSERT INTO " + dbName + " VALUES(" + firstFieldValue + ", '" + secondFieldValue + 
+                "','" + thirdFieldValue + "','" + fourthFieldValue + "','" + 
+                fifthFieldValue + "','" + sixthFieldValue + "')";
         }
         else if (frameName.equalsIgnoreCase(functions.subjectsFrame.getName())){
             dbName = "Subjects";
@@ -120,15 +124,50 @@ import java.util.List;
         else if (frameName.equalsIgnoreCase(functions.teachersFrame.getName())){
             dbName = "Teachers";
         }
-        insertSQL =  
-                "INSERT INTO " + dbName + " VALUES(" + firstFieldValue + ", '" + secondFieldValue + 
-                "','" + thirdFieldValue + "','" + fourthFieldValue + "','" + 
-                fifthFieldValue + "','" + sixthFieldValue + "')";
-        System.out.println(insertSQL);
+        
     }
+    
+     public void setUpdateSQL(String[] textFieldValues, String frameName){
+        firstFieldValue = textFieldValues[0];
+        secondFieldValue = textFieldValues[1];
+        thirdFieldValue = textFieldValues[2];
+        fourthFieldValue = textFieldValues[3];
+        fifthFieldValue = textFieldValues[4];
+        sixthFieldValue = textFieldValues[5];
+        
+        String dbName;
+        Functions functions = new Functions();
+        
+        // assigns the dbName so SQL is dynamic and
+        // changes accordingly to which frame
+        // is being called for the SQL
+      
+        System.out.println(functions.studentsFrame.getName());
+        if (frameName.equalsIgnoreCase(functions.studentsFrame.getName())){
+            dbName = "Students";
+                updateSQL = ""
+                + "UPDATE Students SET " + "studid='" + firstFieldValue + "', studname='" + secondFieldValue + "', studaddr='" + thirdFieldValue + "',"
+                + "studcrs='" + fourthFieldValue + "', studgender='" + fifthFieldValue + "', yrlvl='" + sixthFieldValue + "'"
+                + "WHERE studId=" + firstFieldValue ;
+            
+        }
+        else if (frameName.equalsIgnoreCase(functions.subjectsFrame.getName())){
+            dbName = "Subjects";
+        }
+        else if (frameName.equalsIgnoreCase(functions.teachersFrame.getName())){
+            dbName = "Teachers";
+        }
+        
+    }
+    
+    
     
     public String getInsertSQL(String frameName){
        return insertSQL;
+    }
+    
+    public String getUpdateSQL(String frameName){
+       return updateSQL;
     }
     
     public String getIdQuery(String frameName){
@@ -136,7 +175,7 @@ import java.util.List;
         return studentsIdQuery;
     }
     
-    public List<String> GetResultSetSQL(JTable students_table){
+    public List<String> GetResultSetSQL(JTable jtableName){
         
         String query = "SELECT * FROM Students";
         DB db = new DB();
@@ -155,7 +194,10 @@ import java.util.List;
                 String gender = resultSet.getString("studgender");
                 String yearLevel = resultSet.getString("yrlvl");
                 String array[] = {id, name, address, course, gender, yearLevel};
-                 DefaultTableModel tableModel = (DefaultTableModel) students_table.getModel();
+                
+                // adds array to table row
+                 DefaultTableModel tableModel = (DefaultTableModel) jtableName.getModel();
+                 ClearJTable(tableModel);
                  tableModel.addRow(array);
                 /*for(String data:array){  
                 resultData.add(data);
@@ -170,6 +212,10 @@ import java.util.List;
        
         String[] a = {"a"};
         return resultData;
+    }
+    
+    public void ClearJTable(DefaultTableModel tableModel){
+        tableModel.setRowCount(0);
     }
     
     
