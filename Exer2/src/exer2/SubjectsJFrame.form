@@ -66,18 +66,16 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="course_textField" pref="128" max="32767" attributes="0"/>
-                          <Component id="gender_textField" max="32767" attributes="0"/>
-                          <Component id="year_textField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="subjunits_textField" pref="128" max="32767" attributes="0"/>
+                          <Component id="subjsched_textField" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -91,22 +89,19 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="id_textField" min="-2" pref="128" max="-2" attributes="0"/>
-                          <Component id="name_textField" min="-2" pref="128" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="subjdesc_textField" max="32767" attributes="0"/>
+                          <Component id="subjid_textField" alignment="0" pref="128" max="32767" attributes="0"/>
+                          <Component id="subjode_textField" alignment="0" pref="128" max="32767" attributes="0"/>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="address_textField" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="242" max="32767" attributes="0"/>
+              <EmptySpace pref="247" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -118,34 +113,29 @@
                       <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="id_textField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="subjid_textField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="name_textField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="subjode_textField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="address_textField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="subjdesc_textField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="course_textField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="subjunits_textField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="gender_textField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="subjsched_textField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="year_textField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="save_button" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="update_button" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -165,45 +155,38 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Student ID"/>
+        <Property name="text" type="java.lang.String" value="Subject ID"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Student Name"/>
+        <Property name="text" type="java.lang.String" value="Subject Code"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Student Address"/>
+        <Property name="text" type="java.lang.String" value="Subject Desc"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Student Course"/>
+        <Property name="text" type="java.lang.String" value="Subject Units"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Student Gender"/>
+        <Property name="text" type="java.lang.String" value="Subject Sched"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel6">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Student Year"/>
-      </Properties>
+    <Component class="javax.swing.JTextField" name="subjid_textField">
     </Component>
-    <Component class="javax.swing.JTextField" name="id_textField">
+    <Component class="javax.swing.JTextField" name="subjode_textField">
     </Component>
-    <Component class="javax.swing.JTextField" name="name_textField">
+    <Component class="javax.swing.JTextField" name="subjdesc_textField">
     </Component>
-    <Component class="javax.swing.JTextField" name="address_textField">
+    <Component class="javax.swing.JTextField" name="subjunits_textField">
     </Component>
-    <Component class="javax.swing.JTextField" name="course_textField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="gender_textField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="year_textField">
+    <Component class="javax.swing.JTextField" name="subjsched_textField">
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -212,25 +195,19 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="students_table">
+        <Component class="javax.swing.JTable" name="subjects_table">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="0">
-                <Column editable="false" title="studid" type="java.lang.Integer"/>
-                <Column editable="false" title="studname" type="java.lang.String"/>
-                <Column editable="false" title="studaddr" type="java.lang.String"/>
-                <Column editable="false" title="studcrs" type="java.lang.String"/>
-                <Column editable="false" title="studgender" type="java.lang.String"/>
-                <Column editable="false" title="yrlvl" type="java.lang.String"/>
+              <Table columnCount="5" rowCount="0">
+                <Column editable="false" title="subjid" type="java.lang.Integer"/>
+                <Column editable="false" title="subjode" type="java.lang.String"/>
+                <Column editable="false" title="subjdesc" type="java.lang.String"/>
+                <Column editable="false" title="subjunits" type="java.lang.String"/>
+                <Column editable="false" title="subjsched" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                   <Title/>
                   <Editor/>

@@ -19,7 +19,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
     public SubjectsJFrame() {
         initComponents();
         SQL sql = new SQL();
-        sql.GetResultSetSQL(students_table);
+        sql.GetResultSetSQL(subjects_table);
     }
 
     /**
@@ -36,15 +36,13 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        id_textField = new javax.swing.JTextField();
-        name_textField = new javax.swing.JTextField();
-        address_textField = new javax.swing.JTextField();
-        course_textField = new javax.swing.JTextField();
-        gender_textField = new javax.swing.JTextField();
-        year_textField = new javax.swing.JTextField();
+        subjid_textField = new javax.swing.JTextField();
+        subjode_textField = new javax.swing.JTextField();
+        subjdesc_textField = new javax.swing.JTextField();
+        subjunits_textField = new javax.swing.JTextField();
+        subjsched_textField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        students_table = new javax.swing.JTable();
+        subjects_table = new javax.swing.JTable();
         save_button = new javax.swing.JButton();
         update_button = new javax.swing.JButton();
         delete_button = new javax.swing.JButton();
@@ -59,31 +57,29 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         setName("studentsJFrame"); // NOI18N
         setResizable(false);
 
-        jLabel1.setText("Student ID");
+        jLabel1.setText("Subject ID");
 
-        jLabel2.setText("Student Name");
+        jLabel2.setText("Subject Code");
 
-        jLabel3.setText("Student Address");
+        jLabel3.setText("Subject Desc");
 
-        jLabel4.setText("Student Course");
+        jLabel4.setText("Subject Units");
 
-        jLabel5.setText("Student Gender");
+        jLabel5.setText("Subject Sched");
 
-        jLabel6.setText("Student Year");
-
-        students_table.setModel(new javax.swing.table.DefaultTableModel(
+        subjects_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "studid", "studname", "studaddr", "studcrs", "studgender", "yrlvl"
+                "subjid", "subjode", "subjdesc", "subjunits", "subjsched"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -94,14 +90,13 @@ public class SubjectsJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(students_table);
-        if (students_table.getColumnModel().getColumnCount() > 0) {
-            students_table.getColumnModel().getColumn(0).setResizable(false);
-            students_table.getColumnModel().getColumn(1).setResizable(false);
-            students_table.getColumnModel().getColumn(2).setResizable(false);
-            students_table.getColumnModel().getColumn(3).setResizable(false);
-            students_table.getColumnModel().getColumn(4).setResizable(false);
-            students_table.getColumnModel().getColumn(5).setResizable(false);
+        jScrollPane1.setViewportView(subjects_table);
+        if (subjects_table.getColumnModel().getColumnCount() > 0) {
+            subjects_table.getColumnModel().getColumn(0).setResizable(false);
+            subjects_table.getColumnModel().getColumn(1).setResizable(false);
+            subjects_table.getColumnModel().getColumn(2).setResizable(false);
+            subjects_table.getColumnModel().getColumn(3).setResizable(false);
+            subjects_table.getColumnModel().getColumn(4).setResizable(false);
         }
 
         save_button.setText("Save");
@@ -161,17 +156,15 @@ public class SubjectsJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel6)
                             .addComponent(jLabel4))
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(course_textField, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                            .addComponent(gender_textField)
-                            .addComponent(year_textField)))
+                            .addComponent(subjunits_textField, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                            .addComponent(subjsched_textField)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(save_button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -181,18 +174,16 @@ public class SubjectsJFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
                         .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(id_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(name_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(24, 24, 24)
-                        .addComponent(address_textField)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(subjdesc_textField)
+                            .addComponent(subjid_textField, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                            .addComponent(subjode_textField, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(242, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,28 +193,24 @@ public class SubjectsJFrame extends javax.swing.JFrame {
                         .addGap(79, 79, 79)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(id_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(subjid_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(name_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(subjode_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(address_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(subjdesc_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(course_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(subjunits_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(gender_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(year_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
+                            .addComponent(subjsched_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(74, 74, 74)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(save_button)
                             .addComponent(update_button)
@@ -263,9 +250,9 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         tableModel.addRow(new Object[]{"10", "Jiyo", "Davao"});*/
         String textFieldValues[] =  
             {
-            id_textField.getText(), name_textField.getText(),
-            address_textField.getText(), course_textField.getText(), 
-            gender_textField.getText(), year_textField.getText()};
+            subjid_textField.getText(), subjode_textField.getText(),
+            subjdesc_textField.getText(), subjunits_textField.getText(), 
+            subjsched_textField.getText()};
        
             Functions functions = new Functions();
             SQL sqlObj = new SQL();
@@ -281,7 +268,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
                  sqlObj.setInsertSQL(textFieldValues, this.getName());
                  String sql = sqlObj.getInsertSQL(this.getName());
                  db.executeUpdate(sql);
-                 sqlObj.GetResultSetSQL(students_table);
+                 sqlObj.GetResultSetSQL(subjects_table);
                 System.out.println("Student ID data inserted.");
                 
                 // converts return value from GetResultSetSQL to
@@ -304,9 +291,9 @@ public class SubjectsJFrame extends javax.swing.JFrame {
              // retrieve current frame name for Functions
              // if condition. 
             {
-            id_textField.getText(), name_textField.getText(),
-            address_textField.getText(), course_textField.getText(), 
-            gender_textField.getText(), year_textField.getText()};
+            subjid_textField.getText(), subjode_textField.getText(),
+            subjdesc_textField.getText(), subjunits_textField.getText(), 
+            subjsched_textField.getText()};
         DB db = new DB();
         db.connectDB();
 
@@ -316,7 +303,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         sqlObj.setUpdateSQL(textFieldValues, this.getName());
         String sql = sqlObj.getUpdateSQL(this.getName());
         db.executeUpdate(sql);
-        sqlObj.GetResultSetSQL(students_table);
+        sqlObj.GetResultSetSQL(subjects_table);
         System.out.println("Student ID data updated.");
     }//GEN-LAST:event_update_buttonActionPerformed
 
@@ -324,9 +311,9 @@ public class SubjectsJFrame extends javax.swing.JFrame {
     private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
          String textFieldValues[] =  
             {
-            id_textField.getText(), name_textField.getText(),
-            address_textField.getText(), course_textField.getText(), 
-            gender_textField.getText(), year_textField.getText()};
+            subjid_textField.getText(), subjode_textField.getText(),
+            subjdesc_textField.getText(), subjunits_textField.getText(), 
+            subjsched_textField.getText()};
         
         DB db = new DB();
         db.connectDB();
@@ -340,7 +327,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         sqlObj.setDeleteSQL(textFieldValues, this.getName());
         String sql = sqlObj.getDeleteSQL(this.getName());
         db.executeUpdate(sql);
-        sqlObj.GetResultSetSQL(students_table);
+        sqlObj.GetResultSetSQL(subjects_table);
         System.out.println("Student ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
 
@@ -381,27 +368,25 @@ public class SubjectsJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField address_textField;
-    private javax.swing.JTextField course_textField;
     private javax.swing.JButton delete_button;
-    private javax.swing.JTextField gender_textField;
-    private javax.swing.JTextField id_textField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField name_textField;
     private javax.swing.JButton save_button;
     private javax.swing.JMenuItem students_item;
-    private javax.swing.JTable students_table;
+    private javax.swing.JTextField subjdesc_textField;
     private javax.swing.JMenuItem subjects_item;
+    private javax.swing.JTable subjects_table;
+    private javax.swing.JTextField subjid_textField;
+    private javax.swing.JTextField subjode_textField;
+    private javax.swing.JTextField subjsched_textField;
+    private javax.swing.JTextField subjunits_textField;
     private javax.swing.JMenuItem teachers_item;
     private javax.swing.JButton update_button;
-    private javax.swing.JTextField year_textField;
     // End of variables declaration//GEN-END:variables
 }
