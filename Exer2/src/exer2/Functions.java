@@ -7,6 +7,7 @@ package exer2;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -175,7 +176,7 @@ import java.util.List;
         return studentsIdQuery;
     }
     
-    public List<String> GetResultSetSQL(JTable jtableName){
+    public void GetResultSetSQL(JTable jtableName){
         
         String query = "SELECT * FROM Students";
         DB db = new DB();
@@ -198,20 +199,20 @@ import java.util.List;
                 // adds array to table row
                  DefaultTableModel tableModel = (DefaultTableModel) jtableName.getModel();
                  ClearJTable(tableModel);
+                 for (int i = 0; i < array.length; i++){
+                     System.out.println(array[i]);
+                 }
                  tableModel.addRow(array);
                 /*for(String data:array){  
                 resultData.add(data);
                 }*/
                 
             }
-            return resultData;
-        } catch (Exception ex ){
+        } catch (SQLException ex ){
             System.out.println("Cant get result set");
             ex.printStackTrace();
         }
        
-        String[] a = {"a"};
-        return resultData;
     }
     
     public void ClearJTable(DefaultTableModel tableModel){
