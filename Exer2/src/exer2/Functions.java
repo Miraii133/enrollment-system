@@ -144,7 +144,6 @@ import java.util.List;
         // changes accordingly to which frame
         // is being called for the SQL
       
-        System.out.println(functions.studentsFrame.getName());
         if (frameName.equalsIgnoreCase(functions.studentsFrame.getName())){
             dbName = "Students";
                 updateSQL = ""
@@ -177,7 +176,6 @@ import java.util.List;
         // changes accordingly to which frame
         // is being called for the SQL
       
-        System.out.println(functions.studentsFrame.getName());
         if (frameName.equalsIgnoreCase(functions.studentsFrame.getName())){
             dbName = "Students";
                 deleteSQL = "DELETE FROM " + dbName +" WHERE studid=" + firstFieldValue;

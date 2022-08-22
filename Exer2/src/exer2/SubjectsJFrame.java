@@ -4,6 +4,7 @@
  */
 package exer2;
 
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,6 +18,8 @@ public class SubjectsJFrame extends javax.swing.JFrame {
      */
     public SubjectsJFrame() {
         initComponents();
+        SQL sql = new SQL();
+        sql.GetResultSetSQL(students_table);
     }
 
     /**
@@ -43,8 +46,8 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         students_table = new javax.swing.JTable();
         save_button = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        update_button = new javax.swing.JButton();
+        delete_button = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         students_item = new javax.swing.JMenuItem();
@@ -52,7 +55,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         teachers_item = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Subjects Menu");
+        setTitle("Students Menu");
         setName("studentsJFrame"); // NOI18N
         setResizable(false);
 
@@ -68,23 +71,24 @@ public class SubjectsJFrame extends javax.swing.JFrame {
 
         jLabel6.setText("Student Year");
 
-        name_textField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                name_textFieldActionPerformed(evt);
-            }
-        });
-
         students_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Name", "Address", "Course", "Gender", "Year"
+                "studid", "studname", "studaddr", "studcrs", "studgender", "yrlvl"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -107,9 +111,19 @@ public class SubjectsJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Update");
+        update_button.setText("Update");
+        update_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_buttonActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Delete");
+        delete_button.setText("Delete");
+        delete_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_buttonActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Menu");
 
@@ -161,9 +175,9 @@ public class SubjectsJFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(save_button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
+                        .addComponent(update_button)
                         .addGap(12, 12, 12)
-                        .addComponent(jButton3))
+                        .addComponent(delete_button))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -212,8 +226,8 @@ public class SubjectsJFrame extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(save_button)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)))
+                            .addComponent(update_button)
+                            .addComponent(delete_button)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -226,7 +240,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
 
     private void students_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_students_itemActionPerformed
              this.setVisible(false);
-             StudentsJFrame studentsFrame = new StudentsJFrame();
+             SubjectsJFrame studentsFrame = new SubjectsJFrame();
              studentsFrame.setVisible(true);
     }//GEN-LAST:event_students_itemActionPerformed
 
@@ -242,26 +256,93 @@ public class SubjectsJFrame extends javax.swing.JFrame {
              teachersFrame.setVisible(true);
     }//GEN-LAST:event_teachers_itemActionPerformed
 
+    
+    
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
         /*DefaultTableModel tableModel = (DefaultTableModel) students_table.getModel();
         tableModel.addRow(new Object[]{"10", "Jiyo", "Davao"});*/
-        Functions functions = new Functions();
-        String values[] =  
-        {
+        String textFieldValues[] =  
+            {
+            id_textField.getText(), name_textField.getText(),
+            address_textField.getText(), course_textField.getText(), 
+            gender_textField.getText(), year_textField.getText()};
+       
+            Functions functions = new Functions();
+            SQL sqlObj = new SQL();
+            DB db = new DB();
+            db.connectDB();
+        // checks if ID is a valid id    
+        // checks if ID provided already exists
+        // so code can insert it to DB.
+        if (functions.IsANumber(functions.getTextFieldValues(textFieldValues))){
+            if (!functions.IsExistingID(functions.getTextFieldValues(textFieldValues))){
+                // includes frame name to verify which frame
+                // is sending the setInsertSQL
+                 sqlObj.setInsertSQL(textFieldValues, this.getName());
+                 String sql = sqlObj.getInsertSQL(this.getName());
+                 db.executeUpdate(sql);
+                 sqlObj.GetResultSetSQL(students_table);
+                System.out.println("Student ID data inserted.");
+                
+                // converts return value from GetResultSetSQL to
+                // a local variable
+                
+                // passes it to DisplayTableValues
+                //List<String> resultData = sqlObj.GetResultSetSQL(students_table);
+                //functions.DisplayTableValues(students_table, resultData);
+                return;
+            }
+            System.out.println("Student ID provided already exists!");
+            System.out.println("Please use Update instead.");
+            }
+            
+        
+    }//GEN-LAST:event_save_buttonActionPerformed
+
+    private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_buttonActionPerformed
+        String textFieldValues[] =  
+             // retrieve current frame name for Functions
+             // if condition. 
+            {
+            id_textField.getText(), name_textField.getText(),
+            address_textField.getText(), course_textField.getText(), 
+            gender_textField.getText(), year_textField.getText()};
+        DB db = new DB();
+        db.connectDB();
+
+        //Deletes row and replaces it with a new and updated one.
+        // String update = "DELETE FROM Students WHERE studid='" + id + "'";
+        SQL sqlObj = new SQL();
+        sqlObj.setUpdateSQL(textFieldValues, this.getName());
+        String sql = sqlObj.getUpdateSQL(this.getName());
+        db.executeUpdate(sql);
+        sqlObj.GetResultSetSQL(students_table);
+        System.out.println("Student ID data updated.");
+    }//GEN-LAST:event_update_buttonActionPerformed
+
+    
+    private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
+         String textFieldValues[] =  
+            {
             id_textField.getText(), name_textField.getText(),
             address_textField.getText(), course_textField.getText(), 
             gender_textField.getText(), year_textField.getText()};
         
-        // parameters provided
-        // nameOfFrame, id, name, address, course, gender, yearLevel
-        System.out.println("test");
-        //tfunctions.getTextFieldValues(values);
-        
-    }//GEN-LAST:event_save_buttonActionPerformed
-
-    private void name_textFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_textFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_name_textFieldActionPerformed
+        DB db = new DB();
+        db.connectDB();
+        Functions functions = new Functions();
+        if (!functions.IsExistingID(textFieldValues)){
+            System.out.println("Student ID provided does not exist!");
+            System.out.println("Cannot delete data from Student ID.");
+            return;
+        }
+        SQL sqlObj = new SQL();
+        sqlObj.setDeleteSQL(textFieldValues, this.getName());
+        String sql = sqlObj.getDeleteSQL(this.getName());
+        db.executeUpdate(sql);
+        sqlObj.GetResultSetSQL(students_table);
+        System.out.println("Student ID data deleted.");
+    }//GEN-LAST:event_delete_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,10 +383,9 @@ public class SubjectsJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address_textField;
     private javax.swing.JTextField course_textField;
+    private javax.swing.JButton delete_button;
     private javax.swing.JTextField gender_textField;
     private javax.swing.JTextField id_textField;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -321,6 +401,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
     private javax.swing.JTable students_table;
     private javax.swing.JMenuItem subjects_item;
     private javax.swing.JMenuItem teachers_item;
+    private javax.swing.JButton update_button;
     private javax.swing.JTextField year_textField;
     // End of variables declaration//GEN-END:variables
 }
