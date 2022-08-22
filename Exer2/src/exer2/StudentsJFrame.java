@@ -47,7 +47,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         students_table = new javax.swing.JTable();
         save_button = new javax.swing.JButton();
         update_button = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        delete_button = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         students_item = new javax.swing.JMenuItem();
@@ -119,7 +119,12 @@ public class StudentsJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Delete");
+        delete_button.setText("Delete");
+        delete_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_buttonActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Menu");
 
@@ -173,7 +178,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(update_button)
                         .addGap(12, 12, 12)
-                        .addComponent(jButton3))
+                        .addComponent(delete_button))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -223,7 +228,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(save_button)
                             .addComponent(update_button)
-                            .addComponent(jButton3)))
+                            .addComponent(delete_button)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -258,8 +263,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
         /*DefaultTableModel tableModel = (DefaultTableModel) students_table.getModel();
         tableModel.addRow(new Object[]{"10", "Jiyo", "Davao"});*/
         String textFieldValues[] =  
-             // retrieve current frame name for Functions
-             // if condition. 
             {
             id_textField.getText(), name_textField.getText(),
             address_textField.getText(), course_textField.getText(), 
@@ -318,6 +321,30 @@ public class StudentsJFrame extends javax.swing.JFrame {
         System.out.println("Student ID data updated.");
     }//GEN-LAST:event_update_buttonActionPerformed
 
+    
+    private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
+         String textFieldValues[] =  
+            {
+            id_textField.getText(), name_textField.getText(),
+            address_textField.getText(), course_textField.getText(), 
+            gender_textField.getText(), year_textField.getText()};
+        
+        DB db = new DB();
+        db.connectDB();
+        Functions functions = new Functions();
+        if (!functions.IsExistingID(textFieldValues)){
+            System.out.println("Student ID provided does not exist!");
+            System.out.println("Cannot delete data from Student ID.");
+            return;
+        }
+        SQL sqlObj = new SQL();
+        sqlObj.setDeleteSQL(textFieldValues, this.getName());
+        String sql = sqlObj.getDeleteSQL(this.getName());
+        db.executeUpdate(sql);
+        sqlObj.GetResultSetSQL(students_table);
+        System.out.println("Student ID data deleted.");
+    }//GEN-LAST:event_delete_buttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -356,9 +383,9 @@ public class StudentsJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address_textField;
     private javax.swing.JTextField course_textField;
+    private javax.swing.JButton delete_button;
     private javax.swing.JTextField gender_textField;
     private javax.swing.JTextField id_textField;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

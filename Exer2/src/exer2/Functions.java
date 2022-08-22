@@ -90,6 +90,7 @@ import java.util.List;
         
         private String insertSQL; 
         private String updateSQL;
+        private String deleteSQL;
     private final String teachersInsertSQL = "";
     
     private final String studentsIdQuery = "";
@@ -147,9 +148,39 @@ import java.util.List;
         if (frameName.equalsIgnoreCase(functions.studentsFrame.getName())){
             dbName = "Students";
                 updateSQL = ""
-                + "UPDATE Students SET " + "studid='" + firstFieldValue + "', studname='" + secondFieldValue + "', studaddr='" + thirdFieldValue + "',"
+                + "UPDATE " +  dbName + "SET " + "studid='" + firstFieldValue + "', studname='" + secondFieldValue + "', studaddr='" + thirdFieldValue + "',"
                 + "studcrs='" + fourthFieldValue + "', studgender='" + fifthFieldValue + "', yrlvl='" + sixthFieldValue + "'"
                 + "WHERE studId=" + firstFieldValue ;
+            
+        }
+        else if (frameName.equalsIgnoreCase(functions.subjectsFrame.getName())){
+            dbName = "Subjects";
+        }
+        else if (frameName.equalsIgnoreCase(functions.teachersFrame.getName())){
+            dbName = "Teachers";
+        }
+        
+    }
+     
+      public void setDeleteSQL(String[] textFieldValues, String frameName){
+        firstFieldValue = textFieldValues[0];
+        secondFieldValue = textFieldValues[1];
+        thirdFieldValue = textFieldValues[2];
+        fourthFieldValue = textFieldValues[3];
+        fifthFieldValue = textFieldValues[4];
+        sixthFieldValue = textFieldValues[5];
+        
+        String dbName;
+        Functions functions = new Functions();
+        
+        // assigns the dbName so SQL is dynamic and
+        // changes accordingly to which frame
+        // is being called for the SQL
+      
+        System.out.println(functions.studentsFrame.getName());
+        if (frameName.equalsIgnoreCase(functions.studentsFrame.getName())){
+            dbName = "Students";
+                deleteSQL = "DELETE FROM " + dbName +" WHERE studid=" + firstFieldValue;
             
         }
         else if (frameName.equalsIgnoreCase(functions.subjectsFrame.getName())){
@@ -171,6 +202,10 @@ import java.util.List;
        return updateSQL;
     }
     
+    public String getDeleteSQL(String frameName){
+       return deleteSQL;
+    }
+    
     public String getIdQuery(String frameName){
         
         return studentsIdQuery;
@@ -187,8 +222,8 @@ import java.util.List;
             // update refers to the statement that is going to modify
             // the database.
             ResultSet resultSet = db.getStatement().executeQuery(query);
-                       DefaultTableModel tableModel = (DefaultTableModel) jtableName.getModel();
-                 ClearJTable(tableModel);
+            DefaultTableModel tableModel = (DefaultTableModel) jtableName.getModel();
+            ClearJTable(tableModel);
             while (resultSet.next()){
                 String id = resultSet.getString("studid");
                 String name = resultSet.getString("studname");
