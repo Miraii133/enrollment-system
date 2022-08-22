@@ -19,7 +19,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
     public SubjectsJFrame() {
         initComponents();
         SQL sql = new SQL();
-        sql.GetResultSetSQL(subjects_table);
+        sql.GetResultSetSQL(this.getName(), subjects_table);
     }
 
     /**
@@ -268,7 +268,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
                  sqlObj.setInsertSQL(textFieldValues, this.getName());
                  String sql = sqlObj.getInsertSQL(this.getName());
                  db.executeUpdate(sql);
-                 sqlObj.GetResultSetSQL(subjects_table);
+                 sqlObj.GetResultSetSQL(this.getName(), subjects_table);
                 System.out.println("Student ID data inserted.");
                 
                 // converts return value from GetResultSetSQL to
@@ -303,7 +303,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         sqlObj.setUpdateSQL(textFieldValues, this.getName());
         String sql = sqlObj.getUpdateSQL(this.getName());
         db.executeUpdate(sql);
-        sqlObj.GetResultSetSQL(subjects_table);
+        sqlObj.GetResultSetSQL(this.getName(), subjects_table);
         System.out.println("Student ID data updated.");
     }//GEN-LAST:event_update_buttonActionPerformed
 
@@ -327,7 +327,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         sqlObj.setDeleteSQL(textFieldValues, this.getName());
         String sql = sqlObj.getDeleteSQL(this.getName());
         db.executeUpdate(sql);
-        sqlObj.GetResultSetSQL(subjects_table);
+        sqlObj.GetResultSetSQL(this.getName(), subjects_table);
         System.out.println("Student ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
 
