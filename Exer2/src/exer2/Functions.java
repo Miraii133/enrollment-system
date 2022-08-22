@@ -211,63 +211,49 @@ import java.util.List;
     
     public void GetResultSetSQL(String frameName, JTable jtableName){
         
-        Functions functions = new Functions();
-        String searchQuery = "";
-        String dbName = "";
-        if (frameName.equalsIgnoreCase(functions.studentsFrame.getName())){
-            dbName = "Students";
-            searchQuery = "SELECT * FROM " + dbName;
-        }
-        else if (frameName.equalsIgnoreCase(functions.subjectsFrame.getName())){
-            dbName = "Subjects";
-            searchQuery = "SELECT * FROM " + dbName;
-        }
-        else if (frameName.equalsIgnoreCase(functions.teachersFrame.getName())){
-            dbName = "Teachers";
-            searchQuery = "SELECT * FROM " + dbName;
-        }
         
         DB db = new DB();
         db.connectDB();
+        String dbName = "";
+        String searchQuery = "";
+        String query = "";
+        if (frameName.equalsIgnoreCase("students_table")){
+            dbName = "Students";
+            searchQuery = "SELECT * FROM " + dbName;
+        }
+        
+        else if (frameName.equalsIgnoreCase("subjects_table")){
+            dbName = "Subjects";
+            searchQuery = "SELECT * FROM " + dbName;
+        }
+        else if (frameName.equalsIgnoreCase("teachers_table")){
+            dbName = "Teachers";
+            searchQuery = "SELECT * FROM " + dbName;
+        } 
         try {
              db.setStatement(db.getConn().createStatement());
             // update refers to the statement that is going to modify
             // the database.
-            ResultSet resultSet = db.getStatement().executeQuery(searchQuery);
+            
+            ResultSet resultSet = db.getStatement().executeQuery(query);
             DefaultTableModel tableModel = (DefaultTableModel) jtableName.getModel();
             ClearJTable(tableModel);
-            
-            if (frameName.equalsIgnoreCase(functions.studentsFrame.getName())){
-                while (resultSet.next()){
-                    String id = resultSet.getString("studid");
-                    String name = resultSet.getString("studname");
-                    String address = resultSet.getString("studaddr");
-                    String course = resultSet.getString("studcrs");
-                    String gender = resultSet.getString("studgender");
-                    String yearLevel = resultSet.getString("yrlvl");
-                    String array[] = {id, name, address, course, gender, yearLevel};
-                    // adds array to table row
-                     tableModel.addRow(array);
-
-                }
-            }
-            else if (frameName.equalsIgnoreCase(functions.subjectsFrame.getName())){
-                while (resultSet.next()){
-                    String id = resultSet.getString("subjid");
-                    String code = resultSet.getString("subjode");
-                    String desc = resultSet.getString("subjdesc");
-                    String units = resultSet.getString("subjunits");
-                    String sched = resultSet.getString("subjsched");
-                    String array[] = {id, code, desc, units, sched};
-                    // adds array to table row
-                    tableModel.addRow(array);
-                }
+            while (resultSet.next()){
+                String id = resultSet.getString("studid");
+                String name = resultSet.getString("studname");
+                String address = resultSet.getString("studaddr");
+                String course = resultSet.getString("studcrs");
+                String gender = resultSet.getString("studgender");
+                String yearLevel = resultSet.getString("yrlvl");
+                String array[] = {id, name, address, course, gender, yearLevel};
                 
-              
+                // adds array to table row
+                 tableModel.addRow(array);
+                /*for(String data:array){  
+                resultData.add(data);
+                }*/
+                
             }
-            
-            
-            
         } catch (SQLException ex ){
             System.out.println("Cant get result set");
             ex.printStackTrace();
@@ -284,4 +270,3 @@ import java.util.List;
     
    
     
-

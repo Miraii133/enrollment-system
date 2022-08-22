@@ -260,6 +260,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
     
     
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
+
         /*DefaultTableModel tableModel = (DefaultTableModel) students_table.getModel();
         tableModel.addRow(new Object[]{"10", "Jiyo", "Davao"});*/
         String textFieldValues[] =  
