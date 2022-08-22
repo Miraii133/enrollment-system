@@ -187,6 +187,8 @@ import java.util.List;
             // update refers to the statement that is going to modify
             // the database.
             ResultSet resultSet = db.getStatement().executeQuery(query);
+                       DefaultTableModel tableModel = (DefaultTableModel) jtableName.getModel();
+                 ClearJTable(tableModel);
             while (resultSet.next()){
                 String id = resultSet.getString("studid");
                 String name = resultSet.getString("studname");
@@ -197,11 +199,6 @@ import java.util.List;
                 String array[] = {id, name, address, course, gender, yearLevel};
                 
                 // adds array to table row
-                 DefaultTableModel tableModel = (DefaultTableModel) jtableName.getModel();
-                 ClearJTable(tableModel);
-                 for (int i = 0; i < array.length; i++){
-                     System.out.println(array[i]);
-                 }
                  tableModel.addRow(array);
                 /*for(String data:array){  
                 resultData.add(data);

@@ -279,6 +279,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
                  sqlObj.setInsertSQL(textFieldValues, this.getName());
                  String sql = sqlObj.getInsertSQL(this.getName());
                  db.executeUpdate(sql);
+                 sqlObj.GetResultSetSQL(students_table);
                 System.out.println("Student ID data inserted.");
                 
                 // converts return value from GetResultSetSQL to
