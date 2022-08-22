@@ -217,16 +217,19 @@ import java.util.List;
         String dbName = "";
         String searchQuery = "";
         String query = "";
-        if (frameName.equalsIgnoreCase("students_table")){
+        System.out.println(frameName);
+        
+        // changes searchQuery
+        if (frameName.equalsIgnoreCase("studentsJFrame")){
             dbName = "Students";
             searchQuery = "SELECT * FROM " + dbName;
         }
         
-        else if (frameName.equalsIgnoreCase("subjects_table")){
+        else if (frameName.equalsIgnoreCase("subjectsJFrame")){
             dbName = "Subjects";
             searchQuery = "SELECT * FROM " + dbName;
         }
-        else if (frameName.equalsIgnoreCase("teachers_table")){
+        else if (frameName.equalsIgnoreCase("teachersJFrame")){
             dbName = "Teachers";
             searchQuery = "SELECT * FROM " + dbName;
         } 
@@ -235,10 +238,12 @@ import java.util.List;
             // update refers to the statement that is going to modify
             // the database.
             
-            ResultSet resultSet = db.getStatement().executeQuery(query);
+            ResultSet resultSet = db.getStatement().executeQuery(searchQuery);
             DefaultTableModel tableModel = (DefaultTableModel) jtableName.getModel();
             ClearJTable(tableModel);
-            while (resultSet.next()){
+            
+         if (frameName.equalsIgnoreCase("studentsJFrame")){
+             while (resultSet.next()){
                 String id = resultSet.getString("studid");
                 String name = resultSet.getString("studname");
                 String address = resultSet.getString("studaddr");
@@ -254,6 +259,32 @@ import java.util.List;
                 }*/
                 
             }
+        }
+        
+        else if (frameName.equalsIgnoreCase("subjectsJFrame")){
+            
+            while (resultSet.next()){
+                String id = resultSet.getString("id");
+                String code = resultSet.getString("code");
+                String desc = resultSet.getString("desc");
+                String units = resultSet.getString("units");
+                String sched = resultSet.getString("sched");
+                String array[] = {id, code, desc, units, sched};
+                
+                // adds array to table row
+                 tableModel.addRow(array);
+                /*for(String data:array){  
+                resultData.add(data);
+                }*/
+                
+            }
+        }
+        else if (frameName.equalsIgnoreCase("teachers_table")){
+            dbName = "Teachers";
+            searchQuery = "SELECT * FROM " + dbName;
+        } 
+            
+            
         } catch (SQLException ex ){
             System.out.println("Cant get result set");
             ex.printStackTrace();
