@@ -47,9 +47,6 @@ import java.util.List;
            // cannot proceed if ID is valid and subj units is blank
            // changed type of subjunits to text in DB as
            // compromise
-           if (frameName.equalsIgnoreCase(subjectsFrame.getName())){
-               Integer.parseInt(textFieldValues[3]);
-           }
         } catch(NumberFormatException ex){
            if (frameName.equalsIgnoreCase(studentsFrame.getName())){
               System.out.println("Student ID provided is not a number!");
