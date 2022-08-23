@@ -91,6 +91,11 @@ public class SubjectsJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        subjects_table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                subjects_tableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(subjects_table);
         if (subjects_table.getColumnModel().getColumnCount() > 0) {
             subjects_table.getColumnModel().getColumn(0).setResizable(false);
@@ -276,8 +281,8 @@ public class SubjectsJFrame extends javax.swing.JFrame {
                 // a local variable
                 
                 // passes it to DisplayTableValues
-                //List<String> resultData = sqlObj.GetResultSetSQL(students_table);
-                //functions.DisplayTableValues(students_table, resultData);
+                //List<String> resultData = sqlObj.GetResultSetSQL(subjects_table);
+                //functions.DisplayTableValues(subjects_table, resultData);
                 return;
             }
             System.out.println("Subject ID provided already exists!");
@@ -295,17 +300,26 @@ public class SubjectsJFrame extends javax.swing.JFrame {
             subjid_textField.getText(), subjode_textField.getText(),
             subjdesc_textField.getText(), subjunits_textField.getText(), 
             subjsched_textField.getText()};
+        Functions functions = new Functions();
         DB db = new DB();
         db.connectDB();
 
         //Deletes row and replaces it with a new and updated one.
-        // String update = "DELETE FROM Students WHERE studid='" + id + "'";
+        // String update = "DELETE FROM Students WHERE subjid='" + id + "'";
         SQL sqlObj = new SQL();
-        sqlObj.setUpdateSQL(textFieldValues, this.getName());
-        String sql = sqlObj.getUpdateSQL(this.getName());
-        db.executeUpdate(sql);
-        sqlObj.GetResultSetSQL(this.getName(), subjects_table);
-        System.out.println("Subject ID data updated.");
+            if (functions.IsANumber(functions.getTextFieldValues(textFieldValues), this.getName())){
+               if (functions.IsExistingID(functions.getTextFieldValues(textFieldValues), this.getName())){
+                    sqlObj.setUpdateSQL(textFieldValues, this.getName());
+                    String sql = sqlObj.getUpdateSQL(this.getName());
+                    db.executeUpdate(sql);
+                    sqlObj.GetResultSetSQL(this.getName(), subjects_table);
+                    System.out.println("Subject ID data updated.");
+               return;
+            }
+            return;
+         }
+            System.out.println("Subject ID does not exist!");
+            System.out.println("Please use Save instead.");
     }//GEN-LAST:event_update_buttonActionPerformed
 
     
@@ -331,6 +345,26 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         sqlObj.GetResultSetSQL(this.getName(), subjects_table);
         System.out.println("Subject ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
+
+    private void subjects_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subjects_tableMouseClicked
+       String subjid;
+        String subjode;
+        String subjdesc;
+        String subjunits;
+        String subjsched;
+        
+        int[] selectedRows = subjects_table.getSelectedRows();
+        subjid = subjects_table.getValueAt(selectedRows[0], 0).toString();
+        subjode = subjects_table.getValueAt(selectedRows[0], 1).toString();
+        subjdesc = subjects_table.getValueAt(selectedRows[0], 2).toString();
+        subjunits = subjects_table.getValueAt(selectedRows[0], 3).toString();
+        subjsched = subjects_table.getValueAt(selectedRows[0], 4).toString();
+        subjid_textField.setText(subjid);
+        subjode_textField.setText(subjode);
+        subjdesc_textField.setText(subjdesc);
+        subjunits_textField.setText(subjunits);
+        subjsched_textField.setText(subjsched);
+    }//GEN-LAST:event_subjects_tableMouseClicked
 
     public JTable GetJTable(){
         

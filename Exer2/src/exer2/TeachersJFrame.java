@@ -95,6 +95,11 @@ public class TeachersJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        teachers_table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                teachers_tableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(teachers_table);
         if (teachers_table.getColumnModel().getColumnCount() > 0) {
             teachers_table.getColumnModel().getColumn(0).setResizable(false);
@@ -355,6 +360,29 @@ public class TeachersJFrame extends javax.swing.JFrame {
         sqlObj.GetResultSetSQL(this.getName(), teachers_table);
         System.out.println("Teachers ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
+
+    private void teachers_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_teachers_tableMouseClicked
+        String Tid;
+        String Tname;
+        String Tdept;
+        String Taddr;
+        String Tcontact;
+        String Tstatus;
+        
+        int[] selectedRows = teachers_table.getSelectedRows();
+        Tid = teachers_table.getValueAt(selectedRows[0], 0).toString();
+        Tname = teachers_table.getValueAt(selectedRows[0], 1).toString();
+        Tdept = teachers_table.getValueAt(selectedRows[0], 2).toString();
+        Taddr = teachers_table.getValueAt(selectedRows[0], 3).toString();
+        Tcontact = teachers_table.getValueAt(selectedRows[0], 4).toString();
+        Tstatus = teachers_table.getValueAt(selectedRows[0], 5).toString();
+        id_textField.setText(Tid);
+        name_textField.setText(Tname);
+        dept_textField.setText(Tdept);
+        addr_textField.setText(Taddr);
+        contact_textField.setText(Tcontact);
+        status_textField.setText(Tstatus);
+    }//GEN-LAST:event_teachers_tableMouseClicked
     public JTable GetJTable(){
         
         return teachers_table;
