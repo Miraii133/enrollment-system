@@ -91,6 +91,14 @@ import java.util.List;
         
     }
     
+    // does the logic for the filters to be passed
+    // to GetResultSQL.
+    public void ProcessFilter(){
+        
+    }
+    
+    
+    
     /*public void DisplayTableValues(JTable tableObj, List<String> resultData){
         DefaultTableModel tableModel = (DefaultTableModel) tableObj.getModel();
             String[] values = new String[6];
@@ -130,7 +138,6 @@ import java.util.List;
         thirdFieldValue = textFieldValues[2];
         fourthFieldValue = textFieldValues[3];
         fifthFieldValue = textFieldValues[4];
-        
         
         String dbName;
         Functions functions = new Functions();
@@ -273,7 +280,7 @@ import java.util.List;
         
         DB db = new DB();
         db.connectDB();
-        String dbName = "";
+        String dbName;
         String searchQuery = "";
         
         // changes searchQuery
