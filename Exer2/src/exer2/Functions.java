@@ -93,8 +93,10 @@ import java.util.List;
     
     // does the logic for the filters to be passed
     // to GetResultSQL.
-    public void ProcessFilter(){
-        
+    public void ProcessFilter(List<Object> components){
+        System.out.println(components.get(0));
+        System.out.println(components.get(0));
+        System.out.println(components.get(0));
     }
     
     
