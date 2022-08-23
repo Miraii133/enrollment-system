@@ -40,8 +40,19 @@ import java.util.List;
         
         try {
            Integer.parseInt(textFieldValues[0]);
+           if (frameName.equalsIgnoreCase(subjectsFrame.getName())){
+               Integer.parseInt(textFieldValues[3]);
+           }
         }catch(NumberFormatException ex){
-          System.out.println("ID is not a valid number!");
+           if (frameName.equalsIgnoreCase(studentsFrame.getName())){
+              System.out.println("Student ID provided is not a number!");
+           }
+           else if (frameName.equalsIgnoreCase(subjectsFrame.getName())){
+              System.out.println("Subject Units provided is not a number!");
+           }
+           else if (frameName.equalsIgnoreCase(teachersFrame.getName())){
+              System.out.println("Teacher ID provided is not a number!");
+           }
           System.out.println(ex);
            return false; 
     }
@@ -55,10 +66,24 @@ import java.util.List;
             DB db = new DB();
             db.connectDB();
             int id = Integer.parseInt(textFieldValues[0]);
-            String query = "SELECT * FROM Students WHERE studid='" + id + "'";
+            String searchQuery = "";
+            String dbName = "";
+            if (frameName.equalsIgnoreCase(studentsFrame.getName())){
+                dbName = "Students";
+                searchQuery = "SELECT * FROM " + dbName + " WHERE studid='" + id + "'";   
+            }
+            else if (frameName.equalsIgnoreCase(subjectsFrame.getName())){
+                dbName = "Subjects";
+                searchQuery = "SELECT * FROM " + dbName + " WHERE subjid='" + id + "'";   
+            }
+            else if (frameName.equalsIgnoreCase(subjectsFrame.getName())){
+                dbName = "Teachers";
+                searchQuery = "SELECT * FROM " + dbName + " WHERE studid='" + id + "'";   
+            }
+            
          // if ID is not an existing ID.
          // returns true if the ID is valid.
-        return db.executeQuery(query);
+        return db.executeQuery(searchQuery);
         
     }
     

@@ -21,7 +21,6 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         initComponents();
          SQL sql = new SQL();
         sql.GetResultSetSQL(this.getName(), subjects_table);
-        System.out.println(this.getName());
     }
 
     /**
