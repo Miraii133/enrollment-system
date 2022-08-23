@@ -222,10 +222,10 @@ import java.util.List;
         if (frameName.equalsIgnoreCase(functions.studentsFrame.getName())){
             dbName = "Students";
                 updateSQL = ""
-                + "UPDATE " +  dbName + "SET " + "studid='" + firstFieldValue + "', studname='" + secondFieldValue + "', studaddr='" + thirdFieldValue + "',"
+                + "UPDATE " +  dbName + " SET " + "studid='" + firstFieldValue + "', studname='" + secondFieldValue + "', studaddr='" + thirdFieldValue + "',"
                 + "studcrs='" + fourthFieldValue + "', studgender='" + fifthFieldValue + "', yrlvl='" + sixthFieldValue + "'"
-                + "WHERE studId=" + firstFieldValue ;
-            
+                + "WHERE studid=" + firstFieldValue ;
+            System.out.println(updateSQL);
         }
         else if (frameName.equalsIgnoreCase(functions.subjectsFrame.getName())){
             dbName = "Subjects";
