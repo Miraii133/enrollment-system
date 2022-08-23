@@ -120,11 +120,7 @@ import java.util.List;
         private String insertSQL; 
         private String updateSQL;
         private String deleteSQL;
-    private final String teachersInsertSQL = "";
     
-    private final String studentsIdQuery = "";
-    private final String subjectsIdQuery = "";
-    private final String teachersIdQuery = "";
     
     
     // changes the value of fieldValue accordingly to the frame.
@@ -167,6 +163,10 @@ import java.util.List;
         }
         else if (frameName.equalsIgnoreCase(functions.teachersFrame.getName())){
             dbName = "Teachers";
+            insertSQL = 
+                "INSERT INTO " + dbName + " VALUES(" + firstFieldValue + ", '" + secondFieldValue + 
+                "','" + thirdFieldValue + "','" + fourthFieldValue + "','" + 
+                fifthFieldValue + "','" + sixthFieldValue + "')";
         }
         
     }
@@ -209,6 +209,10 @@ import java.util.List;
         }
         else if (frameName.equalsIgnoreCase(functions.teachersFrame.getName())){
             dbName = "Teachers";
+                updateSQL = ""
+                + "UPDATE " +  dbName + " SET " + "Tid='" + firstFieldValue + "', Tname='" + secondFieldValue + "', Tdept='" + thirdFieldValue + "',"
+                + "Taddr='" + fourthFieldValue + "', Tcontact='" + fifthFieldValue + "', Tstatus='" + sixthFieldValue + "'"
+                + "WHERE Tid=" + firstFieldValue ;
         }
         
     }
@@ -244,6 +248,7 @@ import java.util.List;
         }
         else if (frameName.equalsIgnoreCase(functions.teachersFrame.getName())){
             dbName = "Teachers";
+                deleteSQL = "DELETE FROM " + dbName +" WHERE Tid=" + firstFieldValue;
         }
         
     }
@@ -262,10 +267,6 @@ import java.util.List;
        return deleteSQL;
     }
     
-    public String getIdQuery(String frameName){
-        
-        return studentsIdQuery;
-    }
     
     public void GetResultSetSQL(String frameName, JTable jtableName){
         
@@ -336,8 +337,22 @@ import java.util.List;
             }
         }
         else if (frameName.equalsIgnoreCase("teachers_table")){
-            dbName = "Teachers";
-            searchQuery = "SELECT * FROM " + dbName;
+             while (resultSet.next()){
+                String id = resultSet.getString("Tid");
+                String name = resultSet.getString("Tname");
+                String dept = resultSet.getString("Tdept");
+                String addr = resultSet.getString("Taddr");
+                String contact = resultSet.getString("Tcontact");
+                String status = resultSet.getString("Tstatus");
+                String array[] = {id, name, dept, addr, contact, status};
+                
+                // adds array to table row
+                 tableModel.addRow(array);
+                /*for(String data:array){  
+                resultData.add(data);
+                }*/
+                
+            }
         } 
             
             
