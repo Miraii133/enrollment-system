@@ -36,21 +36,21 @@ import java.util.List;
         return values;
     }
     
-    public boolean IsANumber(String[] textFieldValues){
+    public boolean IsANumber(String[] textFieldValues, String frameName){
         
         try {
            Integer.parseInt(textFieldValues[0]);
         }catch(NumberFormatException ex){
           System.out.println("ID is not a valid number!");
           System.out.println(ex);
-           return false;
+           return false; 
     }
         return true;
     }
     
-    public boolean IsExistingID(String[] textFieldValues){
+    public boolean IsExistingID(String[] textFieldValues, String frameName){
         
-        if (!IsANumber(textFieldValues)) return false;
+        if (!IsANumber(textFieldValues, frameName)) return false;
         
             DB db = new DB();
             db.connectDB();
@@ -129,7 +129,11 @@ import java.util.List;
                 fifthFieldValue + "','" + sixthFieldValue + "')";
         }
         else if (frameName.equalsIgnoreCase(functions.subjectsFrame.getName())){
-            dbName = "Subjects";
+                dbName = "Subjects";
+            insertSQL = 
+                "INSERT INTO " + dbName + " VALUES(" + firstFieldValue + ", '" + secondFieldValue + 
+                "','" + thirdFieldValue + "','" + fourthFieldValue + "','" + 
+                fifthFieldValue + "')";
         }
         else if (frameName.equalsIgnoreCase(functions.teachersFrame.getName())){
             dbName = "Teachers";
@@ -224,8 +228,6 @@ import java.util.List;
         db.connectDB();
         String dbName = "";
         String searchQuery = "";
-        String query = "";
-        System.out.println(frameName);
         
         // changes searchQuery
         if (frameName.equalsIgnoreCase("studentsJFrame")){
