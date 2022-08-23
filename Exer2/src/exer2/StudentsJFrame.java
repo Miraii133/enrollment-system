@@ -5,6 +5,7 @@
 package exer2;
 
 import java.util.List;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -345,7 +346,10 @@ public class StudentsJFrame extends javax.swing.JFrame {
         sqlObj.GetResultSetSQL(this.getName(), students_table);
         System.out.println("Student ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
-
+    public JTable GetJTable(){
+        
+        return students_table;
+    }
     /**
      * @param args the command line arguments
      */

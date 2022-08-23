@@ -105,10 +105,18 @@ import java.util.List;
         thirdFieldValue = textFieldValues[2];
         fourthFieldValue = textFieldValues[3];
         fifthFieldValue = textFieldValues[4];
-        sixthFieldValue = textFieldValues[5];
+        
         
         String dbName;
         Functions functions = new Functions();
+        
+        // subjectsFrame only has 5 textfields
+        // where as studentsFrame and teachersFrame have
+        // 6.
+        if (!frameName.equalsIgnoreCase(functions.subjectsFrame.getName())){
+            sixthFieldValue = textFieldValues[5];
+        }
+        
         
         // assigns the dbName so SQL is dynamic and
         // changes accordingly to which frame
@@ -264,11 +272,11 @@ import java.util.List;
         else if (frameName.equalsIgnoreCase("subjectsJFrame")){
             
             while (resultSet.next()){
-                String id = resultSet.getString("id");
-                String code = resultSet.getString("code");
-                String desc = resultSet.getString("desc");
-                String units = resultSet.getString("units");
-                String sched = resultSet.getString("sched");
+                String id = resultSet.getString("subjid");
+                String code = resultSet.getString("subjode");
+                String desc = resultSet.getString("subjdesc");
+                String units = resultSet.getString("subjunits");
+                String sched = resultSet.getString("subjsched");
                 String array[] = {id, code, desc, units, sched};
                 
                 // adds array to table row

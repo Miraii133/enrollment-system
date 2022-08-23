@@ -5,6 +5,7 @@
 package exer2;
 
 import java.util.List;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,8 +19,10 @@ public class SubjectsJFrame extends javax.swing.JFrame {
      */
     public SubjectsJFrame() {
         initComponents();
-        SQL sql = new SQL();
+        System.out.println("called");
+         SQL sql = new SQL();
         sql.GetResultSetSQL(this.getName(), subjects_table);
+        System.out.println(this.getName());
     }
 
     /**
@@ -53,8 +56,8 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         teachers_item = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Students Menu");
-        setName("studentsJFrame"); // NOI18N
+        setTitle("Subjects Menu");
+        setName("subjectsJFrame"); // NOI18N
         setResizable(false);
 
         jLabel1.setText("Subject ID");
@@ -227,8 +230,11 @@ public class SubjectsJFrame extends javax.swing.JFrame {
 
     private void students_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_students_itemActionPerformed
              this.setVisible(false);
-             SubjectsJFrame studentsFrame = new SubjectsJFrame();
+             StudentsJFrame studentsFrame = new StudentsJFrame();
              studentsFrame.setVisible(true);
+             
+             SQL sql = new SQL();
+             sql.GetResultSetSQL(this.getName(), studentsFrame.GetJTable());
     }//GEN-LAST:event_students_itemActionPerformed
 
     private void subjects_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjects_itemActionPerformed
@@ -268,7 +274,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
                  String sql = sqlObj.getInsertSQL(this.getName());
                  db.executeUpdate(sql);
                  //sqlObj.GetResultSetSQL(this.getName(), subjects_table);
-                System.out.println("Student ID data inserted.");
+                System.out.println("Subject ID data inserted.");
                 
                 // converts return value from GetResultSetSQL to
                 // a local variable
@@ -278,7 +284,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
                 //functions.DisplayTableValues(students_table, resultData);
                 return;
             }
-            System.out.println("Student ID provided already exists!");
+            System.out.println("Subject ID provided already exists!");
             System.out.println("Please use Update instead.");
             }
             
@@ -303,7 +309,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         String sql = sqlObj.getUpdateSQL(this.getName());
         db.executeUpdate(sql);
         //sqlObj.GetResultSetSQL(this.getName(), subjects_table);
-        System.out.println("Student ID data updated.");
+        System.out.println("Subject ID data updated.");
     }//GEN-LAST:event_update_buttonActionPerformed
 
     
@@ -318,8 +324,8 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         db.connectDB();
         Functions functions = new Functions();
         if (!functions.IsExistingID(textFieldValues)){
-            System.out.println("Student ID provided does not exist!");
-            System.out.println("Cannot delete data from Student ID.");
+            System.out.println("Subject ID provided does not exist!");
+            System.out.println("Cannot delete data from Subject ID.");
             return;
         }
         SQL sqlObj = new SQL();
@@ -327,9 +333,14 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         String sql = sqlObj.getDeleteSQL(this.getName());
         db.executeUpdate(sql);
         //sqlObj.GetResultSetSQL(this.getName(), subjects_table);
-        System.out.println("Student ID data deleted.");
+        System.out.println("Subject ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
 
+    public JTable GetJTable(){
+        
+        return subjects_table;
+    }
+    
     /**
      * @param args the command line arguments
      */
