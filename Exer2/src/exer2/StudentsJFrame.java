@@ -277,8 +277,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
         // checks if ID is a valid id    
         // checks if ID provided already exists
         // so code can insert it to DB.
-        if (functions.IsANumber(functions.getTextFieldValues(textFieldValues))){
-            if (!functions.IsExistingID(functions.getTextFieldValues(textFieldValues))){
+        if (functions.IsANumber(functions.getTextFieldValues(textFieldValues), this.getName())){
+            if (!functions.IsExistingID(functions.getTextFieldValues(textFieldValues), this.getName())){
                 // includes frame name to verify which frame
                 // is sending the setInsertSQL
                  sqlObj.setInsertSQL(textFieldValues, this.getName());
@@ -334,7 +334,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         DB db = new DB();
         db.connectDB();
         Functions functions = new Functions();
-        if (!functions.IsExistingID(textFieldValues)){
+        if (!functions.IsExistingID(textFieldValues, this.getName())){
             System.out.println("Student ID provided does not exist!");
             System.out.println("Cannot delete data from Student ID.");
             return;

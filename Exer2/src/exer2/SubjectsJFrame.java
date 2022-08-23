@@ -19,7 +19,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
      */
     public SubjectsJFrame() {
         initComponents();
-         SQL sql = new SQL();
+        SQL sql = new SQL();
         sql.GetResultSetSQL(this.getName(), subjects_table);
     }
 
@@ -306,7 +306,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         sqlObj.setUpdateSQL(textFieldValues, this.getName());
         String sql = sqlObj.getUpdateSQL(this.getName());
         db.executeUpdate(sql);
-        //sqlObj.GetResultSetSQL(this.getName(), subjects_table);
+        sqlObj.GetResultSetSQL(this.getName(), subjects_table);
         System.out.println("Subject ID data updated.");
     }//GEN-LAST:event_update_buttonActionPerformed
 
@@ -330,7 +330,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         sqlObj.setDeleteSQL(textFieldValues, this.getName());
         String sql = sqlObj.getDeleteSQL(this.getName());
         db.executeUpdate(sql);
-        //sqlObj.GetResultSetSQL(this.getName(), subjects_table);
+        sqlObj.GetResultSetSQL(this.getName(), subjects_table);
         System.out.println("Subject ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
 
