@@ -7,8 +7,8 @@ package exer2;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -20,7 +20,8 @@ import java.util.List;
      StudentsJFrame studentsFrame = new StudentsJFrame();
      SubjectsJFrame subjectsFrame = new SubjectsJFrame();
      TeachersJFrame teachersFrame = new TeachersJFrame();
-     // 1st parameter: which frame
+     
+    private List<String> studentsFilter_components = new ArrayList<>();
     public String[] getTextFieldValues(String[] textFieldValues){
         // retrieves values of all text fields and
         // stores them in an array
@@ -93,10 +94,27 @@ import java.util.List;
     
     // does the logic for the filters to be passed
     // to GetResultSQL.
-    public void ProcessFilter(List<Object> components){
-        System.out.println(components.get(0));
-        System.out.println(components.get(0));
-        System.out.println(components.get(0));
+    public void setStudentsFilter_components(List<String> component_values){
+        for (int i = 0; i < component_values.size(); i++){
+            this.studentsFilter_components.add(component_values.get(i));
+            System.out.println(studentsFilter_components.get(i));
+        }
+        
+        
+    }
+    
+    public List<String> getStudentsFilter_components(){
+        
+        return studentsFilter_components;
+    }
+            
+    
+    public void ProcessFilter(List<String> components, String frameName){
+        if (frameName.equalsIgnoreCase(studentsFrame.getName())){
+            setStudentsFilter_components(components);
+            
+            
+        }
     }
     
     
