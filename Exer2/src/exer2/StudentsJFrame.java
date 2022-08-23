@@ -96,6 +96,11 @@ public class StudentsJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        students_table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                students_tableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(students_table);
         if (students_table.getColumnModel().getColumnCount() > 0) {
             students_table.getColumnModel().getColumn(0).setResizable(false);
@@ -356,6 +361,29 @@ public class StudentsJFrame extends javax.swing.JFrame {
         sqlObj.GetResultSetSQL(this.getName(), students_table);
         System.out.println("Student ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
+
+    private void students_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_students_tableMouseClicked
+        String studid;
+        String studname;
+        String studaddr;
+        String studcrs;
+        String studgender;
+        String yrlvl;
+        
+        int[] selectedRows = students_table.getSelectedRows();
+        studid = students_table.getValueAt(selectedRows[0], 0).toString();
+        studname = students_table.getValueAt(selectedRows[0], 1).toString();
+        studaddr = students_table.getValueAt(selectedRows[0], 2).toString();
+        studcrs = students_table.getValueAt(selectedRows[0], 3).toString();
+        studgender = students_table.getValueAt(selectedRows[0], 4).toString();
+        yrlvl = students_table.getValueAt(selectedRows[0], 5).toString();
+        id_textField.setText(studid);
+        name_textField.setText(studname);
+        address_textField.setText(studaddr);
+        course_textField.setText(studcrs);
+        gender_textField.setText(studgender);
+        year_textField.setText(yrlvl);
+    }//GEN-LAST:event_students_tableMouseClicked
     public JTable GetJTable(){
         
         return students_table;

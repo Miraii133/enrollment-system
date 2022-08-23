@@ -240,7 +240,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
 
     private void students_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_students_itemActionPerformed
              this.setVisible(false);
-             TeachersJFrame studentsFrame = new TeachersJFrame();
+             StudentsJFrame studentsFrame = new StudentsJFrame();
              studentsFrame.setVisible(true);
     }//GEN-LAST:event_students_itemActionPerformed
 
