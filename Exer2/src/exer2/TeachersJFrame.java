@@ -317,14 +317,19 @@ public class TeachersJFrame extends javax.swing.JFrame {
         SQL sqlObj = new SQL();
         
          if (functions.IsANumber(functions.getTextFieldValues(textFieldValues), this.getName())){
-            if (!functions.IsExistingID(functions.getTextFieldValues(textFieldValues), this.getName())){
+            if (functions.IsExistingID(functions.getTextFieldValues(textFieldValues), this.getName())){
                 sqlObj.setUpdateSQL(textFieldValues, this.getName());
                 String sql = sqlObj.getUpdateSQL(this.getName());
                 db.executeUpdate(sql);
                 sqlObj.GetResultSetSQL(this.getName(), teachers_table);
                 System.out.println("Teachers ID data updated.");
+                return;
             }
+            return;
          }
+            System.out.println("Teachers ID does not exist!");
+            System.out.println("Please use Save instead.");
+         
     }//GEN-LAST:event_update_buttonActionPerformed
 
     
@@ -339,7 +344,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
         db.connectDB();
         Functions functions = new Functions();
         if (!functions.IsExistingID(textFieldValues, this.getName())){
-            System.out.println("Teachers provided does not exist!");
+            System.out.println("Teachers ID provided does not exist!");
             System.out.println("Cannot delete data from Teachers ID.");
             return;
         }

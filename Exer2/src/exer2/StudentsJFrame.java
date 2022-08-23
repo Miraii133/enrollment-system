@@ -310,17 +310,27 @@ public class StudentsJFrame extends javax.swing.JFrame {
             id_textField.getText(), name_textField.getText(),
             address_textField.getText(), course_textField.getText(), 
             gender_textField.getText(), year_textField.getText()};
+        Functions functions = new Functions();
         DB db = new DB();
         db.connectDB();
 
         //Deletes row and replaces it with a new and updated one.
         // String update = "DELETE FROM Students WHERE studid='" + id + "'";
         SQL sqlObj = new SQL();
-        sqlObj.setUpdateSQL(textFieldValues, this.getName());
-        String sql = sqlObj.getUpdateSQL(this.getName());
-        db.executeUpdate(sql);
-        sqlObj.GetResultSetSQL(this.getName(), students_table);
-        System.out.println("Student ID data updated.");
+      
+       if (functions.IsANumber(functions.getTextFieldValues(textFieldValues), this.getName())){
+            if (functions.IsExistingID(functions.getTextFieldValues(textFieldValues), this.getName())){
+                sqlObj.setUpdateSQL(textFieldValues, this.getName());
+                String sql = sqlObj.getUpdateSQL(this.getName());
+                db.executeUpdate(sql);
+                sqlObj.GetResultSetSQL(this.getName(), students_table);
+                System.out.println("Student ID data updated.");
+                return;
+            }
+            return;
+         }
+            System.out.println("Student ID does not exist!");
+            System.out.println("Please use Save instead.");
     }//GEN-LAST:event_update_buttonActionPerformed
 
     
