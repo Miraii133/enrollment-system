@@ -80,9 +80,9 @@ import java.util.List;
                 dbName = "Subjects";
                 searchQuery = "SELECT * FROM " + dbName + " WHERE subjid='" + id + "'";   
             }
-            else if (frameName.equalsIgnoreCase(subjectsFrame.getName())){
+            else if (frameName.equalsIgnoreCase(teachersFrame.getName())){
                 dbName = "Teachers";
-                searchQuery = "SELECT * FROM " + dbName + " WHERE studid='" + id + "'";   
+                searchQuery = "SELECT * FROM " + dbName + " WHERE Tid='" + id + "'";   
             }
             
          // if ID is not an existing ID.
@@ -336,7 +336,8 @@ import java.util.List;
                 
             }
         }
-        else if (frameName.equalsIgnoreCase("teachers_table")){
+        else if (frameName.equalsIgnoreCase("teachersJFrame")){
+            
              while (resultSet.next()){
                 String id = resultSet.getString("Tid");
                 String name = resultSet.getString("Tname");

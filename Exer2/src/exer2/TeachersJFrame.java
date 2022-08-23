@@ -56,8 +56,8 @@ public class TeachersJFrame extends javax.swing.JFrame {
         teachers_item = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Students Menu");
-        setName("studentsJFrame"); // NOI18N
+        setTitle("Teachers Menu");
+        setName("teachersJFrame"); // NOI18N
         setResizable(false);
 
         jLabel1.setText("Teacher ID");
@@ -77,7 +77,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "studid", "studname", "studaddr", "studcrs", "studgender", "yrlvl"
+                "Tid", "Tname", "Tdept", "Taddr", "Tcontact", "Tstatus"
             }
         ) {
             Class[] types = new Class [] {
@@ -283,7 +283,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
                  String sql = sqlObj.getInsertSQL(this.getName());
                  db.executeUpdate(sql);
                  sqlObj.GetResultSetSQL(this.getName(), teachers_table);
-                System.out.println("Student ID data inserted.");
+                System.out.println("Teachers ID data inserted.");
                 
                 // converts return value from GetResultSetSQL to
                 // a local variable
@@ -293,7 +293,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
                 //functions.DisplayTableValues(students_table, resultData);
                 return;
             }
-            System.out.println("Student ID provided already exists!");
+            System.out.println("Teachers ID provided already exists!");
             System.out.println("Please use Update instead.");
             }
             
@@ -308,17 +308,23 @@ public class TeachersJFrame extends javax.swing.JFrame {
             id_textField.getText(), name_textField.getText(),
             dept_textField.getText(), addr_textField.getText(), 
             contact_textField.getText(), status_textField.getText()};
+        Functions functions = new Functions();
         DB db = new DB();
         db.connectDB();
 
         //Deletes row and replaces it with a new and updated one.
         // String update = "DELETE FROM Students WHERE studid='" + id + "'";
         SQL sqlObj = new SQL();
-        sqlObj.setUpdateSQL(textFieldValues, this.getName());
-        String sql = sqlObj.getUpdateSQL(this.getName());
-        db.executeUpdate(sql);
-        sqlObj.GetResultSetSQL(this.getName(), teachers_table);
-        System.out.println("Student ID data updated.");
+        
+         if (functions.IsANumber(functions.getTextFieldValues(textFieldValues), this.getName())){
+            if (!functions.IsExistingID(functions.getTextFieldValues(textFieldValues), this.getName())){
+                sqlObj.setUpdateSQL(textFieldValues, this.getName());
+                String sql = sqlObj.getUpdateSQL(this.getName());
+                db.executeUpdate(sql);
+                sqlObj.GetResultSetSQL(this.getName(), teachers_table);
+                System.out.println("Teachers ID data updated.");
+            }
+         }
     }//GEN-LAST:event_update_buttonActionPerformed
 
     
@@ -333,8 +339,8 @@ public class TeachersJFrame extends javax.swing.JFrame {
         db.connectDB();
         Functions functions = new Functions();
         if (!functions.IsExistingID(textFieldValues, this.getName())){
-            System.out.println("Student ID provided does not exist!");
-            System.out.println("Cannot delete data from Student ID.");
+            System.out.println("Teachers provided does not exist!");
+            System.out.println("Cannot delete data from Teachers ID.");
             return;
         }
         SQL sqlObj = new SQL();
@@ -342,7 +348,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
         String sql = sqlObj.getDeleteSQL(this.getName());
         db.executeUpdate(sql);
         sqlObj.GetResultSetSQL(this.getName(), teachers_table);
-        System.out.println("Student ID data deleted.");
+        System.out.println("Teachers ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
     public JTable GetJTable(){
         

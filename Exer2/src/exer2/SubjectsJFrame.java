@@ -231,8 +231,6 @@ public class SubjectsJFrame extends javax.swing.JFrame {
              StudentsJFrame studentsFrame = new StudentsJFrame();
              studentsFrame.setVisible(true);
              
-             SQL sql = new SQL();
-             sql.GetResultSetSQL(this.getName(), studentsFrame.GetJTable());
     }//GEN-LAST:event_students_itemActionPerformed
 
     private void subjects_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjects_itemActionPerformed
