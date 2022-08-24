@@ -399,17 +399,16 @@ import java.util.List;
     
     }
 
-class ComponentEvents {
-     ActionListener al = new ActionListener(){
-     @Override
-  public void actionPerformed(ActionEvent event) {
-        System.out.println("Hello");
+    class FilterSQL {
+        public void GetComponentValues(String[] componentValues){
+            
+        }
         
-        
-        
-  }
-   };
-}
+        public void StoreFilterSQL(){
+            
+        }
+    }
+
     
    
     

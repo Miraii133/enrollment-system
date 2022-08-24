@@ -77,7 +77,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         yearFilter_textField = new javax.swing.JTextField();
         addrFilterStart_textField = new javax.swing.JTextField();
         idLogic_comboBox = new javax.swing.JComboBox<>();
-        nameFilterStart_textField1 = new javax.swing.JTextField();
+        nameFilterEnd_textField = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -267,9 +267,9 @@ public class StudentsJFrame extends javax.swing.JFrame {
             }
         });
 
-        nameFilterStart_textField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        nameFilterEnd_textField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                nameFilterStart_textField1KeyPressed(evt);
+                nameFilterEnd_textFieldKeyPressed(evt);
             }
         });
 
@@ -326,7 +326,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel14)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(nameFilterStart_textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(nameFilterEnd_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel17)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -362,7 +362,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameFilterStart_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameFilterStart_textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nameFilterEnd_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14)
                     .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -654,26 +654,37 @@ public class StudentsJFrame extends javax.swing.JFrame {
         year_textField.setText(yrlvl);
     }//GEN-LAST:event_students_tableMouseClicked
 
-    
+     
     private void id_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_comboBoxActionPerformed
-        id_comboBox.getSelectedItem();
+        String componentValues[] = {
+            id_comboBox.getSelectedItem().toString(),
+            idLogic_comboBox.getSelectedItem().toString(),
+            idFilter_textField.getText()
+        };
+        FilterSQL filterSQL = new FilterSQL();
+        filterSQL.GetComponentValues(componentValues);
+       
     }//GEN-LAST:event_id_comboBoxActionPerformed
 
     private void idLogic_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idLogic_comboBoxActionPerformed
-        // TODO add your handling code here:
+        id_comboBox.getSelectedItem();
+        idLogic_comboBox.getSelectedItem();
+        idFilter_textField.getText();
     }//GEN-LAST:event_idLogic_comboBoxActionPerformed
 
     private void idFilter_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idFilter_textFieldKeyPressed
-        // TODO add your handling code here:
+        id_comboBox.getSelectedItem();
+        idLogic_comboBox.getSelectedItem();
+        idFilter_textField.getText();
     }//GEN-LAST:event_idFilter_textFieldKeyPressed
 
     private void name_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_comboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_name_comboBoxActionPerformed
 
-    private void nameFilterStart_textField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameFilterStart_textField1KeyPressed
+    private void nameFilterEnd_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameFilterEnd_textFieldKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nameFilterStart_textField1KeyPressed
+    }//GEN-LAST:event_nameFilterEnd_textFieldKeyPressed
 
     private void addrFilterStart_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addrFilterStart_textFieldKeyPressed
         // TODO add your handling code here:
@@ -781,8 +792,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField nameFilterEnd_textField;
     private javax.swing.JTextField nameFilterStart_textField;
-    private javax.swing.JTextField nameFilterStart_textField1;
     private javax.swing.JTextField nameFilterStart_textField2;
     private javax.swing.JComboBox<String> name_comboBox;
     private javax.swing.JTextField name_textField;
