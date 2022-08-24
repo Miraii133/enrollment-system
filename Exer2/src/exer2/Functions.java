@@ -96,7 +96,7 @@ import java.util.List;
     
     // does the logic for the filters to be passed
     // to GetResultSQL.
-    public void setStudentsFilter_components(List<String> component_values){
+   /* public void setStudentsFilter_components(List<String> component_values){
         for (int i = 0; i < component_values.size(); i++){
             this.studentsFilter_components.add(component_values.get(i));
             System.out.println(getStudentsFilter_components().get(i));
@@ -303,7 +303,6 @@ import java.util.List;
         db.connectDB();
         String dbName;
         String searchQuery = "";
-        
         // changes searchQuery
         if (frameName.equalsIgnoreCase("studentsJFrame")){
             dbName = "Students";
@@ -504,14 +503,21 @@ import java.util.List;
     
         
         public String GetFilterSQL(){
-            
             return studentsFilterSQL;
         }
-        public void SetFilterSQL(String[] filterValues, String frameName){
+        
+        // GetResultsSetSQL() requires jTableName
+        public void SetFilterSQL(String[] filterValues, String frameName, JTable jtableName){
              if (frameName.equalsIgnoreCase("studentsJFrame")){
+                 if (!filterValues[2].equalsIgnoreCase("")){
                studentsFilterSQL = 
                        studentFilter_template + "(SELECT studid FROM Students WHERE studid" + filterValues[1] + "'" +filterValues[2] + "')";
                System.out.println(studentsFilterSQL);
+             } else if (filterValues[2].equalsIgnoreCase("")){
+                     // if the textField is blank, call
+                     // GetResultSetSQL since it calls all functions
+               studentsFilterSQL = "SELECT * FROM Students";
+                 }
              }
         }
     }

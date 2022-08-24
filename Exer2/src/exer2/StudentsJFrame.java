@@ -653,6 +653,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
         gender_textField.setText(studgender);
         year_textField.setText(yrlvl);
     }//GEN-LAST:event_students_tableMouseClicked
+    
+    
     FilterSQL filterSQL = new FilterSQL();
     DB db = new DB();
     SQL sqlObj = new SQL();
@@ -676,7 +678,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         for (int i = 0; i < GetidFilter_values().length; i++){
             System.out.println(GetidFilter_values()[i]);
         }
-        filterSQL.SetFilterSQL(componentValues, this.getName());
+        filterSQL.SetFilterSQL(componentValues, this.getName(), students_table);
         db.connectDB();
         db.executeQuery(filterSQL.GetFilterSQL());
         filterSQL.GetFiltered_ResultSetSQL(this.getName(), students_table);
