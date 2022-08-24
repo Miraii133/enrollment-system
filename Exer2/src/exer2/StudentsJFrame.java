@@ -654,7 +654,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
         year_textField.setText(yrlvl);
     }//GEN-LAST:event_students_tableMouseClicked
     FilterSQL filterSQL = new FilterSQL();
-    
+    DB db = new DB();
+    SQL sqlObj = new SQL();
     private String[] idFilter_values;
     
     public void SetidFilter_values(String[] idFilter_values){
@@ -672,7 +673,13 @@ public class StudentsJFrame extends javax.swing.JFrame {
             idFilter_textField.getText()
         };
         SetidFilter_values(componentValues);
-        
+        for (int i = 0; i < GetidFilter_values().length; i++){
+            System.out.println(GetidFilter_values()[i]);
+        }
+        filterSQL.SetFilterSQL(componentValues, this.getName());
+        db.connectDB();
+        db.executeQuery(filterSQL.GetFilterSQL());
+        filterSQL.GetFiltered_ResultSetSQL(this.getName(), students_table);
        
     }//GEN-LAST:event_id_comboBoxActionPerformed
 

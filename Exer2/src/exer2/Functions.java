@@ -336,7 +336,6 @@ import java.util.List;
                 String gender = resultSet.getString("studgender");
                 String yearLevel = resultSet.getString("yrlvl");
                 String array[] = {id, name, address, course, gender, yearLevel};
-                
                 // adds array to table row
                  tableModel.addRow(array);
                 /*for(String data:array){  
@@ -400,15 +399,120 @@ import java.util.List;
     }
 
     class FilterSQL {
+        SQL sqlObj = new SQL();
+        private final String studentFilter_template = 
+                "SELECT * FROM Students WHERE studid IN";
         private String studentsFilterSQL = "";
         public void GetComponentValues(String[] componentValues, String frameName){
            if (frameName.equalsIgnoreCase("studentsJFrame")){
                
            }
         }
+        public void GetFiltered_ResultSetSQL(String frameName, JTable jtableName){
         
-        public void SetFilterSQL(){
+        
+        DB db = new DB();
+        db.connectDB();
+        String dbName;
+        String searchQuery = "";
+        
+        // changes searchQuery
+        if (frameName.equalsIgnoreCase("studentsJFrame")){
+            searchQuery = GetFilterSQL();
+        }
+        
+        else if (frameName.equalsIgnoreCase("subjectsJFrame")){
+            dbName = "Subjects";
+            searchQuery = "SELECT * FROM " + dbName;
+        }
+        else if (frameName.equalsIgnoreCase("teachersJFrame")){
+            dbName = "Teachers";
+            searchQuery = "SELECT * FROM " + dbName;
+        } 
+        try {
+             db.setStatement(db.getConn().createStatement());
+            // update refers to the statement that is going to modify
+            // the database.
             
+            ResultSet resultSet = db.getStatement().executeQuery(searchQuery);
+            DefaultTableModel tableModel = (DefaultTableModel) jtableName.getModel();
+            sqlObj.ClearJTable(tableModel);
+            
+         if (frameName.equalsIgnoreCase("studentsJFrame")){
+             while (resultSet.next()){
+                String id = resultSet.getString("studid");
+                String name = resultSet.getString("studname");
+                String address = resultSet.getString("studaddr");
+                String course = resultSet.getString("studcrs");
+                String gender = resultSet.getString("studgender");
+                String yearLevel = resultSet.getString("yrlvl");
+                String array[] = {id, name, address, course, gender, yearLevel};
+                // adds array to table row
+                 tableModel.addRow(array);
+                /*for(String data:array){  
+                resultData.add(data);
+                }*/
+                
+            }
+        }
+        
+        else if (frameName.equalsIgnoreCase("subjectsJFrame")){
+            
+            while (resultSet.next()){
+                String id = resultSet.getString("subjid");
+                String code = resultSet.getString("subjode");
+                String desc = resultSet.getString("subjdesc");
+                String units = resultSet.getString("subjunits");
+                String sched = resultSet.getString("subjsched");
+                String array[] = {id, code, desc, units, sched};
+                
+                // adds array to table row
+                 tableModel.addRow(array);
+                /*for(String data:array){  
+                resultData.add(data);
+                }*/
+                
+            }
+        }
+        else if (frameName.equalsIgnoreCase("teachersJFrame")){
+            
+             while (resultSet.next()){
+                String id = resultSet.getString("Tid");
+                String name = resultSet.getString("Tname");
+                String dept = resultSet.getString("Tdept");
+                String addr = resultSet.getString("Taddr");
+                String contact = resultSet.getString("Tcontact");
+                String status = resultSet.getString("Tstatus");
+                String array[] = {id, name, dept, addr, contact, status};
+                
+                // adds array to table row
+                 tableModel.addRow(array);
+                /*for(String data:array){  
+                resultData.add(data);
+                }*/
+                
+            }
+        } 
+            
+            
+        } catch (SQLException ex ){
+            System.out.println("Cant get result set");
+            ex.printStackTrace();
+        }
+       
+    }
+    
+        
+        public String GetFilterSQL(){
+            
+            return studentsFilterSQL;
+        }
+        public void SetFilterSQL(String[] filterValues, String frameName){
+             if (frameName.equalsIgnoreCase("studentsJFrame")){
+               studentsFilterSQL = 
+                       studentFilter_template + "(SELECT studid FROM Students WHERE studid" + filterValues[1] + "'" +filterValues[2] + "')";
+               System.out.println(studentsFilterSQL);
+             }
         }
     }
 
