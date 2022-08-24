@@ -86,7 +86,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Students Menu");
         setName("studentsJFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1000, 600));
         setResizable(false);
 
         jLabel1.setText("Student ID");
@@ -206,6 +205,12 @@ public class StudentsJFrame extends javax.swing.JFrame {
         jLabel13.setText("Student Year");
 
         year_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AND", "OR", "NOT" }));
+
+        nameFilterEnd_textField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nameFilterEnd_textFieldKeyReleased(evt);
+            }
+        });
 
         jLabel14.setText("Starts");
 
@@ -600,13 +605,29 @@ public class StudentsJFrame extends javax.swing.JFrame {
         filterComponents.add(id_comboBox.getSelectedItem().toString());
         filterComponents.add(idFilter_textField.getText());
         functions.ProcessFilter(filterComponents, this.getName());
-        
+    
         
     }//GEN-LAST:event_idFilter_textFieldKeyReleased
 
     private void nameFilterStart_textFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameFilterStart_textFieldKeyReleased
-        // TODO add your handling code here:
+        Functions functions = new Functions();
+        
+        List<String> filterComponents = new ArrayList<>();
+        filterComponents.add(name_comboBox.getSelectedItem().toString());
+        filterComponents.add(nameFilterStart_textField.getText());
+        filterComponents.add(nameFilterEnd_textField.getText());
+        functions.ProcessFilter(filterComponents, this.getName());
     }//GEN-LAST:event_nameFilterStart_textFieldKeyReleased
+
+    private void nameFilterEnd_textFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameFilterEnd_textFieldKeyReleased
+        Functions functions = new Functions();
+        
+        List<String> filterComponents = new ArrayList<>();
+        filterComponents.add(name_comboBox.getSelectedItem().toString());
+        filterComponents.add(nameFilterStart_textField.getText());
+        filterComponents.add(nameFilterEnd_textField.getText());
+        functions.ProcessFilter(filterComponents, this.getName());
+    }//GEN-LAST:event_nameFilterEnd_textFieldKeyReleased
     public JTable GetJTable(){
         
         return students_table;
