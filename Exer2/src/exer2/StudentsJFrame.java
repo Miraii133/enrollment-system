@@ -6,6 +6,8 @@ package exer2;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
@@ -24,9 +26,9 @@ public class StudentsJFrame extends javax.swing.JFrame {
         initComponents();
         SQL sql = new SQL();
         sql.GetResultSetSQL(this.getName(), students_table);
-        idLogic_comboBox.addActionListener(al);
-        idFilter_textField.addActionListener(al);
-        id_comboBox.addActionListener(al);
+        idLogic_comboBox.addActionListener(actionListener);
+        idFilter_textField.addKeyListener(keyListener);
+        id_comboBox.addActionListener(actionListener);
     }
     
     /*private void addEventsToComponents(){
@@ -34,15 +36,33 @@ public class StudentsJFrame extends javax.swing.JFrame {
         idLogic_comboBox.addActionListener(componentEvent.al);
     }*/
     
-    ActionListener al = new ActionListener(){
+    ActionListener actionListener = new ActionListener(){
      @Override
   public void actionPerformed(ActionEvent event) {
       System.out.println(event.getActionCommand());
       System.out.println("Hello");
         
-    
   }
    };
+    KeyListener keyListener = new KeyListener() {
+        // generated abstract methods from keyListener since
+        // abstraction requires all methods to be either
+        // overriden or implemented.
+     @Override
+            public void keyReleased(java.awt.event.KeyEvent event) {
+               // do nothing
+            }
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); 
+        }
+
+        @Override
+        public void keyPressed(java.awt.event.KeyEvent event) {
+            System.out.println("Called");
+        }
+    };
 
     /**
      * This method is called from within the constructor to initialize the form.
