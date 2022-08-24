@@ -4,6 +4,8 @@
  */
 package exer2;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
@@ -97,7 +99,7 @@ import java.util.List;
     public void setStudentsFilter_components(List<String> component_values){
         for (int i = 0; i < component_values.size(); i++){
             this.studentsFilter_components.add(component_values.get(i));
-            System.out.println(studentsFilter_components.get(i));
+            System.out.println(getStudentsFilter_components().get(i));
         }
         
         
@@ -112,7 +114,6 @@ import java.util.List;
     public void ProcessFilter(List<String> components, String frameName){
         if (frameName.equalsIgnoreCase(studentsFrame.getName())){
             setStudentsFilter_components(components);
-            
             
         }
     }
@@ -397,6 +398,17 @@ import java.util.List;
     
     
     }
+
+class ComponentEvents {
+     ActionListener al = new ActionListener(){
+     @Override
+  public void actionPerformed(ActionEvent event) {
+    // either do it like this
+    event.getActionCommand();
+    // etc
+  }
+   };
+}
     
    
     
