@@ -26,43 +26,9 @@ public class StudentsJFrame extends javax.swing.JFrame {
         initComponents();
         SQL sql = new SQL();
         sql.GetResultSetSQL(this.getName(), students_table);
-        idLogic_comboBox.addActionListener(actionListener);
-        idFilter_textField.addKeyListener(keyListener);
-        id_comboBox.addActionListener(actionListener);
     }
     
-    /*private void addEventsToComponents(){
-        ComponentEvents componentEvent = new ComponentEvents();
-        idLogic_comboBox.addActionListener(componentEvent.al);
-    }*/
     
-    ActionListener actionListener = new ActionListener(){
-     @Override
-  public void actionPerformed(ActionEvent event) {
-      System.out.println(event.getActionCommand());
-      System.out.println("Hello");
-        
-  }
-   };
-    KeyListener keyListener = new KeyListener() {
-        // generated abstract methods from keyListener since
-        // abstraction requires all methods to be either
-        // overriden or implemented.
-     @Override
-            public void keyReleased(java.awt.event.KeyEvent event) {
-               // do nothing
-            }
-
-        @Override
-        public void keyTyped(KeyEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); 
-        }
-
-        @Override
-        public void keyPressed(java.awt.event.KeyEvent event) {
-            System.out.println("Called");
-        }
-    };
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -208,33 +174,104 @@ public class StudentsJFrame extends javax.swing.JFrame {
         jLabel8.setText("Student ID");
 
         name_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AND", "OR", "NOT" }));
+        name_comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                name_comboBoxActionPerformed(evt);
+            }
+        });
+
+        idFilter_textField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                idFilter_textFieldKeyPressed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
         jLabel9.setText("Student Name");
 
         id_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AND", "OR", "NOT" }));
+        id_comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                id_comboBoxActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
         jLabel10.setText("Student Addr");
 
         addr_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AND", "OR", "NOT" }));
+        addr_comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addr_comboBoxActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
         jLabel11.setText("Student Course");
 
         crs_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AND", "OR", "NOT" }));
+        crs_comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crs_comboBoxActionPerformed(evt);
+            }
+        });
+
+        crsFilter_textField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                crsFilter_textFieldKeyPressed(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
         jLabel12.setText("Student Gender");
 
         gender_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AND", "OR", "NOT" }));
+        gender_comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gender_comboBoxActionPerformed(evt);
+            }
+        });
+
+        genderFilter_textField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                genderFilter_textFieldKeyPressed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
         jLabel13.setText("Student Year");
 
         year_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AND", "OR", "NOT" }));
+        year_comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                year_comboBoxActionPerformed(evt);
+            }
+        });
+
+        yearFilter_textField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                yearFilter_textFieldKeyPressed(evt);
+            }
+        });
+
+        addrFilterStart_textField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                addrFilterStart_textFieldKeyPressed(evt);
+            }
+        });
 
         idLogic_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=", ">=", "<=", "<", ">", "<>" }));
+        idLogic_comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idLogic_comboBoxActionPerformed(evt);
+            }
+        });
+
+        nameFilterStart_textField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nameFilterStart_textField1KeyPressed(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Liberation Sans", 0, 13)); // NOI18N
         jLabel14.setText("Ends");
@@ -244,12 +281,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
 
         jLabel16.setFont(new java.awt.Font("Liberation Sans", 0, 13)); // NOI18N
         jLabel16.setText("Starts");
-
-        nameFilterStart_textField2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                nameFilterStart_textField2KeyReleased(evt);
-            }
-        });
 
         jLabel17.setFont(new java.awt.Font("Liberation Sans", 0, 13)); // NOI18N
         jLabel17.setText("Ends");
@@ -624,10 +655,57 @@ public class StudentsJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_students_tableMouseClicked
 
     
-  
-    private void nameFilterStart_textField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameFilterStart_textField2KeyReleased
+    private void id_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_comboBoxActionPerformed
+        id_comboBox.getSelectedItem();
+    }//GEN-LAST:event_id_comboBoxActionPerformed
+
+    private void idLogic_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idLogic_comboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nameFilterStart_textField2KeyReleased
+    }//GEN-LAST:event_idLogic_comboBoxActionPerformed
+
+    private void idFilter_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idFilter_textFieldKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idFilter_textFieldKeyPressed
+
+    private void name_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_comboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_name_comboBoxActionPerformed
+
+    private void nameFilterStart_textField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameFilterStart_textField1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameFilterStart_textField1KeyPressed
+
+    private void addrFilterStart_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addrFilterStart_textFieldKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addrFilterStart_textFieldKeyPressed
+
+    private void addr_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addr_comboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addr_comboBoxActionPerformed
+
+    private void crs_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crs_comboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_crs_comboBoxActionPerformed
+
+    private void crsFilter_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_crsFilter_textFieldKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_crsFilter_textFieldKeyPressed
+
+    private void gender_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gender_comboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_gender_comboBoxActionPerformed
+
+    private void genderFilter_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_genderFilter_textFieldKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_genderFilter_textFieldKeyPressed
+
+    private void year_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_year_comboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_year_comboBoxActionPerformed
+
+    private void yearFilter_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_yearFilter_textFieldKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_yearFilter_textFieldKeyPressed
     public JTable GetJTable(){
         
         return students_table;
