@@ -653,16 +653,26 @@ public class StudentsJFrame extends javax.swing.JFrame {
         gender_textField.setText(studgender);
         year_textField.setText(yrlvl);
     }//GEN-LAST:event_students_tableMouseClicked
-
-     
+    FilterSQL filterSQL = new FilterSQL();
+    
+    private String[] idFilter_values;
+    
+    public void SetidFilter_values(String[] idFilter_values){
+        this.idFilter_values = idFilter_values;
+    }
+    
+    public String[] GetidFilter_values(){
+        return idFilter_values;
+    }
+    
     private void id_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_comboBoxActionPerformed
         String componentValues[] = {
             id_comboBox.getSelectedItem().toString(),
             idLogic_comboBox.getSelectedItem().toString(),
             idFilter_textField.getText()
         };
-        FilterSQL filterSQL = new FilterSQL();
-        filterSQL.GetComponentValues(componentValues);
+        SetidFilter_values(componentValues);
+        
        
     }//GEN-LAST:event_id_comboBoxActionPerformed
 

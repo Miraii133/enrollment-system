@@ -400,11 +400,14 @@ import java.util.List;
     }
 
     class FilterSQL {
-        public void GetComponentValues(String[] componentValues){
-            
+        private String studentsFilterSQL = "";
+        public void GetComponentValues(String[] componentValues, String frameName){
+           if (frameName.equalsIgnoreCase("studentsJFrame")){
+               
+           }
         }
         
-        public void StoreFilterSQL(){
+        public void SetFilterSQL(){
             
         }
     }
