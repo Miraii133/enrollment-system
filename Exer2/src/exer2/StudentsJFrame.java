@@ -24,7 +24,25 @@ public class StudentsJFrame extends javax.swing.JFrame {
         initComponents();
         SQL sql = new SQL();
         sql.GetResultSetSQL(this.getName(), students_table);
+        idLogic_comboBox.addActionListener(al);
+        idFilter_textField.addActionListener(al);
+        id_comboBox.addActionListener(al);
     }
+    
+    /*private void addEventsToComponents(){
+        ComponentEvents componentEvent = new ComponentEvents();
+        idLogic_comboBox.addActionListener(componentEvent.al);
+    }*/
+    
+    ActionListener al = new ActionListener(){
+     @Override
+  public void actionPerformed(ActionEvent event) {
+      System.out.println(event.getActionCommand());
+      System.out.println("Hello");
+        
+    
+  }
+   };
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -171,22 +189,10 @@ public class StudentsJFrame extends javax.swing.JFrame {
 
         name_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AND", "OR", "NOT" }));
 
-        idFilter_textField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                idFilter_textFieldKeyReleased(evt);
-            }
-        });
-
         jLabel9.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
         jLabel9.setText("Student Name");
 
         id_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AND", "OR", "NOT" }));
-
-        nameFilterStart_textField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                nameFilterStart_textFieldKeyReleased(evt);
-            }
-        });
 
         jLabel10.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
         jLabel10.setText("Student Addr");
@@ -209,12 +215,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
         year_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AND", "OR", "NOT" }));
 
         idLogic_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=", ">=", "<=", "<", ">", "<>" }));
-
-        nameFilterStart_textField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                nameFilterStart_textField1KeyReleased(evt);
-            }
-        });
 
         jLabel14.setFont(new java.awt.Font("Liberation Sans", 0, 13)); // NOI18N
         jLabel14.setText("Ends");
@@ -605,31 +605,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
 
     
   
-    private void idFilter_textFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idFilter_textFieldKeyReleased
-        Functions functions = new Functions();
-        
-        List<String> filterComponents = new ArrayList<>();
-        filterComponents.add(idLogic_comboBox.getSelectedItem().toString());
-        filterComponents.add(id_comboBox.getSelectedItem().toString());
-        filterComponents.add(idFilter_textField.getText());
-        functions.ProcessFilter(filterComponents, this.getName());
-    
-        
-    }//GEN-LAST:event_idFilter_textFieldKeyReleased
-
-    private void nameFilterStart_textFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameFilterStart_textFieldKeyReleased
-        Functions functions = new Functions();
-        
-        List<String> filterComponents = new ArrayList<>();
-        filterComponents.add(name_comboBox.getSelectedItem().toString());
-        filterComponents.add(nameFilterStart_textField.getText());
-        functions.ProcessFilter(filterComponents, this.getName());
-    }//GEN-LAST:event_nameFilterStart_textFieldKeyReleased
-
-    private void nameFilterStart_textField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameFilterStart_textField1KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameFilterStart_textField1KeyReleased
-
     private void nameFilterStart_textField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameFilterStart_textField2KeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_nameFilterStart_textField2KeyReleased

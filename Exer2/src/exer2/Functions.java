@@ -403,9 +403,10 @@ class ComponentEvents {
      ActionListener al = new ActionListener(){
      @Override
   public void actionPerformed(ActionEvent event) {
-    // either do it like this
-    event.getActionCommand();
-    // etc
+        System.out.println("Hello");
+        
+        
+        
   }
    };
 }

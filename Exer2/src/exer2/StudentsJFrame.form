@@ -476,9 +476,6 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="idFilter_textField">
-          <Events>
-            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="idFilter_textFieldKeyReleased"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
@@ -503,9 +500,6 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="nameFilterStart_textField">
-          <Events>
-            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nameFilterStart_textFieldKeyReleased"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
@@ -621,9 +615,6 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="nameFilterStart_textField1">
-          <Events>
-            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nameFilterStart_textField1KeyReleased"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel14">
           <Properties>
