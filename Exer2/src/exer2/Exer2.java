@@ -4,10 +4,19 @@
  */
 package exer2;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @author jiyo
  */
+
+class sample {
+    
+}
 public class Exer2 {
 
     /**
@@ -16,6 +25,11 @@ public class Exer2 {
     public static void main(String[] args) {
        StudentsJFrame studentsFrame = new StudentsJFrame();
        studentsFrame.setVisible(true);
-    }
+       
+
+       }
+       
+       
+    
     
 }

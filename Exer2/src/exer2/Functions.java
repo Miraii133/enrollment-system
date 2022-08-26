@@ -409,7 +409,6 @@ import java.util.List;
         }
         public void GetFiltered_ResultSetSQL(String frameName, JTable jtableName){
         
-        
         DB db = new DB();
         db.connectDB();
         String dbName;
@@ -417,7 +416,7 @@ import java.util.List;
         
         // changes searchQuery
         if (frameName.equalsIgnoreCase("studentsJFrame")){
-            searchQuery = GetFilterSQL();
+            //searchQuery = studentsFrame.GetFilterSQL();
         }
         
         else if (frameName.equalsIgnoreCase("subjectsJFrame")){
@@ -502,7 +501,7 @@ import java.util.List;
     }
     
         
-        public String GetFilterSQL(){
+       /* public String GetFilterSQL(){
             return studentsFilterSQL;
         }
         
@@ -513,13 +512,13 @@ import java.util.List;
                studentsFilterSQL = 
                        studentFilter_template + "(SELECT studid FROM Students WHERE studid" + filterValues[1] + "'" +filterValues[2] + "')";
                System.out.println(studentsFilterSQL);
+               
+               // if field is blank just get all values
              } else if (filterValues[2].equalsIgnoreCase("")){
-                     // if the textField is blank, call
-                     // GetResultSetSQL since it calls all functions
                studentsFilterSQL = "SELECT * FROM Students";
                  }
              }
-        }
+        }*/
     }
 
     
