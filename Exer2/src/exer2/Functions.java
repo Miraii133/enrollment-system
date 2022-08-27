@@ -407,7 +407,7 @@ import java.util.List;
                
            }
         }
-        public void GetFiltered_ResultSetSQL(String frameName, JTable jtableName){
+        public void GetFiltered_ResultSetSQL(String frameName, JTable jtableName, String filterString){
         
         DB db = new DB();
         db.connectDB();
@@ -416,7 +416,7 @@ import java.util.List;
         
         // changes searchQuery
         if (frameName.equalsIgnoreCase("studentsJFrame")){
-            //searchQuery = studentsFrame.GetFilterSQL();
+            searchQuery = filterString;
         }
         
         else if (frameName.equalsIgnoreCase("subjectsJFrame")){

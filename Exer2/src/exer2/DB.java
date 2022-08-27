@@ -75,6 +75,7 @@ try {
         // Checks if query is a valid query
         // returns true or false accordingly.
        boolean executeQuery(String query){
+           System.out.println(query);
         try {
             setStatement(getConn().createStatement());
             // checks if current query has something

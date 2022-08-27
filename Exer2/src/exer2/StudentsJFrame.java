@@ -673,7 +673,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         
         String filterString = "";
          if(!idFilter_textField.getText().equals("")){
-            filterString = " WHERE studID " + idLogic_comboBox.getSelectedItem() + idFilter_textField.getText();
+            filterString = "SELECT * FROM Students WHERE studid " + idLogic_comboBox.getSelectedItem() + idFilter_textField.getText();
         }
         if(!nameFilterStart_textField.getText().equals("")){
             if(idFilter_textField.getText().equals("")){
@@ -732,7 +732,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
                 filterString = String.format("WHERE studGender like '%s%%'", genderFilter_textField.getText());
             }else{
                 filterString += String.format(" %s studGender like '%s%%'", gender_comboBox.getSelectedItem(), genderFilter_textField.getText());
-            }
+            }   
             //filterString = " WHERE studGender='" + genderFilter.getText() + "' ";
         }
         if(!yearFilter_textField.getText().equals("")){
@@ -743,7 +743,10 @@ public class StudentsJFrame extends javax.swing.JFrame {
             }
             //filterString = " WHERE studYearLvl='" + yearFilter_textField.getText() + "' ";
         }
-        tableModel.addRow(idFilter_values);
+        System.out.println(filterString);
+        db.connectDB();
+        db.executeQuery(filterString);
+        filterSQL.GetFiltered_ResultSetSQL(this.getName(), students_table, filterString);
         
     }
     
@@ -756,7 +759,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         filterSQL.SetFilterSQL(componentValues, this.getName(), students_table);
         db.connectDB();
         db.executeQuery(filterSQL.GetFilterSQL());*/
-        filterSQL.GetFiltered_ResultSetSQL(this.getName(), students_table);
+        //filterSQL.GetFiltered_ResultSetSQL(this.getName(), students_table);
         GetFilterSQL();
        
     }//GEN-LAST:event_id_comboBoxActionPerformed
