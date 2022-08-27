@@ -673,10 +673,10 @@ public class StudentsJFrame extends javax.swing.JFrame {
         
         String filterString = "";
          if(!idFilter_textField.getText().equals("")){
-            filterString = "SELECT * FROM Students WHERE studid " + idLogic_comboBox.getSelectedItem() + idFilter_textField.getText();
+            filterString = " WHERE studid " + idLogic_comboBox.getSelectedItem() + idFilter_textField.getText();
         }
         if(!nameFilterStart_textField.getText().equals("")){
-            if(idFilter_textField.getText().equals("")){
+            if(idFilter_textField.getText().equals("")){    
                 filterString = String.format("WHERE studName like '%s%%'", nameFilterStart_textField.getText());
             }else if(!nameFilterEnd_textField.getText().equals("")){
                 filterString += String.format(" %s studname like '%s%%'", id_comboBox.getSelectedItem(), nameFilterStart_textField.getText());
@@ -699,33 +699,33 @@ public class StudentsJFrame extends javax.swing.JFrame {
         }
         if(!addrFilterStart_textField.getText().equals("")){
             if(idFilter_textField.getText().equals("") && nameFilterStart_textField.getText().equals("") && nameFilterEnd_textField.getText().equals("")){
-                filterString = String.format("WHERE studAddress like '%s%%'", addrFilterStart_textField.getText());
+                filterString = String.format("WHERE studaddr like '%s%%'", addrFilterStart_textField.getText());
             }else if(!addrFilterEnd_textField.getText().equals("")){
-                filterString += String.format(" %s studAddress like '%s%%'", addr_comboBox.getSelectedItem(), addrFilterStart_textField.getText());
+                filterString += String.format(" %s studaddr like '%s%%'", addr_comboBox.getSelectedItem(), addrFilterStart_textField.getText());
             }else{
-                filterString += String.format(" %s studAddress like '%s%%'", addr_comboBox.getSelectedItem(), addrFilterStart_textField.getText());
+                filterString += String.format(" %s studaddr like '%s%%'", addr_comboBox.getSelectedItem(), addrFilterStart_textField.getText());
             }
-            // = " WHERE studAddress like '" + addrFilterStart_textField.getText() + "%' ";
+            // = " WHERE studaddr like '" + addrFilterStart_textField.getText() + "%' ";
         }
         if(!addrFilterEnd_textField.getText().equals("")){
             if(idFilter_textField.getText().equals("") && nameFilterStart_textField.getText().equals("") && nameFilterEnd_textField.getText().equals("") && addrFilterStart_textField.getText().equals("")){
-                filterString = String.format("WHERE studAddress like '%%%s'", addrFilterEnd_textField.getText());
+                filterString = String.format("WHERE studaddr like '%%%s'", addrFilterEnd_textField.getText());
             }else if (addrFilterStart_textField.getText().equals("")){
-                filterString += String.format(" %s studAddress like '%%%s'", addr_comboBox.getSelectedItem(), addrFilterEnd_textField.getText());
+                filterString += String.format(" %s studaddr like '%%%s'", addr_comboBox.getSelectedItem(), addrFilterEnd_textField.getText());
             }else if (addrFilterStart_textField.getText().equals("") && idFilter_textField.getText().equals("") && nameFilterStart_textField.getText().equals("") && nameFilterEnd_textField.getText().equals("")){
-                filterString += String.format(" AND studAddress like '%%%s'", addrFilterEnd_textField.getText());
+                filterString += String.format(" AND studaddr like '%%%s'", addrFilterEnd_textField.getText());
             }else{
-                filterString += String.format(" AND studAddress like '%%%s'", addrFilterEnd_textField.getText());
+                filterString += String.format(" AND studaddr like '%%%s'", addrFilterEnd_textField.getText());
             }
-            //filterString = " WHERE studAddress like '%" + addrFilterEnd_textField.getText() + "' ";
+            //filterString = " WHERE studaddr like '%" + addrFilterEnd_textField.getText() + "' ";
         }
         if(!crsFilter_textField.getText().equals("")){
             if(idFilter_textField.getText().equals("") && nameFilterStart_textField.getText().equals("") && nameFilterEnd_textField.getText().equals("") && addrFilterStart_textField.getText().equals("") && addrFilterEnd_textField.getText().equals("")){
-                filterString = String.format("WHERE studCourse like '%s%%'", crsFilter_textField.getText());
+                filterString = String.format("WHERE studcrs like '%s%%'", crsFilter_textField.getText());
             }else{
-                filterString += String.format(" %s studCourse like '%s%%'", crs_comboBox.getSelectedItem(), crsFilter_textField.getText());
+                filterString += String.format(" %s studcrs like '%s%%'", crs_comboBox.getSelectedItem(), crsFilter_textField.getText());
             }
-            //filterString = " WHERE studCourse='" + crsFilter_textField.getText() + "' ";
+            //filterString = " WHERE studcrs='" + crsFilter_textField.getText() + "' ";
         }
         if(!genderFilter_textField.getText().equals("")){
             if(idFilter_textField.getText().equals("") && nameFilterStart_textField.getText().equals("") && nameFilterEnd_textField.getText().equals("") && addrFilterStart_textField.getText().equals("") && addrFilterEnd_textField.getText().equals("") && crsFilter_textField.getText().equals("")){
@@ -737,109 +737,74 @@ public class StudentsJFrame extends javax.swing.JFrame {
         }
         if(!yearFilter_textField.getText().equals("")){
             if(idFilter_textField.getText().equals("") && nameFilterStart_textField.getText().equals("") && nameFilterEnd_textField.getText().equals("") && addrFilterStart_textField.getText().equals("") && addrFilterEnd_textField.getText().equals("") && crsFilter_textField.getText().equals("") && genderFilter_textField.getText().equals("")){
-                filterString = String.format("WHERE studYearLvl like '%s%%'", yearFilter_textField.getText());
+                filterString = String.format("WHERE yrlvl like '%s%%'", yearFilter_textField.getText());
             }else{
-                filterString += String.format(" %s studYearLvl like '%s%%'", year_comboBox.getSelectedItem(), yearFilter_textField.getText());
+                filterString += String.format(" %s yrlvl like '%s%%'", year_comboBox.getSelectedItem(), yearFilter_textField.getText());
             }
-            //filterString = " WHERE studYearLvl='" + yearFilter_textField.getText() + "' ";
+            //filterString = " WHERE yrlvl='" + yearFilter_textField.getText() + "' ";
         }
         System.out.println(filterString);
         db.connectDB();
-        db.executeQuery(filterString);
-        filterSQL.GetFiltered_ResultSetSQL(this.getName(), students_table, filterString);
+        db.executeQuery("SELECT * FROM Students " + filterString);
+        filterSQL.GetFiltered_ResultSetSQL(this.getName(), students_table, "SELECT * FROM Students " + filterString);
         
     }
     
     private void id_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_comboBoxActionPerformed
-        /*String componentValues[] = {
-            id_comboBox.getSelectedItem().toString(),
-            idLogic_comboBox.getSelectedItem().toString(),
-            idFilter_textField.getText()
-        };
-        filterSQL.SetFilterSQL(componentValues, this.getName(), students_table);
-        db.connectDB();
-        db.executeQuery(filterSQL.GetFilterSQL());*/
-        //filterSQL.GetFiltered_ResultSetSQL(this.getName(), students_table);
         GetFilterSQL();
        
     }//GEN-LAST:event_id_comboBoxActionPerformed
 
     private void idLogic_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idLogic_comboBoxActionPerformed
-        String componentValues[] = {
-            id_comboBox.getSelectedItem().toString(),
-            idLogic_comboBox.getSelectedItem().toString(),
-            idFilter_textField.getText()
-        };
-        /*filterSQL.SetFilterSQL(componentValues, this.getName(), students_table);
-        db.connectDB();
-        db.executeQuery(filterSQL.GetFilterSQL());
-        filterSQL.GetFiltered_ResultSetSQL(this.getName(), students_table);*/
-       
+        GetFilterSQL();
     }//GEN-LAST:event_idLogic_comboBoxActionPerformed
 
     private void idFilter_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idFilter_textFieldKeyPressed
-        String componentValues[] = {
-            id_comboBox.getSelectedItem().toString(),
-            idLogic_comboBox.getSelectedItem().toString(),
-            idFilter_textField.getText()
-        };
-        /*filterSQL.SetFilterSQL(componentValues, this.getName(), students_table);
-        db.connectDB();
-        db.executeQuery(filterSQL.GetFilterSQL());
-        filterSQL.GetFiltered_ResultSetSQL(this.getName(), students_table);*/
-       
+        GetFilterSQL();
     }//GEN-LAST:event_idFilter_textFieldKeyPressed
 
     private void name_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_comboBoxActionPerformed
-        // TODO add your handling code here:
+        GetFilterSQL();
     }//GEN-LAST:event_name_comboBoxActionPerformed
 
     private void addrFilterStart_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addrFilterStart_textFieldKeyPressed
-        // TODO add your handling code here:
+        GetFilterSQL();
     }//GEN-LAST:event_addrFilterStart_textFieldKeyPressed
 
     private void addr_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addr_comboBoxActionPerformed
-        // TODO add your handling code here:
+        GetFilterSQL();
     }//GEN-LAST:event_addr_comboBoxActionPerformed
 
     private void crs_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crs_comboBoxActionPerformed
-        // TODO add your handling code here:
+        GetFilterSQL();
     }//GEN-LAST:event_crs_comboBoxActionPerformed
 
     private void crsFilter_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_crsFilter_textFieldKeyPressed
-        // TODO add your handling code here:
+         GetFilterSQL();
     }//GEN-LAST:event_crsFilter_textFieldKeyPressed
 
     private void gender_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gender_comboBoxActionPerformed
-        // TODO add your handling code here:
+         GetFilterSQL();
     }//GEN-LAST:event_gender_comboBoxActionPerformed
 
     private void genderFilter_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_genderFilter_textFieldKeyPressed
-        // TODO add your handling code here:
+         GetFilterSQL();
     }//GEN-LAST:event_genderFilter_textFieldKeyPressed
 
     private void year_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_year_comboBoxActionPerformed
-        // TODO add your handling code here:
+         GetFilterSQL();
     }//GEN-LAST:event_year_comboBoxActionPerformed
 
     private void yearFilter_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_yearFilter_textFieldKeyPressed
-        // TODO add your handling code here:
+         GetFilterSQL();
     }//GEN-LAST:event_yearFilter_textFieldKeyPressed
 
     private void addrFilterEnd_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addrFilterEnd_textFieldKeyPressed
-        // TODO add your handling code here:
+         GetFilterSQL();
     }//GEN-LAST:event_addrFilterEnd_textFieldKeyPressed
 
     private void idFilter_textFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idFilter_textFieldKeyReleased
-         String componentValues[] = {
-            id_comboBox.getSelectedItem().toString(),
-            idLogic_comboBox.getSelectedItem().toString(),
-            idFilter_textField.getText()
-        };
-       /* filterSQL.SetFilterSQL(componentValues, this.getName(), students_table);
-        db.connectDB();
-        db.executeQuery(filterSQL.GetFilterSQL());
-        filterSQL.GetFiltered_ResultSetSQL(this.getName(), students_table);*/
+         GetFilterSQL();
        
     }//GEN-LAST:event_idFilter_textFieldKeyReleased
     public JTable GetJTable(){
