@@ -192,6 +192,12 @@ public class StudentsJFrame extends javax.swing.JFrame {
             }
         });
 
+        nameFilterEnd_textField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nameFilterEnd_textFieldKeyReleased(evt);
+            }
+        });
+
         jLabel10.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
         jLabel10.setText("Student Addr");
 
@@ -279,6 +285,12 @@ public class StudentsJFrame extends javax.swing.JFrame {
         name_comboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 name_comboBoxActionPerformed(evt);
+            }
+        });
+
+        nameFilterStart_textField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nameFilterStart_textFieldKeyReleased(evt);
             }
         });
 
@@ -658,14 +670,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
     DB db = new DB();
     SQL sqlObj = new SQL();
     private String[] idFilter_values;
-    
-    public void SetidFilter_values(String[] idFilter_values){
-        this.idFilter_values = idFilter_values;
-    }
-    
-    public String[] GetidFilter_values(){
-        return idFilter_values;
-    }
     public void GetFilterSQL(){
         
         DefaultTableModel tableModel = (DefaultTableModel) students_table.getModel();
@@ -807,6 +811,14 @@ public class StudentsJFrame extends javax.swing.JFrame {
          GetFilterSQL();
        
     }//GEN-LAST:event_idFilter_textFieldKeyReleased
+
+    private void nameFilterStart_textFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameFilterStart_textFieldKeyReleased
+         GetFilterSQL();
+    }//GEN-LAST:event_nameFilterStart_textFieldKeyReleased
+
+    private void nameFilterEnd_textFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameFilterEnd_textFieldKeyReleased
+         GetFilterSQL();
+    }//GEN-LAST:event_nameFilterEnd_textFieldKeyReleased
     public JTable GetJTable(){
         
         return students_table;
