@@ -40,8 +40,8 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="Students Menu"/>
-    <Property name="name" type="java.lang.String" value="studentsJFrame" noResource="true"/>
+    <Property name="title" type="java.lang.String" value="Teachers Menu"/>
+    <Property name="name" type="java.lang.String" value="teachersJFrame" noResource="true"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -218,12 +218,12 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="6" rowCount="0">
-                <Column editable="false" title="studid" type="java.lang.Integer"/>
-                <Column editable="false" title="studname" type="java.lang.String"/>
-                <Column editable="false" title="studaddr" type="java.lang.String"/>
-                <Column editable="false" title="studcrs" type="java.lang.String"/>
-                <Column editable="false" title="studgender" type="java.lang.String"/>
-                <Column editable="false" title="yrlvl" type="java.lang.String"/>
+                <Column editable="false" title="Tid" type="java.lang.Integer"/>
+                <Column editable="false" title="Tname" type="java.lang.String"/>
+                <Column editable="false" title="Tdept" type="java.lang.String"/>
+                <Column editable="false" title="Taddr" type="java.lang.String"/>
+                <Column editable="false" title="Tcontact" type="java.lang.String"/>
+                <Column editable="false" title="Tstatus" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -311,7 +311,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
@@ -319,11 +319,6 @@
                           <Component id="addr_comboBox" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="contact_comboBox" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="idLogic_comboBox" min="-2" pref="54" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -337,8 +332,7 @@
                               <Component id="status_comboBox" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="teacherFilter_textField" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
-                      <Component id="addrfilter_textField" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                      <Component id="contactFilter_textField" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                       <Component id="id_comboBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -354,6 +348,26 @@
                       <Component id="name_comboBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="dept_comboBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="deptFilter_textField" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="addrFilterStart_textField" min="-2" pref="52" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="addrFilterEnd_textField" min="-2" pref="44" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="contact_comboBox" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
                   <EmptySpace pref="17" max="32767" attributes="0"/>
               </Group>
@@ -400,14 +414,19 @@
                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="addrfilter_textField" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="addrFilterStart_textField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="addrFilterEnd_textField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="contact_comboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="teacherFilter_textField" min="-2" max="-2" attributes="0"/>
+                  <Component id="contactFilter_textField" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="status_comboBox" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -436,7 +455,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="idFilter_textField">
           <Events>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="idFilter_textFieldKeyPressed"/>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="idFilter_textFieldKeyReleased"/>
           </Events>
         </Component>
@@ -520,9 +538,9 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="addrfilter_textField">
+        <Component class="javax.swing.JTextField" name="addrFilterStart_textField">
           <Events>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="addrfilter_textFieldKeyPressed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="addrFilterStart_textFieldKeyReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel12">
@@ -550,9 +568,9 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="teacherFilter_textField">
+        <Component class="javax.swing.JTextField" name="contactFilter_textField">
           <Events>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="teacherFilter_textFieldKeyPressed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="contactFilter_textFieldKeyReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">
@@ -582,12 +600,12 @@
         </Component>
         <Component class="javax.swing.JTextField" name="statusFilter_textField">
           <Events>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="statusFilter_textFieldKeyPressed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="statusFilter_textFieldKeyReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="deptFilter_textField">
           <Events>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="deptFilter_textFieldKeyPressed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="deptFilter_textFieldKeyReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="idLogic_comboBox">
@@ -647,6 +665,27 @@
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nameFilterStart_textFieldKeyReleased"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="addrFilterEnd_textField">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="addrFilterEnd_textFieldKeyReleased"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel16">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Liberation Sans" size="13" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Starts"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel17">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Liberation Sans" size="13" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Ends"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

@@ -419,11 +419,9 @@ import java.util.List;
         
         else if (frameName.equalsIgnoreCase("subjectsJFrame")){
             searchQuery = filterString;
-            System.out.println("Filter string" + filterString);
         }
         else if (frameName.equalsIgnoreCase("teachersJFrame")){
-            dbName = "Teachers";
-            searchQuery = "SELECT * FROM " + dbName;
+            searchQuery = filterString;
         } 
         try {
              db.setStatement(db.getConn().createStatement());
