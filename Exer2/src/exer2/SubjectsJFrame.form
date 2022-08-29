@@ -40,8 +40,8 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="Students Menu"/>
-    <Property name="name" type="java.lang.String" value="studentsJFrame" noResource="true"/>
+    <Property name="title" type="java.lang.String" value="Subjects Menu"/>
+    <Property name="name" type="java.lang.String" value="subjectsJFrame" noResource="true"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -65,19 +65,8 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace pref="22" max="32767" attributes="0"/>
+              <EmptySpace pref="28" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="course_textField" pref="128" max="32767" attributes="0"/>
-                          <Component id="gender_textField" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
                   <Group type="102" attributes="0">
                       <Component id="save_button" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -90,16 +79,24 @@
                           <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="id_textField" min="-2" pref="128" max="-2" attributes="0"/>
-                          <Component id="name_textField" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="ode_textField" pref="128" max="32767" attributes="0"/>
+                          <Component id="id_textField" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="address_textField" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="desc_textField" max="32767" attributes="0"/>
+                          <Component id="units_textField" pref="128" max="32767" attributes="0"/>
+                          <Component id="sched_textField" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
@@ -123,22 +120,22 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="name_textField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ode_textField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="address_textField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="desc_textField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="course_textField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="units_textField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="gender_textField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="sched_textField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -163,38 +160,38 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Student ID"/>
+        <Property name="text" type="java.lang.String" value="Subject ID"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Student Name"/>
+        <Property name="text" type="java.lang.String" value="Subject Ode"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Student Address"/>
+        <Property name="text" type="java.lang.String" value="Subject Desc"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Student Course"/>
+        <Property name="text" type="java.lang.String" value="Subject Units"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Student Gender"/>
+        <Property name="text" type="java.lang.String" value="Subject Sched"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="id_textField">
     </Component>
-    <Component class="javax.swing.JTextField" name="name_textField">
+    <Component class="javax.swing.JTextField" name="ode_textField">
     </Component>
-    <Component class="javax.swing.JTextField" name="address_textField">
+    <Component class="javax.swing.JTextField" name="desc_textField">
     </Component>
-    <Component class="javax.swing.JTextField" name="course_textField">
+    <Component class="javax.swing.JTextField" name="units_textField">
     </Component>
-    <Component class="javax.swing.JTextField" name="gender_textField">
+    <Component class="javax.swing.JTextField" name="sched_textField">
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -203,7 +200,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="students_table">
+        <Component class="javax.swing.JTable" name="subjects_table">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="5" rowCount="0">
@@ -248,7 +245,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="students_tableMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="subjects_tableMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
@@ -296,47 +293,45 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="crs_comboBox" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="gender_comboBox" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="idLogic_comboBox" min="-2" pref="54" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="idFilter_textField" min="-2" pref="54" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="genderFilter_textField" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
-                      <Component id="crsFilter_textField" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                       <Component id="id_comboBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="nameFilterStart_textField" min="-2" pref="46" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="nameFilterEnd_textField" min="-2" pref="46" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="addr_comboBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="code_comboBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="addrFilterStart_textField" min="-2" pref="46" max="-2" attributes="0"/>
+                          <Component id="descFilterStart_textField" min="-2" pref="46" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="addrFilterEnd_textField" min="-2" pref="46" max="-2" attributes="0"/>
+                          <Component id="descFilterEnd_textField" min="-2" pref="46" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="name_comboBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="desc_comboBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="units_comboBox" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="unitsFilter_textField" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="sched_comboBox" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="schedFilter_textField" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="codeFilter_textField" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="idLogic_comboBox" min="-2" pref="54" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="idFilter_textField" min="-2" pref="54" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
                   <EmptySpace pref="26" max="32767" attributes="0"/>
               </Group>
@@ -359,43 +354,34 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="nameFilterEnd_textField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="nameFilterStart_textField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="codeFilter_textField" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="addr_comboBox" min="-2" max="-2" attributes="0"/>
+                  <Component id="code_comboBox" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="addrFilterStart_textField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="descFilterStart_textField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="addrFilterEnd_textField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="descFilterEnd_textField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="name_comboBox" min="-2" max="-2" attributes="0"/>
+                  <Component id="desc_comboBox" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="crs_comboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="units_comboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="crsFilter_textField" min="-2" max="-2" attributes="0"/>
+                  <Component id="unitsFilter_textField" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="gender_comboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="sched_comboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="genderFilter_textField" min="-2" max="-2" attributes="0"/>
+                  <Component id="schedFilter_textField" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="88" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -412,12 +398,11 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Liberation Sans" size="13" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Student ID"/>
+            <Property name="text" type="java.lang.String" value="Subj ID"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="idFilter_textField">
           <Events>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="idFilter_textFieldKeyPressed"/>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="idFilter_textFieldKeyReleased"/>
           </Events>
         </Component>
@@ -426,7 +411,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Liberation Sans" size="13" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Student Name"/>
+            <Property name="text" type="java.lang.String" value="Subj Ode"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="id_comboBox">
@@ -446,20 +431,15 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="nameFilterEnd_textField">
-          <Events>
-            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nameFilterEnd_textFieldKeyReleased"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Liberation Sans" size="13" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Student Addr"/>
+            <Property name="text" type="java.lang.String" value="Subj Desc"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="addr_comboBox">
+        <Component class="javax.swing.JComboBox" name="code_comboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
@@ -470,7 +450,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addr_comboBoxActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="code_comboBoxActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -481,10 +461,10 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Liberation Sans" size="13" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Student Course"/>
+            <Property name="text" type="java.lang.String" value="Subj Units"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="crs_comboBox">
+        <Component class="javax.swing.JComboBox" name="units_comboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
@@ -495,15 +475,15 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="crs_comboBoxActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="units_comboBoxActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="crsFilter_textField">
+        <Component class="javax.swing.JTextField" name="unitsFilter_textField">
           <Events>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="crsFilter_textFieldKeyPressed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="unitsFilter_textFieldKeyReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel12">
@@ -511,10 +491,10 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Liberation Sans" size="13" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Student Gender"/>
+            <Property name="text" type="java.lang.String" value="Subj Sched"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="gender_comboBox">
+        <Component class="javax.swing.JComboBox" name="sched_comboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
@@ -525,20 +505,20 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gender_comboBoxActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sched_comboBoxActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="genderFilter_textField">
+        <Component class="javax.swing.JTextField" name="schedFilter_textField">
           <Events>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="genderFilter_textFieldKeyPressed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="schedFilter_textFieldKeyReleased"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="addrFilterStart_textField">
+        <Component class="javax.swing.JTextField" name="descFilterStart_textField">
           <Events>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="addrFilterStart_textFieldKeyPressed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="descFilterStart_textFieldKeyReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="idLogic_comboBox">
@@ -561,22 +541,6 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel14">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Liberation Sans" size="13" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Ends"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel15">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Liberation Sans" size="13" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Starts"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel16">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -593,7 +557,7 @@
             <Property name="text" type="java.lang.String" value="Ends"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="name_comboBox">
+        <Component class="javax.swing.JComboBox" name="desc_comboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
@@ -604,20 +568,20 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="name_comboBoxActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="desc_comboBoxActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="nameFilterStart_textField">
+        <Component class="javax.swing.JTextField" name="codeFilter_textField">
           <Events>
-            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nameFilterStart_textFieldKeyReleased"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="codeFilter_textFieldKeyReleased"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="addrFilterEnd_textField">
+        <Component class="javax.swing.JTextField" name="descFilterEnd_textField">
           <Events>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="addrFilterEnd_textFieldKeyPressed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="descFilterEnd_textFieldKeyReleased"/>
           </Events>
         </Component>
       </SubComponents>

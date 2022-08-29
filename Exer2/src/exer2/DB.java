@@ -75,7 +75,7 @@ try {
         // Checks if query is a valid query
         // returns true or false accordingly.
        boolean executeQuery(String query){
-           System.out.println(query);
+            System.out.println("QUERY" + query);
         try {
             setStatement(getConn().createStatement());
             // checks if current query has something
@@ -86,6 +86,8 @@ try {
              }
            
         }  catch (SQLException ex){
+            
+            
             System.out.println("Unable to execute query to the database");
             System.out.println(ex.getMessage());
             ex.printStackTrace();

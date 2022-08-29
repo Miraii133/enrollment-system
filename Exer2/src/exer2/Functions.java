@@ -385,6 +385,7 @@ import java.util.List;
             
         } catch (SQLException ex ){
             System.out.println("Cant get result set");
+           
             ex.printStackTrace();
         }
        
@@ -399,9 +400,6 @@ import java.util.List;
 
     class FilterSQL {
         SQL sqlObj = new SQL();
-        private final String studentFilter_template = 
-                "SELECT * FROM Students WHERE studid IN";
-        private String studentsFilterSQL = "";
         public void GetComponentValues(String[] componentValues, String frameName){
            if (frameName.equalsIgnoreCase("studentsJFrame")){
                
@@ -420,8 +418,8 @@ import java.util.List;
         }
         
         else if (frameName.equalsIgnoreCase("subjectsJFrame")){
-            dbName = "Subjects";
-            searchQuery = "SELECT * FROM " + dbName;
+            searchQuery = filterString;
+            System.out.println("Filter string" + filterString);
         }
         else if (frameName.equalsIgnoreCase("teachersJFrame")){
             dbName = "Teachers";
@@ -465,6 +463,10 @@ import java.util.List;
                 String array[] = {id, code, desc, units, sched};
                 
                 // adds array to table row
+                for (int i = 0; i < array.length; i++){
+
+                    System.out.println(array[i]);
+                }
                  tableModel.addRow(array);
                 /*for(String data:array){  
                 resultData.add(data);
