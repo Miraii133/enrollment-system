@@ -4,6 +4,11 @@
  */
 package exer2;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -22,6 +27,8 @@ public class TeachersJFrame extends javax.swing.JFrame {
         SQL sql = new SQL();
         sql.GetResultSetSQL(this.getName(), teachers_table);
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,6 +56,30 @@ public class TeachersJFrame extends javax.swing.JFrame {
         save_button = new javax.swing.JButton();
         update_button = new javax.swing.JButton();
         delete_button = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        idFilter_textField = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        id_comboBox = new javax.swing.JComboBox<>();
+        nameFilterEnd_textField = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        name_comboBox = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        addr_comboBox = new javax.swing.JComboBox<>();
+        addrfilter_textField = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        contact_comboBox = new javax.swing.JComboBox<>();
+        teacherFilter_textField = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        status_comboBox = new javax.swing.JComboBox<>();
+        statusFilter_textField = new javax.swing.JTextField();
+        deptFilter_textField = new javax.swing.JTextField();
+        idLogic_comboBox = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        dept_comboBox = new javax.swing.JComboBox<>();
+        nameFilterStart_textField = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         students_item = new javax.swing.JMenuItem();
@@ -56,8 +87,8 @@ public class TeachersJFrame extends javax.swing.JFrame {
         teachers_item = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Teachers Menu");
-        setName("teachersJFrame"); // NOI18N
+        setTitle("Students Menu");
+        setName("studentsJFrame"); // NOI18N
         setResizable(false);
 
         jLabel1.setText("Teacher ID");
@@ -66,7 +97,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Teacher Dept");
 
-        jLabel4.setText("Teacher Addr");
+        jLabel4.setText("Teacher Address");
 
         jLabel5.setText("Teacher Contact");
 
@@ -77,7 +108,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tid", "Tname", "Tdept", "Taddr", "Tcontact", "Tstatus"
+                "studid", "studname", "studaddr", "studcrs", "studgender", "yrlvl"
             }
         ) {
             Class[] types = new Class [] {
@@ -131,6 +162,226 @@ public class TeachersJFrame extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setPreferredSize(new java.awt.Dimension(200, 103));
+
+        jLabel7.setText("Filters");
+
+        jLabel8.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        jLabel8.setText("Teacher ID");
+
+        idFilter_textField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                idFilter_textFieldKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                idFilter_textFieldKeyReleased(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        jLabel9.setText("Teacher Name");
+
+        id_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AND", "OR", "NOT" }));
+        id_comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                id_comboBoxActionPerformed(evt);
+            }
+        });
+
+        nameFilterEnd_textField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nameFilterEnd_textFieldKeyReleased(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        jLabel10.setText("Teacher Dept");
+
+        name_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AND", "OR", "NOT" }));
+        name_comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                name_comboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        jLabel11.setText("Teacher Address");
+
+        addr_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AND", "OR", "NOT" }));
+        addr_comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addr_comboBoxActionPerformed(evt);
+            }
+        });
+
+        addrfilter_textField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                addrfilter_textFieldKeyPressed(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        jLabel12.setText("Teacher Contact");
+
+        contact_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AND", "OR", "NOT" }));
+        contact_comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contact_comboBoxActionPerformed(evt);
+            }
+        });
+
+        teacherFilter_textField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                teacherFilter_textFieldKeyPressed(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        jLabel13.setText("Teacher Status");
+
+        status_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AND", "OR", "NOT" }));
+        status_comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                status_comboBoxActionPerformed(evt);
+            }
+        });
+
+        statusFilter_textField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                statusFilter_textFieldKeyPressed(evt);
+            }
+        });
+
+        deptFilter_textField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                deptFilter_textFieldKeyPressed(evt);
+            }
+        });
+
+        idLogic_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=", ">=", "<=", "<", ">", "<>" }));
+        idLogic_comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idLogic_comboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Liberation Sans", 0, 13)); // NOI18N
+        jLabel14.setText("Ends");
+
+        jLabel15.setFont(new java.awt.Font("Liberation Sans", 0, 13)); // NOI18N
+        jLabel15.setText("Starts");
+
+        dept_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AND", "OR", "NOT" }));
+        dept_comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dept_comboBoxActionPerformed(evt);
+            }
+        });
+
+        nameFilterStart_textField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nameFilterStart_textFieldKeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(addr_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel10)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(contact_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(idLogic_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(idFilter_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel13)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(statusFilter_textField, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(103, 103, 103)
+                            .addComponent(status_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(teacherFilter_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addrfilter_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(id_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nameFilterStart_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nameFilterEnd_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(name_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dept_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deptFilter_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(idLogic_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idFilter_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(id_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel14)
+                        .addComponent(nameFilterEnd_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel15)
+                        .addComponent(nameFilterStart_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(name_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(deptFilter_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dept_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addr_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addrfilter_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(contact_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(teacherFilter_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(status_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(statusFilter_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+
         jMenu1.setText("Menu");
 
         students_item.setText("Students");
@@ -166,8 +417,8 @@ public class TeachersJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(save_button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -178,10 +429,10 @@ public class TeachersJFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(id_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(name_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(id_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(name_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -189,15 +440,16 @@ public class TeachersJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel3))
                         .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dept_textField, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(addr_textField, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                                .addComponent(contact_textField)
-                                .addComponent(status_textField)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dept_textField)
+                            .addComponent(addr_textField, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                            .addComponent(contact_textField)
+                            .addComponent(status_textField))))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,8 +487,10 @@ public class TeachersJFrame extends javax.swing.JFrame {
                             .addComponent(delete_button)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(130, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -288,7 +542,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
                  String sql = sqlObj.getInsertSQL(this.getName());
                  db.executeUpdate(sql);
                  sqlObj.GetResultSetSQL(this.getName(), teachers_table);
-                System.out.println("Teachers ID data inserted.");
+                System.out.println("Student ID data inserted.");
                 
                 // converts return value from GetResultSetSQL to
                 // a local variable
@@ -298,7 +552,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
                 //functions.DisplayTableValues(students_table, resultData);
                 return;
             }
-            System.out.println("Teachers ID provided already exists!");
+            System.out.println("Student ID provided already exists!");
             System.out.println("Please use Update instead.");
             }
             
@@ -320,21 +574,20 @@ public class TeachersJFrame extends javax.swing.JFrame {
         //Deletes row and replaces it with a new and updated one.
         // String update = "DELETE FROM Students WHERE studid='" + id + "'";
         SQL sqlObj = new SQL();
-        
-         if (functions.IsANumber(functions.getTextFieldValues(textFieldValues), this.getName())){
+      
+       if (functions.IsANumber(functions.getTextFieldValues(textFieldValues), this.getName())){
             if (functions.IsExistingID(functions.getTextFieldValues(textFieldValues), this.getName())){
                 sqlObj.setUpdateSQL(textFieldValues, this.getName());
                 String sql = sqlObj.getUpdateSQL(this.getName());
                 db.executeUpdate(sql);
                 sqlObj.GetResultSetSQL(this.getName(), teachers_table);
-                System.out.println("Teachers ID data updated.");
+                System.out.println("Student ID data updated.");
                 return;
             }
             return;
          }
-            System.out.println("Teachers ID does not exist!");
+            System.out.println("Student ID does not exist!");
             System.out.println("Please use Save instead.");
-         
     }//GEN-LAST:event_update_buttonActionPerformed
 
     
@@ -349,8 +602,8 @@ public class TeachersJFrame extends javax.swing.JFrame {
         db.connectDB();
         Functions functions = new Functions();
         if (!functions.IsExistingID(textFieldValues, this.getName())){
-            System.out.println("Teachers ID provided does not exist!");
-            System.out.println("Cannot delete data from Teachers ID.");
+            System.out.println("Student ID provided does not exist!");
+            System.out.println("Cannot delete data from Student ID.");
             return;
         }
         SQL sqlObj = new SQL();
@@ -358,31 +611,182 @@ public class TeachersJFrame extends javax.swing.JFrame {
         String sql = sqlObj.getDeleteSQL(this.getName());
         db.executeUpdate(sql);
         sqlObj.GetResultSetSQL(this.getName(), teachers_table);
-        System.out.println("Teachers ID data deleted.");
+        System.out.println("Student ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
 
     private void teachers_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_teachers_tableMouseClicked
-        String Tid;
-        String Tname;
-        String Tdept;
-        String Taddr;
-        String Tcontact;
-        String Tstatus;
+        String studid;
+        String studname;
+        String studaddr;
+        String studcrs;
+        String studgender;
+        String yrlvl;
         
         int[] selectedRows = teachers_table.getSelectedRows();
-        Tid = teachers_table.getValueAt(selectedRows[0], 0).toString();
-        Tname = teachers_table.getValueAt(selectedRows[0], 1).toString();
-        Tdept = teachers_table.getValueAt(selectedRows[0], 2).toString();
-        Taddr = teachers_table.getValueAt(selectedRows[0], 3).toString();
-        Tcontact = teachers_table.getValueAt(selectedRows[0], 4).toString();
-        Tstatus = teachers_table.getValueAt(selectedRows[0], 5).toString();
-        id_textField.setText(Tid);
-        name_textField.setText(Tname);
-        dept_textField.setText(Tdept);
-        addr_textField.setText(Taddr);
-        contact_textField.setText(Tcontact);
-        status_textField.setText(Tstatus);
+        studid = teachers_table.getValueAt(selectedRows[0], 0).toString();
+        studname = teachers_table.getValueAt(selectedRows[0], 1).toString();
+        studaddr = teachers_table.getValueAt(selectedRows[0], 2).toString();
+        studcrs = teachers_table.getValueAt(selectedRows[0], 3).toString();
+        studgender = teachers_table.getValueAt(selectedRows[0], 4).toString();
+        yrlvl = teachers_table.getValueAt(selectedRows[0], 5).toString();
+        id_textField.setText(studid);
+        name_textField.setText(studname);
+        dept_textField.setText(studaddr);
+        addr_textField.setText(studcrs);
+        contact_textField.setText(studgender);
+        status_textField.setText(yrlvl);
     }//GEN-LAST:event_teachers_tableMouseClicked
+    
+    
+    FilterSQL filterSQL = new FilterSQL();
+    DB db = new DB();
+    SQL sqlObj = new SQL();
+    private String[] idFilter_values;
+    public void GetFilterSQL(){
+        
+        DefaultTableModel tableModel = (DefaultTableModel) teachers_table.getModel();
+        sqlObj.ClearJTable(tableModel);
+        
+        String filterString = "";
+         if(!idFilter_textField.getText().equals("")){
+            filterString = " WHERE studid " + idLogic_comboBox.getSelectedItem() + idFilter_textField.getText();
+        }
+        if(!nameFilterStart_textField.getText().equals("")){
+            if(idFilter_textField.getText().equals("")){    
+                filterString = String.format("WHERE studName like '%s%%'", nameFilterStart_textField.getText());
+            }else if(!nameFilterEnd_textField.getText().equals("")){
+                filterString += String.format(" %s studname like '%s%%'", id_comboBox.getSelectedItem(), nameFilterStart_textField.getText());
+            }else{
+                filterString += String.format(" %s studname like '%s%%'", id_comboBox.getSelectedItem(),nameFilterStart_textField.getText());
+            }
+            //filterString = " WHERE studName like '" + snameFilter.getText() + "%' ";
+        }
+        if(!nameFilterEnd_textField.getText().equals("")){
+            if(idFilter_textField.getText().equals("") && nameFilterStart_textField.getText().equals("")){
+                filterString = String.format("WHERE studName like '%%%s'", nameFilterEnd_textField.getText());
+            }else if(nameFilterStart_textField.getText().equals("")){
+                filterString += String.format(" %s studName like '%%%s'", id_comboBox.getSelectedItem(), nameFilterEnd_textField.getText());
+            }else if(!nameFilterStart_textField.getText().equals("") && idFilter_textField.getText().equals("")){
+                filterString += String.format(" AND studName like '$$$s'", nameFilterEnd_textField.getText());
+            }else{
+                filterString += String.format(" AND studName like '$$$s'", nameFilterEnd_textField.getText());
+            }
+            //filterString = " WHERE studName like '%" + nameFilterEnd_textField.getText() + "' ";
+        }
+        if(!deptFilter_textField.getText().equals("")){
+            if(idFilter_textField.getText().equals("") && nameFilterStart_textField.getText().equals("") && nameFilterEnd_textField.getText().equals("")){
+                filterString = String.format("WHERE studaddr like '%s%%'", deptFilter_textField.getText());
+            }else if(!addrFilterEnd_textField.getText().equals("")){
+                filterString += String.format(" %s studaddr like '%s%%'", name_comboBox.getSelectedItem(), deptFilter_textField.getText());
+            }else{
+                filterString += String.format(" %s studaddr like '%s%%'", name_comboBox.getSelectedItem(), deptFilter_textField.getText());
+            }
+            // = " WHERE studaddr like '" + addrFilterStart_textField.getText() + "%' ";
+        }
+        if(!addrFilterEnd_textField.getText().equals("")){
+            if(idFilter_textField.getText().equals("") && nameFilterStart_textField.getText().equals("") && nameFilterEnd_textField.getText().equals("") && deptFilter_textField.getText().equals("")){
+                filterString = String.format("WHERE studaddr like '%%%s'", addrFilterEnd_textField.getText());
+            }else if (deptFilter_textField.getText().equals("")){
+                filterString += String.format(" %s studaddr like '%%%s'", name_comboBox.getSelectedItem(), addrFilterEnd_textField.getText());
+            }else if (deptFilter_textField.getText().equals("") && idFilter_textField.getText().equals("") && nameFilterStart_textField.getText().equals("") && nameFilterEnd_textField.getText().equals("")){
+                filterString += String.format(" AND studaddr like '%%%s'", addrFilterEnd_textField.getText());
+            }else{
+                filterString += String.format(" AND studaddr like '%%%s'", addrFilterEnd_textField.getText());
+            }
+            //filterString = " WHERE studaddr like '%" + addrFilterEnd_textField.getText() + "' ";
+        }
+        if(!addrfilter_textField.getText().equals("")){
+            if(idFilter_textField.getText().equals("") && nameFilterStart_textField.getText().equals("") && nameFilterEnd_textField.getText().equals("") && deptFilter_textField.getText().equals("") && addrFilterEnd_textField.getText().equals("")){
+                filterString = String.format("WHERE studcrs like '%s%%'", addrfilter_textField.getText());
+            }else{
+                filterString += String.format(" %s studcrs like '%s%%'", addr_comboBox.getSelectedItem(), addrfilter_textField.getText());
+            }
+            //filterString = " WHERE studcrs='" + crsFilter_textField.getText() + "' ";
+        }
+        if(!teacherFilter_textField.getText().equals("")){
+            if(idFilter_textField.getText().equals("") && nameFilterStart_textField.getText().equals("") && nameFilterEnd_textField.getText().equals("") && deptFilter_textField.getText().equals("") && addrFilterEnd_textField.getText().equals("") && addrfilter_textField.getText().equals("")){
+                filterString = String.format("WHERE studGender like '%s%%'", teacherFilter_textField.getText());
+            }else{
+                filterString += String.format(" %s studGender like '%s%%'", contact_comboBox.getSelectedItem(), teacherFilter_textField.getText());
+            }   
+            //filterString = " WHERE studGender='" + genderFilter.getText() + "' ";
+        }
+        if(!statusFilter_textField.getText().equals("")){
+            if(idFilter_textField.getText().equals("") && nameFilterStart_textField.getText().equals("") && nameFilterEnd_textField.getText().equals("") && deptFilter_textField.getText().equals("") && addrFilterEnd_textField.getText().equals("") && addrfilter_textField.getText().equals("") && teacherFilter_textField.getText().equals("")){
+                filterString = String.format("WHERE yrlvl like '%s%%'", statusFilter_textField.getText());
+            }else{
+                filterString += String.format(" %s yrlvl like '%s%%'", status_comboBox.getSelectedItem(), statusFilter_textField.getText());
+            }
+            //filterString = " WHERE yrlvl='" + yearFilter_textField.getText() + "' ";
+        }
+        System.out.println(filterString);
+        db.connectDB();
+        db.executeQuery("SELECT * FROM Students " + filterString);
+        filterSQL.GetFiltered_ResultSetSQL(this.getName(), teachers_table, "SELECT * FROM Students " + filterString);
+        
+    }
+    
+    private void id_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_comboBoxActionPerformed
+        GetFilterSQL();
+       
+    }//GEN-LAST:event_id_comboBoxActionPerformed
+
+    private void idLogic_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idLogic_comboBoxActionPerformed
+        GetFilterSQL();
+    }//GEN-LAST:event_idLogic_comboBoxActionPerformed
+
+    private void idFilter_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idFilter_textFieldKeyPressed
+        GetFilterSQL();
+    }//GEN-LAST:event_idFilter_textFieldKeyPressed
+
+    private void dept_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dept_comboBoxActionPerformed
+        GetFilterSQL();
+    }//GEN-LAST:event_dept_comboBoxActionPerformed
+
+    private void deptFilter_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_deptFilter_textFieldKeyPressed
+        GetFilterSQL();
+    }//GEN-LAST:event_deptFilter_textFieldKeyPressed
+
+    private void name_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_comboBoxActionPerformed
+        GetFilterSQL();
+    }//GEN-LAST:event_name_comboBoxActionPerformed
+
+    private void addr_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addr_comboBoxActionPerformed
+        GetFilterSQL();
+    }//GEN-LAST:event_addr_comboBoxActionPerformed
+
+    private void addrfilter_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addrfilter_textFieldKeyPressed
+         GetFilterSQL();
+    }//GEN-LAST:event_addrfilter_textFieldKeyPressed
+
+    private void contact_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contact_comboBoxActionPerformed
+         GetFilterSQL();
+    }//GEN-LAST:event_contact_comboBoxActionPerformed
+
+    private void teacherFilter_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_teacherFilter_textFieldKeyPressed
+         GetFilterSQL();
+    }//GEN-LAST:event_teacherFilter_textFieldKeyPressed
+
+    private void status_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_status_comboBoxActionPerformed
+         GetFilterSQL();
+    }//GEN-LAST:event_status_comboBoxActionPerformed
+
+    private void statusFilter_textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_statusFilter_textFieldKeyPressed
+         GetFilterSQL();
+    }//GEN-LAST:event_statusFilter_textFieldKeyPressed
+
+    private void idFilter_textFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idFilter_textFieldKeyReleased
+         GetFilterSQL();
+       
+    }//GEN-LAST:event_idFilter_textFieldKeyReleased
+
+    private void nameFilterStart_textFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameFilterStart_textFieldKeyReleased
+         GetFilterSQL();
+    }//GEN-LAST:event_nameFilterStart_textFieldKeyReleased
+
+    private void nameFilterEnd_textFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameFilterEnd_textFieldKeyReleased
+         GetFilterSQL();
+    }//GEN-LAST:event_nameFilterEnd_textFieldKeyReleased
     public JTable GetJTable(){
         
         return teachers_table;
@@ -424,25 +828,49 @@ public class TeachersJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> addr_comboBox;
     private javax.swing.JTextField addr_textField;
+    private javax.swing.JTextField addrfilter_textField;
+    private javax.swing.JComboBox<String> contact_comboBox;
     private javax.swing.JTextField contact_textField;
     private javax.swing.JButton delete_button;
+    private javax.swing.JTextField deptFilter_textField;
+    private javax.swing.JComboBox<String> dept_comboBox;
     private javax.swing.JTextField dept_textField;
+    private javax.swing.JTextField idFilter_textField;
+    private javax.swing.JComboBox<String> idLogic_comboBox;
+    private javax.swing.JComboBox<String> id_comboBox;
     private javax.swing.JTextField id_textField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField nameFilterEnd_textField;
+    private javax.swing.JTextField nameFilterStart_textField;
+    private javax.swing.JComboBox<String> name_comboBox;
     private javax.swing.JTextField name_textField;
     private javax.swing.JButton save_button;
+    private javax.swing.JTextField statusFilter_textField;
+    private javax.swing.JComboBox<String> status_comboBox;
     private javax.swing.JTextField status_textField;
     private javax.swing.JMenuItem students_item;
     private javax.swing.JMenuItem subjects_item;
+    private javax.swing.JTextField teacherFilter_textField;
     private javax.swing.JMenuItem teachers_item;
     private javax.swing.JTable teachers_table;
     private javax.swing.JButton update_button;

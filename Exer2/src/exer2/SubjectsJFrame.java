@@ -607,7 +607,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         }
         
         if(!codeFilter_textField.getText().equals("")){
-            if(idFilter_textField.getText().equals("") && descFilterEnd_textField.getText().equals("") && descFilterStart_textField.getText().equals("")){
+            if(idFilter_textField.getText().equals("") && descFilterStart_textField.getText().equals("") && descFilterEnd_textField.getText().equals("")){
                 filterString = String.format("WHERE subjode like '%s%%'", codeFilter_textField.getText());
             }else{
                 filterString += String.format(" %s subjode like '%s%%'", code_comboBox.getSelectedItem(), codeFilter_textField.getText());
@@ -615,31 +615,31 @@ public class SubjectsJFrame extends javax.swing.JFrame {
             //filterString = " WHERE subOde='" + code.getText() + "' ";
         }
         
-        if(!descFilterEnd_textField.getText().equals("")){
-            if(idFilter_textField.getText().equals("")){
-                filterString = String.format("WHERE subjdesc like '%s%%'", descFilterEnd_textField.getText());
-            }else if(!descFilterStart_textField.getText().equals("")){
-                filterString += String.format(" %s subjdesc like '%s%%'", desc_comboBox.getSelectedItem(), descFilterEnd_textField.getText());
-            }else{
-                filterString += String.format(" %s subjdesc like '%s%%'", desc_comboBox.getSelectedItem(), descFilterEnd_textField.getText());
-            }
-            //filterString = " WHERE studName like '" + snameFilter.getText() + "%' ";
-        }
         if(!descFilterStart_textField.getText().equals("")){
-            if(idFilter_textField.getText().equals("") && descFilterEnd_textField.getText().equals("")){
-                filterString = String.format("WHERE subjdesc like '%%%s'", descFilterStart_textField.getText());
-            }else if(descFilterEnd_textField.getText().equals("")){
-                filterString += String.format(" %s subjdesc like '%%%s'", desc_comboBox.getSelectedItem(), descFilterStart_textField.getText());
-            }else if(!descFilterEnd_textField.getText().equals("") && idFilter_textField.getText().equals("")){
-                filterString += String.format(" AND subjdesc like '$$$s'", descFilterStart_textField.getText());
+            if(idFilter_textField.getText().equals("")){
+                filterString = String.format("WHERE subjdesc like '%s%%'", descFilterStart_textField.getText());
+            }else if(!descFilterEnd_textField.getText().equals("")){
+                filterString += String.format(" %s subjdesc like '%s%%'", desc_comboBox.getSelectedItem(), descFilterStart_textField.getText());
             }else{
-                filterString += String.format(" AND subjdesc like '$$$s'", descFilterStart_textField.getText());
+                filterString += String.format(" %s subjdesc like '%s%%'", desc_comboBox.getSelectedItem(), descFilterStart_textField.getText());
             }
-            //filterString = " WHERE studName like '%" + enameFilter.getText() + "' ";
+            //filterString = " WHERE studName like '" + descFilterStart_textField.getText() + "%' ";
+        }
+        if(!descFilterEnd_textField.getText().equals("")){
+            if(idFilter_textField.getText().equals("") && descFilterStart_textField.getText().equals("")){
+                filterString = String.format("WHERE subjdesc like '%%%s'", descFilterEnd_textField.getText());
+            }else if(descFilterStart_textField.getText().equals("")){
+                filterString += String.format(" %s subjdesc like '%%%s'", desc_comboBox.getSelectedItem(), descFilterEnd_textField.getText());
+            }else if(!descFilterStart_textField.getText().equals("") && idFilter_textField.getText().equals("")){
+                filterString += String.format(" AND subjdesc like '$$$s'", descFilterEnd_textField.getText());
+            }else{
+                filterString += String.format(" AND subjdesc like '$$$s'", descFilterEnd_textField.getText());
+            }
+            //filterString = " WHERE studName like '%" + descFilterEnd_textField.getText() + "' ";
         }
         
         if(!unitsFilter_textField.getText().equals("")){
-            if(idFilter_textField.getText().equals("") && descFilterEnd_textField.getText().equals("") && descFilterStart_textField.getText().equals("") && codeFilter_textField.getText().equals("")){
+            if(idFilter_textField.getText().equals("") && descFilterStart_textField.getText().equals("") && descFilterEnd_textField.getText().equals("") && codeFilter_textField.getText().equals("")){
                 filterString = String.format("WHERE subjunits='%s'", unitsFilter_textField.getText());
             }else{
                 filterString += String.format(" %s subjunits='%s'", units_comboBox.getSelectedItem(), unitsFilter_textField.getText());
@@ -647,7 +647,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
             //filterString = " WHERE studGender='" + unitsFilter.getText() + "' ";
         }
         if(!schedFilter_textField.getText().equals("")){
-            if(idFilter_textField.getText().equals("") && descFilterEnd_textField.getText().equals("") && descFilterStart_textField.getText().equals("") && codeFilter_textField.getText().equals("") && unitsFilter_textField.getText().equals("")){
+            if(idFilter_textField.getText().equals("") && descFilterStart_textField.getText().equals("") && descFilterEnd_textField.getText().equals("") && codeFilter_textField.getText().equals("") && unitsFilter_textField.getText().equals("")){
                 filterString = String.format("WHERE subjsched like '%s%%'", schedFilter_textField.getText());
             }else{
                 filterString += String.format(" %s subjsched like '%s%%'", sched_comboBox.getSelectedItem(), schedFilter_textField.getText());
