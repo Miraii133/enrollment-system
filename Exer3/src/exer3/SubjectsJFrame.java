@@ -455,19 +455,19 @@ public class SubjectsJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void students_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_students_itemActionPerformed
-             this.setVisible(false);
+             
              StudentsJFrame studentsFrame = new StudentsJFrame();
              studentsFrame.setVisible(true);
     }//GEN-LAST:event_students_itemActionPerformed
 
     private void subjects_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjects_itemActionPerformed
-             this.setVisible(false);
+             
              SubjectsJFrame subjectsFrame = new SubjectsJFrame();
              subjectsFrame.setVisible(true);
     }//GEN-LAST:event_subjects_itemActionPerformed
 
     private void teachers_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teachers_itemActionPerformed
-             this.setVisible(false);
+             
              TeachersJFrame teachersFrame = new TeachersJFrame();
              teachersFrame.setVisible(true);
     }//GEN-LAST:event_teachers_itemActionPerformed

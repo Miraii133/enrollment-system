@@ -4,10 +4,7 @@
  */
 package exer3;
 
-/**
- *
- * @author jiyo
- */
+
 public class Assign {
     
 }
