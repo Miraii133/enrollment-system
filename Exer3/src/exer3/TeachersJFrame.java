@@ -558,6 +558,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
             DB db = new DB();
             db.connectDB();
         // checks if ID is a valid id    
+        // so code can insert it to DB.
         // checks if ID provided already exists
         // so code can insert it to DB.
         if (functions.IsANumber(functions.getTextFieldValues(textFieldValues), this.getName())){

@@ -253,6 +253,45 @@ import java.util.List;
        return deleteSQL;
     }
     
+    public void sampleSQL(JTable jtableName){
+  
+          DB db = new DB();
+        db.connectDB();
+        String dbName;
+        String searchQuery = 
+                "SELECT Students.studid, Students.studname, Students.studaddr, Students.studcrs, Students.studgender, Students.yrlvl FROM Students, Subjects, Enroll WHERE Enroll.subjid=Subjects.subjid AND Students.studid=Enroll.studid AND Enroll.subjid=1;";
+        try {
+             db.setStatement(db.getConn().createStatement());
+            // update refers to the statement that is going to modify
+            // the database.
+            
+            ResultSet resultSet = db.getStatement().executeQuery(searchQuery);
+            DefaultTableModel tableModel = (DefaultTableModel) jtableName.getModel();
+            ClearJTable(tableModel);
+            
+        
+             while (resultSet.next()){
+                String id = resultSet.getString("studid");
+                String name = resultSet.getString("studname");
+                String address = resultSet.getString("studaddr");
+                String course = resultSet.getString("studcrs");
+                String gender = resultSet.getString("studgender");
+                String yrlvl = resultSet.getString("yrlvl");
+                String array[] = {id, name, address, course, gender, yrlvl};
+                // adds array to table row
+                 tableModel.addRow(array);
+                /*for(String data:array){  
+                resultData.add(data);
+                }*/
+                
+            
+    }
+        }  catch (SQLException ex ){
+            System.out.println("Cant get result set");
+           
+            ex.printStackTrace();
+        }
+    }
     
     public void GetResultSetSQL(String frameName, JTable jtableName){
         

@@ -26,6 +26,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         initComponents();
         SQL sql = new SQL();
         sql.GetResultSetSQL(this.getName(), students_table);
+        sql.sampleSQL(enrolledSubj_table);
     }
     
     
@@ -85,7 +86,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         addrFilterEnd_textField = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        students_table2 = new javax.swing.JTable();
+        enrolledSubj_table = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -413,7 +414,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
 
         jLabel18.setText("Enrolled Subjects");
 
-        students_table2.setModel(new javax.swing.table.DefaultTableModel(
+        enrolledSubj_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -436,18 +437,18 @@ public class StudentsJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        students_table2.addMouseListener(new java.awt.event.MouseAdapter() {
+        enrolledSubj_table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                students_table2MouseClicked(evt);
+                enrolledSubj_tableMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(students_table2);
-        if (students_table2.getColumnModel().getColumnCount() > 0) {
-            students_table2.getColumnModel().getColumn(0).setResizable(false);
-            students_table2.getColumnModel().getColumn(1).setResizable(false);
-            students_table2.getColumnModel().getColumn(2).setResizable(false);
-            students_table2.getColumnModel().getColumn(3).setResizable(false);
-            students_table2.getColumnModel().getColumn(4).setResizable(false);
+        jScrollPane3.setViewportView(enrolledSubj_table);
+        if (enrolledSubj_table.getColumnModel().getColumnCount() > 0) {
+            enrolledSubj_table.getColumnModel().getColumn(0).setResizable(false);
+            enrolledSubj_table.getColumnModel().getColumn(1).setResizable(false);
+            enrolledSubj_table.getColumnModel().getColumn(2).setResizable(false);
+            enrolledSubj_table.getColumnModel().getColumn(3).setResizable(false);
+            enrolledSubj_table.getColumnModel().getColumn(4).setResizable(false);
         }
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -546,8 +547,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
                                 .addComponent(address_textField))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(49, 49, 49)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
@@ -897,9 +897,9 @@ public class StudentsJFrame extends javax.swing.JFrame {
         year_textField.setText(yrlvl);
     }//GEN-LAST:event_students_tableMouseClicked
 
-    private void students_table2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_students_table2MouseClicked
+    private void enrolledSubj_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enrolledSubj_tableMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_students_table2MouseClicked
+    }//GEN-LAST:event_enrolledSubj_tableMouseClicked
     public JTable GetJTable(){
         
         return students_table;
@@ -948,6 +948,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField crsFilter_textField;
     private javax.swing.JComboBox<String> crs_comboBox;
     private javax.swing.JButton delete_button;
+    private javax.swing.JTable enrolledSubj_table;
     private javax.swing.JTextField genderFilter_textField;
     private javax.swing.JComboBox<String> gender_comboBox;
     private javax.swing.JTextField gender_textField;
@@ -988,7 +989,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
     private javax.swing.JButton save_button;
     private javax.swing.JMenuItem students_item;
     private javax.swing.JTable students_table;
-    private javax.swing.JTable students_table2;
     private javax.swing.JMenuItem subjects_item;
     private javax.swing.JMenuItem teachers_item;
     private javax.swing.JButton update_button;
