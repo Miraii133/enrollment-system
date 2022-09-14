@@ -83,6 +83,8 @@ public class TeachersJFrame extends javax.swing.JFrame {
         addrFilterEnd_textField = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        teachers_table1 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         students_item = new javax.swing.JMenuItem();
@@ -315,11 +317,10 @@ public class TeachersJFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(idFilter_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel13)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(statusFilter_textField, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(103, 103, 103)
-                            .addComponent(status_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(statusFilter_textField)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addComponent(status_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(contactFilter_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(id_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
@@ -408,6 +409,44 @@ public class TeachersJFrame extends javax.swing.JFrame {
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
+        teachers_table1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tid", "Tname", "Tdept", "Taddr", "Tcontact", "Tstatus"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        teachers_table1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                teachers_table1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(teachers_table1);
+        if (teachers_table1.getColumnModel().getColumnCount() > 0) {
+            teachers_table1.getColumnModel().getColumn(0).setResizable(false);
+            teachers_table1.getColumnModel().getColumn(1).setResizable(false);
+            teachers_table1.getColumnModel().getColumn(2).setResizable(false);
+            teachers_table1.getColumnModel().getColumn(3).setResizable(false);
+            teachers_table1.getColumnModel().getColumn(4).setResizable(false);
+            teachers_table1.getColumnModel().getColumn(5).setResizable(false);
+        }
+
         jMenu1.setText("Menu");
 
         students_item.setText("Students");
@@ -472,7 +511,9 @@ public class TeachersJFrame extends javax.swing.JFrame {
                             .addComponent(contact_textField)
                             .addComponent(status_textField))))
                 .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
@@ -514,9 +555,12 @@ public class TeachersJFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(32, Short.MAX_VALUE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addGap(70, 70, 70)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
         );
 
         pack();
@@ -800,6 +844,10 @@ public class TeachersJFrame extends javax.swing.JFrame {
     private void statusFilter_textFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_statusFilter_textFieldKeyReleased
         GetFilterSQL();
     }//GEN-LAST:event_statusFilter_textFieldKeyReleased
+
+    private void teachers_table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_teachers_table1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_teachers_table1MouseClicked
     public JTable GetJTable(){
         
         return teachers_table;
@@ -877,6 +925,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField nameFilterEnd_textField;
     private javax.swing.JTextField nameFilterStart_textField;
     private javax.swing.JComboBox<String> name_comboBox;
@@ -889,6 +938,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem subjects_item;
     private javax.swing.JMenuItem teachers_item;
     private javax.swing.JTable teachers_table;
+    private javax.swing.JTable teachers_table1;
     private javax.swing.JButton update_button;
     // End of variables declaration//GEN-END:variables
 }
