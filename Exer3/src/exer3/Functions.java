@@ -364,7 +364,7 @@ import java.util.List;
             ex.printStackTrace();
         }
     }
-    
+    // Primary table in jframe
     public void GetResultSetSQL(String frameName, JTable jtableName){
         
         
@@ -372,10 +372,12 @@ import java.util.List;
         db.connectDB();
         String dbName;
         String searchQuery = "";
+        String unitsQuery ="";
         // changes searchQuery
         if (frameName.equalsIgnoreCase("studentsJFrame")){
             dbName = "Students";
             searchQuery = "SELECT * FROM " + dbName;
+            unitsQuery = "";
         }
         
         else if (frameName.equalsIgnoreCase("subjectsJFrame")){
@@ -396,19 +398,37 @@ import java.util.List;
             ClearJTable(tableModel);
             
          if (frameName.equalsIgnoreCase("studentsJFrame")){
-             while (resultSet.next()){
-                String id = resultSet.getString("studid");
+              String id = resultSet.getString("studid");
                 String name = resultSet.getString("studname");
                 String address = resultSet.getString("studaddr");
                 String course = resultSet.getString("studcrs");
                 String gender = resultSet.getString("studgender");
                 String yearLevel = resultSet.getString("yrlvl");
-                String array[] = {id, name, address, course, gender, yearLevel};
+                String array[] = new String[7];
                 // adds array to table row
-                 tableModel.addRow(array);
-                /*for(String data:array){  
-                resultData.add(data);
-                }*/
+             while (resultSet.next()){
+                array[0] = id;
+                array[1] = name;
+                array[2] = address;
+                array[3] = course;
+                array[4] = gender;
+                array[5] = yearLevel;
+                try {
+             db.setStatement(db.getConn().createStatement());
+            // update refers to the statement that is going to modify
+            // the database.
+            
+            resultSet = db.getStatement().executeQuery(unitsQuery);
+            String units = resultSet.getString("units");
+            array[6] = units;
+            
+            tableModel.addRow(array);
+                } catch (SQLException ex ){
+            System.out.println("Cant get result set");
+           
+            ex.printStackTrace();
+        }
+                
                 
             }
         }

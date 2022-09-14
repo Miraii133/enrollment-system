@@ -114,14 +114,14 @@ public class TeachersJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tid", "Tname", "Tdept", "Taddr", "Tcontact", "Tstatus"
+                "Tid", "Tname", "Tdept", "Taddr", "Tcontact", "Tstatus", "Assigned"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -144,7 +144,8 @@ public class TeachersJFrame extends javax.swing.JFrame {
             teachers_table.getColumnModel().getColumn(2).setResizable(false);
             teachers_table.getColumnModel().getColumn(3).setResizable(false);
             teachers_table.getColumnModel().getColumn(4).setResizable(false);
-            teachers_table.getColumnModel().getColumn(5).setHeaderValue("Tstatus");
+            teachers_table.getColumnModel().getColumn(5).setResizable(false);
+            teachers_table.getColumnModel().getColumn(6).setResizable(false);
         }
 
         save_button.setText("Save");
