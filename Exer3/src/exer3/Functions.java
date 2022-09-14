@@ -292,6 +292,78 @@ import java.util.List;
             ex.printStackTrace();
         }
     }
+    // Gets secondary table result Set
+    public void GetSecondaryResultSetSQL(String frameName, JTable jtableName, String selectedid){
+         DB db = new DB();
+        db.connectDB();
+        String dbName;
+        String searchQuery = "";
+        if (frameName.equalsIgnoreCase("studentsJFrame")){
+            searchQuery = "SELECT Enroll.studid, Subjects.subjid, Subjects.subjode, Subjects.subjdesc, Subjects.subjunits, Subjects.subjsched FROM Enroll, Subjects, Students WHERE Enroll.subjid=Subjects.subjid AND Students.studid=Enroll.studid AND Students.studid=" + selectedid;
+        }
+        
+        else if (frameName.equalsIgnoreCase("subjectsJFrame")){
+            searchQuery = "SELECT Students.studid, Students.studname, Students.studaddr, Students.studcrs, Students.studgender, Students.yrlvl FROM Students, Subjects, Enroll WHERE Enroll.subjid=Subjects.subjid AND Students.studid=Enroll.studid AND Enroll.subjid=" + selectedid;
+        }
+        else if (frameName.equalsIgnoreCase("teachersJFrame")){
+            searchQuery = "SELECT Subjects.subjid, Subjects.subjode, Subjects.subjdesc, Subjects.subjunits, Subjects.subjsched FROM Teachers, Subjects, Assign WHERE Assign.subjid=Subjects.subjid AND Teachers.Tid=Assign.Tid AND Teachers.Tid=" + selectedid;
+        } 
+        
+        try {
+             db.setStatement(db.getConn().createStatement());
+            // update refers to the statement that is going to modify
+            // the database.
+            
+            ResultSet resultSet = db.getStatement().executeQuery(searchQuery);
+            DefaultTableModel tableModel = (DefaultTableModel) jtableName.getModel();
+            ClearJTable(tableModel);
+            
+        if (frameName.equalsIgnoreCase("studentsJFrame")){
+             while (resultSet.next()){
+                String id = resultSet.getString("subjid");
+                String name = resultSet.getString("subjode");
+                String address = resultSet.getString("subjdesc");
+                String course = resultSet.getString("subjunits");
+                String gender = resultSet.getString("subjsched");
+                String array[] = {id, name, address, course, gender};
+                // adds array to table row
+                 tableModel.addRow(array);
+              
+             }
+    }
+        else if (frameName.equalsIgnoreCase("subjectsJFrame")){
+             while (resultSet.next()){
+                String id = resultSet.getString("studid");
+                String name = resultSet.getString("studname");
+                String address = resultSet.getString("studaddr");
+                String course = resultSet.getString("studcrs");
+                String gender = resultSet.getString("studgender");
+                String yrlvl = resultSet.getString("yrlvl");
+                String array[] = {id, name, address, course, gender, yrlvl};
+                // adds array to table row
+                 tableModel.addRow(array);
+              
+             }
+    }
+        else if (frameName.equalsIgnoreCase("teachersJFrame")){
+             while (resultSet.next()){
+                String id = resultSet.getString("subjid");
+                String name = resultSet.getString("subjode");
+                String address = resultSet.getString("subjdesc");
+                String course = resultSet.getString("subjunits");
+                String gender = resultSet.getString("subjsched");
+                String array[] = {id, name, address, course, gender};
+                // adds array to table row
+                 tableModel.addRow(array);
+              
+             }
+    }
+        }  catch (SQLException ex ){
+            System.out.println("Cant get result set");
+           
+            ex.printStackTrace();
+        }
+    }
     
     public void GetResultSetSQL(String frameName, JTable jtableName){
         

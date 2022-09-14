@@ -84,7 +84,8 @@ public class TeachersJFrame extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        teachers_table1 = new javax.swing.JTable();
+        assignsubjects_table = new javax.swing.JTable();
+        jLabel18 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         students_item = new javax.swing.JMenuItem();
@@ -143,7 +144,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
             teachers_table.getColumnModel().getColumn(2).setResizable(false);
             teachers_table.getColumnModel().getColumn(3).setResizable(false);
             teachers_table.getColumnModel().getColumn(4).setResizable(false);
-            teachers_table.getColumnModel().getColumn(5).setResizable(false);
+            teachers_table.getColumnModel().getColumn(5).setHeaderValue("Tstatus");
         }
 
         save_button.setText("Save");
@@ -409,19 +410,19 @@ public class TeachersJFrame extends javax.swing.JFrame {
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        teachers_table1.setModel(new javax.swing.table.DefaultTableModel(
+        assignsubjects_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Tid", "Tname", "Tdept", "Taddr", "Tcontact", "Tstatus"
+                "subjid", "subjode", "subjdesc", "subjunits", "subjsched"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -432,20 +433,21 @@ public class TeachersJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        teachers_table1.addMouseListener(new java.awt.event.MouseAdapter() {
+        assignsubjects_table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                teachers_table1MouseClicked(evt);
+                assignsubjects_tableMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(teachers_table1);
-        if (teachers_table1.getColumnModel().getColumnCount() > 0) {
-            teachers_table1.getColumnModel().getColumn(0).setResizable(false);
-            teachers_table1.getColumnModel().getColumn(1).setResizable(false);
-            teachers_table1.getColumnModel().getColumn(2).setResizable(false);
-            teachers_table1.getColumnModel().getColumn(3).setResizable(false);
-            teachers_table1.getColumnModel().getColumn(4).setResizable(false);
-            teachers_table1.getColumnModel().getColumn(5).setResizable(false);
+        jScrollPane2.setViewportView(assignsubjects_table);
+        if (assignsubjects_table.getColumnModel().getColumnCount() > 0) {
+            assignsubjects_table.getColumnModel().getColumn(0).setResizable(false);
+            assignsubjects_table.getColumnModel().getColumn(1).setResizable(false);
+            assignsubjects_table.getColumnModel().getColumn(2).setResizable(false);
+            assignsubjects_table.getColumnModel().getColumn(3).setResizable(false);
+            assignsubjects_table.getColumnModel().getColumn(4).setResizable(false);
         }
+
+        jLabel18.setText("Assigned Subjects");
 
         jMenu1.setText("Menu");
 
@@ -510,56 +512,62 @@ public class TeachersJFrame extends javax.swing.JFrame {
                             .addComponent(addr_textField, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                             .addComponent(contact_textField)
                             .addComponent(status_textField))))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel18)
+                        .addGap(160, 160, 160)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(id_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(name_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel18)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(dept_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(addr_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(contact_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(status_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(save_button)
-                            .addComponent(update_button)
-                            .addComponent(delete_button)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addGap(70, 70, 70)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(id_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(name_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(dept_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(addr_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(contact_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(status_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(save_button)
+                    .addComponent(update_button)
+                    .addComponent(delete_button))
                 .addContainerGap())
         );
 
@@ -684,7 +692,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
         sqlObj.GetResultSetSQL(this.getName(), teachers_table);
         System.out.println("Student ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
-
+    static String selected_teacherid;
     private void teachers_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_teachers_tableMouseClicked
         String teacherid;
         String teachername;
@@ -701,11 +709,14 @@ public class TeachersJFrame extends javax.swing.JFrame {
         teachercontact = teachers_table.getValueAt(selectedRows[0], 4).toString();
         teacherstatus = teachers_table.getValueAt(selectedRows[0], 5).toString();
         id_textField.setText(teacherid);
+        selected_teacherid = teacherid;
         name_textField.setText(teachername);
         dept_textField.setText(teacherdept);
         addr_textField.setText(teacheraddr);
         contact_textField.setText(teachercontact);
         status_textField.setText(teacherstatus);
+        SQL sql = new SQL();
+        sql.GetSecondaryResultSetSQL(this.getName(), assignsubjects_table, selected_teacherid);
     }//GEN-LAST:event_teachers_tableMouseClicked
     
     
@@ -845,9 +856,9 @@ public class TeachersJFrame extends javax.swing.JFrame {
         GetFilterSQL();
     }//GEN-LAST:event_statusFilter_textFieldKeyReleased
 
-    private void teachers_table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_teachers_table1MouseClicked
+    private void assignsubjects_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignsubjects_tableMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_teachers_table1MouseClicked
+    }//GEN-LAST:event_assignsubjects_tableMouseClicked
     public JTable GetJTable(){
         
         return teachers_table;
@@ -893,6 +904,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField addrFilterStart_textField;
     private javax.swing.JComboBox<String> addr_comboBox;
     private javax.swing.JTextField addr_textField;
+    private javax.swing.JTable assignsubjects_table;
     private javax.swing.JTextField contactFilter_textField;
     private javax.swing.JComboBox<String> contact_comboBox;
     private javax.swing.JTextField contact_textField;
@@ -913,6 +925,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -938,7 +951,6 @@ public class TeachersJFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem subjects_item;
     private javax.swing.JMenuItem teachers_item;
     private javax.swing.JTable teachers_table;
-    private javax.swing.JTable teachers_table1;
     private javax.swing.JButton update_button;
     // End of variables declaration//GEN-END:variables
 }

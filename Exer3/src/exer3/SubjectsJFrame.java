@@ -77,7 +77,8 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         codeFilter_textField = new javax.swing.JTextField();
         descFilterEnd_textField = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        subjects_table1 = new javax.swing.JTable();
+        classlist_table = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         students_item = new javax.swing.JMenuItem();
@@ -104,14 +105,14 @@ public class SubjectsJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "subjid", "subjode", "subjdesc", "subjunits", "subjsched"
+                "subjid", "subjode", "subjdesc", "subjunits", "subjsched", "enrolled"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -134,6 +135,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
             subjects_table.getColumnModel().getColumn(2).setResizable(false);
             subjects_table.getColumnModel().getColumn(3).setResizable(false);
             subjects_table.getColumnModel().getColumn(4).setResizable(false);
+            subjects_table.getColumnModel().getColumn(5).setResizable(false);
         }
 
         save_button.setText("Save");
@@ -347,19 +349,19 @@ public class SubjectsJFrame extends javax.swing.JFrame {
                 .addContainerGap(88, Short.MAX_VALUE))
         );
 
-        subjects_table1.setModel(new javax.swing.table.DefaultTableModel(
+        classlist_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "subjid", "subjode", "subjdesc", "subjunits", "subjsched"
+                "studid", "studname", "studaddr", "studcrs", "studgender", "yrlvl"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -370,19 +372,22 @@ public class SubjectsJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        subjects_table1.addMouseListener(new java.awt.event.MouseAdapter() {
+        classlist_table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                subjects_table1MouseClicked(evt);
+                classlist_tableMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(subjects_table1);
-        if (subjects_table1.getColumnModel().getColumnCount() > 0) {
-            subjects_table1.getColumnModel().getColumn(0).setResizable(false);
-            subjects_table1.getColumnModel().getColumn(1).setResizable(false);
-            subjects_table1.getColumnModel().getColumn(2).setResizable(false);
-            subjects_table1.getColumnModel().getColumn(3).setResizable(false);
-            subjects_table1.getColumnModel().getColumn(4).setResizable(false);
+        jScrollPane2.setViewportView(classlist_table);
+        if (classlist_table.getColumnModel().getColumnCount() > 0) {
+            classlist_table.getColumnModel().getColumn(0).setResizable(false);
+            classlist_table.getColumnModel().getColumn(1).setResizable(false);
+            classlist_table.getColumnModel().getColumn(2).setResizable(false);
+            classlist_table.getColumnModel().getColumn(3).setResizable(false);
+            classlist_table.getColumnModel().getColumn(4).setResizable(false);
+            classlist_table.getColumnModel().getColumn(5).setResizable(false);
         }
+
+        jLabel6.setText("Class List");
 
         jMenu1.setText("Menu");
 
@@ -420,36 +425,41 @@ public class SubjectsJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(28, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(save_button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(update_button)
-                        .addGap(12, 12, 12)
-                        .addComponent(delete_button))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ode_textField, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                            .addComponent(id_textField)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(desc_textField)
-                            .addComponent(units_textField, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                            .addComponent(sched_textField))))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(save_button)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(update_button)
+                                .addGap(12, 12, 12)
+                                .addComponent(delete_button))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addGap(43, 43, 43)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ode_textField, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                                    .addComponent(id_textField)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3))
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(desc_textField)
+                                    .addComponent(units_textField, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                                    .addComponent(sched_textField))))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(221, 221, 221)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
@@ -461,7 +471,9 @@ public class SubjectsJFrame extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                        .addGap(48, 48, 48)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addGap(13, 13, 13)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
@@ -613,7 +625,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         sqlObj.GetResultSetSQL(this.getName(), subjects_table);
         System.out.println("Student ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
-
+    static String selected_subjid;
     private void subjects_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subjects_tableMouseClicked
         String subjid;
         String subjode;
@@ -623,6 +635,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         
         int[] selectedRows = subjects_table.getSelectedRows();
         subjid = subjects_table.getValueAt(selectedRows[0], 0).toString();
+        selected_subjid = subjid;
         subjode = subjects_table.getValueAt(selectedRows[0], 1).toString();
         subjdesc = subjects_table.getValueAt(selectedRows[0], 2).toString();
         subjunits = subjects_table.getValueAt(selectedRows[0], 3).toString();
@@ -632,6 +645,8 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         desc_textField.setText(subjdesc);
         units_textField.setText(subjunits);
         sched_textField.setText(subjsched);
+        SQL sql = new SQL();
+        sql.GetSecondaryResultSetSQL(this.getName(), classlist_table, selected_subjid);
     }//GEN-LAST:event_subjects_tableMouseClicked
     
     
@@ -754,9 +769,9 @@ public class SubjectsJFrame extends javax.swing.JFrame {
          GetFilterSQL();
     }//GEN-LAST:event_schedFilter_textFieldKeyReleased
 
-    private void subjects_table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subjects_table1MouseClicked
+    private void classlist_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_classlist_tableMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_subjects_table1MouseClicked
+    }//GEN-LAST:event_classlist_tableMouseClicked
     public JTable GetJTable(){
         
         return subjects_table;
@@ -798,6 +813,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable classlist_table;
     private javax.swing.JTextField codeFilter_textField;
     private javax.swing.JComboBox<String> code_comboBox;
     private javax.swing.JButton delete_button;
@@ -819,6 +835,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -835,7 +852,6 @@ public class SubjectsJFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem students_item;
     private javax.swing.JMenuItem subjects_item;
     private javax.swing.JTable subjects_table;
-    private javax.swing.JTable subjects_table1;
     private javax.swing.JMenuItem teachers_item;
     private javax.swing.JTextField unitsFilter_textField;
     private javax.swing.JComboBox<String> units_comboBox;

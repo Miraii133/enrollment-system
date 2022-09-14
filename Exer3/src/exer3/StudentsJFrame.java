@@ -419,7 +419,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "subjid", "subjcode", "subjdesc", "subjunits", "subjsched"
+                "subjid", "subjode", "subjdesc", "subjunits", "subjsched"
             }
         ) {
             Class[] types = new Class [] {
@@ -874,6 +874,9 @@ public class StudentsJFrame extends javax.swing.JFrame {
         GetFilterSQL();
     }//GEN-LAST:event_yearFilter_textFieldKeyReleased
 
+    // variable to know which id is selected in the table
+    // to be used for passing id to secondary table
+    static String selected_studid;
     private void students_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_students_tableMouseClicked
         String studid;
         String studname;
@@ -881,9 +884,10 @@ public class StudentsJFrame extends javax.swing.JFrame {
         String studcrs;
         String studgender;
         String yrlvl;
-
+        
         int[] selectedRows = students_table.getSelectedRows();
         studid = students_table.getValueAt(selectedRows[0], 0).toString();
+        selected_studid = studid;
         studname = students_table.getValueAt(selectedRows[0], 1).toString();
         studaddr = students_table.getValueAt(selectedRows[0], 2).toString();
         studcrs = students_table.getValueAt(selectedRows[0], 3).toString();
@@ -895,6 +899,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
         course_textField.setText(studcrs);
         gender_textField.setText(studgender);
         year_textField.setText(yrlvl);
+        SQL sql = new SQL();
+        sql.GetSecondaryResultSetSQL(this.getName(), enrolledSubj_table, selected_studid);
     }//GEN-LAST:event_students_tableMouseClicked
 
     private void enrolledSubj_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enrolledSubj_tableMouseClicked
