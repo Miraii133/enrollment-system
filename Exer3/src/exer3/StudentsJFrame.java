@@ -88,8 +88,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         enrolledSubj_table = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        enrollAdd_button = new javax.swing.JButton();
+        enrollDrop_button = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         students_item = new javax.swing.JMenuItem();
@@ -453,9 +453,19 @@ public class StudentsJFrame extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton1.setText("Add");
+        enrollAdd_button.setText("Add");
+        enrollAdd_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enrollAdd_buttonActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Drop");
+        enrollDrop_button.setText("Drop");
+        enrollDrop_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enrollDrop_buttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -464,17 +474,17 @@ public class StudentsJFrame extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(enrollDrop_button)
+                    .addComponent(enrollAdd_button))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jButton1)
+                .addComponent(enrollAdd_button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(enrollDrop_button)
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -906,6 +916,17 @@ public class StudentsJFrame extends javax.swing.JFrame {
     private void enrolledSubj_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enrolledSubj_tableMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_enrolledSubj_tableMouseClicked
+
+    private void enrollAdd_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollAdd_buttonActionPerformed
+       System.out.println("here" + selected_studid);
+       System.out.println("subject" + SubjectsJFrame.selected_subjid);
+       Enroll enroll = new Enroll();
+       enroll.InsertSQLToEnroll(selected_studid, SubjectsJFrame.selected_subjid);
+    }//GEN-LAST:event_enrollAdd_buttonActionPerformed
+
+    private void enrollDrop_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollDrop_buttonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_enrollDrop_buttonActionPerformed
     public JTable GetJTable(){
         
         return students_table;
@@ -954,6 +975,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField crsFilter_textField;
     private javax.swing.JComboBox<String> crs_comboBox;
     private javax.swing.JButton delete_button;
+    private javax.swing.JButton enrollAdd_button;
+    private javax.swing.JButton enrollDrop_button;
     private javax.swing.JTable enrolledSubj_table;
     private javax.swing.JTextField genderFilter_textField;
     private javax.swing.JComboBox<String> gender_comboBox;
@@ -962,8 +985,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> idLogic_comboBox;
     private javax.swing.JComboBox<String> id_comboBox;
     private javax.swing.JTextField id_textField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -625,7 +625,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         sqlObj.GetResultSetSQL(this.getName(), subjects_table);
         System.out.println("Student ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
-    static String selected_subjid;
+    public static String selected_subjid;
     private void subjects_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subjects_tableMouseClicked
         String subjid;
         String subjode;
