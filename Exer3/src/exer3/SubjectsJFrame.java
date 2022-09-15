@@ -85,7 +85,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         subjects_item = new javax.swing.JMenuItem();
         teachers_item = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Subjects Menu");
         setName("subjectsJFrame"); // NOI18N
         setResizable(false);

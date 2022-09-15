@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -84,11 +85,11 @@ public class TeachersJFrame extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        assignsubjects_table = new javax.swing.JTable();
+        assignSubj_table = new javax.swing.JTable();
         jLabel18 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        assignAdd_button = new javax.swing.JButton();
+        assignDrop_button = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         students_item = new javax.swing.JMenuItem();
@@ -414,7 +415,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        assignsubjects_table.setModel(new javax.swing.table.DefaultTableModel(
+        assignSubj_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -437,27 +438,37 @@ public class TeachersJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        assignsubjects_table.addMouseListener(new java.awt.event.MouseAdapter() {
+        assignSubj_table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                assignsubjects_tableMouseClicked(evt);
+                assignSubj_tableMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(assignsubjects_table);
-        if (assignsubjects_table.getColumnModel().getColumnCount() > 0) {
-            assignsubjects_table.getColumnModel().getColumn(0).setResizable(false);
-            assignsubjects_table.getColumnModel().getColumn(1).setResizable(false);
-            assignsubjects_table.getColumnModel().getColumn(2).setResizable(false);
-            assignsubjects_table.getColumnModel().getColumn(3).setResizable(false);
-            assignsubjects_table.getColumnModel().getColumn(4).setResizable(false);
+        jScrollPane2.setViewportView(assignSubj_table);
+        if (assignSubj_table.getColumnModel().getColumnCount() > 0) {
+            assignSubj_table.getColumnModel().getColumn(0).setResizable(false);
+            assignSubj_table.getColumnModel().getColumn(1).setResizable(false);
+            assignSubj_table.getColumnModel().getColumn(2).setResizable(false);
+            assignSubj_table.getColumnModel().getColumn(3).setResizable(false);
+            assignSubj_table.getColumnModel().getColumn(4).setResizable(false);
         }
 
         jLabel18.setText("Assigned Subjects");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton1.setText("Add");
+        assignAdd_button.setText("Add");
+        assignAdd_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignAdd_buttonActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Drop");
+        assignDrop_button.setText("Drop");
+        assignDrop_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignDrop_buttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -466,17 +477,17 @@ public class TeachersJFrame extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(assignDrop_button)
+                    .addComponent(assignAdd_button))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jButton1)
+                .addComponent(assignAdd_button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(assignDrop_button)
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -547,8 +558,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
                                     .addComponent(status_textField)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(77, 77, 77)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
@@ -731,7 +741,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
         sqlObj.GetResultSetSQL(this.getName(), teachers_table);
         System.out.println("Student ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
-    static String selected_teacherid;
+    public static String selected_teacherid;
     private void teachers_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_teachers_tableMouseClicked
         String teacherid;
         String teachername;
@@ -755,7 +765,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
         contact_textField.setText(teachercontact);
         status_textField.setText(teacherstatus);
         SQL sql = new SQL();
-        sql.GetSecondaryResultSetSQL(this.getName(), assignsubjects_table, selected_teacherid);
+        sql.GetSecondaryResultSetSQL(this.getName(), assignSubj_table, selected_teacherid);
     }//GEN-LAST:event_teachers_tableMouseClicked
     
     
@@ -894,10 +904,36 @@ public class TeachersJFrame extends javax.swing.JFrame {
     private void statusFilter_textFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_statusFilter_textFieldKeyReleased
         GetFilterSQL();
     }//GEN-LAST:event_statusFilter_textFieldKeyReleased
+    static String selected_assignsubjid;
+    private void assignSubj_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignSubj_tableMouseClicked
+        String subjid; 
+        int[] selectedRows = assignSubj_table.getSelectedRows();
+        subjid = assignSubj_table.getValueAt(selectedRows[0], 0).toString();
+        selected_assignsubjid = subjid;
+    }//GEN-LAST:event_assignSubj_tableMouseClicked
 
-    private void assignsubjects_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignsubjects_tableMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_assignsubjects_tableMouseClicked
+    private void assignAdd_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignAdd_buttonActionPerformed
+
+         TeachersJFrame teachersJFrame = new TeachersJFrame();
+       int confirmAdd = JOptionPane.showConfirmDialog(teachersJFrame,"Assign SubjectID: " + SubjectsJFrame.selected_subjid + " to TeacherID: " + selected_teacherid);
+       if (confirmAdd == JOptionPane.YES_OPTION){
+           Assign assign = new Assign();
+           assign.InsertSQLToAssign(selected_teacherid, SubjectsJFrame.selected_subjid, this.getName(), teachers_table, assignSubj_table);
+           JOptionPane.showMessageDialog(teachersJFrame, "Successfully assigned.");
+       }
+      
+    }//GEN-LAST:event_assignAdd_buttonActionPerformed
+
+    private void assignDrop_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignDrop_buttonActionPerformed
+        
+         TeachersJFrame teachersJFrame = new TeachersJFrame();
+       int confirmAdd = JOptionPane.showConfirmDialog(teachersJFrame,"Remove SubjectID: " + selected_assignsubjid + " to TeacherID: " + selected_teacherid);
+       if (confirmAdd == JOptionPane.YES_OPTION){
+           Assign assign = new Assign();
+           assign.DeleteSQLToAssign(selected_teacherid, selected_assignsubjid, this.getName(), teachers_table, assignSubj_table);
+           JOptionPane.showMessageDialog(teachersJFrame, "Successfully dropped.");
+       }
+    }//GEN-LAST:event_assignDrop_buttonActionPerformed
     public JTable GetJTable(){
         
         return teachers_table;
@@ -943,7 +979,9 @@ public class TeachersJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField addrFilterStart_textField;
     private javax.swing.JComboBox<String> addr_comboBox;
     private javax.swing.JTextField addr_textField;
-    private javax.swing.JTable assignsubjects_table;
+    private javax.swing.JButton assignAdd_button;
+    private javax.swing.JButton assignDrop_button;
+    private javax.swing.JTable assignSubj_table;
     private javax.swing.JTextField contactFilter_textField;
     private javax.swing.JComboBox<String> contact_comboBox;
     private javax.swing.JTextField contact_textField;
@@ -955,8 +993,6 @@ public class TeachersJFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> idLogic_comboBox;
     private javax.swing.JComboBox<String> id_comboBox;
     private javax.swing.JTextField id_textField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
