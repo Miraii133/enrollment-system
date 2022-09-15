@@ -342,12 +342,10 @@ import java.util.List;
         }
         
         else if (frameName.equalsIgnoreCase("subjectsJFrame")){
-            dbName = "Subjects";
-            searchQuery = "SELECT * FROM " + dbName;
+            searchQuery = "SELECT Subjects.subjid as id, Subjects.subjode, Subjects.subjdesc, Subjects.subjunits, Subjects.subjsched, (SELECT COUNT(Subjects.subjid) from Enroll, Subjects WHERE Subjects.subjid=Enroll.subjid AND Enroll.subjid=id) AS enrolled FROM Subjects";
         }
         else if (frameName.equalsIgnoreCase("teachersJFrame")){
-            dbName = "Teachers";
-            searchQuery = "SELECT * FROM " + dbName;
+            searchQuery = "SELECT Teachers.Tid as id, Teachers.Tname, Teachers.Tdept, Teachers.Taddr, Teachers.Tcontact, Teachers.Tstatus, (SELECT COUNT(Teachers.Tid) from Assign, Teachers, Subjects WHERE Teachers.Tid=Assign.Tid AND Assign.subjid=Subjects.subjid AND Assign.Tid=id) AS assigned FROM Teachers";
         } 
         try {
              db.setStatement(db.getConn().createStatement());
@@ -379,10 +377,7 @@ import java.util.List;
                 array[5] = yearLevel;
                 array[6] = units;
              
-            
-            
-            
-            
+
              tableModel.addRow(array);
              
             }
@@ -394,39 +389,54 @@ import java.util.List;
         
         else if (frameName.equalsIgnoreCase("subjectsJFrame")){
             
-            while (resultSet.next()){
-                String id = resultSet.getString("subjid");
-                String code = resultSet.getString("subjode");
-                String desc = resultSet.getString("subjdesc");
-                String units = resultSet.getString("subjunits");
-                String sched = resultSet.getString("subjsched");
-                String array[] = {id, code, desc, units, sched};
+             String array[] = new String[6];
+             while(resultSet.next()){
+                 
+                String id = resultSet.getString("id");
+                String subjode = resultSet.getString("subjode");
+                String subjdesc = resultSet.getString("subjdesc");
+                String subjunits = resultSet.getString("subjunits");
+                String subjsched = resultSet.getString("subjsched");
+                String enrolled = resultSet.getString("enrolled");
                 
                 // adds array to table row
-                 tableModel.addRow(array);
-                /*for(String data:array){  
-                resultData.add(data);
-                }*/
-                
+                array[0] = id;
+                array[1] = subjode;
+                array[2] = subjdesc;
+                array[3] = subjunits;
+                array[4] = subjsched;
+                array[5] = enrolled;
+             
+
+             tableModel.addRow(array);
+             
             }
         }
         else if (frameName.equalsIgnoreCase("teachersJFrame")){
             
-             while (resultSet.next()){
-                String id = resultSet.getString("Tid");
+           String array[] = new String[7];
+             while(resultSet.next()){
+                 
+                String id = resultSet.getString("id");
                 String name = resultSet.getString("Tname");
                 String dept = resultSet.getString("Tdept");
                 String addr = resultSet.getString("Taddr");
                 String contact = resultSet.getString("Tcontact");
                 String status = resultSet.getString("Tstatus");
-                String array[] = {id, name, dept, addr, contact, status};
+                String assigned = resultSet.getString("assigned");
                 
                 // adds array to table row
-                 tableModel.addRow(array);
-                /*for(String data:array){  
-                resultData.add(data);
-                }*/
-                
+                array[0] = id;
+                array[1] = name;
+                array[2] = dept;
+                array[3] = addr;
+                array[4] = contact;
+                array[5] = status;
+                array[6] = assigned;
+             
+
+             tableModel.addRow(array);
+             
             }
         } 
             
