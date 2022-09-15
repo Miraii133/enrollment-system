@@ -253,45 +253,7 @@ import java.util.List;
        return deleteSQL;
     }
     
-    public void sampleSQL(JTable jtableName){
-  
-          DB db = new DB();
-        db.connectDB();
-        String dbName;
-        String searchQuery = 
-                "SELECT Students.studid, Students.studname, Students.studaddr, Students.studcrs, Students.studgender, Students.yrlvl FROM Students, Subjects, Enroll WHERE Enroll.subjid=Subjects.subjid AND Students.studid=Enroll.studid AND Enroll.subjid=1;";
-        try {
-             db.setStatement(db.getConn().createStatement());
-            // update refers to the statement that is going to modify
-            // the database.
-            
-            ResultSet resultSet = db.getStatement().executeQuery(searchQuery);
-            DefaultTableModel tableModel = (DefaultTableModel) jtableName.getModel();
-            ClearJTable(tableModel);
-            
-        
-             while (resultSet.next()){
-                String id = resultSet.getString("studid");
-                String name = resultSet.getString("studname");
-                String address = resultSet.getString("studaddr");
-                String course = resultSet.getString("studcrs");
-                String gender = resultSet.getString("studgender");
-                String yrlvl = resultSet.getString("yrlvl");
-                String array[] = {id, name, address, course, gender, yrlvl};
-                // adds array to table row
-                 tableModel.addRow(array);
-                /*for(String data:array){  
-                resultData.add(data);
-                }*/
-                
-            
-    }
-        }  catch (SQLException ex ){
-            System.out.println("Cant get result set");
-           
-            ex.printStackTrace();
-        }
-    }
+    
     // Gets secondary table result Set
     public void GetSecondaryResultSetSQL(String frameName, JTable jtableName, String selectedid){
          DB db = new DB();
@@ -375,9 +337,8 @@ import java.util.List;
         String unitsQuery ="";
         // changes searchQuery
         if (frameName.equalsIgnoreCase("studentsJFrame")){
-            dbName = "Students";
-            searchQuery = "SELECT * FROM " + dbName;
-            unitsQuery = "";
+            searchQuery = "SELECT studid as id, studname as name, studaddr as addr, studcrs as crs, studgender as gender, yrlvl as yrlvl, (SELECT SUM(subjunits) from Students, Enroll, Subjects WHERE Students.studid=Enroll.studid AND Enroll.subjid=Subjects.subjid AND Enroll.studid=id) as units FROM Students";
+       
         }
         
         else if (frameName.equalsIgnoreCase("subjectsJFrame")){
@@ -398,40 +359,38 @@ import java.util.List;
             ClearJTable(tableModel);
             
          if (frameName.equalsIgnoreCase("studentsJFrame")){
-              String id = resultSet.getString("studid");
-                String name = resultSet.getString("studname");
-                String address = resultSet.getString("studaddr");
-                String course = resultSet.getString("studcrs");
-                String gender = resultSet.getString("studgender");
+              String array[] = new String[7];
+             while(resultSet.next()){
+                 
+                String id = resultSet.getString("id");
+                String name = resultSet.getString("name");
+                String address = resultSet.getString("addr");
+                String course = resultSet.getString("crs");
+                String gender = resultSet.getString("gender");
                 String yearLevel = resultSet.getString("yrlvl");
-                String array[] = new String[7];
+                String units = resultSet.getString("units");
+                
                 // adds array to table row
-             while (resultSet.next()){
                 array[0] = id;
                 array[1] = name;
                 array[2] = address;
                 array[3] = course;
                 array[4] = gender;
                 array[5] = yearLevel;
-                try {
-             db.setStatement(db.getConn().createStatement());
-            // update refers to the statement that is going to modify
-            // the database.
+                array[6] = units;
+             
             
-            resultSet = db.getStatement().executeQuery(unitsQuery);
-            String units = resultSet.getString("units");
-            array[6] = units;
             
-            tableModel.addRow(array);
-                } catch (SQLException ex ){
-            System.out.println("Cant get result set");
-           
-            ex.printStackTrace();
-        }
+            
+            
+             tableModel.addRow(array);
+             
+            }
                 
                 
             }
-        }
+        
+        
         
         else if (frameName.equalsIgnoreCase("subjectsJFrame")){
             

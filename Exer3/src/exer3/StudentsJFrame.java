@@ -26,7 +26,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         initComponents();
         SQL sql = new SQL();
         sql.GetResultSetSQL(this.getName(), students_table);
-        sql.sampleSQL(enrolledSubj_table);
+        //sql.sampleSQL(enrolledSubj_table);
     }
     
     
