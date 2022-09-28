@@ -987,8 +987,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
     private int nextYear = currentYear + 1;
     private void firstSem_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstSem_MenuActionPerformed
         DB db = new DB();
-        
-        template_createNewDB = template_createNewDB + currentYear + "_"+ nextYear;
+        template_createNewDB = template_createNewDB + "1st_sy" + currentYear + "_"+ nextYear;
         System.out.println(template_createNewDB);
         db.connectDB();
         // creates a new DB using concatenated string
