@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -981,25 +982,100 @@ public class StudentsJFrame extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(studentsJFrame, "Successfully dropped.");
        }
     }//GEN-LAST:event_enrollDrop_buttonActionPerformed
+    private void createDBTables(){
+  String transactionChargesSQL = new StringBuilder()
+  .append("CREATE TABLE summer_sy2022_2023.TransactionCharges (")
+  .append("transid int, ")
+  .append("department DECIMAL(15,2), ")
+  .append("subjunits DECIMAL(15,2), ")
+  .append("insurance DECIMAL(15,2), ")
+  .append("computer DECIMAL(15,2), ")
+  .append("laboratory DECIMAL(15,2), ")
+  .append("cultural DECIMAL(15,2), ")
+  .append("library DECIMAL(15,2), ")
+  .append("PRIMARY KEY (transid)) ")
+.toString();
+  System.out.println(transactionChargesSQL);
+  
+  String studentsSQL = new StringBuilder()
+  .append("CREATE TABLE summer_sy2022_2023.Students (")
+  .append("studid int, ")
+  .append("studname varchar(50), ")
+  .append("studaddr varchar(50), ")
+  .append("studcrs varchar(50), ")
+  .append("studgender varchar(50), ")
+  .append("yrlvl varchar(50), ")
+  .append("PRIMARY KEY (studid)) ")
+.toString();
+  System.out.println(studentsSQL);
+  
+   String subjectsSQL = new StringBuilder()
+  .append("CREATE TABLE summer_sy2022_2023.Subjects (")
+  .append("subjid int, ")
+  .append("subjode varchar(50), ")
+  .append("subjdesc varchar(50), ")
+  .append("subjunits varchar(50), ")
+  .append("subjsched varchar(50), ")
+  .append("PRIMARY KEY (subjid)) ")
+  .toString();
+  System.out.println(subjectsSQL);
+  
+  String teachersSQL = new StringBuilder()
+  .append("CREATE TABLE summer_sy2022_2023.Teachers (")
+  .append("Tid int, ")
+  .append("Tname varchar(50), ")
+  .append("Taddr varchar(50), ")
+  .append("Tcontact varchar(50), ")
+  .append("Tstatus varchar(50), ")
+  .append("PRIMARY KEY (Tid)) ")
+  .toString();
+  System.out.println(teachersSQL);
+  db.connectDB();
+  try {
+      db.getStatement().addBatch(studentsSQL);
+  }catch(SQLException ex) {
+      ex.printStackTrace();
+  }
+  
+  
+  
 
+
+
+    }
     private String template_createNewDB = "CREATE DATABASE ";
     private int currentYear = Calendar.getInstance().get(Calendar.YEAR);
     private int nextYear = currentYear + 1;
     private void firstSem_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstSem_MenuActionPerformed
+        createDBTables();
+        String createNewDB;
         DB db = new DB();
-        template_createNewDB = template_createNewDB + "1st_sy" + currentYear + "_"+ nextYear;
-        System.out.println(template_createNewDB);
+        createNewDB = template_createNewDB + "1st_sy" + currentYear + "_"+ nextYear;
+        System.out.println(createNewDB);
         db.connectDB();
         // creates a new DB using concatenated string
-        db.executeUpdate(template_createNewDB);
+        //db.executeUpdate(createNewDB);
     }//GEN-LAST:event_firstSem_MenuActionPerformed
 
     private void secondSem_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondSem_MenuActionPerformed
+        String createNewDB;
+        DB db = new DB();
+        createNewDB = template_createNewDB + "2nd_sy" + currentYear + "_"+ nextYear;
+        System.out.println(createNewDB);
+        db.connectDB();
+        // creates a new DB using concatenated string
+        db.executeUpdate(createNewDB);
         
     }//GEN-LAST:event_secondSem_MenuActionPerformed
 
     private void summer_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_summer_MenuActionPerformed
-        // TODO add your handling code here:
+        String createNewDB;
+        DB db = new DB();
+        createNewDB = template_createNewDB + "summer_sy" + currentYear + "_"+ nextYear;
+        System.out.println(createNewDB);
+        db.connectDB();
+        // creates a new DB using concatenated string
+        db.executeUpdate(createNewDB);
     }//GEN-LAST:event_summer_MenuActionPerformed
     public JTable GetJTable(){
         
