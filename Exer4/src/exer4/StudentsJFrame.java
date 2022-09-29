@@ -1032,7 +1032,19 @@ public class StudentsJFrame extends javax.swing.JFrame {
   System.out.println(teachersSQL);
   db.connectDB();
   try {
+      
+      
+      // creates a statement in order for getStatement
+      // to have an actual statement and not
+      // throw a nullexception
+      db.setStatement(db.getConn().createStatement());
+      // adds SQL string to batches in order
+      // to execute multiple sqls at the same time
       db.getStatement().addBatch(studentsSQL);
+      db.getStatement().addBatch(transactionChargesSQL);
+      db.getStatement().addBatch(subjectsSQL);
+      db.getStatement().addBatch(teachersSQL);
+      db.getStatement().executeBatch();
   }catch(SQLException ex) {
       ex.printStackTrace();
   }
