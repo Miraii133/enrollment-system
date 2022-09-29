@@ -995,7 +995,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
   .append("library DECIMAL(15,2), ")
   .append("PRIMARY KEY (transid)) ")
 .toString();
-  System.out.println(transactionChargesSQL);
   
   String studentsSQL = new StringBuilder()
   .append("CREATE TABLE summer_sy2022_2023.Students (")
@@ -1007,7 +1006,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
   .append("yrlvl varchar(50), ")
   .append("PRIMARY KEY (studid)) ")
 .toString();
-  System.out.println(studentsSQL);
   
    String subjectsSQL = new StringBuilder()
   .append("CREATE TABLE summer_sy2022_2023.Subjects (")
@@ -1018,7 +1016,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
   .append("subjsched varchar(50), ")
   .append("PRIMARY KEY (subjid)) ")
   .toString();
-  System.out.println(subjectsSQL);
   
   String teachersSQL = new StringBuilder()
   .append("CREATE TABLE summer_sy2022_2023.Teachers (")
@@ -1029,11 +1026,42 @@ public class StudentsJFrame extends javax.swing.JFrame {
   .append("Tstatus varchar(50), ")
   .append("PRIMARY KEY (Tid)) ")
   .toString();
-  System.out.println(teachersSQL);
+  
+   String gradesSQL = new StringBuilder()
+  .append("CREATE TABLE summer_sy2022_2023.Grades (")
+  .append("gradeid int, ")
+  .append("prelim varchar(50), ")
+  .append("midterm varchar(50), ")
+  .append("prefinal varchar(50), ")
+  .append("final varchar(50), ")
+  .append("PRIMARY KEY (gradeid)) ")
+  .toString();
+   System.out.println(gradesSQL);
+   
+   String enrollSQL = new StringBuilder()
+  .append("CREATE TABLE summer_sy2022_2023.Enroll (")
+  .append("eid int, ")
+  .append("studid int, ")
+  .append("subjid int, ")
+  .append("PRIMARY KEY (eid), ")
+  .append("FOREIGN KEY (`studid`) REFERENCES `Students`(`studid`),")
+  .append("FOREIGN KEY (`subjid`) REFERENCES `Subjects`(`subjid`))")
+  .toString();
+   System.out.println(enrollSQL);
+   
+   String enrollSQL = new StringBuilder()
+  .append("CREATE TABLE summer_sy2022_2023.Enroll (")
+  .append("eid int, ")
+  .append("studid int, ")
+  .append("subjid int, ")
+  .append("PRIMARY KEY (eid), ")
+  .append("FOREIGN KEY (`studid`) REFERENCES `Students`(`studid`),")
+  .append("FOREIGN KEY (`subjid`) REFERENCES `Subjects`(`subjid`))")
+  .toString();
+   
+   
   db.connectDB();
   try {
-      
-      
       // creates a statement in order for getStatement
       // to have an actual statement and not
       // throw a nullexception
@@ -1041,9 +1069,9 @@ public class StudentsJFrame extends javax.swing.JFrame {
       // adds SQL string to batches in order
       // to execute multiple sqls at the same time
       db.getStatement().addBatch(studentsSQL);
-      db.getStatement().addBatch(transactionChargesSQL);
       db.getStatement().addBatch(subjectsSQL);
       db.getStatement().addBatch(teachersSQL);
+      db.getStatement().addBatch(transactionChargesSQL);
       db.getStatement().executeBatch();
   }catch(SQLException ex) {
       ex.printStackTrace();
