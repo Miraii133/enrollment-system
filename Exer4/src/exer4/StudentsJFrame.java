@@ -983,18 +983,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_enrollDrop_buttonActionPerformed
     private void createDBTables(){
-  String transactionChargesSQL = new StringBuilder()
-  .append("CREATE TABLE summer_sy2022_2023.TransactionCharges (")
-  .append("transid int, ")
-  .append("department DECIMAL(15,2), ")
-  .append("subjunits DECIMAL(15,2), ")
-  .append("insurance DECIMAL(15,2), ")
-  .append("computer DECIMAL(15,2), ")
-  .append("laboratory DECIMAL(15,2), ")
-  .append("cultural DECIMAL(15,2), ")
-  .append("library DECIMAL(15,2), ")
-  .append("PRIMARY KEY (transid)) ")
-.toString();
+ 
   
   String studentsSQL = new StringBuilder()
   .append("CREATE TABLE summer_sy2022_2023.Students (")
@@ -1021,6 +1010,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
   .append("CREATE TABLE summer_sy2022_2023.Teachers (")
   .append("Tid int, ")
   .append("Tname varchar(50), ")
+  .append("Tdept varchar(50), ")
   .append("Taddr varchar(50), ")
   .append("Tcontact varchar(50), ")
   .append("Tstatus varchar(50), ")
@@ -1036,7 +1026,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
   .append("final varchar(50), ")
   .append("PRIMARY KEY (gradeid)) ")
   .toString();
-   System.out.println(gradesSQL);
    
    String enrollSQL = new StringBuilder()
   .append("CREATE TABLE summer_sy2022_2023.Enroll (")
@@ -1047,16 +1036,40 @@ public class StudentsJFrame extends javax.swing.JFrame {
   .append("FOREIGN KEY (`studid`) REFERENCES `Students`(`studid`),")
   .append("FOREIGN KEY (`subjid`) REFERENCES `Subjects`(`subjid`))")
   .toString();
-   System.out.println(enrollSQL);
    
-   String enrollSQL = new StringBuilder()
-  .append("CREATE TABLE summer_sy2022_2023.Enroll (")
-  .append("eid int, ")
-  .append("studid int, ")
-  .append("subjid int, ")
-  .append("PRIMARY KEY (eid), ")
-  .append("FOREIGN KEY (`studid`) REFERENCES `Students`(`studid`),")
+   String assignSQL = new StringBuilder()
+  .append("CREATE TABLE summer_sy2022_2023.Assign (")
+  .append("dateassigned Date, ")
+  .append("Tid int, ")
+  // UNIQUE removes duplicates
+  // since instruction restricts duplicate of studid
+  .append("subjid int UNIQUE, ")
+  .append("FOREIGN KEY (`Tid`) REFERENCES `Teachers`(`Tid`),")
   .append("FOREIGN KEY (`subjid`) REFERENCES `Subjects`(`subjid`))")
+  .toString();
+   
+  String transactionChargesSQL = new StringBuilder()
+  .append("CREATE TABLE summer_sy2022_2023.TransactionCharges (")
+  .append("transid int, ")
+  .append("department DECIMAL(15,2), ")
+  .append("subjunits DECIMAL(15,2), ")
+  .append("insurance DECIMAL(15,2), ")
+  .append("computer DECIMAL(15,2), ")
+  .append("laboratory DECIMAL(15,2), ")
+  .append("cultural DECIMAL(15,2), ")
+  .append("library DECIMAL(15,2), ")
+  .append("PRIMARY KEY (transid)) ")
+  .toString();
+   
+  String invoiceSQL = new StringBuilder()
+  .append("CREATE TABLE summer_sy2022_2023.Invoice (")
+  .append("dateassigned Date, ")
+  // UNIQUE removes duplicates
+  // since instruction restricts duplicate of studid
+  .append("studid int UNIQUE, ")
+  .append("transid int, ")
+  .append("FOREIGN KEY (`studid`) REFERENCES `Students`(`studid`),")
+  .append("FOREIGN KEY (`transid`) REFERENCES `TransactionCharges`(`transid`))")
   .toString();
    
    
