@@ -102,6 +102,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         firstSem_Menu = new javax.swing.JMenuItem();
         secondSem_Menu = new javax.swing.JMenuItem();
         summer_Menu = new javax.swing.JMenuItem();
+        delete_Menu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Students Menu");
@@ -549,6 +550,14 @@ public class StudentsJFrame extends javax.swing.JFrame {
         });
         jMenu2.add(summer_Menu);
 
+        delete_Menu.setText("Delete");
+        delete_Menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_MenuActionPerformed(evt);
+            }
+        });
+        jMenu2.add(delete_Menu);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -982,11 +991,26 @@ public class StudentsJFrame extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(studentsJFrame, "Successfully dropped.");
        }
     }//GEN-LAST:event_enrollDrop_buttonActionPerformed
-    private void createDBTables(){
- 
   
+  private final String template_createNewDB = "CREATE DATABASE ";
+  private final String template_createNewTable = "CREATE TABLE ";
+  private final int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+  private int nextYear = currentYear + 1;
+  private void createDBTables(String semesterInfo){
+      String tableSemName = "";
+      if (semesterInfo.equalsIgnoreCase("firstSem")){
+            tableSemName = template_createNewTable + "1st_sy" + currentYear + "_" + nextYear;
+      }
+      else if (semesterInfo.equalsIgnoreCase("secondSem")){
+            tableSemName = template_createNewTable + "2nd_sy" + currentYear + "_" + nextYear;
+      }
+      else if (semesterInfo.equalsIgnoreCase("summer")){
+            tableSemName = template_createNewTable + "summer_sy" + currentYear + "_" + nextYear;
+      }
   String studentsSQL = new StringBuilder()
-  .append("CREATE TABLE summer_sy2022_2023.Students (")
+  .append(tableSemName)
+  // .Students represents the name of the table
+  .append(".Students (")
   .append("studid int, ")
   .append("studname varchar(50), ")
   .append("studaddr varchar(50), ")
@@ -997,7 +1021,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
 .toString();
   
    String subjectsSQL = new StringBuilder()
-  .append("CREATE TABLE summer_sy2022_2023.Subjects (")
+  .append(tableSemName)
+  .append(".Subjects (")
   .append("subjid int, ")
   .append("subjode varchar(50), ")
   .append("subjdesc varchar(50), ")
@@ -1007,7 +1032,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
   .toString();
   
   String teachersSQL = new StringBuilder()
-  .append("CREATE TABLE summer_sy2022_2023.Teachers (")
+  .append(tableSemName)
+  .append(".Teachers (")
   .append("Tid int, ")
   .append("Tname varchar(50), ")
   .append("Tdept varchar(50), ")
@@ -1018,7 +1044,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
   .toString();
   
    String gradesSQL = new StringBuilder()
-  .append("CREATE TABLE summer_sy2022_2023.Grades (")
+  .append(tableSemName)
+  .append(".Grades (")
   .append("gradeid int, ")
   .append("prelim varchar(50), ")
   .append("midterm varchar(50), ")
@@ -1028,7 +1055,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
   .toString();
    
    String enrollSQL = new StringBuilder()
-  .append("CREATE TABLE summer_sy2022_2023.Enroll (")
+  .append(tableSemName)
+  .append(".Enroll (")
   .append("eid int, ")
   .append("studid int, ")
   .append("subjid int, ")
@@ -1038,7 +1066,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
   .toString();
    
    String assignSQL = new StringBuilder()
-  .append("CREATE TABLE summer_sy2022_2023.Assign (")
+  .append(tableSemName)
+  .append(".Assign (")
   .append("dateassigned Date, ")
   .append("Tid int, ")
   // UNIQUE removes duplicates
@@ -1049,7 +1078,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
   .toString();
    
   String transactionChargesSQL = new StringBuilder()
-  .append("CREATE TABLE summer_sy2022_2023.TransactionCharges (")
+  .append(tableSemName)
+  .append(".TransactionCharges (")
   .append("transid int, ")
   .append("department DECIMAL(15,2), ")
   .append("subjunits DECIMAL(15,2), ")
@@ -1062,7 +1092,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
   .toString();
    
   String invoiceSQL = new StringBuilder()
-  .append("CREATE TABLE summer_sy2022_2023.Invoice (")
+  .append(tableSemName)
+  .append(".Invoice (")
   .append("dateassigned Date, ")
   // UNIQUE removes duplicates
   // since instruction restricts duplicate of studid
@@ -1084,52 +1115,74 @@ public class StudentsJFrame extends javax.swing.JFrame {
       db.getStatement().addBatch(studentsSQL);
       db.getStatement().addBatch(subjectsSQL);
       db.getStatement().addBatch(teachersSQL);
+      db.getStatement().addBatch(gradesSQL);
+      db.getStatement().addBatch(enrollSQL);
+      db.getStatement().addBatch(assignSQL);
       db.getStatement().addBatch(transactionChargesSQL);
+      db.getStatement().addBatch(invoiceSQL);
       db.getStatement().executeBatch();
   }catch(SQLException ex) {
       ex.printStackTrace();
   }
   
-  
-  
-
-
-
     }
-    private String template_createNewDB = "CREATE DATABASE ";
-    private int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-    private int nextYear = currentYear + 1;
+  
     private void firstSem_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstSem_MenuActionPerformed
-        createDBTables();
         String createNewDB;
-        DB db = new DB();
         createNewDB = template_createNewDB + "1st_sy" + currentYear + "_"+ nextYear;
-        System.out.println(createNewDB);
         db.connectDB();
         // creates a new DB using concatenated string
-        //db.executeUpdate(createNewDB);
+        db.executeUpdate(createNewDB);
+        
+        String semesterInfo = "firstSem";
+        createDBTables(semesterInfo);
+        
+        
     }//GEN-LAST:event_firstSem_MenuActionPerformed
 
     private void secondSem_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondSem_MenuActionPerformed
         String createNewDB;
-        DB db = new DB();
         createNewDB = template_createNewDB + "2nd_sy" + currentYear + "_"+ nextYear;
-        System.out.println(createNewDB);
         db.connectDB();
         // creates a new DB using concatenated string
         db.executeUpdate(createNewDB);
+        String semesterInfo = "secondSem";
+        createDBTables(semesterInfo);
+        
+        
         
     }//GEN-LAST:event_secondSem_MenuActionPerformed
 
     private void summer_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_summer_MenuActionPerformed
         String createNewDB;
-        DB db = new DB();
         createNewDB = template_createNewDB + "summer_sy" + currentYear + "_"+ nextYear;
-        System.out.println(createNewDB);
         db.connectDB();
         // creates a new DB using concatenated string
         db.executeUpdate(createNewDB);
+        String semesterInfo = "summer";
+        createDBTables(semesterInfo);
+        
     }//GEN-LAST:event_summer_MenuActionPerformed
+    // for testing purposes only, remove in final
+    private void delete_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_MenuActionPerformed
+       db.connectDB();
+       String removeDB1 = "DROP DATABASE 1st_sy2022_2023";
+       String removeDB2 = "DROP DATABASE 2nd_sy2022_2023";
+       String removeDB3 = "DROP DATABASE summer_sy2022_2023";
+       try {
+      db.setStatement(db.getConn().createStatement());
+      db.getStatement().addBatch(removeDB1);
+      db.getStatement().addBatch(removeDB2);
+      db.getStatement().addBatch(removeDB3);
+      db.getStatement().executeBatch();
+       } catch(SQLException ex){
+      
+          ex.printStackTrace();
+   
+       }
+      
+       
+    }//GEN-LAST:event_delete_MenuActionPerformed
     public JTable GetJTable(){
         
         return students_table;
@@ -1177,6 +1230,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField course_textField;
     private javax.swing.JTextField crsFilter_textField;
     private javax.swing.JComboBox<String> crs_comboBox;
+    private javax.swing.JMenuItem delete_Menu;
     private javax.swing.JButton delete_button;
     private javax.swing.JButton enrollAdd_button;
     private javax.swing.JButton enrollDrop_button;
