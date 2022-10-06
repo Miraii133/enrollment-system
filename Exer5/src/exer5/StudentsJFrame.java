@@ -753,6 +753,19 @@ public class StudentsJFrame extends javax.swing.JFrame {
             System.out.println("Please use Save instead.");
     }//GEN-LAST:event_update_buttonActionPerformed
 
+    // checks if filterString in GetFilter returns an empty string
+    // or with fill
+    boolean IsFilterEmpty(String filterString){
+        return filterString.isBlank();
+    }
+    
+    
+  
+    // tells delete function to delete multiple
+    // ids instead of one
+    private void deleteIdFromFilter(){
+        
+    }
     
     private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
          String textFieldValues[] =  
@@ -769,6 +782,10 @@ public class StudentsJFrame extends javax.swing.JFrame {
             System.out.println("Cannot delete data from Student ID.");
             return;
         }
+        
+        
+        
+        
         SQL sqlObj = new SQL();
         sqlObj.setDeleteSQL(textFieldValues, this.getName());
         String sql = sqlObj.getDeleteSQL(this.getName());
@@ -782,7 +799,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
     DB db = new DB();
     SQL sqlObj = new SQL();
     private String[] idFilter_values;
-    public void GetFilterSQL(){
+    public String GetFilterSQL(){
         
         DefaultTableModel tableModel = (DefaultTableModel) students_table.getModel();
         sqlObj.ClearJTable(tableModel);
@@ -863,6 +880,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
         db.executeQuery("SELECT * FROM Students " + filterString);
         filterSQL.GetFiltered_ResultSetSQL(this.getName(), students_table, "SELECT * FROM Students " + filterString);
         
+        // checks if the String is Empty to determine deleting multiple Ids or a single Id
+        return filterString;
     }
     
     private void id_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_comboBoxActionPerformed

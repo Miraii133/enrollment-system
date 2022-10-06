@@ -24,7 +24,8 @@ public class Exer4 {
     public static void main(String[] args) {
        var loginJFrame = new LoginGUIJFrame();
        loginJFrame.setVisible(true);
-       
+       var studentsJFrame = new StudentsJFrame();
+       studentsJFrame.setVisible(true);
        
 
        }
