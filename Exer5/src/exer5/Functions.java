@@ -458,11 +458,7 @@ import java.util.List;
 
     class FilterSQL {
         SQL sqlObj = new SQL();
-        public void GetComponentValues(String[] componentValues, String frameName){
-           if (frameName.equalsIgnoreCase("studentsJFrame")){
-               
-           }
-        }
+        
         public void GetFiltered_ResultSetSQL(String frameName, JTable jtableName, String filterString){
         DB db = new DB();
         db.connectDB();
@@ -513,9 +509,9 @@ import java.util.List;
                  studentIdArray[loopCounter] = Integer.parseInt(id);
                  loopCounter++;
             }
-             for (int i = 0; i < studentIdArray.length; i++){
+             /*for (int i = 0; i < studentIdArray.length; i++){
                   System.out.println("ids" + studentIdArray[i]);
-             }
+             }*/
             
         }
         
