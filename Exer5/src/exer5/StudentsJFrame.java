@@ -768,7 +768,13 @@ public class StudentsJFrame extends javax.swing.JFrame {
     }
     
     private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
-         String textFieldValues[] =  
+        if (!IsFilterEmpty(GetFilterSQL())){
+            
+            
+            return;
+        }
+        
+        String textFieldValues[] =  
             {
             id_textField.getText(), name_textField.getText(),
             address_textField.getText(), course_textField.getText(), 
@@ -783,6 +789,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
             return;
         }
         
+        // checks if filterString from GetFilterSQL is empty
         
         
         
@@ -880,7 +887,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         db.executeQuery("SELECT * FROM Students " + filterString);
         filterSQL.GetFiltered_ResultSetSQL(this.getName(), students_table, "SELECT * FROM Students " + filterString);
         
-        // checks if the String is Empty to determine deleting multiple Ids or a single Id
+        // returns filterString for IsFilterEmpty
         return filterString;
     }
     

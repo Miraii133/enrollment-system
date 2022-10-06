@@ -464,7 +464,6 @@ import java.util.List;
            }
         }
         public void GetFiltered_ResultSetSQL(String frameName, JTable jtableName, String filterString){
-        
         DB db = new DB();
         db.connectDB();
         String dbName;
@@ -491,6 +490,16 @@ import java.util.List;
             sqlObj.ClearJTable(tableModel);
             
          if (frameName.equalsIgnoreCase("studentsJFrame")){
+             int totalRowsInResultSet = 0;
+             // retrieves the total amount of rows in the query to
+             // determine the studentIdArray size
+             if (resultSet.last()) {
+             totalRowsInResultSet = resultSet.getRow();
+             resultSet.beforeFirst(); 
+           }
+             int[] studentIdArray = new int[totalRowsInResultSet];
+             int loopCounter = 0;
+             
              while (resultSet.next()){
                 String id = resultSet.getString("studid");
                 String name = resultSet.getString("studname");
@@ -501,11 +510,13 @@ import java.util.List;
                 String array[] = {id, name, address, course, gender, yearLevel};
                 // adds array to table row
                  tableModel.addRow(array);
-                /*for(String data:array){  
-                resultData.add(data);
-                }*/
-                
+                 studentIdArray[loopCounter] = Integer.parseInt(id);
+                 loopCounter++;
             }
+             for (int i = 0; i < studentIdArray.length; i++){
+                  System.out.println("ids" + studentIdArray[i]);
+             }
+            
         }
         
         else if (frameName.equalsIgnoreCase("subjectsJFrame")){
