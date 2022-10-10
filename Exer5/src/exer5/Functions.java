@@ -457,21 +457,19 @@ import java.util.List;
     }
 
     class FilterSQL {
-        
-       
+       private int totalRowsInResultSet = 0;
+       private void SetTotalResultRows(int totalRows){
+           this.totalRowsInResultSet = totalRows;
+       }
+       public int GetTotalResultRows(){
+           return totalRowsInResultSet;
+       }
     
-        SQL sqlObj = new SQL();
-        
-        
-    
-        
+        SQL sqlObj = new SQL(); 
         public void GetFiltered_ResultSetSQL(String frameName, JTable jtableName, String filterString){
-            
         DB db = new DB();
         db.connectDB();
-        String dbName;
         String searchQuery = "";
-        int totalRowsInResultSet = 0;
         
         
         // changes searchQuery
@@ -486,8 +484,6 @@ import java.util.List;
         } 
         try {
              db.setStatement(db.getConn().createStatement());
-            // update refers to the statement that is going to modify
-            // the database.
             
             ResultSet resultSet = db.getStatement().executeQuery(searchQuery);
             DefaultTableModel tableModel = (DefaultTableModel) jtableName.getModel();
@@ -498,6 +494,7 @@ import java.util.List;
              // determine the studentIdArray size
              if (resultSet.last()) {
              totalRowsInResultSet = resultSet.getRow();
+             SetTotalResultRows(totalRowsInResultSet);
              resultSet.beforeFirst(); 
            }
              int[] studentIdArray = new int[totalRowsInResultSet];
@@ -513,19 +510,9 @@ import java.util.List;
                 String array[] = {id, name, address, course, gender, yearLevel};
                 // adds array to table row
                  tableModel.addRow(array);
-                 studentIdArray[loopCounter] = Integer.parseInt(id);
                  loopCounter++;
             }
-             /*for (int i = 0; i < studentIdArray.length; i++){
-                  System.out.println("ids" + studentIdArray[i]);
-             }*/
-             
-             // sends studentIdArray to getAllStudentId
-             // to be used by delete button multiple id from filters
-             var studentsJFrame = new StudentsJFrame();
-             studentsJFrame.getAllStudentId(studentIdArray);
-             studentsJFrame.SetTotalRows(totalRowsInResultSet);   
-             System.out.println("Total rows in result set: " + totalRowsInResultSet);
+           
         }
         
         else if (frameName.equalsIgnoreCase("subjectsJFrame")){

@@ -32,7 +32,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         //sql.sampleSQL(enrolledSubj_table);
     }
     
-    
+     FilterSQL filterSQL = new FilterSQL();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -732,12 +732,12 @@ public class StudentsJFrame extends javax.swing.JFrame {
             address_textField.getText(), course_textField.getText(), 
             gender_textField.getText(), year_textField.getText()};
         Functions functions = new Functions();
-        DB db = new DB();
+        
         db.connectDB();
 
         //Deletes row and replaces it with a new and updated one.
         // String update = "DELETE FROM Students WHERE studid='" + id + "'";
-        SQL sqlObj = new SQL();
+        
       
        if (functions.IsANumber(functions.getTextFieldValues(textFieldValues), this.getName())){
             if (functions.IsExistingID(functions.getTextFieldValues(textFieldValues), this.getName())){
@@ -763,8 +763,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
 
     
     private int totalRowsInResultSet = 0;
-    
-  
     public void SetTotalRows(int totalRowsInResultSet){
         this.totalRowsInResultSet = totalRowsInResultSet;
         
@@ -784,15 +782,14 @@ public class StudentsJFrame extends javax.swing.JFrame {
     
      
      
-     
+   
     private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
-       GetTotalRows();
-       System.out.println("Result when button is pressed:" + totalRowsInResultSet);
-        /* if (!IsFilterEmpty(GetFilterSQL())){
+       
+        if (!IsFilterEmpty(GetFilterSQL())){
             //
             print();
             return;
-        }*/
+        }
         
         String textFieldValues[] =  
             {
@@ -826,7 +823,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
     DB db = new DB();
     SQL sqlObj = new SQL();
     private String[] idFilter_values;
-    FilterSQL filterSQL = new FilterSQL();
+    
     public String GetFilterSQL(){
         
         
