@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package exer5;
+import java.sql.SQLException;
+import java.sql.ResultSet;
 
 /**
  *
@@ -31,7 +33,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         password_textField = new javax.swing.JTextField();
         userId_textField = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        dbSelector_comboBox = new javax.swing.JComboBox<>();
         login_button = new javax.swing.JButton();
         submit_button = new javax.swing.JButton();
 
@@ -45,10 +47,10 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
 
         jLabel3.setText("School Year");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "D" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        dbSelector_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "a" }));
+        dbSelector_comboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                dbSelector_comboBoxActionPerformed(evt);
             }
         });
 
@@ -77,7 +79,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(submit_button)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dbSelector_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(49, 49, 49)))
                 .addContainerGap(173, Short.MAX_VALUE))
         );
@@ -97,7 +99,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dbSelector_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addComponent(submit_button)
                 .addContainerGap(77, Short.MAX_VALUE))
@@ -105,10 +107,25 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    DB db = new DB();
+    private void dbSelector_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbSelector_comboBoxActionPerformed
+        db.connectDB();
+        try {
+            db.setStatement(db.getConn().createStatement());
+            ResultSet rs = db.getStatement().executeQuery("SHOW DATABASES");
+            System.out.println("List of databases: ");
+            while(rs.next()) {
+            System.out.print(rs.getString(1));
+            
+      }
+        } catch (SQLException ex){
+            System.out.println("Cannot retrieve query.");
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+        
+        
+    }//GEN-LAST:event_dbSelector_comboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,7 +163,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> dbSelector_comboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -699,8 +699,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
             gender_textField.getText(), year_textField.getText()};
        
             Functions functions = new Functions();
-            SQL sqlObj = new SQL();
-            DB db = new DB();
             db.connectDB();
         // checks if ID is a valid id    
         // checks if ID provided already exists
@@ -795,7 +793,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
             address_textField.getText(), course_textField.getText(), 
             gender_textField.getText(), year_textField.getText()};
         
-        DB db = new DB();
         db.connectDB();
         Functions functions = new Functions();
         if (!functions.IsExistingID(textFieldValues, this.getName())){
