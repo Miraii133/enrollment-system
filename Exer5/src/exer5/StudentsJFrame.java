@@ -761,11 +761,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
     }
  
 
-    
-
-     public void getAllStudentId(int[] studIdArray){
-
-    }
      
     
      
@@ -773,10 +768,22 @@ public class StudentsJFrame extends javax.swing.JFrame {
    
     private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
        
-        if (!IsFilterEmpty(GetFilterSQL())){        
+        if (!IsFilterEmpty(GetFilterSQL())){   
+            // provides empty textFieldValues for setDeleteSQL
+            // since delete requires textfieldValues
+            // but filter values is used instead
+            // to get deleteValues
+            
             for (int i = 0; i < filterSQL.GetStudentIdsFromResultSet().size(); i++){
-                System.out.println("value:" + filterSQL.GetStudentIdsFromResultSet().get(i));
+                String textFieldValues[] =  
+            {filterSQL.GetStudentIdsFromResultSet().get(i).toString(),"","","","",""};
+                // retrieves deleteSQL from new SQL set in setDeleteSQL
+                sqlObj.setDeleteSQL(textFieldValues, this.getName());
+                String deleteSQL = sqlObj.getDeleteSQL(this.getName());
+                db.executeUpdate(deleteSQL);
             }
+ 
+            sqlObj.GetResultSetSQL(this.getName(), students_table);
             filterSQL.ClearStudentIdsFromResultSet();
             
             return;

@@ -218,7 +218,7 @@ import java.util.List;
         if (!frameName.equalsIgnoreCase(functions.subjectsFrame.getName())){
             sixthFieldValue = textFieldValues[5];
         }
-        
+            
         // assigns the dbName so SQL is dynamic and
         // changes accordingly to which frame
         // is being called for the SQL
@@ -226,7 +226,7 @@ import java.util.List;
         if (frameName.equalsIgnoreCase(functions.studentsFrame.getName())){
             dbName = "Students";
                 deleteSQL = "DELETE FROM " + dbName +" WHERE studid=" + firstFieldValue;
-            
+            System.out.println(deleteSQL);
         }
         else if (frameName.equalsIgnoreCase(functions.subjectsFrame.getName())){
             dbName = "Subjects";
