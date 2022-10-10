@@ -458,11 +458,26 @@ import java.util.List;
 
     class FilterSQL {
        private int totalRowsInResultSet = 0;
+       
+    
        private void SetTotalResultRows(int totalRows){
            this.totalRowsInResultSet = totalRows;
        }
        public int GetTotalResultRows(){
            return totalRowsInResultSet;
+       }
+       
+       private List<Integer> studIdsList=new ArrayList<>();
+       private void SetStudentIdsFromResultSet(int studentIds){
+           this.studIdsList.add(studentIds);
+       }
+       
+       public List<Integer> GetStudentIdsFromResultSet(){
+           return studIdsList;
+       }
+       
+       public void ClearStudentIdsFromResultSet(){
+           this.studIdsList.clear();
        }
     
         SQL sqlObj = new SQL(); 
@@ -497,9 +512,14 @@ import java.util.List;
              SetTotalResultRows(totalRowsInResultSet);
              resultSet.beforeFirst(); 
            }
-             int[] studentIdArray = new int[totalRowsInResultSet];
-             int loopCounter = 0;
              
+             
+          
+             int counter = 0;
+             // Removes intitial values
+             // from when StudentJFrame SQL query for default
+             // display is loaded
+             ClearStudentIdsFromResultSet();
              while (resultSet.next()){
                 String id = resultSet.getString("studid");
                 String name = resultSet.getString("studname");
@@ -510,8 +530,12 @@ import java.util.List;
                 String array[] = {id, name, address, course, gender, yearLevel};
                 // adds array to table row
                  tableModel.addRow(array);
-                 loopCounter++;
+                 
+               
+                 SetStudentIdsFromResultSet(Integer.parseInt(id));
+                 counter++;
             }
+            
            
         }
         

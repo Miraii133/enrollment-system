@@ -762,18 +762,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
  
 
     
-    private int totalRowsInResultSet = 0;
-    public void SetTotalRows(int totalRowsInResultSet){
-        this.totalRowsInResultSet = totalRowsInResultSet;
-        
-    }
-    
-    public void GetTotalRows(){
-        System.out.println("Total result: " + totalRowsInResultSet);
-    }
-    
-    
-
 
      public void getAllStudentId(int[] studIdArray){
 
@@ -785,9 +773,12 @@ public class StudentsJFrame extends javax.swing.JFrame {
    
     private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
        
-        if (!IsFilterEmpty(GetFilterSQL())){
-            //
-            print();
+        if (!IsFilterEmpty(GetFilterSQL())){        
+            for (int i = 0; i < filterSQL.GetStudentIdsFromResultSet().size(); i++){
+                System.out.println("value:" + filterSQL.GetStudentIdsFromResultSet().get(i));
+            }
+            filterSQL.ClearStudentIdsFromResultSet();
+            
             return;
         }
         
