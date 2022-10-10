@@ -457,19 +457,27 @@ import java.util.List;
     }
 
     class FilterSQL {
+        
+       
+    
         SQL sqlObj = new SQL();
         
+        
+    
+        
         public void GetFiltered_ResultSetSQL(String frameName, JTable jtableName, String filterString){
+            
         DB db = new DB();
         db.connectDB();
         String dbName;
         String searchQuery = "";
+        int totalRowsInResultSet = 0;
+        
         
         // changes searchQuery
         if (frameName.equalsIgnoreCase("studentsJFrame")){
             searchQuery = filterString;
         }
-        
         else if (frameName.equalsIgnoreCase("subjectsJFrame")){
             searchQuery = filterString;
         }
@@ -486,7 +494,6 @@ import java.util.List;
             sqlObj.ClearJTable(tableModel);
             
          if (frameName.equalsIgnoreCase("studentsJFrame")){
-             int totalRowsInResultSet = 0;
              // retrieves the total amount of rows in the query to
              // determine the studentIdArray size
              if (resultSet.last()) {
@@ -512,7 +519,13 @@ import java.util.List;
              /*for (int i = 0; i < studentIdArray.length; i++){
                   System.out.println("ids" + studentIdArray[i]);
              }*/
-            
+             
+             // sends studentIdArray to getAllStudentId
+             // to be used by delete button multiple id from filters
+             var studentsJFrame = new StudentsJFrame();
+             studentsJFrame.getAllStudentId(studentIdArray);
+             studentsJFrame.SetTotalRows(totalRowsInResultSet);   
+             System.out.println("Total rows in result set: " + totalRowsInResultSet);
         }
         
         else if (frameName.equalsIgnoreCase("subjectsJFrame")){

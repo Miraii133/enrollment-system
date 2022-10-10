@@ -687,6 +687,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
              teachersFrame.setVisible(true);
     }//GEN-LAST:event_teachers_itemActionPerformed
 
+   
     
     
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
@@ -758,21 +759,40 @@ public class StudentsJFrame extends javax.swing.JFrame {
     boolean IsFilterEmpty(String filterString){
         return filterString.isBlank();
     }
+ 
+
     
+    private int totalRowsInResultSet = 0;
     
   
-    // tells delete function to delete multiple
-    // ids instead of one
-    private void deleteIdFromFilter(){
+    public void SetTotalRows(int totalRowsInResultSet){
+        this.totalRowsInResultSet = totalRowsInResultSet;
         
     }
     
+    public void GetTotalRows(){
+        System.out.println("Total result: " + totalRowsInResultSet);
+    }
+    
+    
+
+
+     public void getAllStudentId(int[] studIdArray){
+
+    }
+     
+    
+     
+     
+     
     private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
-        if (!IsFilterEmpty(GetFilterSQL())){
-            
-            
+       GetTotalRows();
+       System.out.println("Result when button is pressed:" + totalRowsInResultSet);
+        /* if (!IsFilterEmpty(GetFilterSQL())){
+            //
+            print();
             return;
-        }
+        }*/
         
         String textFieldValues[] =  
             {
@@ -802,11 +822,13 @@ public class StudentsJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_delete_buttonActionPerformed
     
     
-    FilterSQL filterSQL = new FilterSQL();
+    
     DB db = new DB();
     SQL sqlObj = new SQL();
     private String[] idFilter_values;
+    FilterSQL filterSQL = new FilterSQL();
     public String GetFilterSQL(){
+        
         
         DefaultTableModel tableModel = (DefaultTableModel) students_table.getModel();
         sqlObj.ClearJTable(tableModel);

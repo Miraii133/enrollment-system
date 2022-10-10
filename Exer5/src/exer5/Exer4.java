@@ -26,7 +26,6 @@ public class Exer4 {
        loginJFrame.setVisible(true);
        var studentsJFrame = new StudentsJFrame();
        studentsJFrame.setVisible(true);
-       
 
        }
        
