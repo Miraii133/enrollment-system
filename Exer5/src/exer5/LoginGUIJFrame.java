@@ -6,6 +6,7 @@ package exer5;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
@@ -48,14 +49,14 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
 
         jLabel3.setText("School Year");
 
-        dbSelector_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "a" }));
-        dbSelector_comboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dbSelector_comboBoxActionPerformed(evt);
-            }
-        });
+        dbSelector_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "School Year" }));
 
         submit_button.setText("Submit");
+        submit_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submit_buttonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Password:");
 
@@ -173,25 +174,19 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
     // information_schema, performance_schema
     // since DBs are shown to user but cannot access it anyways
     private boolean isSelectedToHideDB(String dbName){
-        List<String> hiddenDBs = Arrays.asList("One", "Two", "Three") 
-        hiddenDBs.contains("ba");
-        if (dbName.equalsIgnoreCase("information_schema")||
-            dbName.equalsIgnoreCase("performance_schema")||
-                // include enrollmentsystem for
-                // backup just in case something is needed here
-            dbName.equalsIgnoreCase("enrollmentsystem"))
+        // add to this list to hide DBs
+        List<String> hiddenDBs = Arrays.asList(
+                "information_schema", "performance_schema", "dummyDB",
+                "mysql", "sys"
+        ); 
+        
+        if (hiddenDBs.contains(dbName))
         {
             return true;
         }
         return false;
     }
-    
-    private void dbSelector_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbSelector_comboBoxActionPerformed
         
-        
-        
-    }//GEN-LAST:event_dbSelector_comboBoxActionPerformed
-    
     private void getLoginInfo(){                                         
         String userName = userId_textField.getText();
         db.setUser(userName);   
@@ -225,11 +220,22 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
          
             
         } catch (SQLException ex){
-            System.out.println("Cannot retrieve query.");
             System.out.println(ex.getMessage());
             ex.printStackTrace();
         }
+        
+        
     }//GEN-LAST:event_login_buttonActionPerformed
+     
+    private void submit_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submit_buttonActionPerformed
+       getLoginInfo();
+       db.setDBObject(db);
+       //db.setDBToConnect(dbSelector_comboBox.getSelectedItem().toString());
+      StudentsJFrame studentsJFrame = new StudentsJFrame();
+      studentsJFrame.setVisible(true);
+  
+       //studentsJFrame.setVisible(true);
+    }//GEN-LAST:event_submit_buttonActionPerformed
     
     /**
      * @param args the command line arguments

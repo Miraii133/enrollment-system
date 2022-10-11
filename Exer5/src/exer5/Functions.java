@@ -97,6 +97,8 @@ import java.util.List;
     
  }
     class SQL {
+        
+       
         // changes SQL depending on the frame that will use it.
         private String firstFieldValue = "";
         private String secondFieldValue;

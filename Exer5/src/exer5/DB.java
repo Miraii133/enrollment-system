@@ -22,6 +22,12 @@ public class DB {
     private String password  = "";
     private Connection conn = null;
     private Statement stmt = null;
+    
+    // initial DB will always be dummyDB
+    private String dbName = "dummyDB";
+    // db Object to be used by all other frames 
+    // and methods
+    private
     public String getURL(){
         return sqlURL;
     }
@@ -39,7 +45,6 @@ public class DB {
     public void setPassword(String password){
         this.password = password;
     }
-    
     public Connection getConn(){
         return conn;
     }
@@ -53,12 +58,28 @@ public class DB {
         this.stmt = stmt;
     }
     
+    // sets the Database to connect
+    // used for switching to other databases
+    public void setDBToConnect(String dbName){
+        this.dbName = dbName;
+    }
+    
+    public String getDBToConnect(){
+        return this.dbName;
+    }
+    
+    // stores instance of DB from LoginGUIFrame
+    // to pass to StudentsJFrame and others
+    public void setDBObject(Object dbObject){
+        
+    }
+    
     String sqlURL = new StringBuilder()
    .append("jdbc:mysql://localhost:3306/")
    // database to which the sql will
    // connect to. Used enrollmentsystem
     //as dummy DB to connect initially
-   .append("enrollmentsystem")
+   .append(getDBToConnect())
    .append("?useSSL=false&allowPublicKeyRetrieval=true")
    .toString();
     
