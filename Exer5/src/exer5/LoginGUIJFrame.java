@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -30,22 +31,20 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        password_textField = new javax.swing.JTextField();
-        userId_textField = new javax.swing.JTextField();
         dbSelector_comboBox = new javax.swing.JComboBox<>();
-        login_button = new javax.swing.JButton();
         submit_button = new javax.swing.JButton();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jLabel2 = new javax.swing.JLabel();
+        password_textField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        userId_textField = new javax.swing.JTextField();
+        jDesktopPane2 = new javax.swing.JDesktopPane();
+        login_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("loginJFrame"); // NOI18N
         setResizable(false);
-
-        jLabel1.setText("User ID:");
-
-        jLabel2.setText("Password:");
 
         jLabel3.setText("School Year");
 
@@ -56,9 +55,71 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
             }
         });
 
-        login_button.setText("Login");
-
         submit_button.setText("Submit");
+
+        jLabel2.setText("Password:");
+
+        jLabel1.setText("User ID:");
+
+        jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(password_textField, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(userId_textField, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addGap(48, 48, 48)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(userId_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(password_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(userId_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(password_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        login_button.setText("Login");
+        login_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login_buttonActionPerformed(evt);
+            }
+        });
+
+        jDesktopPane2.setLayer(login_button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jDesktopPane2Layout = new javax.swing.GroupLayout(jDesktopPane2);
+        jDesktopPane2.setLayout(jDesktopPane2Layout);
+        jDesktopPane2Layout.setHorizontalGroup(
+            jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(login_button)
+                .addContainerGap())
+        );
+        jDesktopPane2Layout.setVerticalGroup(
+            jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(login_button)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,86 +127,95 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(127, 127, 127)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(login_button)
-                            .addComponent(userId_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(password_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(submit_button)
-                            .addComponent(dbSelector_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49)))
-                .addContainerGap(173, Short.MAX_VALUE))
+                            .addComponent(dbSelector_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(81, 81, 81)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(userId_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(password_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(login_button)
+                .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(dbSelector_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addComponent(submit_button)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     DB db = new DB();
-    private void changeSelector_comboBoxValue(){
+    // changes value of comboboxes to dbNames from dbSelector event
+    private void changeSelector_comboBoxValue(List<String> dbNames){
+       DefaultComboBoxModel model = (DefaultComboBoxModel) dbSelector_comboBox.getModel();
+        // removing old data
+        model.removeAllElements();
+         for (String item : dbNames) {
+            model.addElement(item);
+        }
+        dbSelector_comboBox.setModel(model);
         
     }
     
     // removes unecessary DBs like
     // information_schema, performance_schema
     // since DBs are shown to user but cannot access it anyways
-    private void checkIfSelectedDBs(String dbName){
+    private boolean isSelectedToRemoveDB(String dbName){
         if (dbName.equalsIgnoreCase("information_schema")||
-              dbName.equalsIgnoreCase("performance_schema")
-                );
+            dbName.equalsIgnoreCase("performance_schema")||
+                // include enrollmentsystem for
+                // backup just in case something is needed here
+            dbName.equalsIgnoreCase("enrollmentsystem"))
+        {
+            return true;
+        }
+        return false;
     }
     
     private void dbSelector_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbSelector_comboBoxActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_dbSelector_comboBoxActionPerformed
+
+    private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_buttonActionPerformed
         List<String> dbNames = new ArrayList<>();
         db.connectDB();
         try {
             db.setStatement(db.getConn().createStatement());
-            System.out.println("List of databases: ");
             ResultSet rs = db.getStatement().executeQuery("SHOW DATABASES");
             int counter = 0;
+
+            // checks if current DB is needed for user
+            // to see and stores it to a list
             while(rs.next()) {
-                removeSelectedDBs();
-            dbNames.add(rs.getString(1));
-            
+               if(!isSelectedToRemoveDB(rs.getString(1))){
+                 dbNames.add(rs.getString(1));
+               }
+
             counter++;
-      }
+            }
+            changeSelector_comboBoxValue(dbNames);
+         
             
         } catch (SQLException ex){
             System.out.println("Cannot retrieve query.");
             System.out.println(ex.getMessage());
             ex.printStackTrace();
         }
-        
-        
-    }//GEN-LAST:event_dbSelector_comboBoxActionPerformed
+    }//GEN-LAST:event_login_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,6 +254,8 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> dbSelector_comboBox;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

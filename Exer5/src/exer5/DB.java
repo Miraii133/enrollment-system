@@ -15,13 +15,15 @@ import java.sql.ResultSet;
  * @author jiyo
  */
 public class DB {
-    private final String url = "jdbc:mysql://localhost:3306/enrollmentsystem?useSSL=false&allowPublicKeyRetrieval=true";
+    
+    
+  
     private final String user = "jiyo";
     private final String password  = "s1a";
     private Connection conn = null;
     private Statement stmt = null;
     public String getURL(){
-        return url;
+        return sqlURL;
     }
     public String getUser(){
         return user;
@@ -29,6 +31,15 @@ public class DB {
     public String getPassword(){
         return password;
     }
+    
+    private void setUser(){
+        
+    }
+    
+    private void setPassword(){
+        
+    }
+    
     public Connection getConn(){
         return conn;
     }
@@ -41,6 +52,12 @@ public class DB {
     public void setStatement(Statement stmt){
         this.stmt = stmt;
     }
+    
+    String sqlURL = new StringBuilder()
+   .append("jdbc:mysql://localhost:3306/")
+   .append()
+   .append("?useSSL=false&allowPublicKeyRetrieval=true")
+   .toString();
     
     void connectDB(){
 try {
