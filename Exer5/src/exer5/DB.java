@@ -18,8 +18,8 @@ public class DB {
     
     
   
-    private final String user = "jiyo";
-    private final String password  = "s1a";
+    private String user = "";
+    private String password  = "";
     private Connection conn = null;
     private Statement stmt = null;
     public String getURL(){
@@ -32,12 +32,12 @@ public class DB {
         return password;
     }
     
-    private void setUser(){
-        
+    public void setUser(String userId){
+        user = userId;
     }
     
-    private void setPassword(){
-        
+    public void setPassword(String password){
+        this.password = password;
     }
     
     public Connection getConn(){
@@ -55,7 +55,10 @@ public class DB {
     
     String sqlURL = new StringBuilder()
    .append("jdbc:mysql://localhost:3306/")
-   .append()
+   // database to which the sql will
+   // connect to. Used enrollmentsystem
+    //as dummy DB to connect initially
+   .append("enrollmentsystem")
    .append("?useSSL=false&allowPublicKeyRetrieval=true")
    .toString();
     

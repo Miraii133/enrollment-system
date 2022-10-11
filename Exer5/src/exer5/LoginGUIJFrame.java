@@ -36,9 +36,9 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         submit_button = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel2 = new javax.swing.JLabel();
-        password_textField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         userId_textField = new javax.swing.JTextField();
+        password_passwordField = new javax.swing.JPasswordField();
         jDesktopPane2 = new javax.swing.JDesktopPane();
         login_button = new javax.swing.JButton();
 
@@ -62,9 +62,9 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         jLabel1.setText("User ID:");
 
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(password_textField, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(userId_textField, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(password_passwordField, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -76,9 +76,9 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addGap(48, 48, 48)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(userId_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(password_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(userId_textField, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                    .addComponent(password_passwordField))
                 .addContainerGap())
         );
         jDesktopPane1Layout.setVerticalGroup(
@@ -91,7 +91,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(password_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(password_passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -172,7 +172,9 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
     // removes unecessary DBs like
     // information_schema, performance_schema
     // since DBs are shown to user but cannot access it anyways
-    private boolean isSelectedToRemoveDB(String dbName){
+    private boolean isSelectedToHideDB(String dbName){
+        List<String> hiddenDBs = Arrays.asList("One", "Two", "Three") 
+        hiddenDBs.contains("ba");
         if (dbName.equalsIgnoreCase("information_schema")||
             dbName.equalsIgnoreCase("performance_schema")||
                 // include enrollmentsystem for
@@ -189,8 +191,19 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_dbSelector_comboBoxActionPerformed
-
+    
+    private void getLoginInfo(){                                         
+        String userName = userId_textField.getText();
+        db.setUser(userName);   
+        // should replace .getText() with
+        // .getPassword() but problems in db.setConn arises
+        // will fix on refactoring
+        String password = password_passwordField.getText();
+        db.setPassword(password);
+    }
+    
     private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_buttonActionPerformed
+       getLoginInfo();
         List<String> dbNames = new ArrayList<>();
         db.connectDB();
         try {
@@ -199,9 +212,10 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
             int counter = 0;
 
             // checks if current DB is needed for user
-            // to see and stores it to a list
+            // to see and stores it to a list if its not 
+            // supposed to be hidden
             while(rs.next()) {
-               if(!isSelectedToRemoveDB(rs.getString(1))){
+               if(!isSelectedToHideDB(rs.getString(1))){
                  dbNames.add(rs.getString(1));
                }
 
@@ -216,7 +230,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_login_buttonActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
@@ -260,7 +274,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton login_button;
-    private javax.swing.JTextField password_textField;
+    private javax.swing.JPasswordField password_passwordField;
     private javax.swing.JButton submit_button;
     private javax.swing.JTextField userId_textField;
     // End of variables declaration//GEN-END:variables
