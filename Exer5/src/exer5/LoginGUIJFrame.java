@@ -5,6 +5,8 @@
 package exer5;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -108,16 +110,34 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     DB db = new DB();
+    private void changeSelector_comboBoxValue(){
+        
+    }
+    
+    // removes unecessary DBs like
+    // information_schema, performance_schema
+    // since DBs are shown to user but cannot access it anyways
+    private void checkIfSelectedDBs(String dbName){
+        if (dbName.equalsIgnoreCase("information_schema")||
+              dbName.equalsIgnoreCase("performance_schema")
+                );
+    }
+    
     private void dbSelector_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbSelector_comboBoxActionPerformed
+        List<String> dbNames = new ArrayList<>();
         db.connectDB();
         try {
             db.setStatement(db.getConn().createStatement());
-            ResultSet rs = db.getStatement().executeQuery("SHOW DATABASES");
             System.out.println("List of databases: ");
+            ResultSet rs = db.getStatement().executeQuery("SHOW DATABASES");
+            int counter = 0;
             while(rs.next()) {
-            System.out.print(rs.getString(1));
+                removeSelectedDBs();
+            dbNames.add(rs.getString(1));
             
+            counter++;
       }
+            
         } catch (SQLException ex){
             System.out.println("Cannot retrieve query.");
             System.out.println(ex.getMessage());

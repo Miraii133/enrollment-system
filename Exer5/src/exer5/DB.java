@@ -16,8 +16,8 @@ import java.sql.ResultSet;
  */
 public class DB {
     private final String url = "jdbc:mysql://localhost:3306/enrollmentsystem?useSSL=false&allowPublicKeyRetrieval=true";
-    private final String user = "root";
-    private final String password  = "AiHosh1no_135";
+    private final String user = "jiyo";
+    private final String password  = "s1a";
     private Connection conn = null;
     private Statement stmt = null;
     public String getURL(){
