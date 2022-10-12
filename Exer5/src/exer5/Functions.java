@@ -98,6 +98,12 @@ import java.util.List;
  }
     class SQL {
         
+       private DB db;
+       // stores dbObject for use as the same instance for all DB
+       // connections.
+       public SQL(DB db){
+        this.db = db;
+       }
        
         // changes SQL depending on the frame that will use it.
         private String firstFieldValue = "";
@@ -330,10 +336,7 @@ import java.util.List;
     }
     // Primary table in jframe
     public void GetResultSetSQL(String frameName, JTable jtableName){
-        
-        
-        DB db = new DB();
-        db.connectDB();
+   
         String dbName;
         String searchQuery = "";
         String unitsQuery ="";
@@ -482,7 +485,7 @@ import java.util.List;
            this.studIdsList.clear();
        }
     
-        SQL sqlObj = new SQL(); 
+        //SQL sqlObj = new SQL(); 
         public void GetFiltered_ResultSetSQL(String frameName, JTable jtableName, String filterString){
         DB db = new DB();
         db.connectDB();

@@ -197,6 +197,21 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         db.setPassword(password);
     }
     
+    // getter setter to store dbNames that
+    // a user has access to so it can be used
+    // for db checking
+    private List<String> dbNames = new ArrayList<>();
+    private void setDBNames(List<String> dbNames){
+        this.dbNames = dbNames;
+    }
+    
+    public List<String> getDBNames(){
+        for (int i = 0; i < dbNames.size(); i++){
+            System.out.println(dbNames.get(i));
+        }
+        return dbNames;
+    }
+    
     private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_buttonActionPerformed
        getLoginInfo();
         List<String> dbNames = new ArrayList<>();
@@ -217,6 +232,9 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
             counter++;
             }
             changeSelector_comboBoxValue(dbNames);
+            // stores all accessible DBs to 
+            // dbNames setter
+            setDBNames(dbNames);
          
             
         } catch (SQLException ex){
@@ -227,14 +245,32 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_login_buttonActionPerformed
      
+    private void showJFrame(String selectedDB){
+        var studentUserForm = new StudentsUserFormJFrame();
+        studentUserForm.setVisible(true);
+        // hides and destroys loginGUIJFrame
+        this.setVisible(false);
+        this.dispose();
+      
+    }
+    
+    private void checkJFrameToShow(String selectedDB){
+        if (selectedDB.equalsIgnoreCase("enrollmentsystem")){
+            showJFrame(selectedDB);
+        }
+    }
+    
     private void submit_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submit_buttonActionPerformed
-       getLoginInfo();
-       db.setDBObject(db);
-       //db.setDBToConnect(dbSelector_comboBox.getSelectedItem().toString());
-      StudentsJFrame studentsJFrame = new StudentsJFrame();
-      studentsJFrame.setVisible(true);
-  
-       //studentsJFrame.setVisible(true);
+      getLoginInfo();
+      db.setDBObject(db);
+      String selectedDB = dbSelector_comboBox.getSelectedItem().toString();
+      
+      // sets the specific database where
+      // the instance of DB will connect to
+      // depending on the selected comboBox
+      db.setDBToConnect(selectedDB);
+      checkJFrameToShow(selectedDB);
+     
     }//GEN-LAST:event_submit_buttonActionPerformed
     
     /**

@@ -27,7 +27,7 @@ public class DB {
     private String dbName = "dummyDB";
     // db Object to be used by all other frames 
     // and methods
-    private
+    private DB db;
     public String getURL(){
         return sqlURL;
     }
@@ -70,8 +70,12 @@ public class DB {
     
     // stores instance of DB from LoginGUIFrame
     // to pass to StudentsJFrame and others
-    public void setDBObject(Object dbObject){
-        
+    public void setDBObject(DB db){
+        this.db = db;
+    }
+    
+    public Object getDBObject(){
+        return db;
     }
     
     String sqlURL = new StringBuilder()

@@ -16,20 +16,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author jiyo
- */
+
 public class StudentsJFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form StudentsJFrame
-     */
-    public StudentsJFrame() {
+ private DB db;
+
+    public StudentsJFrame(DB db) {
+        
         initComponents();
-        SQL sql = new SQL();
+        
+        this.db = db;
+        SQL sql = new SQL(db);
         sql.GetResultSetSQL(this.getName(), students_table);
-        //sql.sampleSQL(enrolledSubj_table);
     }
     
      FilterSQL filterSQL = new FilterSQL();
@@ -670,13 +668,11 @@ public class StudentsJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void students_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_students_itemActionPerformed
-             
              StudentsJFrame studentsFrame = new StudentsJFrame();
              studentsFrame.setVisible(true);
     }//GEN-LAST:event_students_itemActionPerformed
 
     private void subjects_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjects_itemActionPerformed
-             
              SubjectsJFrame subjectsFrame = new SubjectsJFrame();
              subjectsFrame.setVisible(true);
     }//GEN-LAST:event_subjects_itemActionPerformed
@@ -805,7 +801,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         
         
         
-        SQL sqlObj = new SQL();
+       
         sqlObj.setDeleteSQL(textFieldValues, this.getName());
         String sql = sqlObj.getDeleteSQL(this.getName());
         db.executeUpdate(sql);
@@ -814,9 +810,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_delete_buttonActionPerformed
     
     
+
     
-    DB db = new DB();
-    SQL sqlObj = new SQL();
     private String[] idFilter_values;
     
     public String GetFilterSQL(){
@@ -992,7 +987,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         course_textField.setText(studcrs);
         gender_textField.setText(studgender);
         year_textField.setText(yrlvl);
-        SQL sql = new SQL();
+        
         sql.GetSecondaryResultSetSQL(this.getName(), enrolledSubj_table, selected_studid);
     }//GEN-LAST:event_students_tableMouseClicked
     
