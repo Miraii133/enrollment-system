@@ -244,19 +244,26 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_login_buttonActionPerformed
-     
-    private void showJFrame(String selectedDB){
-        var studentUserForm = new StudentsUserFormJFrame();
-        studentUserForm.setVisible(true);
-        // hides and destroys loginGUIJFrame
-        this.setVisible(false);
-        this.dispose();
-      
-    }
+
     
-    private void checkJFrameToShow(String selectedDB){
+    private void showJFrame(String selectedDB){
         if (selectedDB.equalsIgnoreCase("enrollmentsystem")){
-            showJFrame(selectedDB);
+            var studentUserForm = new StudentsUserFormJFrame();
+            studentUserForm.setVisible(true);
+            
+            this.setVisible(false);
+            this.dispose();
+        }
+        // should dynamically check for dbs
+        // but not much time left just refactor in future
+        else if (selectedDB.equalsIgnoreCase("1st_sy2022_2023")){
+            
+        }
+        else if (selectedDB.equalsIgnoreCase("2nd_sy2022_2023")){
+            
+        }
+        else if (selectedDB.equalsIgnoreCase("summer_sy2022_2023")){
+            
         }
     }
     
@@ -269,7 +276,10 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
       // the instance of DB will connect to
       // depending on the selected comboBox
       db.setDBToConnect(selectedDB);
-      checkJFrameToShow(selectedDB);
+      // sets the proper URL for the DB to connect to
+      //after DB is changed.
+      db.setURL();
+      showJFrame(selectedDB);
      
     }//GEN-LAST:event_submit_buttonActionPerformed
     

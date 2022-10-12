@@ -23,11 +23,27 @@ public class DB {
     private Connection conn = null;
     private Statement stmt = null;
     
-    // initial DB will always be dummyDB
-    private String dbName = "dummyDB";
+  
     // db Object to be used by all other frames 
     // and methods
     private DB db;
+    // initial DB will always be dummyDB
+    // in order for connectDB to have an initial DB
+    // to connect to.
+    private String sqlURL = "jdbc:mysql://localhost:3306/dummyDB?useSSL=false&allowPublicKeyRetrieval=true";
+    public void setURL(){
+    
+    sqlURL = new StringBuilder()
+   .append("jdbc:mysql://localhost:3306/")
+   // database to which the sql will
+   // connect to. Used enrollmentsystem
+    //as dummy DB to connect initially
+   .append(getDBToConnect())
+   .append("?useSSL=false&allowPublicKeyRetrieval=true")
+   .toString();
+    
+    }
+    
     public String getURL(){
         return sqlURL;
     }
@@ -58,6 +74,9 @@ public class DB {
         this.stmt = stmt;
     }
     
+    
+    // initial DB will always be dummyDB
+    private String dbName = "dummyDB";
     // sets the Database to connect
     // used for switching to other databases
     public void setDBToConnect(String dbName){
@@ -65,7 +84,7 @@ public class DB {
     }
     
     public String getDBToConnect(){
-        return this.dbName;
+        return dbName;
     }
     
     // stores instance of DB from LoginGUIFrame
@@ -78,15 +97,7 @@ public class DB {
         return db;
     }
     
-    String sqlURL = new StringBuilder()
-   .append("jdbc:mysql://localhost:3306/")
-   // database to which the sql will
-   // connect to. Used enrollmentsystem
-    //as dummy DB to connect initially
-   .append(getDBToConnect())
-   .append("?useSSL=false&allowPublicKeyRetrieval=true")
-   .toString();
-    
+  
     void connectDB(){
 try {
     // connects code to DB
