@@ -16,7 +16,7 @@ import java.util.Map;
 class sample {
     
 }
-public class Exer4 {
+public class Exer5 {
 
     /**
      * @param args the command line arguments

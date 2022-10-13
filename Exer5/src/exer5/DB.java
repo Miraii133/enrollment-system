@@ -32,11 +32,10 @@ public class DB {
     // to connect to.
     private String sqlURL = "jdbc:mysql://localhost:3306/dummyDB?useSSL=false&allowPublicKeyRetrieval=true";
     public void setURL(){
-    
     sqlURL = new StringBuilder()
    .append("jdbc:mysql://localhost:3306/")
    // database to which the sql will
-   // connect to. Used enrollmentsystem
+   // connect to. Used dummyDB
     //as dummy DB to connect initially
    .append(getDBToConnect())
    .append("?useSSL=false&allowPublicKeyRetrieval=true")
@@ -75,8 +74,7 @@ public class DB {
     }
     
     
-    // initial DB will always be dummyDB
-    private String dbName = "dummyDB";
+    private String dbName = "";
     // sets the Database to connect
     // used for switching to other databases
     public void setDBToConnect(String dbName){
@@ -99,14 +97,15 @@ public class DB {
     
   
     void connectDB(){
-try {
-    // connects code to DB
-    setConn(DriverManager.getConnection(getURL(), getUser(), getPassword()));
-}
- catch(SQLException ex) {
-     System.out.println("Unable to connect to the Database.");
-   System.out.println(ex.getMessage());
-   ex.printStackTrace();
+        try {
+            // connects code to DB, changes the connection to
+            // new setConnection when DB connection changes dynamically
+            setConn(DriverManager.getConnection(getURL(), getUser(), getPassword()));
+    }
+        catch(SQLException ex) {
+            System.out.println("Unable to connect to the Database.");
+          System.out.println(ex.getMessage());
+          ex.printStackTrace();
 }
     }
     

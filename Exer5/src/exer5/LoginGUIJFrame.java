@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import java.sql.SQLException;
 
 /**
  *
@@ -213,7 +214,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
     }
     
     private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_buttonActionPerformed
-       getLoginInfo();
+        getLoginInfo();
         List<String> dbNames = new ArrayList<>();
         db.connectDB();
         try {
@@ -235,6 +236,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
             // stores all accessible DBs to 
             // dbNames setter
             setDBNames(dbNames);
+           
          
             
         } catch (SQLException ex){
@@ -257,7 +259,10 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         // should dynamically check for dbs
         // but not much time left just refactor in future
         else if (selectedDB.equalsIgnoreCase("1st_sy2022_2023")){
-            
+            var studentsJFrame = new StudentsJFrame(db);
+            studentsJFrame.setVisible(true);
+            this.setVisible(false);
+            this.dispose();
         }
         else if (selectedDB.equalsIgnoreCase("2nd_sy2022_2023")){
             
@@ -279,6 +284,19 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
       // sets the proper URL for the DB to connect to
       //after DB is changed.
       db.setURL();
+      try {
+          // replace previous connection with
+          // dummyDB as db to new connection
+          // with dynamic DB selected from comboBOx
+          db.connectDB();
+          db.setStatement(db.getConn().createStatement());
+      } catch (SQLException ex){
+          
+      }
+  
+      
+  
+      
       showJFrame(selectedDB);
      
     }//GEN-LAST:event_submit_buttonActionPerformed

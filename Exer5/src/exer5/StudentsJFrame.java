@@ -27,7 +27,18 @@ public class StudentsJFrame extends javax.swing.JFrame {
         
         this.db = db;
         SQL sql = new SQL(db);
+        setSQL(sql);
         sql.GetResultSetSQL(this.getName(), students_table);
+    }
+    
+    private SQL sql;
+    private void setSQL(SQL sql){
+        this.sql = sql;
+    }
+    
+    public SQL getSQL(){
+        
+        return sql;
     }
     
      FilterSQL filterSQL = new FilterSQL();
@@ -987,8 +998,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         course_textField.setText(studcrs);
         gender_textField.setText(studgender);
         year_textField.setText(yrlvl);
-        
-        sql.GetSecondaryResultSetSQL(this.getName(), enrolledSubj_table, selected_studid);
+        getSQL().GetSecondaryResultSetSQL(this.getName(), enrolledSubj_table, selected_studid);
     }//GEN-LAST:event_students_tableMouseClicked
     
     // refers to the selected subjid in the enrolled table.

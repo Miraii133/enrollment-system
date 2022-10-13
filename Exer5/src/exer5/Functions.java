@@ -264,8 +264,8 @@ import java.util.List;
     
     // Gets secondary table result Set
     public void GetSecondaryResultSetSQL(String frameName, JTable jtableName, String selectedid){
-         DB db = new DB();
-        db.connectDB();
+        
+        
         String dbName;
         String searchQuery = "";
         if (frameName.equalsIgnoreCase("studentsJFrame")){
@@ -280,10 +280,6 @@ import java.util.List;
         } 
         
         try {
-             db.setStatement(db.getConn().createStatement());
-            // update refers to the statement that is going to modify
-            // the database.
-            
             ResultSet resultSet = db.getStatement().executeQuery(searchQuery);
             DefaultTableModel tableModel = (DefaultTableModel) jtableName.getModel();
             ClearJTable(tableModel);
@@ -296,10 +292,14 @@ import java.util.List;
                 String course = resultSet.getString("subjunits");
                 String gender = resultSet.getString("subjsched");
                 String array[] = {id, name, address, course, gender};
+                          
+               
+                
                 // adds array to table row
                  tableModel.addRow(array);
-              
+                 
              }
+             
     }
         else if (frameName.equalsIgnoreCase("subjectsJFrame")){
              while (resultSet.next()){
@@ -323,6 +323,7 @@ import java.util.List;
                 String course = resultSet.getString("subjunits");
                 String gender = resultSet.getString("subjsched");
                 String array[] = {id, name, address, course, gender};
+      
                 // adds array to table row
                  tableModel.addRow(array);
               
@@ -341,9 +342,9 @@ import java.util.List;
         String searchQuery = "";
         String unitsQuery ="";
         // changes searchQuery
+        
         if (frameName.equalsIgnoreCase("studentsJFrame")){
             searchQuery = "SELECT studid as id, studname as name, studaddr as addr, studcrs as crs, studgender as gender, yrlvl as yrlvl, (SELECT SUM(subjunits) from Students, Enroll, Subjects WHERE Students.studid=Enroll.studid AND Enroll.subjid=Subjects.subjid AND Enroll.studid=id) as units FROM Students";
-       
         }
         
         else if (frameName.equalsIgnoreCase("subjectsJFrame")){
@@ -353,10 +354,9 @@ import java.util.List;
             searchQuery = "SELECT Teachers.Tid as id, Teachers.Tname, Teachers.Tdept, Teachers.Taddr, Teachers.Tcontact, Teachers.Tstatus, (SELECT COUNT(Teachers.Tid) from Assign, Teachers, Subjects WHERE Teachers.Tid=Assign.Tid AND Assign.subjid=Subjects.subjid AND Assign.Tid=id) AS assigned FROM Teachers";
         } 
         try {
-             db.setStatement(db.getConn().createStatement());
+             
             // update refers to the statement that is going to modify
             // the database.
-            
             ResultSet resultSet = db.getStatement().executeQuery(searchQuery);
             DefaultTableModel tableModel = (DefaultTableModel) jtableName.getModel();
             ClearJTable(tableModel);
@@ -386,6 +386,7 @@ import java.util.List;
              tableModel.addRow(array);
              
             }
+            
                 
                 
             }
