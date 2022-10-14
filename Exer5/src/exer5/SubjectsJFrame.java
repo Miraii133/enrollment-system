@@ -20,24 +20,37 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SubjectsJFrame extends javax.swing.JFrame {
 
-
-    private DB db;
-    public SubjectsJFrame() {
+private DB db;
+ private SQL sql;
+ private FilterSQL filterSQL;
+ 
+ private StudentsJFrame studentsJFrame;
+ private TeachersJFrame teachersJFrame;
+ private Functions functions;
+    public SubjectsJFrame(SQL sql, DB db) {
+        
         initComponents();
-        setSQL(sql);
-        //sql.GetResultSetSQL(this.getName(), subjects_table);
-
-    }
-    
-    
-    private SQL sql;
-    private void setSQL(SQL sql){
         this.sql = sql;
+        this.db = db;
+        sql.GetResultSetSQL(this.getName(), subjects_table);
+        
     }
-
-    public SQL getSQL(){
-
-        return sql;
+    
+    
+    public void setStudentsJFrame(StudentsJFrame studentsJFrame){
+        this.studentsJFrame= studentsJFrame;
+    }
+    
+    public void setTeachersJFrame(TeachersJFrame teachersJFrame){
+        this.teachersJFrame = teachersJFrame;
+    }
+    
+    public void setFunctions(Functions functions){
+        this.functions = functions;
+    }
+    
+    public void setFilterSQL(FilterSQL filterSQL){
+        this.filterSQL = filterSQL;
     }
 
 
@@ -553,7 +566,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
             desc_textField.getText(), units_textField.getText(), 
             sched_textField.getText()};
        
-            Functions functions = new Functions();
+            
            
             db.connectDB();
         // checks if ID is a valid id    
@@ -664,7 +677,6 @@ public class SubjectsJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_subjects_tableMouseClicked
     
     
-    FilterSQL filterSQL = new FilterSQL();
     
     
     private String[] idFilter_values;

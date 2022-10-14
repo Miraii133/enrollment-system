@@ -163,33 +163,57 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     ;
   
-    DB db = new DB();
+    private DB db = new DB();
     private SQL sql = new SQL(db);
+   
+    private FilterSQL filterSQL;
     
     private StudentsJFrame studentsJFrame;
     private SubjectsJFrame subjectsJFrame;
     private TeachersJFrame teachersJFrame;
     private Functions functions;
     
+    private Enroll enroll;
+    
+   
+    
     // initializes all classes, instead of placing it into
     // constructor where it will call all frames
     // prior to logging in bug.
     private void initialize_classes(){
         studentsJFrame = new StudentsJFrame(sql, db);
-        subjectsJFrame = new SubjectsJFrame();
-        teachersJFrame = new TeachersJFrame();
+        subjectsJFrame = new SubjectsJFrame(sql, db);
+        teachersJFrame = new TeachersJFrame(sql, db);
         functions = new Functions(db,
         studentsJFrame,  subjectsJFrame, teachersJFrame);
         
+        enroll = new Enroll();
+        
+        filterSQL = new FilterSQL(db, sql);
         // passes reference of jframes to sql
         sql.setStudentsJFrame(studentsJFrame);
         sql.setSubjectsJFrame(subjectsJFrame);
         sql.setTeachersJFrame(teachersJFrame);
         
-    
+       studentsJFrame.setFilterSQL(filterSQL);
        studentsJFrame.setSubjectsJFrame(subjectsJFrame);
        studentsJFrame.setTeachersJFrame(teachersJFrame);
        studentsJFrame.setFunctions(functions);
+       studentsJFrame.setEnroll(enroll);
+       
+       subjectsJFrame.setFilterSQL(filterSQL);
+       subjectsJFrame.setStudentsJFrame(studentsJFrame);
+       subjectsJFrame.setTeachersJFrame(teachersJFrame);
+       subjectsJFrame.setFunctions(functions);
+       
+       teachersJFrame.setFilterSQL(filterSQL);
+       teachersJFrame.setStudentsJFrame(studentsJFrame);
+       teachersJFrame.setSubjectsJFrame(subjectsJFrame);
+       teachersJFrame.setFunctions(functions);
+       
+       enroll.setDB(db);
+       enroll.setSQL(sql);
+       
     }
     // changes value of comboboxes to dbNames from dbSelector event
     private void changeSelector_comboBoxValue(List<String> dbNames){

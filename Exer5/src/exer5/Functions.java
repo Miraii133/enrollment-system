@@ -495,6 +495,14 @@ import java.util.List;
     }
 
     class FilterSQL {
+        
+        private SQL sql;
+        private DB db;
+        public FilterSQL(DB db, SQL sql){
+            this.db = db;
+            this.sql = sql;
+        }
+
        private int totalRowsInResultSet = 0;
        
     
@@ -520,8 +528,6 @@ import java.util.List;
     
         //SQL sqlObj = new SQL(); 
         public void GetFiltered_ResultSetSQL(String frameName, JTable jtableName, String filterString){
-        DB db = new DB();
-        db.connectDB();
         String searchQuery = "";
         
         

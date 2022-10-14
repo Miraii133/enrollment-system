@@ -15,17 +15,18 @@ public class StudentsJFrame extends javax.swing.JFrame {
 
  private DB db;
  private SQL sql;
-
+ private FilterSQL filterSQL;
+ 
  private SubjectsJFrame subjectsJFrame;
  private TeachersJFrame teachersJFrame;
  private Functions functions;
+ 
+ private Enroll enroll;
     public StudentsJFrame(SQL sql, DB db) {
-        
         initComponents();
         this.sql = sql;
         this.db = db;
         sql.GetResultSetSQL(this.getName(), students_table);
-        
     }
     
     
@@ -39,6 +40,14 @@ public class StudentsJFrame extends javax.swing.JFrame {
     
     public void setFunctions(Functions functions){
         this.functions = functions;
+    }
+    
+    public void setFilterSQL(FilterSQL filterSQL){
+        this.filterSQL = filterSQL;
+    }
+    
+     public void setEnroll(Enroll enroll){
+        this.enroll = enroll;
     }
     
 
@@ -692,8 +701,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
 
     private void teachers_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teachers_itemActionPerformed
              
-             TeachersJFrame teachersFrame = new TeachersJFrame();
-             teachersFrame.setVisible(true);
+             
+             teachersJFrame.setVisible(true);
     }//GEN-LAST:event_teachers_itemActionPerformed
 
    
@@ -737,8 +746,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
             id_textField.getText(), name_textField.getText(),
             address_textField.getText(), course_textField.getText(), 
             gender_textField.getText(), year_textField.getText()};
-        
-        db.connectDB();
 
         //Deletes row and replaces it with a new and updated one.
         // String update = "DELETE FROM Students WHERE studid='" + id + "'";
@@ -799,8 +806,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
             id_textField.getText(), name_textField.getText(),
             address_textField.getText(), course_textField.getText(), 
             gender_textField.getText(), year_textField.getText()};
-        
-        db.connectDB();
+
         if (!functions.IsExistingID(textFieldValues, this.getName())){
             System.out.println("Student ID provided does not exist!");
             System.out.println("Cannot delete data from Student ID.");
@@ -821,8 +827,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
     
     
 
-    
-    private String[] idFilter_values;
     
     public String GetFilterSQL(){
         
@@ -1010,14 +1014,12 @@ public class StudentsJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_enrolledSubj_tableMouseClicked
 
     private void enrollAdd_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollAdd_buttonActionPerformed
-       StudentsJFrame studentsJFrame = new StudentsJFrame();
-       SubjectsJFrame subjectsJFrame = new SubjectsJFrame();
+
       
-       int confirmAdd = JOptionPane.showConfirmDialog(studentsJFrame,"Enroll SubjectID: " + SubjectsJFrame.selected_subjid + " to StudentID: " + selected_studid);
+       int confirmAdd = JOptionPane.showConfirmDialog(this,"Enroll SubjectID: " + SubjectsJFrame.selected_subjid + " to StudentID: " + selected_studid);
        if (confirmAdd == JOptionPane.YES_OPTION){
-           Enroll enroll = new Enroll();
            enroll.InsertSQLToEnroll(selected_studid, SubjectsJFrame.selected_subjid, this.getName(), students_table, enrolledSubj_table);
-           JOptionPane.showMessageDialog(studentsJFrame, "Successfully enrolled.");
+           JOptionPane.showMessageDialog(this, "Successfully enrolled.");
            sql.GetResultSetSQL(subjectsJFrame.GetJFrame(), subjectsJFrame.GetJTable());
            
        }
@@ -1027,12 +1029,10 @@ public class StudentsJFrame extends javax.swing.JFrame {
 
     private void enrollDrop_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollDrop_buttonActionPerformed
 
-       StudentsJFrame studentsJFrame = new StudentsJFrame();
-       int confirmAdd = JOptionPane.showConfirmDialog(studentsJFrame,"Drop SubjectID: " + selected_enrollsubjid + " to StudentID: " + selected_studid);
+       int confirmAdd = JOptionPane.showConfirmDialog(this,"Drop SubjectID: " + selected_enrollsubjid + " to StudentID: " + selected_studid);
        if (confirmAdd == JOptionPane.YES_OPTION){
-           Enroll enroll = new Enroll();
            enroll.DeleteSQLToEnroll(selected_studid, selected_enrollsubjid, this.getName(), students_table, enrolledSubj_table);
-           JOptionPane.showMessageDialog(studentsJFrame, "Successfully dropped.");
+           JOptionPane.showMessageDialog(this, "Successfully dropped.");
        }
     }//GEN-LAST:event_enrollDrop_buttonActionPerformed
   
@@ -1174,7 +1174,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
     private void firstSem_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstSem_MenuActionPerformed
         String createNewDB;
         createNewDB = template_createNewDB + "1st_sy" + currentYear + "_"+ nextYear;
-        db.connectDB();
         // creates a new DB using concatenated string
         db.executeUpdate(createNewDB);
         
@@ -1187,7 +1186,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
     private void secondSem_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondSem_MenuActionPerformed
         String createNewDB;
         createNewDB = template_createNewDB + "2nd_sy" + currentYear + "_"+ nextYear;
-        db.connectDB();
         // creates a new DB using concatenated string
         db.executeUpdate(createNewDB);
         String semesterInfo = "secondSem";
@@ -1200,7 +1198,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
     private void summer_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_summer_MenuActionPerformed
         String createNewDB;
         createNewDB = template_createNewDB + "summer_sy" + currentYear + "_"+ nextYear;
-        db.connectDB();
         // creates a new DB using concatenated string
         db.executeUpdate(createNewDB);
         String semesterInfo = "summer";

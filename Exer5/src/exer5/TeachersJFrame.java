@@ -20,18 +20,37 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TeachersJFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form StudentsJFrame
-     * @param db
-     * @param sql
-     */
-    public TeachersJFrame() {
+  private DB db;
+ private SQL sql;
+ private FilterSQL filterSQL;
+ 
+ private StudentsJFrame studentsJFrame;
+ private SubjectsJFrame subjectsJFrame;
+ private Functions functions;
+    public TeachersJFrame(SQL sql, DB db) {
+        
         initComponents();
+        this.sql = sql;
+        this.db = db;
+        sql.GetResultSetSQL(this.getName(), teachers_table);
         
-        
-        //sql.GetResultSetSQL(this.getName(), teachers_table);
     }
     
+     public void setStudentsJFrame(StudentsJFrame studentsJFrame){
+        this.studentsJFrame = studentsJFrame;
+    }
+    
+    public void setSubjectsJFrame(SubjectsJFrame subjectsJFrame){
+        this.subjectsJFrame = subjectsJFrame;
+    }
+    
+    public void setFunctions(Functions functions){
+        this.functions = functions;
+    }
+    
+    public void setFilterSQL(FilterSQL filterSQL){
+        this.filterSQL = filterSQL;
+    }
     
 
     /**
@@ -657,8 +676,6 @@ public class TeachersJFrame extends javax.swing.JFrame {
             dept_textField.getText(), addr_textField.getText(), 
             contact_textField.getText(), status_textField.getText()};
        
-            DB db = new DB();
-            db.connectDB();
         // checks if ID is a valid id    
         // so code can insert it to DB.
         // checks if ID provided already exists
@@ -765,8 +782,6 @@ public class TeachersJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_teachers_tableMouseClicked
     
     
-    FilterSQL filterSQL = new FilterSQL();
-    DB db = new DB();
     private String[] idFilter_values;
     public void GetFilterSQL(){
         
