@@ -22,11 +22,14 @@ public class TeachersJFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form StudentsJFrame
+     * @param db
+     * @param sql
      */
     public TeachersJFrame() {
         initComponents();
-        SQL sql = new SQL();
-        sql.GetResultSetSQL(this.getName(), teachers_table);
+        
+        
+        //sql.GetResultSetSQL(this.getName(), teachers_table);
     }
     
     
@@ -654,8 +657,6 @@ public class TeachersJFrame extends javax.swing.JFrame {
             dept_textField.getText(), addr_textField.getText(), 
             contact_textField.getText(), status_textField.getText()};
        
-            Functions functions = new Functions();
-            SQL sqlObj = new SQL();
             DB db = new DB();
             db.connectDB();
         // checks if ID is a valid id    
@@ -695,13 +696,11 @@ public class TeachersJFrame extends javax.swing.JFrame {
             id_textField.getText(), name_textField.getText(),
             dept_textField.getText(), addr_textField.getText(), 
             contact_textField.getText(), status_textField.getText()};
-        Functions functions = new Functions();
         DB db = new DB();
         db.connectDB();
 
         //Deletes row and replaces it with a new and updated one.
         // String update = "DELETE FROM Students WHERE studid='" + id + "'";
-        SQL sqlObj = new SQL();
       
        if (functions.IsANumber(functions.getTextFieldValues(textFieldValues), this.getName())){
             if (functions.IsExistingID(functions.getTextFieldValues(textFieldValues), this.getName())){
@@ -728,13 +727,11 @@ public class TeachersJFrame extends javax.swing.JFrame {
         
         DB db = new DB();
         db.connectDB();
-        Functions functions = new Functions();
         if (!functions.IsExistingID(textFieldValues, this.getName())){
             System.out.println("Student ID provided does not exist!");
             System.out.println("Cannot delete data from Student ID.");
             return;
         }
-        SQL sqlObj = new SQL();
         sqlObj.setDeleteSQL(textFieldValues, this.getName());
         String sql = sqlObj.getDeleteSQL(this.getName());
         db.executeUpdate(sql);
@@ -764,14 +761,12 @@ public class TeachersJFrame extends javax.swing.JFrame {
         addr_textField.setText(teacheraddr);
         contact_textField.setText(teachercontact);
         status_textField.setText(teacherstatus);
-        SQL sql = new SQL();
         sql.GetSecondaryResultSetSQL(this.getName(), assignSubj_table, selected_teacherid);
     }//GEN-LAST:event_teachers_tableMouseClicked
     
     
     FilterSQL filterSQL = new FilterSQL();
     DB db = new DB();
-    SQL sqlObj = new SQL();
     private String[] idFilter_values;
     public void GetFilterSQL(){
         
@@ -914,7 +909,6 @@ public class TeachersJFrame extends javax.swing.JFrame {
 
     private void assignAdd_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignAdd_buttonActionPerformed
 
-         TeachersJFrame teachersJFrame = new TeachersJFrame();
        int confirmAdd = JOptionPane.showConfirmDialog(teachersJFrame,"Assign SubjectID: " + SubjectsJFrame.selected_subjid + " to TeacherID: " + selected_teacherid);
        if (confirmAdd == JOptionPane.YES_OPTION){
            Assign assign = new Assign();
@@ -926,7 +920,6 @@ public class TeachersJFrame extends javax.swing.JFrame {
 
     private void assignDrop_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignDrop_buttonActionPerformed
         
-         TeachersJFrame teachersJFrame = new TeachersJFrame();
        int confirmAdd = JOptionPane.showConfirmDialog(teachersJFrame,"Remove SubjectID: " + selected_assignsubjid + " to TeacherID: " + selected_teacherid);
        if (confirmAdd == JOptionPane.YES_OPTION){
            Assign assign = new Assign();

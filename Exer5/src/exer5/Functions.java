@@ -19,9 +19,24 @@ import java.util.List;
  */
  public class Functions {
     
-     StudentsJFrame studentsFrame = new StudentsJFrame();
-     SubjectsJFrame subjectsFrame = new SubjectsJFrame();
-     TeachersJFrame teachersFrame = new TeachersJFrame();
+     private StudentsJFrame studentsJFrame;
+     private SubjectsJFrame subjectsJFrame;
+     private TeachersJFrame teachersJFrame;
+     public Functions (
+             DB db,
+             StudentsJFrame studentsJFrame, 
+             SubjectsJFrame subjectsJFrame, 
+             TeachersJFrame teachersJFrame){
+         
+         this.studentsJFrame = studentsJFrame;
+         this.subjectsJFrame = subjectsJFrame;
+         this.teachersJFrame = teachersJFrame;
+     }
+     
+     
+     /*StudentsJFrame studentsFrame = new StudentsJFrame();
+     SubjectsJFrame subjectsFrame = new SubjectsJFrame();*/
+     //TeachersJFrame teachersFrame = new TeachersJFrame();
      
     private List<String> studentsFilter_components = new ArrayList<>();
     public String[] getTextFieldValues(String[] textFieldValues){
@@ -51,13 +66,13 @@ import java.util.List;
            // changed type of subjunits to text in DB as
            // compromise
         } catch(NumberFormatException ex){
-           if (frameName.equalsIgnoreCase(studentsFrame.getName())){
+           if (frameName.equalsIgnoreCase(studentsJFrame.getName())){
               System.out.println("Student ID provided is not a number!");
            }
-           else if (frameName.equalsIgnoreCase(subjectsFrame.getName())){
+           else if (frameName.equalsIgnoreCase(subjectsJFrame.getName())){
               System.out.println("Subject ID provided is not a number!");
            }
-           else if (frameName.equalsIgnoreCase(teachersFrame.getName())){
+           else if (frameName.equalsIgnoreCase(teachersJFrame.getName())){
               System.out.println("Teacher ID provided is not a number!");
            }
           System.out.println(ex);
@@ -75,15 +90,15 @@ import java.util.List;
             int id = Integer.parseInt(textFieldValues[0]);
             String searchQuery = "";
             String dbName = "";
-            if (frameName.equalsIgnoreCase(studentsFrame.getName())){
+            if (frameName.equalsIgnoreCase(studentsJFrame.getName())){
                 dbName = "Students";
                 searchQuery = "SELECT * FROM " + dbName + " WHERE studid='" + id + "'";   
             }
-            else if (frameName.equalsIgnoreCase(subjectsFrame.getName())){
+            else if (frameName.equalsIgnoreCase(subjectsJFrame.getName())){
                 dbName = "Subjects";
                 searchQuery = "SELECT * FROM " + dbName + " WHERE subjid='" + id + "'";   
             }
-            else if (frameName.equalsIgnoreCase(teachersFrame.getName())){
+            else if (frameName.equalsIgnoreCase(teachersJFrame.getName())){
                 dbName = "Teachers";
                 searchQuery = "SELECT * FROM " + dbName + " WHERE Tid='" + id + "'";   
             }
@@ -99,10 +114,15 @@ import java.util.List;
     class SQL {
         
        private DB db;
+       private SQL sql;
        // stores dbObject for use as the same instance for all DB
        // connections.
        public SQL(DB db){
         this.db = db;
+       }
+       
+       public void setSQL(SQL sql){
+           this.sql = sql;
        }
        
         // changes SQL depending on the frame that will use it.
@@ -128,12 +148,11 @@ import java.util.List;
         fifthFieldValue = textFieldValues[4];
         
         String dbName;
-        Functions functions = new Functions();
         
         // subjectsFrame only has 5 textfields
         // where as studentsFrame and teachersFrame have
         // 6.
-        if (!frameName.equalsIgnoreCase(functions.subjectsFrame.getName())){
+        if (!frameName.equalsIgnoreCase(functions.subjectsJFrame.getName())){
             sixthFieldValue = textFieldValues[5];
         }
         
@@ -141,7 +160,7 @@ import java.util.List;
         // assigns the dbName so SQL is dynamic and
         // changes accordingly to which frame
         // is being called for the SQL
-        if (frameName.equalsIgnoreCase(functions.studentsFrame.getName())){
+        if (frameName.equalsIgnoreCase(functions.studentsJFrame.getName())){
             dbName = "Students";
             insertSQL =  
                 "INSERT INTO " + dbName + " VALUES(" + firstFieldValue + ", '" + secondFieldValue + 
@@ -149,14 +168,14 @@ import java.util.List;
                 fifthFieldValue + "','" + sixthFieldValue + "')";
         }
         // subjects table only has 5 columns
-        else if (frameName.equalsIgnoreCase(functions.subjectsFrame.getName())){
+        else if (frameName.equalsIgnoreCase(functions.subjectsJFrame.getName())){
                 dbName = "Subjects";
             insertSQL = 
                 "INSERT INTO " + dbName + " VALUES(" + firstFieldValue + ", '" + secondFieldValue + 
                 "','" + thirdFieldValue + "','" + fourthFieldValue + "','" + 
                 fifthFieldValue + "')";
         }
-        else if (frameName.equalsIgnoreCase(functions.teachersFrame.getName())){
+        else if (frameName.equalsIgnoreCase(functions.teachersJFrame.getName())){
             dbName = "Teachers";
             insertSQL = 
                 "INSERT INTO " + dbName + " VALUES(" + firstFieldValue + ", '" + secondFieldValue + 
@@ -179,7 +198,7 @@ import java.util.List;
         // subjectsFrame only has 5 textfields
         // where as studentsFrame and teachersFrame have
         // 6.
-        if (!frameName.equalsIgnoreCase(functions.subjectsFrame.getName())){
+        if (!frameName.equalsIgnoreCase(functions.subjectsJFrame.getName())){
             sixthFieldValue = textFieldValues[5];
         }
         
@@ -187,21 +206,21 @@ import java.util.List;
         // changes accordingly to which frame
         // is being called for the SQL
       
-        if (frameName.equalsIgnoreCase(functions.studentsFrame.getName())){
+        if (frameName.equalsIgnoreCase(functions.studentsJFrame.getName())){
             dbName = "Students";
                 updateSQL = ""
                 + "UPDATE " +  dbName + " SET " + "studid='" + firstFieldValue + "', studname='" + secondFieldValue + "', studaddr='" + thirdFieldValue + "',"
                 + "studcrs='" + fourthFieldValue + "', studgender='" + fifthFieldValue + "', yrlvl='" + sixthFieldValue + "'"
                 + "WHERE studid=" + firstFieldValue ;
         }
-        else if (frameName.equalsIgnoreCase(functions.subjectsFrame.getName())){
+        else if (frameName.equalsIgnoreCase(functions.subjectsJFrame.getName())){
             dbName = "Subjects";
                 updateSQL = ""
                 + "UPDATE " +  dbName + " SET " + "subjid='" + firstFieldValue + "', subjode='" + secondFieldValue + "', subjdesc='" + thirdFieldValue + "',"
                 + "subjunits='" + fourthFieldValue + "', subjsched='" + fifthFieldValue + "'"
                 + "WHERE subjid=" + firstFieldValue ;
         }
-        else if (frameName.equalsIgnoreCase(functions.teachersFrame.getName())){
+        else if (frameName.equalsIgnoreCase(functions.teachersJFrame.getName())){
             dbName = "Teachers";
                 updateSQL = ""
                 + "UPDATE " +  dbName + " SET " + "Tid='" + firstFieldValue + "', Tname='" + secondFieldValue + "', Tdept='" + thirdFieldValue + "',"
@@ -223,7 +242,7 @@ import java.util.List;
         // subjectsFrame only has 5 textfields
         // where as studentsFrame and teachersFrame have
         // 6.
-        if (!frameName.equalsIgnoreCase(functions.subjectsFrame.getName())){
+        if (!frameName.equalsIgnoreCase(functions.subjectsJFrame.getName())){
             sixthFieldValue = textFieldValues[5];
         }
             
@@ -231,16 +250,16 @@ import java.util.List;
         // changes accordingly to which frame
         // is being called for the SQL
       
-        if (frameName.equalsIgnoreCase(functions.studentsFrame.getName())){
+        if (frameName.equalsIgnoreCase(functions.studentsJFrame.getName())){
             dbName = "Students";
                 deleteSQL = "DELETE FROM " + dbName +" WHERE studid=" + firstFieldValue;
             System.out.println(deleteSQL);
         }
-        else if (frameName.equalsIgnoreCase(functions.subjectsFrame.getName())){
+        else if (frameName.equalsIgnoreCase(functions.subjectsJFrame.getName())){
             dbName = "Subjects";
                 deleteSQL = "DELETE FROM " + dbName +" WHERE subjid=" + firstFieldValue;
         }
-        else if (frameName.equalsIgnoreCase(functions.teachersFrame.getName())){
+        else if (frameName.equalsIgnoreCase(functions.teachersJFrame.getName())){
             dbName = "Teachers";
                 deleteSQL = "DELETE FROM " + dbName +" WHERE Tid=" + firstFieldValue;
         }

@@ -13,9 +13,7 @@ import java.util.Map;
  * @author jiyo
  */
 
-class sample {
-    
-}
+
 public class Exer5 {
 
     /**
@@ -24,7 +22,7 @@ public class Exer5 {
     public static void main(String[] args) {
        var loginJFrame = new LoginGUIJFrame();
        loginJFrame.setVisible(true);
-
+        
        }
        
        

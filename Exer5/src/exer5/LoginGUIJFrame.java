@@ -20,8 +20,28 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
     /**
      * Creates new form LoginGUIJFrame
      */
+    
+    private DB db = new DB();
+    private SQL sql = new SQL(db);
+    
+    private final StudentsJFrame studentsJFrame;
+    private final SubjectsJFrame subjectsJFrame;
+    private final TeachersJFrame teachersJFrame;
+    private final Functions functions;
     public LoginGUIJFrame() {
         initComponents();
+        
+        studentsJFrame = new StudentsJFrame(sql, db);
+        
+        subjectsJFrame = new SubjectsJFrame();
+       
+        teachersJFrame = new TeachersJFrame();
+        functions = new Functions(db,
+        studentsJFrame,  subjectsJFrame, teachersJFrame);
+    
+       studentsJFrame.setSubjectsJFrame(subjectsJFrame);
+       studentsJFrame.setTeachersJFrame(teachersJFrame);
+       studentsJFrame.setFunctions(functions);
     }
 
     /**
@@ -158,7 +178,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    DB db = new DB();
+    ;
     // changes value of comboboxes to dbNames from dbSelector event
     private void changeSelector_comboBoxValue(List<String> dbNames){
        DefaultComboBoxModel model = (DefaultComboBoxModel) dbSelector_comboBox.getModel();
@@ -259,7 +279,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         // should dynamically check for dbs
         // but not much time left just refactor in future
         else if (selectedDB.equalsIgnoreCase("1st_sy2022_2023")){
-            var studentsJFrame = new StudentsJFrame(db);
+           
             studentsJFrame.setVisible(true);
             this.setVisible(false);
             this.dispose();

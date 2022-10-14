@@ -20,15 +20,29 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SubjectsJFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form StudentsJFrame
-     */
+
+    private DB db;
     public SubjectsJFrame() {
         initComponents();
-        SQL sql = new SQL();
+        this.db = db;
+        setSQL(sql);
         sql.GetResultSetSQL(this.getName(), subjects_table);
-        
+
     }
+    
+    
+    private SQL sql;
+    private void setSQL(SQL sql){
+        this.sql = sql;
+    }
+
+    public SQL getSQL(){
+
+        return sql;
+    }
+
+
+    
     
     
 
@@ -512,7 +526,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
 
     private void students_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_students_itemActionPerformed
              
-             StudentsJFrame studentsFrame = new StudentsJFrame();
+             StudentsJFrame studentsFrame = new StudentsJFrame(db);
              studentsFrame.setVisible(true);
     }//GEN-LAST:event_students_itemActionPerformed
 
@@ -541,8 +555,7 @@ public class SubjectsJFrame extends javax.swing.JFrame {
             sched_textField.getText()};
        
             Functions functions = new Functions();
-            SQL sqlObj = new SQL();
-            DB db = new DB();
+           
             db.connectDB();
         // checks if ID is a valid id    
         // checks if ID provided already exists
@@ -551,17 +564,17 @@ public class SubjectsJFrame extends javax.swing.JFrame {
             if (!functions.IsExistingID(functions.getTextFieldValues(textFieldValues), this.getName())){
                 // includes frame name to verify which frame
                 // is sending the setInsertSQL
-                 sqlObj.setInsertSQL(textFieldValues, this.getName());
-                 String sql = sqlObj.getInsertSQL(this.getName());
-                 db.executeUpdate(sql);
-                 sqlObj.GetResultSetSQL(this.getName(), subjects_table);
+                 sql.setInsertSQL(textFieldValues, this.getName());
+                 String insertSQL = sql.getInsertSQL(this.getName());
+                 db.executeUpdate(insertSQL);
+                 sql.GetResultSetSQL(this.getName(), subjects_table);
                 System.out.println("Student ID data inserted.");
                 
                 // converts return value from GetResultSetSQL to
                 // a local variable
                 
                 // passes it to DisplayTableValues
-                //List<String> resultData = sqlObj.GetResultSetSQL(students_table);
+                //List<String> resultData = sql.GetResultSetSQL(students_table);
                 //functions.DisplayTableValues(students_table, resultData);
                 return;
             }
@@ -586,14 +599,14 @@ public class SubjectsJFrame extends javax.swing.JFrame {
 
         //Deletes row and replaces it with a new and updated one.
         // String update = "DELETE FROM Students WHERE studid='" + id + "'";
-        SQL sqlObj = new SQL();
+        
       
        if (functions.IsANumber(functions.getTextFieldValues(textFieldValues), this.getName())){
             if (functions.IsExistingID(functions.getTextFieldValues(textFieldValues), this.getName())){
-                sqlObj.setUpdateSQL(textFieldValues, this.getName());
-                String sql = sqlObj.getUpdateSQL(this.getName());
-                db.executeUpdate(sql);
-                sqlObj.GetResultSetSQL(this.getName(), subjects_table);
+                sql.setUpdateSQL(textFieldValues, this.getName());
+                String updateSQL = sql.getUpdateSQL(this.getName());
+                db.executeUpdate(updateSQL);
+                sql.GetResultSetSQL(this.getName(), subjects_table);
                 System.out.println("Student ID data updated.");
                 return;
             }
@@ -619,11 +632,11 @@ public class SubjectsJFrame extends javax.swing.JFrame {
             System.out.println("Cannot delete data from Student ID.");
             return;
         }
-        SQL sqlObj = new SQL();
-        sqlObj.setDeleteSQL(textFieldValues, this.getName());
-        String sql = sqlObj.getDeleteSQL(this.getName());
-        db.executeUpdate(sql);
-        sqlObj.GetResultSetSQL(this.getName(), subjects_table);
+       
+        sql.setDeleteSQL(textFieldValues, this.getName());
+        String deleteSQL = sql.getDeleteSQL(this.getName());
+        db.executeUpdate(deleteSQL);
+        sql.GetResultSetSQL(this.getName(), subjects_table);
         System.out.println("Student ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
 
@@ -647,19 +660,19 @@ public class SubjectsJFrame extends javax.swing.JFrame {
         desc_textField.setText(subjdesc);
         units_textField.setText(subjunits);
         sched_textField.setText(subjsched);
-        SQL sql = new SQL();
+        
         sql.GetSecondaryResultSetSQL(this.getName(), classlist_table, selected_subjid);
     }//GEN-LAST:event_subjects_tableMouseClicked
     
     
     FilterSQL filterSQL = new FilterSQL();
-    DB db = new DB();
-    SQL sqlObj = new SQL();
+    
+    
     private String[] idFilter_values;
     public void GetFilterSQL(){
         
         DefaultTableModel tableModel = (DefaultTableModel) subjects_table.getModel();
-        sqlObj.ClearJTable(tableModel);
+        sql.ClearJTable(tableModel);
         
         String filterString = "";
         if(!idFilter_textField.getText().equals("")){
