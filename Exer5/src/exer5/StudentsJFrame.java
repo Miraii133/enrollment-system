@@ -4,14 +4,8 @@
  */
 package exer5;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -28,6 +22,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
     public StudentsJFrame(SQL sql, DB db) {
         
         initComponents();
+        this.sql = sql;
+        this.db = db;
         sql.GetResultSetSQL(this.getName(), students_table);
         
     }
@@ -711,8 +707,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
             address_textField.getText(), course_textField.getText(), 
             gender_textField.getText(), year_textField.getText()};
        
-            Functions functions = new Functions();
-            db.connectDB();
+
         // checks if ID is a valid id    
         // checks if ID provided already exists
         // so code can insert it to DB. StudentsJFrame studentsJFrame = new StudentsJFrame();
@@ -818,8 +813,8 @@ public class StudentsJFrame extends javax.swing.JFrame {
         
        
         sql.setDeleteSQL(textFieldValues, this.getName());
-        String sql = sql.getDeleteSQL(this.getName());
-        db.executeUpdate(sql);
+        String deleteSQL = sql.getDeleteSQL(this.getName());
+        db.executeUpdate(deleteSQL);
         sql.GetResultSetSQL(this.getName(), students_table);
         System.out.println("Student ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
@@ -1002,7 +997,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         course_textField.setText(studcrs);
         gender_textField.setText(studgender);
         year_textField.setText(yrlvl);
-        getSQL().GetSecondaryResultSetSQL(this.getName(), enrolledSubj_table, selected_studid);
+        sql.GetSecondaryResultSetSQL(this.getName(), enrolledSubj_table, selected_studid);
     }//GEN-LAST:event_students_tableMouseClicked
     
     // refers to the selected subjid in the enrolled table.

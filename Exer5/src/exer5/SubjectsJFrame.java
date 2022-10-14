@@ -24,9 +24,8 @@ public class SubjectsJFrame extends javax.swing.JFrame {
     private DB db;
     public SubjectsJFrame() {
         initComponents();
-        this.db = db;
         setSQL(sql);
-        sql.GetResultSetSQL(this.getName(), subjects_table);
+        //sql.GetResultSetSQL(this.getName(), subjects_table);
 
     }
     

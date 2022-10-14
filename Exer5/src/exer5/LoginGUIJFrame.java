@@ -21,27 +21,10 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
      * Creates new form LoginGUIJFrame
      */
     
-    private DB db = new DB();
-    private SQL sql = new SQL(db);
-    
-    private final StudentsJFrame studentsJFrame;
-    private final SubjectsJFrame subjectsJFrame;
-    private final TeachersJFrame teachersJFrame;
-    private final Functions functions;
+
     public LoginGUIJFrame() {
         initComponents();
-        
-        studentsJFrame = new StudentsJFrame(sql, db);
-        
-        subjectsJFrame = new SubjectsJFrame();
-       
-        teachersJFrame = new TeachersJFrame();
-        functions = new Functions(db,
-        studentsJFrame,  subjectsJFrame, teachersJFrame);
     
-       studentsJFrame.setSubjectsJFrame(subjectsJFrame);
-       studentsJFrame.setTeachersJFrame(teachersJFrame);
-       studentsJFrame.setFunctions(functions);
     }
 
     /**
@@ -179,6 +162,35 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     ;
+  
+    DB db = new DB();
+    private SQL sql = new SQL(db);
+    
+    private StudentsJFrame studentsJFrame;
+    private SubjectsJFrame subjectsJFrame;
+    private TeachersJFrame teachersJFrame;
+    private Functions functions;
+    
+    // initializes all classes, instead of placing it into
+    // constructor where it will call all frames
+    // prior to logging in bug.
+    private void initialize_classes(){
+        studentsJFrame = new StudentsJFrame(sql, db);
+        subjectsJFrame = new SubjectsJFrame();
+        teachersJFrame = new TeachersJFrame();
+        functions = new Functions(db,
+        studentsJFrame,  subjectsJFrame, teachersJFrame);
+        
+        // passes reference of jframes to sql
+        sql.setStudentsJFrame(studentsJFrame);
+        sql.setSubjectsJFrame(subjectsJFrame);
+        sql.setTeachersJFrame(teachersJFrame);
+        
+    
+       studentsJFrame.setSubjectsJFrame(subjectsJFrame);
+       studentsJFrame.setTeachersJFrame(teachersJFrame);
+       studentsJFrame.setFunctions(functions);
+    }
     // changes value of comboboxes to dbNames from dbSelector event
     private void changeSelector_comboBoxValue(List<String> dbNames){
        DefaultComboBoxModel model = (DefaultComboBoxModel) dbSelector_comboBox.getModel();
@@ -316,8 +328,9 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
   
       
   
-      
+      initialize_classes();
       showJFrame(selectedDB);
+      
      
     }//GEN-LAST:event_submit_buttonActionPerformed
     
