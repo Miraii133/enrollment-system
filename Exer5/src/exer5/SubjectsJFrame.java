@@ -538,20 +538,18 @@ private DB db;
 
     private void students_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_students_itemActionPerformed
              
-             StudentsJFrame studentsFrame = new StudentsJFrame(db);
-             studentsFrame.setVisible(true);
+             studentsJFrame.dispose();
+             studentsJFrame.setVisible(true);
     }//GEN-LAST:event_students_itemActionPerformed
 
     private void subjects_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjects_itemActionPerformed
              
-             SubjectsJFrame subjectsFrame = new SubjectsJFrame();
-             subjectsFrame.setVisible(true);
+             this.setVisible(true);
     }//GEN-LAST:event_subjects_itemActionPerformed
 
     private void teachers_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teachers_itemActionPerformed
              
-             TeachersJFrame teachersFrame = new TeachersJFrame();
-             teachersFrame.setVisible(true);
+             teachersJFrame.setVisible(true);
     }//GEN-LAST:event_teachers_itemActionPerformed
 
     
@@ -566,9 +564,6 @@ private DB db;
             desc_textField.getText(), units_textField.getText(), 
             sched_textField.getText()};
        
-            
-           
-            db.connectDB();
         // checks if ID is a valid id    
         // checks if ID provided already exists
         // so code can insert it to DB.
@@ -605,9 +600,7 @@ private DB db;
             id_textField.getText(), ode_textField.getText(),
             desc_textField.getText(), units_textField.getText(), 
             sched_textField.getText()};
-        Functions functions = new Functions();
-        DB db = new DB();
-        db.connectDB();
+ 
 
         //Deletes row and replaces it with a new and updated one.
         // String update = "DELETE FROM Students WHERE studid='" + id + "'";
@@ -636,9 +629,6 @@ private DB db;
             desc_textField.getText(), units_textField.getText(), 
             sched_textField.getText()};
         
-        DB db = new DB();
-        db.connectDB();
-        Functions functions = new Functions();
         if (!functions.IsExistingID(textFieldValues, this.getName())){
             System.out.println("Student ID provided does not exist!");
             System.out.println("Cannot delete data from Student ID.");
@@ -739,7 +729,6 @@ private DB db;
             //filterString = " WHERE studYearLvl='" + yearlvlFilter.getText() + "' ";
         }
 
-        db.connectDB();
         db.executeQuery("SELECT * FROM Subjects " + filterString);
         filterSQL.GetFiltered_ResultSetSQL(this.getName(), subjects_table, "SELECT * FROM Subjects " + filterString);
         

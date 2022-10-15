@@ -690,7 +690,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void students_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_students_itemActionPerformed
-
+             this.dispose();
              this.setVisible(true);
     }//GEN-LAST:event_students_itemActionPerformed
 

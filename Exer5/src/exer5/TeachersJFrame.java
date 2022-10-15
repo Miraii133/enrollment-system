@@ -24,9 +24,12 @@ public class TeachersJFrame extends javax.swing.JFrame {
  private SQL sql;
  private FilterSQL filterSQL;
  
+ 
  private StudentsJFrame studentsJFrame;
  private SubjectsJFrame subjectsJFrame;
  private Functions functions;
+ 
+ private Assign assign;
     public TeachersJFrame(SQL sql, DB db) {
         
         initComponents();
@@ -50,6 +53,10 @@ public class TeachersJFrame extends javax.swing.JFrame {
     
     public void setFilterSQL(FilterSQL filterSQL){
         this.filterSQL = filterSQL;
+    }
+    
+    public void setAssign(Assign assign){
+        this.assign = assign;
     }
     
 
@@ -648,20 +655,17 @@ public class TeachersJFrame extends javax.swing.JFrame {
 
     private void students_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_students_itemActionPerformed
              
-             StudentsJFrame studentsFrame = new StudentsJFrame();
-             studentsFrame.setVisible(true);
+             studentsJFrame.setVisible(true);
     }//GEN-LAST:event_students_itemActionPerformed
 
     private void subjects_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjects_itemActionPerformed
              
-             SubjectsJFrame subjectsFrame = new SubjectsJFrame();
-             subjectsFrame.setVisible(true);
+             subjectsJFrame.setVisible(true);
     }//GEN-LAST:event_subjects_itemActionPerformed
 
     private void teachers_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teachers_itemActionPerformed
              
-             TeachersJFrame teachersFrame = new TeachersJFrame();
-             teachersFrame.setVisible(true);
+             this.setVisible(true);
     }//GEN-LAST:event_teachers_itemActionPerformed
 
     
@@ -924,22 +928,21 @@ public class TeachersJFrame extends javax.swing.JFrame {
 
     private void assignAdd_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignAdd_buttonActionPerformed
 
-       int confirmAdd = JOptionPane.showConfirmDialog(teachersJFrame,"Assign SubjectID: " + SubjectsJFrame.selected_subjid + " to TeacherID: " + selected_teacherid);
+       int confirmAdd = JOptionPane.showConfirmDialog(this, "Assign SubjectID: " + SubjectsJFrame.selected_subjid + " to TeacherID: " + selected_teacherid);
        if (confirmAdd == JOptionPane.YES_OPTION){
-           Assign assign = new Assign();
            assign.InsertSQLToAssign(selected_teacherid, SubjectsJFrame.selected_subjid, this.getName(), teachers_table, assignSubj_table);
-           JOptionPane.showMessageDialog(teachersJFrame, "Successfully assigned.");
+           JOptionPane.showMessageDialog(this, "Successfully assigned.");
        }
       
     }//GEN-LAST:event_assignAdd_buttonActionPerformed
 
     private void assignDrop_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignDrop_buttonActionPerformed
         
-       int confirmAdd = JOptionPane.showConfirmDialog(teachersJFrame,"Remove SubjectID: " + selected_assignsubjid + " to TeacherID: " + selected_teacherid);
+       int confirmAdd = JOptionPane.showConfirmDialog(this,"Remove SubjectID: " + selected_assignsubjid + " to TeacherID: " + selected_teacherid);
        if (confirmAdd == JOptionPane.YES_OPTION){
-           Assign assign = new Assign();
+          
            assign.DeleteSQLToAssign(selected_teacherid, selected_assignsubjid, this.getName(), teachers_table, assignSubj_table);
-           JOptionPane.showMessageDialog(teachersJFrame, "Successfully dropped.");
+           JOptionPane.showMessageDialog(this, "Successfully dropped.");
        }
     }//GEN-LAST:event_assignDrop_buttonActionPerformed
     public JTable GetJTable(){

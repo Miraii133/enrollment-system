@@ -265,7 +265,7 @@ import java.util.List;
         if (frameName.equalsIgnoreCase(studentsJFrame.getName())){
             dbName = "Students";
                 deleteSQL = "DELETE FROM " + dbName +" WHERE studid=" + firstFieldValue;
-            System.out.println(deleteSQL);
+           
         }
         else if (frameName.equalsIgnoreCase(subjectsJFrame.getName())){
             dbName = "Subjects";
@@ -388,7 +388,7 @@ import java.util.List;
              
             // update refers to the statement that is going to modify
             // the database.
-            System.out.println(searchQuery);
+            
             ResultSet resultSet = db.getStatement().executeQuery(searchQuery);
             DefaultTableModel tableModel = (DefaultTableModel) jtableName.getModel();
             ClearJTable(tableModel);

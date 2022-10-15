@@ -174,6 +174,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
     private Functions functions;
     
     private Enroll enroll;
+    private Assign assign;
     
    
     
@@ -188,6 +189,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         studentsJFrame,  subjectsJFrame, teachersJFrame);
         
         enroll = new Enroll();
+        assign = new Assign();
         
         filterSQL = new FilterSQL(db, sql);
         // passes reference of jframes to sql
@@ -210,9 +212,15 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
        teachersJFrame.setStudentsJFrame(studentsJFrame);
        teachersJFrame.setSubjectsJFrame(subjectsJFrame);
        teachersJFrame.setFunctions(functions);
+       teachersJFrame.setAssign(assign);
        
        enroll.setDB(db);
        enroll.setSQL(sql);
+       
+       assign.setDB(db);
+       assign.setSQL(sql);
+       
+    
        
     }
     // changes value of comboboxes to dbNames from dbSelector event
