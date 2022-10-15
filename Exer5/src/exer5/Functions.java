@@ -118,6 +118,8 @@ import java.util.List;
        private StudentsJFrame studentsJFrame;
        private SubjectsJFrame subjectsJFrame;
        private TeachersJFrame teachersJFrame;
+       
+       private TeachersUserFormJFrame teachersFormJFrame;
        // stores dbObject for use as the same instance for all DB
        // connections.
        public SQL(DB db){
@@ -132,6 +134,10 @@ import java.util.List;
        }
        public void setTeachersJFrame(TeachersJFrame teachersJFrame){
            this.teachersJFrame = teachersJFrame;
+       }
+       
+       public void setTeachersFormJFrame(TeachersUserFormJFrame teachersFormJFrame){
+           this.teachersFormJFrame = teachersFormJFrame;
        }
    
    
@@ -384,6 +390,11 @@ import java.util.List;
         else if (frameName.equalsIgnoreCase("teachersJFrame")){
             searchQuery = "SELECT Teachers.Tid as id, Teachers.Tname, Teachers.Tdept, Teachers.Taddr, Teachers.Tcontact, Teachers.Tstatus, (SELECT COUNT(Teachers.Tid) from Assign, Teachers, Subjects WHERE Teachers.Tid=Assign.Tid AND Assign.subjid=Subjects.subjid AND Assign.Tid=id) AS assigned FROM Teachers";
         } 
+        
+        else if (frameName.equalsIgnoreCase("teachersFormJFrame")){
+            searchQuery = "SELECT Subjects.subjid as id, Subjects.subjode, Subjects.subjdesc, Subjects.subjunits, Subjects.subjsched, (SELECT COUNT(Subjects.subjid) from Enroll, Subjects WHERE Subjects.subjid=Enroll.subjid AND Enroll.subjid=id) AS enrolled FROM Subjects";
+        }
+        
         try {
              
             // update refers to the statement that is going to modify
@@ -477,6 +488,31 @@ import java.util.List;
              
             }
         } 
+         else if (frameName.equalsIgnoreCase("teachersFormJFrame")){
+            
+             String array[] = new String[6];
+             while(resultSet.next()){
+                 
+                String id = resultSet.getString("id");
+                String subjode = resultSet.getString("subjode");
+                String subjdesc = resultSet.getString("subjdesc");
+                String subjunits = resultSet.getString("subjunits");
+                String subjsched = resultSet.getString("subjsched");
+                String enrolled = resultSet.getString("enrolled");
+                
+                // adds array to table row
+                array[0] = id;
+                array[1] = subjode;
+                array[2] = subjdesc;
+                array[3] = subjunits;
+                array[4] = subjsched;
+                array[5] = enrolled;
+             
+
+             tableModel.addRow(array);
+             
+            }
+         }
             
             
         } catch (SQLException ex ){

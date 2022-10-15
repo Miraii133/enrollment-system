@@ -323,6 +323,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
             // supposed to be hidden
             while(rs.next()) {
                if(!isSelectedToHideDB(rs.getString(1))){
+                   
                  dbNames.add(rs.getString(1));
                }
 
@@ -351,17 +352,20 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         // but not much time left just refactor in future
         
         // root user check
-        if (selectedDB.equalsIgnoreCase("1st_sy2022_2023")){
+        if (selectedDB.equalsIgnoreCase("1st_sy2022_2023") && 
+                userName.equalsIgnoreCase(rootUserName)){
             studentsJFrame.setVisible(true);
             this.dispose();
             return;
         }
-        else if (selectedDB.equalsIgnoreCase("2nd_sy2022_2023")){
+        else if (selectedDB.equalsIgnoreCase("2nd_sy2022_2023") && 
+                userName.equalsIgnoreCase(rootUserName)){
             studentsJFrame.setVisible(true);
             this.dispose();
             return;
         }
-        else if (selectedDB.equalsIgnoreCase("summer_sy2022_2023")){
+        else if (selectedDB.equalsIgnoreCase("summer_sy2022_2023")&& 
+                userName.equalsIgnoreCase(rootUserName)){
             studentsJFrame.setVisible(true);
             this.dispose();
             return;
@@ -372,18 +376,20 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
             this.dispose();
             return;
         }
-        
-            
-        
+
+        // student login form
         if (selectedDB.equalsIgnoreCase("enrollmentsystem")){
             var studentUserForm = new StudentsUserFormJFrame();
             studentUserForm.setVisible(true);
             this.dispose();
         }
+        
+        // teacher login form
+        // checks if username is not root
         else if (selectedDB.equalsIgnoreCase("1st_sy2022_2023")&&
                 !userName.equalsIgnoreCase(rootUserName)
                 ){
-            var teachersUserForm = new TeachersUserFormJFrame();
+            var teachersUserForm = new TeachersUserFormJFrame(sql, db);
             teachersUserForm.setVisible(true);
             this.dispose();
             
@@ -391,7 +397,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         else if (selectedDB.equalsIgnoreCase("2nd_sy2022_2023")&&
                 !userName.equalsIgnoreCase(rootUserName)
                 ){
-            var teachersUserForm = new TeachersUserFormJFrame();
+            var teachersUserForm = new TeachersUserFormJFrame(sql, db);
             teachersUserForm.setVisible(true);
             this.dispose();
             
@@ -399,7 +405,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         else if (selectedDB.equalsIgnoreCase("summer_sy2022_2023")&&
                 !userName.equalsIgnoreCase(rootUserName)
                 ){
-            var teachersUserForm = new TeachersUserFormJFrame();
+            var teachersUserForm = new TeachersUserFormJFrame(sql, db);
             teachersUserForm.setVisible(true);
             this.dispose();
             

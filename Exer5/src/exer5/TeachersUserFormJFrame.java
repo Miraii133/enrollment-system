@@ -1,5 +1,7 @@
 package exer5;
 
+import static exer5.SubjectsJFrame.selected_subjid;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -11,11 +13,13 @@ package exer5;
  */
 public class TeachersUserFormJFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TeachersUserFormJFrame
-     */
-    public TeachersUserFormJFrame() {
+    private DB db;
+    private SQL sql;
+    public TeachersUserFormJFrame(SQL sql, DB db) {
         initComponents();
+        this.sql = sql;
+        this.db = db;
+        sql.GetResultSetSQL(this.getName(), subjects_table);
     }
 
     /**
@@ -30,9 +34,9 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        subjects_table = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        grades_table = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
@@ -71,8 +75,9 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setName("teachersFormJFrame"); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        subjects_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -98,12 +103,17 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
+        subjects_table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                subjects_tableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(subjects_table);
+        if (subjects_table.getColumnModel().getColumnCount() > 0) {
+            subjects_table.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        grades_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -122,12 +132,12 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
-        if (jTable3.getColumnModel().getColumnCount() > 0) {
-            jTable3.getColumnModel().getColumn(0).setResizable(false);
-            jTable3.getColumnModel().getColumn(1).setResizable(false);
-            jTable3.getColumnModel().getColumn(3).setResizable(false);
-            jTable3.getColumnModel().getColumn(5).setResizable(false);
+        jScrollPane3.setViewportView(grades_table);
+        if (grades_table.getColumnModel().getColumnCount() > 0) {
+            grades_table.getColumnModel().getColumn(0).setResizable(false);
+            grades_table.getColumnModel().getColumn(1).setResizable(false);
+            grades_table.getColumnModel().getColumn(3).setResizable(false);
+            grades_table.getColumnModel().getColumn(5).setResizable(false);
         }
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
@@ -196,6 +206,30 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public static String selected_subjid;
+    private void subjects_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subjects_tableMouseClicked
+        String subjid;
+        String subjode;
+        String subjdesc;
+        String subjunits;
+        String subjsched;
+        
+        int[] selectedRows = subjects_table.getSelectedRows();
+        subjid = subjects_table.getValueAt(selectedRows[0], 0).toString();
+        selected_subjid = subjid;
+        subjode = subjects_table.getValueAt(selectedRows[0], 1).toString();
+        subjdesc = subjects_table.getValueAt(selectedRows[0], 2).toString();
+        subjunits = subjects_table.getValueAt(selectedRows[0], 3).toString();
+        subjsched = subjects_table.getValueAt(selectedRows[0], 4).toString();
+        id_textField.setText(subjid);
+        ode_textField.setText(subjode);
+        desc_textField.setText(subjdesc);
+        units_textField.setText(subjunits);
+        sched_textField.setText(subjsched);
+        
+        sql.GetSecondaryResultSetSQL(this.getName(), classlist_table, selected_subjid);
+    }//GEN-LAST:event_subjects_tableMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -233,18 +267,18 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> final_comboBox;
+    private javax.swing.JTable grades_table;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JComboBox<String> midterm_comboBox;
     private javax.swing.JComboBox<String> prefinal_comboBox;
     private javax.swing.JComboBox<String> prelim_comboBox;
     private javax.swing.JButton save_button;
+    private javax.swing.JTable subjects_table;
     // End of variables declaration//GEN-END:variables
 }
