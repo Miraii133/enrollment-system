@@ -1101,7 +1101,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
    String enrollSQL = new StringBuilder()
   .append(tableSemName)
   .append(".Enroll (")
-  .append("eid int, ")
+  .append("eid int NOT NULL AUTO_INCREMENT, ")
   .append("studid int, ")
   .append("subjid int, ")
   .append("PRIMARY KEY (eid), ")
@@ -1113,7 +1113,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
   .append(tableSemName)
   .append(".Assign (")
   .append("dateassigned Date, ")
-  .append("Tid int, ")
+  .append("Tid, ")
   // UNIQUE removes duplicates
   // since instruction restricts duplicate of studid
   .append("subjid int UNIQUE, ")

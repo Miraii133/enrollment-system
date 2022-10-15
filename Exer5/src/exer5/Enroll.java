@@ -23,7 +23,7 @@ public class Enroll {
     public void InsertSQLToEnroll(String selected_studid, String selected_subjid, String frameName, JTable primaryTable, JTable secondaryTable){
         
         String insertSQL = 
-                "INSERT INTO Enroll(eid, studid, subjid) VALUES (" + 3 +","+ selected_studid + "," + SubjectsJFrame.selected_subjid +")";
+                "INSERT INTO Enroll( studid, subjid) VALUES (" + selected_studid + "," + SubjectsJFrame.selected_subjid +")";
         System.out.println(insertSQL);
         db.executeUpdate(insertSQL);
         sql.GetResultSetSQL(frameName, primaryTable);
