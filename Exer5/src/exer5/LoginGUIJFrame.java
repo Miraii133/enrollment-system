@@ -241,7 +241,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
     private boolean isSelectedToHideDB(String dbName){
         // add to this list to hide DBs
         List<String> hiddenDBs = Arrays.asList(
-                "information_schema", "performance_schema", "dummyDB",
+                "information_schema", "performance_schema",
                 "mysql", "sys"
         ); 
         
@@ -325,15 +325,22 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         else if (selectedDB.equalsIgnoreCase("1st_sy2022_2023")){
            
             studentsJFrame.setVisible(true);
-            this.setVisible(false);
             this.dispose();
         }
         else if (selectedDB.equalsIgnoreCase("2nd_sy2022_2023")){
-            
+            studentsJFrame.setVisible(true);
+            this.dispose();
         }
         else if (selectedDB.equalsIgnoreCase("summer_sy2022_2023")){
-            
+            studentsJFrame.setVisible(true);
+            this.dispose();
         }
+        
+         else if (selectedDB.equalsIgnoreCase("dummyDB")){
+            studentsJFrame.setVisible(true);
+            this.dispose();
+        }
+        
     }
     
     private void submit_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submit_buttonActionPerformed

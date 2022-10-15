@@ -540,6 +540,20 @@ import java.util.List;
        public void ClearSubjectsIdsFromResultSet(){
            this.subjectsIdsList.clear();
        }
+       
+       // teachers
+        private List<Integer> teachersIdsList=new ArrayList<>();
+       private void SetTeachersIdsFromResultSet(int teachersIdsList){
+           this.teachersIdsList.add(teachersIdsList);
+       }
+       
+       public List<Integer> GetTeachersIdsFromResultSet(){
+           return teachersIdsList;
+       }
+       
+       public void ClearTeachersIdsFromResultSet(){
+           this.teachersIdsList.clear();
+       }
     
         //SQL sqlObj = new SQL(); 
         public void GetFiltered_ResultSetSQL(String frameName, JTable jtableName, String filterString){
@@ -611,7 +625,7 @@ import java.util.List;
              // Removes intitial values
              // from when StudentJFrame SQL query for default
              // display is loaded
-             ClearStudentIdsFromResultSet();
+             ClearSubjectsIdsFromResultSet();
              
             while (resultSet.next()){
                 String id = resultSet.getString("subjid");
@@ -623,14 +637,23 @@ import java.util.List;
                 
                
                  tableModel.addRow(array);
-                /*for(String data:array){  
-                resultData.add(data);
-                }*/
                  SetSubjectsIdsFromResultSet(Integer.parseInt(id));
                  counter++;
             }
         }
         else if (frameName.equalsIgnoreCase("teachersJFrame")){
+            
+              if (resultSet.last()) {
+             totalRowsInResultSet = resultSet.getRow();
+             SetTotalResultRows(totalRowsInResultSet);
+             resultSet.beforeFirst(); 
+           }
+              
+                int counter = 0;
+             // Removes intitial values
+             // from when TeachersId SQL query for default
+             // display is loaded
+             ClearTeachersIdsFromResultSet();
             
              while (resultSet.next()){
                 String id = resultSet.getString("Tid");
@@ -643,9 +666,8 @@ import java.util.List;
                 
                 // adds array to table row
                  tableModel.addRow(array);
-                /*for(String data:array){  
-                resultData.add(data);
-                }*/
+                 SetTeachersIdsFromResultSet(Integer.parseInt(id));
+                 counter++;
                 
             }
         } 

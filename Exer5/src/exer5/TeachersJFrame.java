@@ -750,9 +750,9 @@ public class TeachersJFrame extends javax.swing.JFrame {
             // but filter values is used instead
             // to get deleteValues
             
-            for (int i = 0; i < filterSQL.GetStudentIdsFromResultSet().size(); i++){
+            for (int i = 0; i < filterSQL.GetTeachersIdsFromResultSet().size(); i++){
                 String textFieldValues[] =  
-            {filterSQL.GetStudentIdsFromResultSet().get(i).toString(),"","","","",""};
+            {filterSQL.GetTeachersIdsFromResultSet().get(i).toString(),"","","","",""};
                 // retrieves deleteSQL from new SQL set in setDeleteSQL
                 sql.setDeleteSQL(textFieldValues, this.getName());
                 String deleteSQL = sql.getDeleteSQL(this.getName());
@@ -760,7 +760,7 @@ public class TeachersJFrame extends javax.swing.JFrame {
             }
  
             sql.GetResultSetSQL(this.getName(), teachers_table);
-            filterSQL.ClearStudentIdsFromResultSet();
+            filterSQL.ClearTeachersIdsFromResultSet();
             
             return;
         }

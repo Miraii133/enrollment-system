@@ -118,6 +118,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         students_item = new javax.swing.JMenuItem();
         subjects_item = new javax.swing.JMenuItem();
         teachers_item = new javax.swing.JMenuItem();
+        logout_item = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         firstSem_Menu = new javax.swing.JMenuItem();
         secondSem_Menu = new javax.swing.JMenuItem();
@@ -542,6 +543,14 @@ public class StudentsJFrame extends javax.swing.JFrame {
         });
         jMenu1.add(teachers_item);
 
+        logout_item.setText("Logout");
+        logout_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logout_itemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(logout_item);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("New");
@@ -904,7 +913,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
             }
             //filterString = " WHERE yrlvl='" + yearFilter_textField.getText() + "' ";
         }
-        db.connectDB();
+        
         db.executeQuery("SELECT * FROM Students " + filterString);
         filterSQL.GetFiltered_ResultSetSQL(this.getName(), students_table, "SELECT * FROM Students " + filterString);
         
@@ -1111,7 +1120,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
   .append(tableSemName)
   .append(".Assign (")
   .append("dateassigned Date, ")
-  .append("Tid, ")
+  .append("Tid int, ")
   // UNIQUE removes duplicates
   // since instruction restricts duplicate of studid
   .append("subjid int UNIQUE, ")
@@ -1159,6 +1168,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
       db.getStatement().addBatch(teachersSQL);
       db.getStatement().addBatch(gradesSQL);
       db.getStatement().addBatch(enrollSQL);
+      System.out.println(assignSQL);
       db.getStatement().addBatch(assignSQL);
       db.getStatement().addBatch(transactionChargesSQL);
       db.getStatement().addBatch(invoiceSQL);
@@ -1222,6 +1232,14 @@ public class StudentsJFrame extends javax.swing.JFrame {
       
        
     }//GEN-LAST:event_delete_MenuActionPerformed
+
+    private void logout_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_itemActionPerformed
+        this.dispose();
+        subjectsJFrame.dispose();
+        teachersJFrame.dispose();
+        var loginGUIJFrame = new LoginGUIJFrame();
+        loginGUIJFrame.setVisible(true);
+    }//GEN-LAST:event_logout_itemActionPerformed
     public JTable GetJTable(){
         
         return students_table;
@@ -1307,6 +1325,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JMenuItem logout_item;
     private javax.swing.JTextField nameFilterEnd_textField;
     private javax.swing.JTextField nameFilterStart_textField;
     private javax.swing.JComboBox<String> name_comboBox;

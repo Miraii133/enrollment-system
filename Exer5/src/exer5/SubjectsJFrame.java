@@ -621,19 +621,48 @@ private DB db;
             System.out.println("Please use Save instead.");
     }//GEN-LAST:event_update_buttonActionPerformed
 
+     boolean IsFilterEmpty(String filterString){
+        return filterString.isBlank();
+    }
+ 
     
     private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
-         String textFieldValues[] =  
+       
+           if (!IsFilterEmpty(GetFilterSQL())){   
+            // provides empty textFieldValues for setDeleteSQL
+            // since delete requires textfieldValues
+            // but filter values is used instead
+            // to get deleteValues
+            
+            for (int i = 0; i < filterSQL.GetSubjectsIdsFromResultSet().size(); i++){
+                String textFieldValues[] =  
+            {filterSQL.GetSubjectsIdsFromResultSet().get(i).toString(),"","","",""};
+                // retrieves deleteSQL from new SQL set in setDeleteSQL
+                sql.setDeleteSQL(textFieldValues, this.getName());
+                String deleteSQL = sql.getDeleteSQL(this.getName());
+                db.executeUpdate(deleteSQL);
+            }
+ 
+            sql.GetResultSetSQL(this.getName(), subjects_table);
+            filterSQL.ClearSubjectsIdsFromResultSet();;
+            
+            return;
+        }
+        
+        String textFieldValues[] =  
             {
             id_textField.getText(), ode_textField.getText(),
             desc_textField.getText(), units_textField.getText(), 
             sched_textField.getText()};
-        
+
         if (!functions.IsExistingID(textFieldValues, this.getName())){
             System.out.println("Student ID provided does not exist!");
             System.out.println("Cannot delete data from Student ID.");
             return;
         }
+        
+ 
+        
        
         sql.setDeleteSQL(textFieldValues, this.getName());
         String deleteSQL = sql.getDeleteSQL(this.getName());
@@ -670,7 +699,7 @@ private DB db;
     
     
     private String[] idFilter_values;
-    public void GetFilterSQL(){
+    public String GetFilterSQL(){
         
         DefaultTableModel tableModel = (DefaultTableModel) subjects_table.getModel();
         sql.ClearJTable(tableModel);
@@ -732,6 +761,7 @@ private DB db;
         db.executeQuery("SELECT * FROM Subjects " + filterString);
         filterSQL.GetFiltered_ResultSetSQL(this.getName(), subjects_table, "SELECT * FROM Subjects " + filterString);
         
+        return filterString;
     }
     
     private void id_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_comboBoxActionPerformed
