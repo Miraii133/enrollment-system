@@ -32,8 +32,7 @@ public class Assign {
     }
       public void InsertSQLToAssign(String selected_teacherid, String selected_subjid, String frameName, JTable primaryTable, JTable secondaryTable){
         String insertSQL = 
-                "INSERT INTO Assign(dateassigned, Tid, subjid) VALUES (" + "'" +  getCurrentDate() + "'" + ", "+ selected_teacherid + "," + SubjectsJFrame.selected_subjid +")";
-        System.out.println("insert" + insertSQL);        
+                "INSERT INTO Assign(dateassigned, Tid, subjid) VALUES (" + "'" +  getCurrentDate() + "'" + ", "+ selected_teacherid + "," + SubjectsJFrame.selected_subjid +")";      
         db.executeUpdate(insertSQL);
         sql.GetResultSetSQL(frameName, primaryTable);
         sql.GetSecondaryResultSetSQL(frameName, secondaryTable, selected_teacherid);

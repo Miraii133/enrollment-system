@@ -525,6 +525,21 @@ import java.util.List;
        public void ClearStudentIdsFromResultSet(){
            this.studIdsList.clear();
        }
+       
+       
+       // subjects
+       private List<Integer> subjectsIdsList=new ArrayList<>();
+       private void SetSubjectsIdsFromResultSet(int subjectsIdsList){
+           this.subjectsIdsList.add(subjectsIdsList);
+       }
+       
+       public List<Integer> GetSubjectsIdsFromResultSet(){
+           return subjectsIdsList;
+       }
+       
+       public void ClearSubjectsIdsFromResultSet(){
+           this.subjectsIdsList.clear();
+       }
     
         //SQL sqlObj = new SQL(); 
         public void GetFiltered_ResultSetSQL(String frameName, JTable jtableName, String filterString){
@@ -585,6 +600,19 @@ import java.util.List;
         
         else if (frameName.equalsIgnoreCase("subjectsJFrame")){
             
+             if (resultSet.last()) {
+             totalRowsInResultSet = resultSet.getRow();
+             SetTotalResultRows(totalRowsInResultSet);
+             resultSet.beforeFirst(); 
+           }
+            
+             
+             int counter = 0;
+             // Removes intitial values
+             // from when StudentJFrame SQL query for default
+             // display is loaded
+             ClearStudentIdsFromResultSet();
+             
             while (resultSet.next()){
                 String id = resultSet.getString("subjid");
                 String code = resultSet.getString("subjode");
@@ -598,7 +626,8 @@ import java.util.List;
                 /*for(String data:array){  
                 resultData.add(data);
                 }*/
-                
+                 SetSubjectsIdsFromResultSet(Integer.parseInt(id));
+                 counter++;
             }
         }
         else if (frameName.equalsIgnoreCase("teachersJFrame")){

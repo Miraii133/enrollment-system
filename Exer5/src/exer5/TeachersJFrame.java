@@ -30,14 +30,16 @@ public class TeachersJFrame extends javax.swing.JFrame {
  private Functions functions;
  
  private Assign assign;
+
+
     public TeachersJFrame(SQL sql, DB db) {
-        
         initComponents();
         this.sql = sql;
         this.db = db;
         sql.GetResultSetSQL(this.getName(), teachers_table);
-        
     }
+
+
     
      public void setStudentsJFrame(StudentsJFrame studentsJFrame){
         this.studentsJFrame = studentsJFrame;
@@ -688,17 +690,17 @@ public class TeachersJFrame extends javax.swing.JFrame {
             if (!functions.IsExistingID(functions.getTextFieldValues(textFieldValues), this.getName())){
                 // includes frame name to verify which frame
                 // is sending the setInsertSQL
-                 sqlObj.setInsertSQL(textFieldValues, this.getName());
-                 String sql = sqlObj.getInsertSQL(this.getName());
-                 db.executeUpdate(sql);
-                 sqlObj.GetResultSetSQL(this.getName(), teachers_table);
+                 sql.setInsertSQL(textFieldValues, this.getName());
+                 String insertSQL = sql.getInsertSQL(this.getName());
+                 db.executeUpdate(insertSQL);
+                 sql.GetResultSetSQL(this.getName(), teachers_table);
                 System.out.println("Student ID data inserted.");
                 
                 // converts return value from GetResultSetSQL to
                 // a local variable
                 
                 // passes it to DisplayTableValues
-                //List<String> resultData = sqlObj.GetResultSetSQL(students_table);
+                //List<String> resultData = sql.GetResultSetSQL(students_table);
                 //functions.DisplayTableValues(students_table, resultData);
                 return;
             }
@@ -717,18 +719,16 @@ public class TeachersJFrame extends javax.swing.JFrame {
             id_textField.getText(), name_textField.getText(),
             dept_textField.getText(), addr_textField.getText(), 
             contact_textField.getText(), status_textField.getText()};
-        DB db = new DB();
-        db.connectDB();
 
         //Deletes row and replaces it with a new and updated one.
         // String update = "DELETE FROM Students WHERE studid='" + id + "'";
       
        if (functions.IsANumber(functions.getTextFieldValues(textFieldValues), this.getName())){
             if (functions.IsExistingID(functions.getTextFieldValues(textFieldValues), this.getName())){
-                sqlObj.setUpdateSQL(textFieldValues, this.getName());
-                String sql = sqlObj.getUpdateSQL(this.getName());
-                db.executeUpdate(sql);
-                sqlObj.GetResultSetSQL(this.getName(), teachers_table);
+                sql.setUpdateSQL(textFieldValues, this.getName());
+                String updateSQL = sql.getUpdateSQL(this.getName());
+                db.executeUpdate(updateSQL);
+                sql.GetResultSetSQL(this.getName(), teachers_table);
                 System.out.println("Student ID data updated.");
                 return;
             }
@@ -738,25 +738,54 @@ public class TeachersJFrame extends javax.swing.JFrame {
             System.out.println("Please use Save instead.");
     }//GEN-LAST:event_update_buttonActionPerformed
 
+      boolean IsFilterEmpty(String filterString){
+        return filterString.isBlank();
+    }
     
     private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
-         String textFieldValues[] =  
+        
+         if (!IsFilterEmpty(GetFilterSQL())){   
+            // provides empty textFieldValues for setDeleteSQL
+            // since delete requires textfieldValues
+            // but filter values is used instead
+            // to get deleteValues
+            
+            for (int i = 0; i < filterSQL.GetStudentIdsFromResultSet().size(); i++){
+                String textFieldValues[] =  
+            {filterSQL.GetStudentIdsFromResultSet().get(i).toString(),"","","","",""};
+                // retrieves deleteSQL from new SQL set in setDeleteSQL
+                sql.setDeleteSQL(textFieldValues, this.getName());
+                String deleteSQL = sql.getDeleteSQL(this.getName());
+                db.executeUpdate(deleteSQL);
+            }
+ 
+            sql.GetResultSetSQL(this.getName(), teachers_table);
+            filterSQL.ClearStudentIdsFromResultSet();
+            
+            return;
+        }
+        
+        String textFieldValues[] =  
             {
             id_textField.getText(), name_textField.getText(),
             dept_textField.getText(), addr_textField.getText(), 
             contact_textField.getText(), status_textField.getText()};
-        
-        DB db = new DB();
-        db.connectDB();
+
         if (!functions.IsExistingID(textFieldValues, this.getName())){
             System.out.println("Student ID provided does not exist!");
             System.out.println("Cannot delete data from Student ID.");
             return;
         }
-        sqlObj.setDeleteSQL(textFieldValues, this.getName());
-        String sql = sqlObj.getDeleteSQL(this.getName());
-        db.executeUpdate(sql);
-        sqlObj.GetResultSetSQL(this.getName(), teachers_table);
+        
+        // checks if filterString from GetFilterSQL is empty
+        
+        
+        
+       
+        sql.setDeleteSQL(textFieldValues, this.getName());
+        String deleteSQL = sql.getDeleteSQL(this.getName());
+        db.executeUpdate(deleteSQL);
+        sql.GetResultSetSQL(this.getName(), teachers_table);
         System.out.println("Student ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
     public static String selected_teacherid;
@@ -787,10 +816,10 @@ public class TeachersJFrame extends javax.swing.JFrame {
     
     
     private String[] idFilter_values;
-    public void GetFilterSQL(){
+    public String GetFilterSQL(){
         
         DefaultTableModel tableModel = (DefaultTableModel) teachers_table.getModel();
-        sqlObj.ClearJTable(tableModel);
+        sql.ClearJTable(tableModel);
         
         String filterString = "";
          if(!idFilter_textField.getText().equals("")){
@@ -854,7 +883,8 @@ public class TeachersJFrame extends javax.swing.JFrame {
         db.connectDB();
         db.executeQuery("SELECT * FROM Teachers " + filterString);
         filterSQL.GetFiltered_ResultSetSQL(this.getName(), teachers_table, "SELECT * FROM Teachers " + filterString);
-        
+         // returns filterString for IsFilterEmpty
+        return filterString;
     }
     
     private void id_comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_comboBoxActionPerformed

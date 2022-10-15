@@ -813,9 +813,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
             return;
         }
         
-        // checks if filterString from GetFilterSQL is empty
-        
-        
+ 
         
        
         sql.setDeleteSQL(textFieldValues, this.getName());
