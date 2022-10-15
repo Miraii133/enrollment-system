@@ -238,10 +238,11 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
     // removes unecessary DBs like
     // information_schema, performance_schema
     // since DBs are shown to user but cannot access it anyways
+    private String rootUserName;
     private boolean isSelectedToHideDB(String dbName){
         // add to this list to hide DBs
         
-        String rootUserName = "root";
+        rootUserName = "root";
         List<String> hiddenDBsRootUser = Arrays.asList(
                 "information_schema", "performance_schema",
                 "mysql", "sys"
@@ -253,8 +254,19 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
                 "mysql", "sys","dummyDB"
         ); 
         
+        List<String> hiddenDBsTeacherUser = Arrays.asList(
+                "information_schema", "performance_schema",
+                "mysql", "sys","dummyDB, enrollmentsystem"
+        ); 
+        
         // hides dbs if a normal user is logging in
         if (hiddenDBsNormalUser.contains(dbName) &&
+             !userName.equalsIgnoreCase(rootUserName))
+        {
+            return true;
+        }
+        
+        else if (hiddenDBsTeacherUser.contains(dbName) &&
              !userName.equalsIgnoreCase(rootUserName))
         {
             return true;
@@ -265,6 +277,9 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         {
             return true;
         }
+        
+        
+            
         return false;
     }
         
@@ -330,32 +345,64 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
 
     
     private void showJFrame(String selectedDB){
-        if (selectedDB.equalsIgnoreCase("enrollmentsystem")){
-            var studentUserForm = new StudentsUserFormJFrame();
-            studentUserForm.setVisible(true);
-            
-            this.setVisible(false);
-            this.dispose();
-        }
+        
+      
         // should dynamically check for dbs
         // but not much time left just refactor in future
-        else if (selectedDB.equalsIgnoreCase("1st_sy2022_2023")){
-           
+        
+        // root user check
+        if (selectedDB.equalsIgnoreCase("1st_sy2022_2023")){
             studentsJFrame.setVisible(true);
             this.dispose();
+            return;
         }
         else if (selectedDB.equalsIgnoreCase("2nd_sy2022_2023")){
             studentsJFrame.setVisible(true);
             this.dispose();
+            return;
         }
         else if (selectedDB.equalsIgnoreCase("summer_sy2022_2023")){
             studentsJFrame.setVisible(true);
             this.dispose();
+            return;
         }
         
          else if (selectedDB.equalsIgnoreCase("dummyDB")){
             studentsJFrame.setVisible(true);
             this.dispose();
+            return;
+        }
+        
+            
+        
+        if (selectedDB.equalsIgnoreCase("enrollmentsystem")){
+            var studentUserForm = new StudentsUserFormJFrame();
+            studentUserForm.setVisible(true);
+            this.dispose();
+        }
+        else if (selectedDB.equalsIgnoreCase("1st_sy2022_2023")&&
+                !userName.equalsIgnoreCase(rootUserName)
+                ){
+            var teachersUserForm = new TeachersUserFormJFrame();
+            teachersUserForm.setVisible(true);
+            this.dispose();
+            
+        }
+        else if (selectedDB.equalsIgnoreCase("2nd_sy2022_2023")&&
+                !userName.equalsIgnoreCase(rootUserName)
+                ){
+            var teachersUserForm = new TeachersUserFormJFrame();
+            teachersUserForm.setVisible(true);
+            this.dispose();
+            
+        }
+        else if (selectedDB.equalsIgnoreCase("summer_sy2022_2023")&&
+                !userName.equalsIgnoreCase(rootUserName)
+                ){
+            var teachersUserForm = new TeachersUserFormJFrame();
+            teachersUserForm.setVisible(true);
+            this.dispose();
+            
         }
         
     }
