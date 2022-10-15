@@ -240,20 +240,37 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
     // since DBs are shown to user but cannot access it anyways
     private boolean isSelectedToHideDB(String dbName){
         // add to this list to hide DBs
-        List<String> hiddenDBs = Arrays.asList(
+        
+        String rootUserName = "root";
+        List<String> hiddenDBsRootUser = Arrays.asList(
                 "information_schema", "performance_schema",
                 "mysql", "sys"
         ); 
         
-        if (hiddenDBs.contains(dbName))
+        // hidden DBs for normal users
+        List<String> hiddenDBsNormalUser = Arrays.asList(
+                "information_schema", "performance_schema",
+                "mysql", "sys","dummyDB"
+        ); 
+        
+        // hides dbs if a normal user is logging in
+        if (hiddenDBsNormalUser.contains(dbName) &&
+             !userName.equalsIgnoreCase(rootUserName))
+        {
+            return true;
+        }
+        
+        else if (hiddenDBsRootUser.contains(dbName) &&
+             userName.equalsIgnoreCase(rootUserName))
         {
             return true;
         }
         return false;
     }
         
+        private String userName;
     private void getLoginInfo(){                                         
-        String userName = userId_textField.getText();
+        userName = userId_textField.getText();
         db.setUser(userName);   
         // should replace .getText() with
         // .getPassword() but problems in db.setConn arises
