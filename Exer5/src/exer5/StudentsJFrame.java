@@ -737,6 +737,11 @@ public class StudentsJFrame extends javax.swing.JFrame {
                  String insertSQL = sql.getInsertSQL(this.getName());
                  db.executeUpdate(insertSQL);
                  sql.GetResultSetSQL(this.getName(), students_table);
+                 
+                 // creates a new student user with added permission
+                 var dbPermissions = new DBPermissions(db);
+                 System.out.println(id_textField.getText() + name_textField.getText());
+                 dbPermissions.CreateStudentUser(id_textField.getText(), name_textField.getText());
                 System.out.println("Student ID data inserted.");
                 return;
             }

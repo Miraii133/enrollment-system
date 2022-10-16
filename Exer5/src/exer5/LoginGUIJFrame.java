@@ -236,10 +236,12 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         
     }
     
-    // removes unecessary DBs like
-    // information_schema, performance_schema
-    // since DBs are shown to user but cannot access it anyways
+
     private String rootUserName;
+    
+    // studentCodeInitial is always s for student,
+    // t for teacher.
+    private String studentCodeInitial = "s";
     private boolean isSelectedToHideDB(String dbName){
         // add to this list to hide DBs
         
@@ -324,7 +326,6 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
             // supposed to be hidden
             while(rs.next()) {
                if(!isSelectedToHideDB(rs.getString(1))){
-                   
                  dbNames.add(rs.getString(1));
                }
 
@@ -386,16 +387,32 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
             return;
         }
 
+        
+        
+        
         // student login form
-        if (selectedDB.equalsIgnoreCase("enrollmentsystem")){
+        if (selectedDB.equalsIgnoreCase("1st_sy2022_2023")){
             var studentUserForm = new StudentsUserFormJFrame();
             studentUserForm.setVisible(true);
             this.dispose();
+            return;
+        }
+        else if (selectedDB.equalsIgnoreCase("2nd_sy2022_2023")){
+            var studentUserForm = new StudentsUserFormJFrame();
+            studentUserForm.setVisible(true);
+            this.dispose();
+            return;
+        }
+        else if (selectedDB.equalsIgnoreCase("summer_sy2022_2023")){
+            var studentUserForm = new StudentsUserFormJFrame();
+            studentUserForm.setVisible(true);
+            this.dispose();
+            return;
         }
         
         // teacher login form
         // checks if username is not root
-        else if (selectedDB.equalsIgnoreCase("1st_sy2022_2023")&&
+        if (selectedDB.equalsIgnoreCase("1st_sy2022_2023")&&
                 !userName.equalsIgnoreCase(rootUserName)
                 ){
             teachersUserForm.setFunctions(functions);
