@@ -1006,7 +1006,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
         sql.GetSecondaryResultSetSQL(this.getName(), enrolledSubj_table, selected_studid);
     }//GEN-LAST:event_students_tableMouseClicked
     
-    // refers to the selected subjid in the enrolled table.
+    // refers to the selected subj$kakid in the enrolled table.
     static String selected_enrollsubjid;
     private void enrolledSubj_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enrolledSubj_tableMouseClicked
         String subjid; 
@@ -1017,7 +1017,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
 
     private void enrollAdd_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollAdd_buttonActionPerformed
 
-      
        int confirmAdd = JOptionPane.showConfirmDialog(this,"Enroll SubjectID: " + SubjectsJFrame.selected_subjid + " to StudentID: " + selected_studid);
        if (confirmAdd == JOptionPane.YES_OPTION){
            enroll.InsertSQLToEnroll(selected_studid, SubjectsJFrame.selected_subjid, this.getName(), students_table, enrolledSubj_table);
