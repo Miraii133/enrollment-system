@@ -390,6 +390,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
                 !userName.equalsIgnoreCase(rootUserName)
                 ){
             var teachersUserForm = new TeachersUserFormJFrame(sql, db);
+            teachersUserForm.setFunctions(functions);
             teachersUserForm.setVisible(true);
             this.dispose();
             
@@ -398,6 +399,8 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
                 !userName.equalsIgnoreCase(rootUserName)
                 ){
             var teachersUserForm = new TeachersUserFormJFrame(sql, db);
+            teachersUserForm.setFunctions(functions);
+            teachersUserForm.setVisible(true);
             teachersUserForm.setVisible(true);
             this.dispose();
             
@@ -406,6 +409,8 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
                 !userName.equalsIgnoreCase(rootUserName)
                 ){
             var teachersUserForm = new TeachersUserFormJFrame(sql, db);
+            teachersUserForm.setFunctions(functions);
+            teachersUserForm.setVisible(true);
             teachersUserForm.setVisible(true);
             this.dispose();
             

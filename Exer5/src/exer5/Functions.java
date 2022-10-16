@@ -201,6 +201,13 @@ import java.util.List;
                 "','" + thirdFieldValue + "','" + fourthFieldValue + "','" + 
                 fifthFieldValue + "','" + sixthFieldValue + "')";
         }
+         else if (frameName.equalsIgnoreCase("teachersFormJFrame")){
+            dbName = "Grades";
+            insertSQL = 
+                "INSERT INTO " + dbName + " VALUES(" + firstFieldValue + ", '" + secondFieldValue + 
+                "','" + thirdFieldValue + "','" + fourthFieldValue + "','" + 
+                fifthFieldValue + "','" + sixthFieldValue + "')";
+        }
         
     }
     
@@ -303,7 +310,6 @@ import java.util.List;
     public void GetSecondaryResultSetSQL(String frameName, JTable jtableName, String selectedid){
         
         
-        String dbName;
         String searchQuery = "";
         if (frameName.equalsIgnoreCase("studentsJFrame")){
             searchQuery = "SELECT Enroll.studid, Subjects.subjid, Subjects.subjode, Subjects.subjdesc, Subjects.subjunits, Subjects.subjsched FROM Enroll, Subjects, Students WHERE Enroll.subjid=Subjects.subjid AND Students.studid=Enroll.studid AND Students.studid=" + selectedid;
@@ -316,11 +322,15 @@ import java.util.List;
             searchQuery = "SELECT Subjects.subjid, Subjects.subjode, Subjects.subjdesc, Subjects.subjunits, Subjects.subjsched FROM Teachers, Subjects, Assign WHERE Assign.subjid=Subjects.subjid AND Teachers.Tid=Assign.Tid AND Teachers.Tid=" + selectedid;
         } 
         
+         else if (frameName.equalsIgnoreCase("teachersFormJFrame")){
+            searchQuery = "SELECT Enroll.studid, Students.studname, Grades.prelim, Grades.midterm, Grades.prefinal, Grades.final  FROM Enroll, Subjects, Students, Grades WHERE Students.studid=Enroll.studid AND Subjects.subjid=Enroll.subjid AND Enroll.eid=Grades.eid AND Subjects.subjid=" + selectedid;
+            System.out.println(selectedid);
+         } 
+        
         try {
             ResultSet resultSet = db.getStatement().executeQuery(searchQuery);
             DefaultTableModel tableModel = (DefaultTableModel) jtableName.getModel();
             ClearJTable(tableModel);
-            
         if (frameName.equalsIgnoreCase("studentsJFrame")){
              while (resultSet.next()){
                 String id = resultSet.getString("subjid");
@@ -366,6 +376,23 @@ import java.util.List;
               
              }
     }
+        
+         else if (frameName.equalsIgnoreCase("teachersFormJFrame")){
+             while (resultSet.next()){
+                String id = resultSet.getString("studid");
+                String name = resultSet.getString("studname");
+                String prelim = resultSet.getString("prelim");
+                String midterm = resultSet.getString("midterm");
+                String prefinal = resultSet.getString("prefinal");
+                String finals = resultSet.getString("final");
+                String array[] = {id, name, prelim, midterm, prefinal, finals};
+                // adds array to table row
+                 tableModel.addRow(array);
+                 
+              
+             }
+    }
+        
         }  catch (SQLException ex ){
             System.out.println("Cant get result set");
            

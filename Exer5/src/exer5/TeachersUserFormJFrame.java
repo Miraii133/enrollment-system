@@ -1,5 +1,6 @@
 package exer5;
 
+import static exer5.StudentsJFrame.selected_enrollsubjid;
 import static exer5.SubjectsJFrame.selected_subjid;
 
 /*
@@ -22,6 +23,11 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
         sql.GetResultSetSQL(this.getName(), subjects_table);
     }
 
+    private Functions functions;
+    public void setFunctions(Functions functions){
+        this.functions = functions;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,8 +44,8 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         grades_table = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        studid_textField = new javax.swing.JTextField();
+        studname_textField = new javax.swing.JTextField();
         prelim_comboBox = new javax.swing.JComboBox<>();
         save_button = new javax.swing.JButton();
         midterm_comboBox = new javax.swing.JComboBox<>();
@@ -132,6 +138,11 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        grades_table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                grades_tableMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(grades_table);
         if (grades_table.getColumnModel().getColumnCount() > 0) {
             grades_table.getColumnModel().getColumn(0).setResizable(false);
@@ -143,9 +154,18 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
         jLabel1.setText("Teachers Class List/Grades Encoding Form");
 
+        studid_textField.setFocusable(false);
+
+        studname_textField.setFocusable(false);
+
         prelim_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B+", "B+", "C+", "C", "D", "F", "FD" }));
 
         save_button.setText("Save");
+        save_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                save_buttonMouseClicked(evt);
+            }
+        });
 
         midterm_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B+", "B+", "C+", "C", "D", "F", "FD" }));
 
@@ -166,11 +186,11 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)
+                        .addComponent(studid_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(studname_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(prelim_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(midterm_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -180,7 +200,7 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
                         .addComponent(final_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
                         .addComponent(save_button)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,8 +211,8 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(studid_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(studname_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(prelim_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(save_button)
                     .addComponent(midterm_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -209,26 +229,46 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
     public static String selected_subjid;
     private void subjects_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subjects_tableMouseClicked
         String subjid;
-        String subjode;
-        String subjdesc;
-        String subjunits;
-        String subjsched;
-        
         int[] selectedRows = subjects_table.getSelectedRows();
         subjid = subjects_table.getValueAt(selectedRows[0], 0).toString();
         selected_subjid = subjid;
-        subjode = subjects_table.getValueAt(selectedRows[0], 1).toString();
-        subjdesc = subjects_table.getValueAt(selectedRows[0], 2).toString();
-        subjunits = subjects_table.getValueAt(selectedRows[0], 3).toString();
-        subjsched = subjects_table.getValueAt(selectedRows[0], 4).toString();
-        id_textField.setText(subjid);
-        ode_textField.setText(subjode);
-        desc_textField.setText(subjdesc);
-        units_textField.setText(subjunits);
-        sched_textField.setText(subjsched);
         
-        sql.GetSecondaryResultSetSQL(this.getName(), classlist_table, selected_subjid);
+        
+        sql.GetSecondaryResultSetSQL(this.getName(), grades_table, selected_subjid);
     }//GEN-LAST:event_subjects_tableMouseClicked
+
+    static String selected_gradeseid;
+    private void grades_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grades_tableMouseClicked
+        String eid; 
+        int[] selectedRows = grades_table.getSelectedRows();
+        eid = grades_table.getValueAt(selectedRows[0], 0).toString();
+        selected_gradeseid = eid;
+        System.out.println("gradesid" + selected_gradeseid);
+        studid_textField.setText(grades_table.getValueAt(selectedRows[0], 0).toString());
+        studname_textField.setText(grades_table.getValueAt(selectedRows[0], 1).toString());
+    }//GEN-LAST:event_grades_tableMouseClicked
+
+    private void save_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_save_buttonMouseClicked
+         String textFieldValues[] =  
+            {
+                // convert selected items to string because textFieldValues only take in Strings
+            studid_textField.getText(), studname_textField.getText(), prelim_comboBox.getSelectedItem().toString(), 
+            midterm_comboBox.getSelectedItem().toString(), prefinal_comboBox.getSelectedItem().toString(), 
+            final_comboBox.getSelectedItem().toString()
+            
+            };
+
+        
+                // includes frame name to verify which frame
+                // is sending the setInsertSQL
+                 sql.setInsertSQL(textFieldValues, this.getName());
+                 String insertSQL = sql.getInsertSQL(this.getName());
+                 db.executeUpdate(insertSQL);
+                 sql.GetResultSetSQL(this.getName(), grades_table);
+                System.out.println("Grades inserted.");
+              
+     
+    }//GEN-LAST:event_save_buttonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -273,12 +313,12 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JComboBox<String> midterm_comboBox;
     private javax.swing.JComboBox<String> prefinal_comboBox;
     private javax.swing.JComboBox<String> prelim_comboBox;
     private javax.swing.JButton save_button;
+    private javax.swing.JTextField studid_textField;
+    private javax.swing.JTextField studname_textField;
     private javax.swing.JTable subjects_table;
     // End of variables declaration//GEN-END:variables
 }

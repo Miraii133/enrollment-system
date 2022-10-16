@@ -1097,12 +1097,12 @@ public class StudentsJFrame extends javax.swing.JFrame {
    String gradesSQL = new StringBuilder()
   .append(tableSemName)
   .append(".Grades (")
-  .append("gradeid int, ")
+  .append("eid int NOT NULL, ")
   .append("prelim varchar(50), ")
   .append("midterm varchar(50), ")
   .append("prefinal varchar(50), ")
   .append("final varchar(50), ")
-  .append("PRIMARY KEY (gradeid)) ")
+  .append("FOREIGN KEY (eid) REFERENCES Enroll(eid)) ")
   .toString();
    
    String enrollSQL = new StringBuilder()
