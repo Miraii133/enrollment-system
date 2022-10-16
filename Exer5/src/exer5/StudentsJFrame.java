@@ -742,6 +742,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
                  var dbPermissions = new DBPermissions(db);
                  System.out.println(id_textField.getText() + name_textField.getText());
                  dbPermissions.CreateStudentUser(id_textField.getText(), name_textField.getText());
+                 dbPermissions.GrantStudentPermission(id_textField.getText(), name_textField.getText(), db.getDBToConnect());
                 System.out.println("Student ID data inserted.");
                 return;
             }
