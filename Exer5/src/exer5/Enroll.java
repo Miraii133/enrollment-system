@@ -5,7 +5,8 @@
 package exer5;
 
 import javax.swing.JTable;
-
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 public class Enroll {
@@ -24,10 +25,12 @@ public class Enroll {
         
         String insertSQL = 
                 "INSERT INTO Enroll( studid, subjid) VALUES (" + selected_studid + "," + SubjectsJFrame.selected_subjid +")";
-        System.out.println(insertSQL);
         db.executeUpdate(insertSQL);
         sql.GetResultSetSQL(frameName, primaryTable);
         sql.GetSecondaryResultSetSQL(frameName, secondaryTable, selected_studid);
+        // retrieves subjid
+        System.out.println(insertSQL);
+        GetStudenteid(selected_studid, selected_subjid);
                  
        }
     
@@ -37,7 +40,42 @@ public class Enroll {
         db.executeUpdate(deleteSQL);
         sql.GetResultSetSQL(frameName, primaryTable);
         sql.GetSecondaryResultSetSQL(frameName, secondaryTable, selected_studid);
+        GetStudenteid(selected_studid, selected_enrollsubjid);
                  
+       }
+     
+     // create Grades for the user who was assigned a subject so that grades table will appear
+     // in teachersForm
+     
+     private String studenteid;
+     public void GetStudenteid(String selected_studid, String selected_enrollsubjid){
+         String studenteidSQL =
+         "SELECT Enroll.eid FROM Enroll, Students, Subjects WHERE Students.studid=Enroll.studid AND Subjects.subjid=Enroll.subjid AND Students.studid='"+ selected_studid +"' AND Subjects.subjid='" + selected_enrollsubjid +"'";
+         try {
+             ResultSet resultSet = db.getStatement().executeQuery(studenteidSQL);
+             while (resultSet.next()){
+                 // retrieves eid so insertGradesSQL and deleteGradesSQL can use it
+                   studenteid = resultSet.getString("eid");
+             }
+         } catch(SQLException ex){
+             System.out.println("Could not get Studenteid");
+             ex.printStackTrace();
+         }
+         
+     }
+      public void InsertGradesSQL(){
+        System.out.println(studenteid);
+        String insertGradesSQL = 
+                "INSERT INTO Grades(eid) VALUES ("  + studenteid+ ")";      
+        db.executeUpdate(insertGradesSQL);
+        System.out.println(insertGradesSQL);
+      }
+    
+     public void DeleteGradesSQL(String selected_studid, String selected_assignsubjid, String frameName, JTable primaryTable, JTable secondaryTable){
+        String deleteGradesSQL = 
+                "DELETE FROM Grades WHERE eid='" + studenteid + "')";
+        db.executeUpdate(deleteGradesSQL);
+
        }
     
     

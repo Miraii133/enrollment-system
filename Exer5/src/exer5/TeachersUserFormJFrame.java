@@ -51,6 +51,9 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
         midterm_comboBox = new javax.swing.JComboBox<>();
         prefinal_comboBox = new javax.swing.JComboBox<>();
         final_comboBox = new javax.swing.JComboBox<>();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        logout_itemMenu = new javax.swing.JMenuItem();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -180,6 +183,20 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
 
         final_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B+", "B+", "C+", "C", "D", "F", "FD" }));
 
+        jMenu1.setText("Menu");
+
+        logout_itemMenu.setText("Logout");
+        logout_itemMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logout_itemMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(logout_itemMenu);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -212,7 +229,7 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(82, Short.MAX_VALUE)
+                .addContainerGap(58, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -284,8 +301,15 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
                  String updateSQL = sql.getUpdateSQL(this.getName());
                  db.executeUpdate(updateSQL);
                  sql.GetResultSetSQL(this.getName(), grades_table);
+                 sql.GetSecondaryResultSetSQL(this.getName(), grades_table, selected_subjid);
                 System.out.println("Grades inserted.");
     }//GEN-LAST:event_save_buttonMouseClicked
+
+    private void logout_itemMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_itemMenuActionPerformed
+        this.dispose();
+        var loginGUIJFrame = new LoginGUIJFrame();
+        loginGUIJFrame.setVisible(true);
+    }//GEN-LAST:event_logout_itemMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -326,10 +350,13 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> final_comboBox;
     private javax.swing.JTable grades_table;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable2;
+    private javax.swing.JMenuItem logout_itemMenu;
     private javax.swing.JComboBox<String> midterm_comboBox;
     private javax.swing.JComboBox<String> prefinal_comboBox;
     private javax.swing.JComboBox<String> prelim_comboBox;

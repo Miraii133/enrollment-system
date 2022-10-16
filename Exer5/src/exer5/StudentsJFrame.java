@@ -781,11 +781,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
         return filterString.isBlank();
     }
  
-
-     
-    
-     
-     
    
     private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
        
@@ -1026,6 +1021,7 @@ public class StudentsJFrame extends javax.swing.JFrame {
        int confirmAdd = JOptionPane.showConfirmDialog(this,"Enroll SubjectID: " + SubjectsJFrame.selected_subjid + " to StudentID: " + selected_studid);
        if (confirmAdd == JOptionPane.YES_OPTION){
            enroll.InsertSQLToEnroll(selected_studid, SubjectsJFrame.selected_subjid, this.getName(), students_table, enrolledSubj_table);
+           enroll.InsertGradesSQL();
            JOptionPane.showMessageDialog(this, "Successfully enrolled.");
            sql.GetResultSetSQL(subjectsJFrame.GetJFrame(), subjectsJFrame.GetJTable());
            

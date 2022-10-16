@@ -45,4 +45,6 @@ public class Assign {
         sql.GetResultSetSQL(frameName, primaryTable);
         sql.GetSecondaryResultSetSQL(frameName, secondaryTable, selected_studid);
        }
+     
+     
 }

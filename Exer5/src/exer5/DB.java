@@ -130,7 +130,6 @@ public class DB {
         // Checks if query is a valid query
         // returns true or false accordingly.
        boolean executeQuery(String query){
-            System.out.println("QUERY" + query);
         try {
             setStatement(getConn().createStatement());
             // checks if current query has something
