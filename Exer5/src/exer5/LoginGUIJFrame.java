@@ -185,7 +185,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         studentsJFrame = new StudentsJFrame(sql, db);
         subjectsJFrame = new SubjectsJFrame(sql, db);
         teachersJFrame = new TeachersJFrame(sql, db);
-        functions = new Functions(db,
+        functions = new Functions(sql, db,
         studentsJFrame,  subjectsJFrame, teachersJFrame);
         
         enroll = new Enroll();
@@ -196,6 +196,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         sql.setStudentsJFrame(studentsJFrame);
         sql.setSubjectsJFrame(subjectsJFrame);
         sql.setTeachersJFrame(teachersJFrame);
+        
         
        studentsJFrame.setFilterSQL(filterSQL);
        studentsJFrame.setSubjectsJFrame(subjectsJFrame);
@@ -346,28 +347,36 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
 
     
     private void showJFrame(String selectedDB){
-        
+        var teachersUserForm = new TeachersUserFormJFrame(sql, db);
       
         // should dynamically check for dbs
         // but not much time left just refactor in future
         
         // root user check
         if (selectedDB.equalsIgnoreCase("1st_sy2022_2023") && 
-                userName.equalsIgnoreCase(rootUserName)){
+            userName.equalsIgnoreCase(rootUserName)){
             studentsJFrame.setVisible(true);
             this.dispose();
+            
+            // sets TeacherFormJFrame to be used when updating
+            // subjectsJFrame otherwise setTeachersFormJFrame will be empty
+            // and check in setInsertSQL and updateSQL will be null
+            sql.setTeachersFormJFrame(teachersUserForm);
             return;
         }
         else if (selectedDB.equalsIgnoreCase("2nd_sy2022_2023") && 
                 userName.equalsIgnoreCase(rootUserName)){
             studentsJFrame.setVisible(true);
             this.dispose();
+            sql.setTeachersFormJFrame(teachersUserForm);
             return;
         }
         else if (selectedDB.equalsIgnoreCase("summer_sy2022_2023")&& 
                 userName.equalsIgnoreCase(rootUserName)){
             studentsJFrame.setVisible(true);
             this.dispose();
+            
+            sql.setTeachersFormJFrame(teachersUserForm);
             return;
         }
         
@@ -389,8 +398,10 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         else if (selectedDB.equalsIgnoreCase("1st_sy2022_2023")&&
                 !userName.equalsIgnoreCase(rootUserName)
                 ){
-            var teachersUserForm = new TeachersUserFormJFrame(sql, db);
             teachersUserForm.setFunctions(functions);
+            
+            // sets teachersFormJFrame so setInsertSQL can use it
+            sql.setTeachersFormJFrame(teachersUserForm);
             teachersUserForm.setVisible(true);
             this.dispose();
             
@@ -398,8 +409,10 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         else if (selectedDB.equalsIgnoreCase("2nd_sy2022_2023")&&
                 !userName.equalsIgnoreCase(rootUserName)
                 ){
-            var teachersUserForm = new TeachersUserFormJFrame(sql, db);
             teachersUserForm.setFunctions(functions);
+            
+            // sets teachersFormJFrame so setInsertSQL can use it
+            sql.setTeachersFormJFrame(teachersUserForm);
             teachersUserForm.setVisible(true);
             teachersUserForm.setVisible(true);
             this.dispose();
@@ -408,8 +421,10 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         else if (selectedDB.equalsIgnoreCase("summer_sy2022_2023")&&
                 !userName.equalsIgnoreCase(rootUserName)
                 ){
-            var teachersUserForm = new TeachersUserFormJFrame(sql, db);
             teachersUserForm.setFunctions(functions);
+            
+            // sets teachersFormJFrame so setInsertSQL can use it
+            sql.setTeachersFormJFrame(teachersUserForm);
             teachersUserForm.setVisible(true);
             teachersUserForm.setVisible(true);
             this.dispose();

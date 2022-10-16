@@ -22,8 +22,12 @@ import java.util.List;
      private StudentsJFrame studentsJFrame;
      private SubjectsJFrame subjectsJFrame;
      private TeachersJFrame teachersJFrame;
+     
+     //private TeachersUserFormFrameJFrame teachersFormJFrame
+     private SQL sql;
      private DB db;
      public Functions (
+             SQL sql,
              DB db,
              StudentsJFrame studentsJFrame, 
              SubjectsJFrame subjectsJFrame, 
@@ -33,6 +37,7 @@ import java.util.List;
          this.subjectsJFrame = subjectsJFrame;
          this.teachersJFrame = teachersJFrame;
          this.db = db;
+         this.sql = sql;
      }
      
      
@@ -90,6 +95,10 @@ import java.util.List;
             int id = Integer.parseInt(textFieldValues[0]);
             String searchQuery = "";
             String dbName = "";
+            
+            // create short lived teacherJFrame for teachersJFrame condition only
+            var teachersFormJFrame = new TeachersUserFormJFrame(sql, db);
+            
             if (frameName.equalsIgnoreCase(studentsJFrame.getName())){
                 dbName = "Students";
                 searchQuery = "SELECT * FROM " + dbName + " WHERE studid='" + id + "'";
@@ -101,6 +110,11 @@ import java.util.List;
             else if (frameName.equalsIgnoreCase(teachersJFrame.getName())){
                 dbName = "Teachers";
                 searchQuery = "SELECT * FROM " + dbName + " WHERE Tid='" + id + "'";   
+            }
+            
+            else if (frameName.equalsIgnoreCase(teachersFormJFrame.getName())){
+                dbName = "Grades";
+                searchQuery = "SELECT * FROM " + dbName + " WHERE eid='" + id + "'"; 
             }
             
          // if ID is not an existing ID.
@@ -168,12 +182,16 @@ import java.util.List;
         
         String dbName;
         
-        // subjectsFrame only has 5 textfields
-        // where as studentsFrame and teachersFrame have
+        // subjectsFrame and Grades table from TeacherUserFormJFrame
+        // only has 5 textfields
+        // whereas studentsFrame and teachersFrame have
         // 6.
-        if (!frameName.equalsIgnoreCase(subjectsJFrame.getName())){
-            sixthFieldValue = textFieldValues[5];
+        if (!frameName.equalsIgnoreCase(subjectsJFrame.getName()) &&
+             !frameName.equalsIgnoreCase(teachersFormJFrame.getName())){
+              sixthFieldValue = textFieldValues[5];
         }
+
+
         
         
         // assigns the dbName so SQL is dynamic and
@@ -204,9 +222,9 @@ import java.util.List;
          else if (frameName.equalsIgnoreCase("teachersFormJFrame")){
             dbName = "Grades";
             insertSQL = 
-                "INSERT INTO " + dbName + " VALUES(" + firstFieldValue + ", '" + secondFieldValue + 
+                "UPDATE " + dbName + " SET(" + firstFieldValue + ", '" + secondFieldValue + 
                 "','" + thirdFieldValue + "','" + fourthFieldValue + "','" + 
-                fifthFieldValue + "','" + sixthFieldValue + "')";
+                fifthFieldValue + "')";
         }
         
     }
@@ -220,11 +238,15 @@ import java.util.List;
         
         String dbName;
         
-        // subjectsFrame only has 5 textfields
-        // where as studentsFrame and teachersFrame have
+       // subjectsFrame and Grades table from TeacherUserFormJFrame
+        // only has 5 textfields
+        // whereas studentsFrame and teachersFrame have
         // 6.
-        if (!frameName.equalsIgnoreCase(subjectsJFrame.getName())){
+        if (!frameName.equalsIgnoreCase(subjectsJFrame.getName()) &&
+                !frameName.equalsIgnoreCase(teachersFormJFrame.getName())
+                ){
             sixthFieldValue = textFieldValues[5];
+           
         }
         
         // assigns the dbName so SQL is dynamic and
@@ -251,6 +273,13 @@ import java.util.List;
                 + "UPDATE " +  dbName + " SET " + "Tid='" + firstFieldValue + "', Tname='" + secondFieldValue + "', Tdept='" + thirdFieldValue + "',"
                 + "Taddr='" + fourthFieldValue + "', Tcontact='" + fifthFieldValue + "', Tstatus='" + sixthFieldValue + "'"
                 + "WHERE Tid=" + firstFieldValue ;
+        }
+        else if (frameName.equalsIgnoreCase("teachersFormJFrame")){
+            dbName = "Grades";
+                updateSQL = ""
+                + "UPDATE " +  dbName + " SET " + "prelim='" + secondFieldValue + "', midterm='" + thirdFieldValue + "',"
+                + "prefinal='" + fourthFieldValue + "', final='" + fifthFieldValue + "' "
+                + "WHERE eid=" + firstFieldValue ;
         }
         
     }
@@ -323,8 +352,7 @@ import java.util.List;
         } 
         
          else if (frameName.equalsIgnoreCase("teachersFormJFrame")){
-            searchQuery = "SELECT Enroll.studid, Students.studname, Grades.prelim, Grades.midterm, Grades.prefinal, Grades.final  FROM Enroll, Subjects, Students, Grades WHERE Students.studid=Enroll.studid AND Subjects.subjid=Enroll.subjid AND Enroll.eid=Grades.eid AND Subjects.subjid=" + selectedid;
-            System.out.println(selectedid);
+            searchQuery = "SELECT Enroll.eid, Enroll.studid, Students.studname, Grades.prelim, Grades.midterm, Grades.prefinal, Grades.final  FROM Enroll, Subjects, Students, Grades WHERE Students.studid=Enroll.studid AND Subjects.subjid=Enroll.subjid AND Enroll.eid=Grades.eid AND Subjects.subjid=" + selectedid;
          } 
         
         try {
@@ -379,13 +407,14 @@ import java.util.List;
         
          else if (frameName.equalsIgnoreCase("teachersFormJFrame")){
              while (resultSet.next()){
+                String eid = resultSet.getString("eid");
                 String id = resultSet.getString("studid");
                 String name = resultSet.getString("studname");
                 String prelim = resultSet.getString("prelim");
                 String midterm = resultSet.getString("midterm");
                 String prefinal = resultSet.getString("prefinal");
                 String finals = resultSet.getString("final");
-                String array[] = {id, name, prelim, midterm, prefinal, finals};
+                String array[] = {eid, id, name, prelim, midterm, prefinal, finals};
                 // adds array to table row
                  tableModel.addRow(array);
                  

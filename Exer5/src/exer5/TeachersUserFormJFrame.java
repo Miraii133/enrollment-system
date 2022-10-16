@@ -121,18 +121,25 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
 
         grades_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "studid", "studname", "prelim", "midterm", "prefinal", "final"
+                "eid", "studid", "studname", "prelim", "midterm", "prefinal", "final"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -145,10 +152,10 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(grades_table);
         if (grades_table.getColumnModel().getColumnCount() > 0) {
-            grades_table.getColumnModel().getColumn(0).setResizable(false);
             grades_table.getColumnModel().getColumn(1).setResizable(false);
-            grades_table.getColumnModel().getColumn(3).setResizable(false);
-            grades_table.getColumnModel().getColumn(5).setResizable(false);
+            grades_table.getColumnModel().getColumn(2).setResizable(false);
+            grades_table.getColumnModel().getColumn(4).setResizable(false);
+            grades_table.getColumnModel().getColumn(6).setResizable(false);
         }
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
@@ -243,31 +250,41 @@ public class TeachersUserFormJFrame extends javax.swing.JFrame {
         int[] selectedRows = grades_table.getSelectedRows();
         eid = grades_table.getValueAt(selectedRows[0], 0).toString();
         selected_gradeseid = eid;
-        System.out.println("gradesid" + selected_gradeseid);
-        studid_textField.setText(grades_table.getValueAt(selectedRows[0], 0).toString());
-        studname_textField.setText(grades_table.getValueAt(selectedRows[0], 1).toString());
+        studid_textField.setText(grades_table.getValueAt(selectedRows[0], 1).toString());
+        studname_textField.setText(grades_table.getValueAt(selectedRows[0], 2).toString());
     }//GEN-LAST:event_grades_tableMouseClicked
 
     private void save_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_save_buttonMouseClicked
-         String textFieldValues[] =  
+         String gradesFieldsValues[] =  
             {
                 // convert selected items to string because textFieldValues only take in Strings
-            studid_textField.getText(), studname_textField.getText(), prelim_comboBox.getSelectedItem().toString(), 
+            selected_gradeseid, prelim_comboBox.getSelectedItem().toString(), 
             midterm_comboBox.getSelectedItem().toString(), prefinal_comboBox.getSelectedItem().toString(), 
             final_comboBox.getSelectedItem().toString()
             
             };
-
-        
+         
+         // if student id in Grades table does not exist yet
+        if (!functions.IsExistingID(gradesFieldsValues, this.getName())){
                 // includes frame name to verify which frame
                 // is sending the setInsertSQL
-                 sql.setInsertSQL(textFieldValues, this.getName());
+                 sql.setInsertSQL(gradesFieldsValues, this.getName());
                  String insertSQL = sql.getInsertSQL(this.getName());
                  db.executeUpdate(insertSQL);
                  sql.GetResultSetSQL(this.getName(), grades_table);
                 System.out.println("Grades inserted.");
-              
-     
+              return;
+        }
+        
+        
+        
+        // if the student ID in Grades table is already existing, just update it when
+        // using the save button
+                sql.setUpdateSQL(gradesFieldsValues, this.getName());
+                 String updateSQL = sql.getUpdateSQL(this.getName());
+                 db.executeUpdate(updateSQL);
+                 sql.GetResultSetSQL(this.getName(), grades_table);
+                System.out.println("Grades inserted.");
     }//GEN-LAST:event_save_buttonMouseClicked
 
     /**
