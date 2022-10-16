@@ -21,6 +21,11 @@ public class Enroll {
         this.sql = sql;
     }
     
+    private String selected_studid;
+    private String selected_subjid;
+    // subjid selected from secondary enroll table
+    private String selected_enrollsubjid;
+    
     public void InsertSQLToEnroll(String selected_studid, String selected_subjid, String frameName, JTable primaryTable, JTable secondaryTable){
         
         String insertSQL = 
@@ -29,13 +34,15 @@ public class Enroll {
         sql.GetResultSetSQL(frameName, primaryTable);
         sql.GetSecondaryResultSetSQL(frameName, secondaryTable, selected_studid);
         // retrieves subjid
-        System.out.println(insertSQL);
         GetStudenteid(selected_studid, selected_subjid);
-                 
+     
        }
     
      public void DeleteSQLToEnroll(String selected_studid, String selected_enrollsubjid, String frameName, JTable primaryTable, JTable secondaryTable){
-        String deleteSQL = 
+         // delete Grades first since Grades.eid is a foreign key from Enroll.eid
+         DeleteGradesSQL(selected_studid, selected_enrollsubjid, frameName, primaryTable, secondaryTable);
+         
+         String deleteSQL = 
                 "DELETE FROM Enroll WHERE studid=" + selected_studid + " AND subjid=" + selected_enrollsubjid;
         db.executeUpdate(deleteSQL);
         sql.GetResultSetSQL(frameName, primaryTable);
@@ -56,7 +63,7 @@ public class Enroll {
              while (resultSet.next()){
                  // retrieves eid so insertGradesSQL and deleteGradesSQL can use it
                    studenteid = resultSet.getString("eid");
-             }
+             } 
          } catch(SQLException ex){
              System.out.println("Could not get Studenteid");
              ex.printStackTrace();
@@ -64,16 +71,16 @@ public class Enroll {
          
      }
       public void InsertGradesSQL(){
-        System.out.println(studenteid);
         String insertGradesSQL = 
                 "INSERT INTO Grades(eid) VALUES ("  + studenteid+ ")";      
         db.executeUpdate(insertGradesSQL);
-        System.out.println(insertGradesSQL);
       }
     
-     public void DeleteGradesSQL(String selected_studid, String selected_assignsubjid, String frameName, JTable primaryTable, JTable secondaryTable){
-        String deleteGradesSQL = 
-                "DELETE FROM Grades WHERE eid='" + studenteid + "')";
+     public void DeleteGradesSQL(String selected_studid, String selected_enrollsubjid, String frameName, JTable primaryTable, JTable secondaryTable){
+         GetStudenteid(selected_studid, selected_enrollsubjid);
+         String deleteGradesSQL = 
+                "DELETE FROM Grades WHERE eid='" + studenteid + "'";
+        
         db.executeUpdate(deleteGradesSQL);
 
        }
