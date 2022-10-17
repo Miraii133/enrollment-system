@@ -620,12 +620,12 @@ import java.util.List;
            this.studIdsList.clear();
        }
        
-       private List<Integer> studNameList = new ArrayList<>();
-       private void SetStudentNameFromResultSet(int studentName){
-           this.studIdsList.add(studentName);
+       private List<String> studNameList = new ArrayList<>();
+       private void SetStudentNameFromResultSet(String studentName){
+           this.studNameList.add(studentName);
        }
        
-       public List<Integer> GetStudentNameFromResultSet(){
+       public List<String> GetStudentNameFromResultSet(){
            return studNameList;
        }
        
@@ -850,6 +850,7 @@ class DBPermissions {
     public void RevokeStudentPermission(String studid, String studname, String dbSelected){
         String selectedStudentId = studid + studname;
         String revokeStudentPermsSQL = "REVOKE SELECT ON "  + dbSelected + ".* FROM '" + selectedStudentId + "'@'localhost'"; 
+        System.out.println(revokeStudentPermsSQL);
         db.executeUpdate(revokeStudentPermsSQL);
     }
     
