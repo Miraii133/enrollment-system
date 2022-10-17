@@ -241,7 +241,8 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
     
     // studentCodeInitial is always s for student,
     // t for teacher.
-    private String studentCodeInitial = "s";
+    private final char studentCodeInitial = 's';
+    private final char teacherCodeInitial = 't';
     private boolean isSelectedToHideDB(String dbName){
         // add to this list to hide DBs
         
@@ -287,13 +288,14 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
     }
         
         private String userName;
+        private String password;
     private void getLoginInfo(){                                         
         userName = userId_textField.getText();
         db.setUser(userName);   
         // should replace .getText() with
         // .getPassword() but problems in db.setConn arises
         // will fix on refactoring
-        String password = password_passwordField.getText();
+        password = password_passwordField.getText();
         db.setPassword(password);
     }
     
@@ -348,6 +350,10 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
 
     
     private void showJFrame(String selectedDB){
+        
+        // retrieves initial from passwords
+        // to determine the user
+        char userNameInitial = password.charAt(0);
         var teachersUserForm = new TeachersUserFormJFrame(sql, db);
       
         // should dynamically check for dbs
@@ -358,10 +364,9 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
             userName.equalsIgnoreCase(rootUserName)){
             studentsJFrame.setVisible(true);
             this.dispose();
+            // makes sure that InsertSQL can be used since 
+            // setInsertSQL uses teachersJFormJFrame for if statement
             
-            // sets TeacherFormJFrame to be used when updating
-            // subjectsJFrame otherwise setTeachersFormJFrame will be empty
-            // and check in setInsertSQL and updateSQL will be null
             sql.setTeachersFormJFrame(teachersUserForm);
             return;
         }
@@ -376,7 +381,6 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
                 userName.equalsIgnoreCase(rootUserName)){
             studentsJFrame.setVisible(true);
             this.dispose();
-            
             sql.setTeachersFormJFrame(teachersUserForm);
             return;
         }
@@ -384,26 +388,33 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
          else if (selectedDB.equalsIgnoreCase("dummyDB")){
             studentsJFrame.setVisible(true);
             this.dispose();
+            sql.setTeachersFormJFrame(teachersUserForm);
             return;
         }
 
         
         
-        
         // student login form
-        if (selectedDB.equalsIgnoreCase("1st_sy2022_2023")){
+        if (selectedDB.equalsIgnoreCase("1st_sy2022_2023") && 
+                // compares char to char
+                studentCodeInitial == userNameInitial
+                ){
             var studentUserForm = new StudentsUserFormJFrame();
             studentUserForm.setVisible(true);
             this.dispose();
             return;
         }
-        else if (selectedDB.equalsIgnoreCase("2nd_sy2022_2023")){
+        else if (selectedDB.equalsIgnoreCase("2nd_sy2022_2023") && 
+                studentCodeInitial == userNameInitial
+                ){
             var studentUserForm = new StudentsUserFormJFrame();
             studentUserForm.setVisible(true);
             this.dispose();
             return;
         }
-        else if (selectedDB.equalsIgnoreCase("summer_sy2022_2023")){
+        else if (selectedDB.equalsIgnoreCase("summer_sy2022_2023") && 
+                studentCodeInitial == userNameInitial
+                ){
             var studentUserForm = new StudentsUserFormJFrame();
             studentUserForm.setVisible(true);
             this.dispose();
@@ -413,30 +424,30 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         // teacher login form
         // checks if username is not root
         if (selectedDB.equalsIgnoreCase("1st_sy2022_2023")&&
-                !userName.equalsIgnoreCase(rootUserName)
+                teacherCodeInitial == userNameInitial
                 ){
             teachersUserForm.setFunctions(functions);
             
             // sets teachersFormJFrame so setInsertSQL can use it
             sql.setTeachersFormJFrame(teachersUserForm);
+            
             teachersUserForm.setVisible(true);
             this.dispose();
             
         }
         else if (selectedDB.equalsIgnoreCase("2nd_sy2022_2023")&&
-                !userName.equalsIgnoreCase(rootUserName)
+                teacherCodeInitial == userNameInitial
                 ){
             teachersUserForm.setFunctions(functions);
             
             // sets teachersFormJFrame so setInsertSQL can use it
             sql.setTeachersFormJFrame(teachersUserForm);
             teachersUserForm.setVisible(true);
-            teachersUserForm.setVisible(true);
             this.dispose();
             
         }
         else if (selectedDB.equalsIgnoreCase("summer_sy2022_2023")&&
-                !userName.equalsIgnoreCase(rootUserName)
+                teacherCodeInitial == userNameInitial
                 ){
             teachersUserForm.setFunctions(functions);
             
@@ -471,8 +482,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
       } catch (SQLException ex){
           
       }
-  
-      
+ 
   
       initialize_classes();
       showJFrame(selectedDB);

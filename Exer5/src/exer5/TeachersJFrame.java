@@ -694,17 +694,17 @@ public class TeachersJFrame extends javax.swing.JFrame {
                  String insertSQL = sql.getInsertSQL(this.getName());
                  db.executeUpdate(insertSQL);
                  sql.GetResultSetSQL(this.getName(), teachers_table);
-                System.out.println("Student ID data inserted.");
+                 
+                  // creates a new Teacher user with added permission
+                 var dbPermissions = new DBPermissions(db);
+                 dbPermissions.CreateTeacherUser(id_textField.getText(), name_textField.getText());
+                 dbPermissions.GrantTeacherPermission(id_textField.getText(), name_textField.getText(), db.getDBToConnect());
+                System.out.println("Teacher ID data inserted.");
                 
-                // converts return value from GetResultSetSQL to
-                // a local variable
-                
-                // passes it to DisplayTableValues
-                //List<String> resultData = sql.GetResultSetSQL(students_table);
-                //functions.DisplayTableValues(students_table, resultData);
+   
                 return;
             }
-            System.out.println("Student ID provided already exists!");
+            System.out.println("Teacher ID provided already exists!");
             System.out.println("Please use Update instead.");
             }
             
@@ -786,6 +786,10 @@ public class TeachersJFrame extends javax.swing.JFrame {
         String deleteSQL = sql.getDeleteSQL(this.getName());
         db.executeUpdate(deleteSQL);
         sql.GetResultSetSQL(this.getName(), teachers_table);
+        
+         var dbPermissions = new DBPermissions(db);
+        //dbPermissions.RevokeStudentUser(id_textField.getText(), name_textField.getText());
+        dbPermissions.RevokeTeacherPermission(id_textField.getText(), name_textField.getText(), db.getDBToConnect());
         System.out.println("Student ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
     public static String selected_teacherid;

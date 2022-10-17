@@ -794,14 +794,19 @@ public class StudentsJFrame extends javax.swing.JFrame {
             // since delete requires textfieldValues
             // but filter values is used instead
             // to get deleteValues
-            
+             
+            var dbPermissions = new DBPermissions(db);
             for (int i = 0; i < filterSQL.GetStudentIdsFromResultSet().size(); i++){
+                
+                String studentId = filterSQL.GetStudentIdsFromResultSet().get(i).toString();
                 String textFieldValues[] =  
-            {filterSQL.GetStudentIdsFromResultSet().get(i).toString(),"","","","",""};
+            {studentId,"","","","",""};
                 // retrieves deleteSQL from new SQL set in setDeleteSQL
                 sql.setDeleteSQL(textFieldValues, this.getName());
                 String deleteSQL = sql.getDeleteSQL(this.getName());
                 db.executeUpdate(deleteSQL);
+               
+            dbPermissions.RevokeStudentPermission(id_textField.getText(), name_textField.getText(), db.getDBToConnect());
             }
  
             sql.GetResultSetSQL(this.getName(), students_table);
@@ -1229,6 +1234,11 @@ public class StudentsJFrame extends javax.swing.JFrame {
       db.getStatement().addBatch(removeDB2);
       db.getStatement().addBatch(removeDB3);
       db.getStatement().executeBatch();
+      subjectsJFrame.dispose();
+      teachersJFrame.dispose();
+      this.dispose();
+      var loginGUIJFrame = new LoginGUIJFrame();
+      loginGUIJFrame.setVisible(true);
        } catch(SQLException ex){
       
           ex.printStackTrace();
