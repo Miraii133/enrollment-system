@@ -740,7 +740,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
                  
                  // creates a new student user with added permission
                  var dbPermissions = new DBPermissions(db);
-                 System.out.println(id_textField.getText() + name_textField.getText());
                  dbPermissions.CreateStudentUser(id_textField.getText(), name_textField.getText());
                  dbPermissions.GrantStudentPermission(id_textField.getText(), name_textField.getText(), db.getDBToConnect());
                 System.out.println("Student ID data inserted.");
@@ -830,6 +829,11 @@ public class StudentsJFrame extends javax.swing.JFrame {
         String deleteSQL = sql.getDeleteSQL(this.getName());
         db.executeUpdate(deleteSQL);
         sql.GetResultSetSQL(this.getName(), students_table);
+        
+        
+        var dbPermissions = new DBPermissions(db);
+        //dbPermissions.RevokeStudentUser(id_textField.getText(), name_textField.getText());
+        dbPermissions.RevokeStudentPermission(id_textField.getText(), name_textField.getText(), db.getDBToConnect());
         System.out.println("Student ID data deleted.");
     }//GEN-LAST:event_delete_buttonActionPerformed
     
