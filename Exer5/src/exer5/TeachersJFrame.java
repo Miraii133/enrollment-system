@@ -750,17 +750,27 @@ public class TeachersJFrame extends javax.swing.JFrame {
             // but filter values is used instead
             // to get deleteValues
             
+            var dbPermissions = new DBPermissions(db);
+            String teacherId;
+            String teacherName;
             for (int i = 0; i < filterSQL.GetTeachersIdsFromResultSet().size(); i++){
+                
+                teacherId = filterSQL.GetTeachersIdsFromResultSet().get(i).toString();
+                teacherName = filterSQL.GetTeachersNameFromResultSet().get(i);
                 String textFieldValues[] =  
-            {filterSQL.GetTeachersIdsFromResultSet().get(i).toString(),"","","","",""};
+                {teacherId,teacherName,"","","",""};
                 // retrieves deleteSQL from new SQL set in setDeleteSQL
                 sql.setDeleteSQL(textFieldValues, this.getName());
                 String deleteSQL = sql.getDeleteSQL(this.getName());
                 db.executeUpdate(deleteSQL);
+                
+                // revokes student permissions recursively for multi delete
+                dbPermissions.RevokeTeacherPermission(teacherId, teacherName, db.getDBToConnect());
             }
  
             sql.GetResultSetSQL(this.getName(), teachers_table);
             filterSQL.ClearTeachersIdsFromResultSet();
+            filterSQL.ClearTeachersNameFromResultSet();
             
             return;
         }

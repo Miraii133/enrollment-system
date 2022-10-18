@@ -1110,16 +1110,6 @@ public class StudentsJFrame extends javax.swing.JFrame {
   .append("PRIMARY KEY (Tid)) ")
   .toString();
   
-   String gradesSQL = new StringBuilder()
-  .append(tableSemName)
-  .append(".Grades (")
-  .append("eid int NOT NULL, ")
-  .append("prelim varchar(50), ")
-  .append("midterm varchar(50), ")
-  .append("prefinal varchar(50), ")
-  .append("final varchar(50), ")
-  .append("FOREIGN KEY (eid) REFERENCES Enroll(eid)) ")
-  .toString();
    
    String enrollSQL = new StringBuilder()
   .append(tableSemName)
@@ -1130,6 +1120,17 @@ public class StudentsJFrame extends javax.swing.JFrame {
   .append("PRIMARY KEY (eid), ")
   .append("FOREIGN KEY (`studid`) REFERENCES `Students`(`studid`),")
   .append("FOREIGN KEY (`subjid`) REFERENCES `Subjects`(`subjid`))")
+  .toString();
+   
+    String gradesSQL = new StringBuilder()
+  .append(tableSemName)
+  .append(".Grades (")
+  .append("eid int NOT NULL, ")
+  .append("prelim varchar(50), ")
+  .append("midterm varchar(50), ")
+  .append("prefinal varchar(50), ")
+  .append("final varchar(50), ")
+  .append("FOREIGN KEY (eid) REFERENCES Enroll(eid)) ")
   .toString();
    
    String assignSQL = new StringBuilder()
@@ -1182,9 +1183,9 @@ public class StudentsJFrame extends javax.swing.JFrame {
       db.getStatement().addBatch(studentsSQL);
       db.getStatement().addBatch(subjectsSQL);
       db.getStatement().addBatch(teachersSQL);
-      db.getStatement().addBatch(gradesSQL);
       db.getStatement().addBatch(enrollSQL);
-      System.out.println(assignSQL);
+      db.getStatement().addBatch(gradesSQL);
+      System.out.println(gradesSQL);
       db.getStatement().addBatch(assignSQL);
       db.getStatement().addBatch(transactionChargesSQL);
       db.getStatement().addBatch(invoiceSQL);
