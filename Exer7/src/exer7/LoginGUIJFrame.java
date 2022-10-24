@@ -447,6 +447,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
             var createPDF = new CreatePDF(db);
             createPDF.setStudentUserId(studentUserId);
             createPDF.generatePDF(db, studentUserId);
+           
             
             return;
         }

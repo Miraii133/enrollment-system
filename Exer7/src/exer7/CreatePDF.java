@@ -58,41 +58,66 @@ public class CreatePDF {
          };
     }
     
-    public String[] GetResultSet(PdfPTable table, Font bfBold12, int studentUserId){
+    private String studname;
+    private String studcrs;
+    private String yrlvl;
+    
+    private String schoolyear;
+    public void GetStudentInfoFromQuery(){
+        schoolyear = db.getDBToConnect();
+        String searchQuery = "SELECT studname, studcrs, yrlvl FROM Students WHERE studid=1;";
+     try {
+             db.setStatement(db.getConn().createStatement());
+            
+            ResultSet resultSet = db.getStatement().executeQuery(searchQuery);
+              while (resultSet.next()){
+              this.studname = resultSet.getString("studname");
+              this.studcrs = resultSet.getString("studcrs");
+              this.yrlvl = resultSet.getString("yrlvl");
+              }
+         } catch (SQLException ex){
+             ex.printStackTrace();
+         };
+    }
+    
+    
+    private String subjid;
+    private String subjode;
+    private String prelim;
+    private String midterm;
+    private String prefinal;
+    private String finals;
+    public void GetResultSet(PdfPTable table, Font bfBold12, int studentUserId){
         String searchQuery = "SELECT Subjects.subjid, Subjects.subjode, Grades.prelim, Grades.midterm, Grades.prefinal, Grades.final  FROM Enroll, Subjects, Students, Grades WHERE Students.studid=Enroll.studid AND Subjects.subjid=Enroll.subjid AND Enroll.eid=Grades.eid AND Students.studid=" + studentUserId;
         try {
             ResultSet resultSet = db.getStatement().executeQuery(searchQuery);
              while (resultSet.next()){
-                String subjid = resultSet.getString("subjid");
-                String subjode = resultSet.getString("subjode");
-                String prelim = resultSet.getString("prelim");
-                String midterm = resultSet.getString("midterm");
-                String prefinal = resultSet.getString("prefinal");
-                String finals = resultSet.getString("final");
-                String array[] = {subjid, subjode, prelim, midterm, prefinal, finals};
+                this.subjid = resultSet.getString("subjid");
+                this.subjode = resultSet.getString("subjode");
+                this.prelim = resultSet.getString("prelim");
+                this.midterm = resultSet.getString("midterm");
+                this.prefinal = resultSet.getString("prefinal");
+                this.finals = resultSet.getString("final");
+
+   insertCell(table, this.subjid, Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, this.subjode, Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, this.prelim, Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, this.midterm, Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, this.prefinal, Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, this.finals, Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   
                
-                
-   insertCell(table, subjid, Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, subjode, Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, prelim, Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, midterm, Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, resultSet[4], Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, resultSet[5], Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-                
-                return array;
-               
-                
-                // adds array to table row
+          
                  
              }
-             
+              
+ 
+               
     
     } catch (SQLException ex){
         ex.printStackTrace();
     }
-        
-        String array[] = {};
-        return array;
+
     }
     
     
@@ -109,38 +134,39 @@ public class CreatePDF {
         float[] columnWidths2 = {2f, 5f};
         float[] columnWidths = {2f, 3f, 2f, 2f, 2f,2f};
         
-   PdfPTable table2 = new PdfPTable(columnWidths2);
+  PdfPTable table2 = new PdfPTable(columnWidths2);
    table2.setWidthPercentage(50f);
    table2.getDefaultCell().setBorder(0);
    table2.addCell("Ateneo De Davao University\nRegistrars Office");
+
+   
    doc.add(table2);
    
    PdfPTable table = new PdfPTable(columnWidths);
    table.setWidthPercentage(90f); 
    Paragraph paragraph = new Paragraph();
  
-   insertCell(table, "My Grades", Element.ALIGN_LEFT, 6, bfBold12,1,255,255,255);     
-   insertCell(table, "StudID", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, "StudName", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, "Prelim", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, "Midterm", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, "Prefinal", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, "Final", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);    
-   
-   
    getTotalResultSetRows(studentUserId);
-   String[] resultSet; 
-    resultSet = GetResultSet(studentUserId);
+   GetStudentInfoFromQuery();
+   insertCell(table, "Student Grade Sheet", Element.ALIGN_CENTER, 6, bfBold12,0,255,255,255);
+   insertCell(table, "", Element.ALIGN_CENTER, 6, bfBold12,0,255,255,255);
    
-   for(int i = 0 ; i < totalRowsInResultSet ; i++){
-   insertCell(table, resultSet[0], Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, resultSet[1], Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, resultSet[2], Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, resultSet[3], Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, resultSet[4], Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, resultSet[5], Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   }
- 
+   insertCell(table, "Student ID: " + this.studentUserId, Element.ALIGN_LEFT, 3, bfBold12,0,255,255,255);
+   insertCell(table, "School Year " + this.schoolyear, Element.ALIGN_CENTER, 3, bfBold12,0,255,255,255);
+   insertCell(table, "Student Name: " + this.studname, Element.ALIGN_LEFT, 3, bfBold12,0,255,255,255);
+   insertCell(table, "Student Course: " + this.studcrs, Element.ALIGN_CENTER, 3, bfBold12,0,255,255,255);
+   insertCell(table, "Student Year: " + this.yrlvl, Element.ALIGN_LEFT, 6, bfBold12,0,255,255,255);
+   insertCell(table, "Number of Subjects Listed: " + totalRowsInResultSet, Element.ALIGN_LEFT, 6, bfBold12,0,255,255,255);
+   insertCell(table, "subjid", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, "subjode", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, "prelim", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, "midterm", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, "prefinal", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, "final", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255); 
+   
+   // Generates the grades of student
+   
+   GetResultSet(table, bfBold12, studentUserId);
    paragraph.add(table);
 
    doc.add(paragraph);
@@ -179,6 +205,7 @@ public class CreatePDF {
     
   private static void insertCell(PdfPTable table, String text, int align, int colspan, Font font,int border, int r, int g, int b){
   
+     System.out.println("text" + text);
   //create a new cell with the specified Text and Font
   PdfPCell cell = new PdfPCell(new Phrase(text.trim(), font));
   //set the cell alignment
