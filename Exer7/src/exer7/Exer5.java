@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package exer6;
+package exer7;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,8 +22,7 @@ public class Exer5 {
     public static void main(String[] args) {
        var loginJFrame = new LoginGUIJFrame();
        loginJFrame.setVisible(true);
-        var createPDF = new CreatePDF();
-        createPDF.generatePDF();
+       
         
        }
        

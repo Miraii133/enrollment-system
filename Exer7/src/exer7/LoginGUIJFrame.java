@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package exer6;
+package exer7;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -310,9 +310,15 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         
         // example: 11Jiyo
         if (Character.isAlphabetic(userName.charAt(1))){
-            studentUserId = userName.charAt(0);
+            studentUserId = Character.getNumericValue(userName.charAt(0));
         } else {
-            studentUserId = userName.charAt(0) + userName.charAt(1);
+            studentUserId = Character.getNumericValue(userName.charAt(0));
+            
+            int firstDigit = Character.getNumericValue(userName.charAt(0));
+            //String stringUserId = Character.getNumericValue(userName.charAt(0)) + Character.getNumericValue(userName.charAt(1));
+             System.out.println(Character.getNumericValue(userName.charAt(0)));
+             System.out.println(Character.getNumericValue(userName.charAt(1)));
+            System.out.println("b" + studentUserId);
         }
     }
         
@@ -440,7 +446,7 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
             
             var createPDF = new CreatePDF(db);
             createPDF.setStudentUserId(studentUserId);
-            
+            createPDF.generatePDF(db, studentUserId);
             
             return;
         }

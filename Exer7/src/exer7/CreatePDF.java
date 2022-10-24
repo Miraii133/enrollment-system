@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package exer6;
+package exer7;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -39,35 +39,47 @@ public class CreatePDF {
         this.studentUserId = studentUserId;
     }
     
-    // retrieves resultSet from query
     
+    // retrieves resultSet from query
     private int totalRowsInResultSet;
-    public void getTotalResultSetRows(){
-        String searchQuery = "SELECT Enroll.studid, Students.studname, Grades.prelim, Grades.midterm, Grades.prefinal, Grades.final  FROM Enroll, Subjects, Students, Grades WHERE Students.studid=Enroll.studid AND Subjects.subjid=Enroll.subjid AND Enroll.eid=Grades.eid AND Students.studid=1";
-         try {
+    public void getTotalResultSetRows(int studentUserId){
+        String searchQuery = "SELECT Enroll.studid, Students.studname, Grades.prelim, Grades.midterm, Grades.prefinal, Grades.final  FROM Enroll, Subjects, Students, Grades WHERE Students.studid=Enroll.studid AND Subjects.subjid=Enroll.subjid AND Enroll.eid=Grades.eid AND Students.studid=" + studentUserId;
+        try {
              db.setStatement(db.getConn().createStatement());
             
             ResultSet resultSet = db.getStatement().executeQuery(searchQuery);
         if (resultSet.last()) {
              totalRowsInResultSet = resultSet.getRow();
+             
              resultSet.beforeFirst(); 
            }
          } catch (SQLException ex){
              ex.printStackTrace();
-         }
+         };
     }
     
-    public void GetResultSet(DB db){
+    public String[] GetResultSet(PdfPTable table, Font bfBold12, int studentUserId){
+        String searchQuery = "SELECT Subjects.subjid, Subjects.subjode, Grades.prelim, Grades.midterm, Grades.prefinal, Grades.final  FROM Enroll, Subjects, Students, Grades WHERE Students.studid=Enroll.studid AND Subjects.subjid=Enroll.subjid AND Enroll.eid=Grades.eid AND Students.studid=" + studentUserId;
         try {
             ResultSet resultSet = db.getStatement().executeQuery(searchQuery);
              while (resultSet.next()){
-                String id = resultSet.getString("subjid");
-                String name = resultSet.getString("subjode");
-                String address = resultSet.getString("subjdesc");
-                String course = resultSet.getString("subjunits");
-                String gender = resultSet.getString("subjsched");
-                String array[] = {id, name, address, course, gender};
-                          
+                String subjid = resultSet.getString("subjid");
+                String subjode = resultSet.getString("subjode");
+                String prelim = resultSet.getString("prelim");
+                String midterm = resultSet.getString("midterm");
+                String prefinal = resultSet.getString("prefinal");
+                String finals = resultSet.getString("final");
+                String array[] = {subjid, subjode, prelim, midterm, prefinal, finals};
+               
+                
+   insertCell(table, subjid, Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, subjode, Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, prelim, Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, midterm, Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, resultSet[4], Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, resultSet[5], Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+                
+                return array;
                
                 
                 // adds array to table row
@@ -76,19 +88,22 @@ public class CreatePDF {
              
     
     } catch (SQLException ex){
+        ex.printStackTrace();
+    }
         
-    }
+        String array[] = {};
+        return array;
     }
     
     
-    public void generatePDF(DB Db, int studid){
+    public void generatePDF(DB Db, int studentUserId){
          Document doc = new Document();
          PdfWriter docWriter = null;
          DecimalFormat df = new DecimalFormat("0.00");
          Font bfBold12 = new Font(FontFamily.TIMES_ROMAN, 12, Font.BOLD, new BaseColor(0, 0, 0));
          Font bf12 = new Font(FontFamily.TIMES_ROMAN, 12);
   try {         
-        String path = "/home/jiyo/NetBeansProjects/Exer6/src/exer6/studentGrades.pdf" ;
+        String path = "/home/jiyo/NetBeansProjects/Exer7/src/exer7/studentGrades.pdf" ;
         docWriter = PdfWriter.getInstance(doc , new FileOutputStream(path));         
         doc.open();  
         float[] columnWidths2 = {2f, 5f};
@@ -113,14 +128,17 @@ public class CreatePDF {
    insertCell(table, "Final", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);    
    
    
+   getTotalResultSetRows(studentUserId);
+   String[] resultSet; 
+    resultSet = GetResultSet(studentUserId);
    
-   for(int i=0;i<10;i++){
-   insertCell(table, "123", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, "Chris", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, "A", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, "B", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, "C", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
-   insertCell(table, "C", Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   for(int i = 0 ; i < totalRowsInResultSet ; i++){
+   insertCell(table, resultSet[0], Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, resultSet[1], Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, resultSet[2], Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, resultSet[3], Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, resultSet[4], Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
+   insertCell(table, resultSet[5], Element.ALIGN_CENTER, 1, bfBold12,1,255,255,255);  
    }
  
    paragraph.add(table);
@@ -149,7 +167,7 @@ public class CreatePDF {
    }
   }  
    try{
-  Runtime.getRuntime().exec("rundll32 url.dll, FileProtocolHandler " + "/home/jiyo/NetBeansProjects/Exer6/src/exer6/studentGrades.pdf");
+  Runtime.getRuntime().exec("rundll32 url.dll, FileProtocolHandler " + "/home/jiyo/NetBeansProjects/Exer7/src/exer7/studentGrades.pdf");
     }catch(Exception e){
 
     } 

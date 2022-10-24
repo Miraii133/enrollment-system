@@ -1,7 +1,7 @@
-package exer6;
+package exer7;
 
-import static exer6.StudentsJFrame.selected_enrollsubjid;
-import static exer6.SubjectsJFrame.selected_subjid;
+import static exer7.StudentsJFrame.selected_enrollsubjid;
+import static exer7.SubjectsJFrame.selected_subjid;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
