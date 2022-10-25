@@ -18,6 +18,8 @@ import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
@@ -65,7 +67,7 @@ public class CreatePDF {
     private String schoolyear;
     public void GetStudentInfoFromQuery(){
         schoolyear = db.getDBToConnect();
-        String searchQuery = "SELECT studname, studcrs, yrlvl FROM Students WHERE studid=1;";
+        String searchQuery = "SELECT studname, studcrs, yrlvl FROM Students WHERE studid=" + studentUserId;
      try {
              db.setStatement(db.getConn().createStatement());
             
@@ -192,20 +194,20 @@ public class CreatePDF {
     docWriter.close();
    }
   }  
-   try{
-  Runtime.getRuntime().exec("rundll32 url.dll, FileProtocolHandler " + "/home/jiyo/NetBeansProjects/Exer7/src/exer7/studentGrades.pdf");
+   try {
+        File myFile = new File("/home/jiyo/NetBeansProjects/Exer7/src/exer7/studentGrades.pdf");
+        Desktop.getDesktop().open(myFile);
     }catch(Exception e){
 
     } 
   
     }
-    
+   
    
     
     
   private static void insertCell(PdfPTable table, String text, int align, int colspan, Font font,int border, int r, int g, int b){
   
-     System.out.println("text" + text);
   //create a new cell with the specified Text and Font
   PdfPCell cell = new PdfPCell(new Phrase(text.trim(), font));
   //set the cell alignment

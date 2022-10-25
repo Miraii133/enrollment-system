@@ -454,7 +454,9 @@ public class LoginGUIJFrame extends javax.swing.JFrame {
         else if (selectedDB.equalsIgnoreCase("2nd_sy2022_2023") && 
                 studentCodeInitial == userNameInitial
                 ){
-            
+             var createPDF = new CreatePDF(db);
+             createPDF.setStudentUserId(studentUserId);
+             createPDF.generatePDF(db, studentUserId);
             
             return;
         }
